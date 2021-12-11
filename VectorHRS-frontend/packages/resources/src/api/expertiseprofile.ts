@@ -15,7 +15,6 @@ export const expertiseprofile_list = async (
     headers,
   });
 };
-
 export const expertiseprofile_create = async (
   data: definitions["ExpertiseProfile"],
   headers: any
@@ -30,7 +29,6 @@ export const expertiseprofile_create = async (
     headers,
   });
 };
-
 export const expertiseprofile_read = async (
   id: string,
   headers: any
@@ -46,7 +44,6 @@ export const expertiseprofile_read = async (
     headers,
   });
 };
-
 export const expertiseprofile_update = async (
   id: string,
   data: definitions["ExpertiseProfile"],
@@ -63,7 +60,6 @@ export const expertiseprofile_update = async (
     headers,
   });
 };
-
 export const expertiseprofile_partial_update = async (
   id: string,
   data: definitions["ExpertiseProfile"],
@@ -80,7 +76,6 @@ export const expertiseprofile_partial_update = async (
     headers,
   });
 };
-
 export const expertiseprofile_delete = async (
   id: string,
   headers: any

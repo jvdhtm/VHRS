@@ -13,7 +13,6 @@ export const address_list = async (
     headers,
   });
 };
-
 export const address_create = async (
   data: definitions["Address"],
   headers: any
@@ -26,7 +25,6 @@ export const address_create = async (
     headers,
   });
 };
-
 export const address_read = async (
   id: string,
   headers: any
@@ -40,7 +38,6 @@ export const address_read = async (
     headers,
   });
 };
-
 export const address_update = async (
   id: string,
   data: definitions["Address"],
@@ -55,7 +52,6 @@ export const address_update = async (
     headers,
   });
 };
-
 export const address_partial_update = async (
   id: string,
   data: definitions["Address"],
@@ -72,7 +68,6 @@ export const address_partial_update = async (
     headers,
   });
 };
-
 export const address_delete = async (
   id: string,
   headers: any

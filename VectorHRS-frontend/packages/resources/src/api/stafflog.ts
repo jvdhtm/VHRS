@@ -13,7 +13,6 @@ export const stafflog_list = async (
     headers,
   });
 };
-
 export const stafflog_create = async (
   data: definitions["StaffLog"],
   headers: any
@@ -26,7 +25,6 @@ export const stafflog_create = async (
     headers,
   });
 };
-
 export const stafflog_read = async (
   id: string,
   headers: any
@@ -40,7 +38,6 @@ export const stafflog_read = async (
     headers,
   });
 };
-
 export const stafflog_update = async (
   id: string,
   data: definitions["StaffLog"],
@@ -55,7 +52,6 @@ export const stafflog_update = async (
     headers,
   });
 };
-
 export const stafflog_partial_update = async (
   id: string,
   data: definitions["StaffLog"],
@@ -72,7 +68,6 @@ export const stafflog_partial_update = async (
     headers,
   });
 };
-
 export const stafflog_delete = async (
   id: string,
   headers: any

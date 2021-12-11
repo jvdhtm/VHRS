@@ -13,7 +13,6 @@ export const staffstage_list = async (
     headers,
   });
 };
-
 export const staffstage_create = async (
   data: definitions["StaffStage"],
   headers: any
@@ -28,7 +27,6 @@ export const staffstage_create = async (
     headers,
   });
 };
-
 export const staffstage_read = async (
   id: string,
   headers: any
@@ -42,7 +40,6 @@ export const staffstage_read = async (
     headers,
   });
 };
-
 export const staffstage_update = async (
   id: string,
   data: definitions["StaffStage"],
@@ -59,7 +56,6 @@ export const staffstage_update = async (
     headers,
   });
 };
-
 export const staffstage_partial_update = async (
   id: string,
   data: definitions["StaffStage"],
@@ -76,7 +72,6 @@ export const staffstage_partial_update = async (
     headers,
   });
 };
-
 export const staffstage_delete = async (
   id: string,
   headers: any

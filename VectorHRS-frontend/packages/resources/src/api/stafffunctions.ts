@@ -15,7 +15,6 @@ export const stafffunctions_list = async (
     headers,
   });
 };
-
 export const stafffunctions_create = async (
   data: definitions["StaffFunctions"],
   headers: any
@@ -30,7 +29,6 @@ export const stafffunctions_create = async (
     headers,
   });
 };
-
 export const stafffunctions_read = async (
   id: string,
   headers: any
@@ -46,7 +44,6 @@ export const stafffunctions_read = async (
     headers,
   });
 };
-
 export const stafffunctions_update = async (
   id: string,
   data: definitions["StaffFunctions"],
@@ -63,7 +60,6 @@ export const stafffunctions_update = async (
     headers,
   });
 };
-
 export const stafffunctions_partial_update = async (
   id: string,
   data: definitions["StaffFunctions"],
@@ -80,7 +76,6 @@ export const stafffunctions_partial_update = async (
     headers,
   });
 };
-
 export const stafffunctions_delete = async (
   id: string,
   headers: any

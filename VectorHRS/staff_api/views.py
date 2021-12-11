@@ -4,108 +4,93 @@ from staff_api.serializers import PersonStageSerializer, StaffStageSerializer, P
 from staff_api.models import PersonStage, StaffStage, Person, PersonLog, Expertise, ExpertiseProfile, Condition, Department, Staff, StaffLog, Function, StaffFunctions, Address, Phone, Comments
 
 
-class BulkCreateModelMixin(mixins.CreateModelMixin):
+class CreateListMixin:
+
+    def get_serializer(self, *args, **kwargs):
+        if isinstance(kwargs.get('data', {}), list):
+            kwargs['many'] = True
+
+        return super().get_serializer(*args, **kwargs)
 
     def create(self, request, *args, **kwargs):
-        # The initial serializer
-        serializer = self.get_serializer(data=request.DATA)
-        return_list = []
-
-        for item in zip(serializer.errors, serializer.init_data):
-            # If item doesn't have errors
-            if not item[0]:
-
-                # Create a an individual serializer for the valid object and save it
-                object_serializer = self.get_serializer(data=[item[1]])
-                if object_serializer.is_valid():
-                    self.pre_save(object_serializer.object)
-                    self.object = object_serializer.save(force_insert=True)
-                    self.post_save(self.object, created=True)
-
-                    return_list.append(object_serializer.data[0])
-            else:
-                return_list.append(item[0])
-
-        # Status code
-        if serializer.errors:
-            return_status = status.HTTP_206_PARTIAL_CONTENT
-        else:
-            return_status = status.HTTP_201_CREATED
-
-        return Response(return_list, status=return_status)
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response({"result": serializer.data, "errors": serializer.errors_list},
+                        status=status.HTTP_202_ACCEPTED, headers=headers)
 
 
-
-class PersonStageViewSet(ModelViewSet, BulkCreateModelMixin):
+class PersonStageViewSet(CreateListMixin, ModelViewSet):
     queryset = PersonStage.objects.order_by('pk')
     serializer_class = PersonStageSerializer
 
 
-class StaffStageViewSet(ModelViewSet, BulkCreateModelMixin):
+class StaffStageViewSet(CreateListMixin, ModelViewSet):
     queryset = StaffStage.objects.order_by('pk')
     serializer_class = StaffStageSerializer
 
 
-class PersonViewSet(ModelViewSet, BulkCreateModelMixin):
+class PersonViewSet(CreateListMixin, ModelViewSet):
     queryset = Person.objects.order_by('pk')
     serializer_class = PersonSerializer
 
 
-class PersonLogViewSet(ModelViewSet, BulkCreateModelMixin):
+class PersonLogViewSet(CreateListMixin, ModelViewSet):
     queryset = PersonLog.objects.order_by('pk')
     serializer_class = PersonLogSerializer
 
 
-class ExpertiseViewSet(ModelViewSet, BulkCreateModelMixin):
+class ExpertiseViewSet(CreateListMixin, ModelViewSet):
     queryset = Expertise.objects.order_by('pk')
     serializer_class = ExpertiseSerializer
 
 
-class ExpertiseProfileViewSet(ModelViewSet, BulkCreateModelMixin):
+class ExpertiseProfileViewSet(CreateListMixin, ModelViewSet):
     queryset = ExpertiseProfile.objects.order_by('pk')
     serializer_class = ExpertiseProfileSerializer
 
 
-class ConditionViewSet(ModelViewSet, BulkCreateModelMixin):
+class ConditionViewSet(CreateListMixin, ModelViewSet):
     queryset = Condition.objects.order_by('pk')
     serializer_class = ConditionSerializer
 
 
-class DepartmentViewSet(ModelViewSet, BulkCreateModelMixin):
+class DepartmentViewSet(CreateListMixin, ModelViewSet):
     queryset = Department.objects.order_by('pk')
     serializer_class = DepartmentSerializer
 
 
-class StaffViewSet(ModelViewSet, BulkCreateModelMixin):
+class StaffViewSet(CreateListMixin, ModelViewSet):
     queryset = Staff.objects.order_by('pk')
     serializer_class = StaffSerializer
 
 
-class StaffLogViewSet(ModelViewSet, BulkCreateModelMixin):
+class StaffLogViewSet(CreateListMixin, ModelViewSet):
     queryset = StaffLog.objects.order_by('pk')
     serializer_class = StaffLogSerializer
 
 
-class FunctionViewSet(ModelViewSet, BulkCreateModelMixin):
+class FunctionViewSet(CreateListMixin, ModelViewSet):
     queryset = Function.objects.order_by('pk')
     serializer_class = FunctionSerializer
 
 
-class StaffFunctionsViewSet(ModelViewSet, BulkCreateModelMixin):
+class StaffFunctionsViewSet(CreateListMixin, ModelViewSet):
     queryset = StaffFunctions.objects.order_by('pk')
     serializer_class = StaffFunctionsSerializer
 
 
-class AddressViewSet(ModelViewSet, BulkCreateModelMixin):
+class AddressViewSet(CreateListMixin, ModelViewSet):
     queryset = Address.objects.order_by('pk')
     serializer_class = AddressSerializer
 
 
-class PhoneViewSet(ModelViewSet, BulkCreateModelMixin):
+class PhoneViewSet(CreateListMixin, ModelViewSet):
     queryset = Phone.objects.order_by('pk')
     serializer_class = PhoneSerializer
 
 
-class CommentsViewSet(ModelViewSet, BulkCreateModelMixin):
+class CommentsViewSet(CreateListMixin, ModelViewSet):
     queryset = Comments.objects.order_by('pk')
     serializer_class = CommentsSerializer

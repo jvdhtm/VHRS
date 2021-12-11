@@ -315,7 +315,7 @@ export interface paths {
 export interface definitions {
   Address: {
     id?: number;
-    staff: string;
+    staff: number;
     description?: string;
     address1?: string;
     address2?: string;
@@ -332,7 +332,7 @@ export interface definitions {
   };
   Comments: {
     id?: number;
-    staff: string;
+    staff: number;
     name?: string;
     description?: string;
     status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
@@ -355,7 +355,7 @@ export interface definitions {
     id?: number;
     name?: string;
     description?: string;
-    parentId: number;
+    parentId?: number;
     status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };
@@ -377,7 +377,6 @@ export interface definitions {
     created_date_time?: string;
   };
   Person: {
-    staff: string;
     id?: number;
     firstname?: string;
     lastname?: string;
@@ -415,7 +414,7 @@ export interface definitions {
   };
   Phone: {
     id?: number;
-    staff: string;
+    staff: number;
     description?: string;
     phoneNumber?: string;
     status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
@@ -429,11 +428,12 @@ export interface definitions {
     app: number;
   };
   Staff: {
-    person_ptr?: string;
+    id?: number;
     department: number;
     condition: number;
     title?: string;
-    bossId: string;
+    bossId?: number;
+    who: number;
     x: number;
     y: number;
     level: number;
@@ -441,7 +441,7 @@ export interface definitions {
   StaffFunctions: {
     id?: number;
     function: number;
-    staff: string;
+    staff: number;
     status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };
@@ -449,7 +449,7 @@ export interface definitions {
     id?: number;
     description?: string;
     stage: number;
-    person: number;
+    with_person?: number;
     status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };

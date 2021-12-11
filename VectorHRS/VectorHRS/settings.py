@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_seed',
+    'django_extensions',
     'api_generators_vhrs',
 ]
 

@@ -13,7 +13,6 @@ export const condition_list = async (
     headers,
   });
 };
-
 export const condition_create = async (
   data: definitions["Condition"],
   headers: any
@@ -26,7 +25,6 @@ export const condition_create = async (
     headers,
   });
 };
-
 export const condition_read = async (
   id: string,
   headers: any
@@ -40,7 +38,6 @@ export const condition_read = async (
     headers,
   });
 };
-
 export const condition_update = async (
   id: string,
   data: definitions["Condition"],
@@ -55,7 +52,6 @@ export const condition_update = async (
     headers,
   });
 };
-
 export const condition_partial_update = async (
   id: string,
   data: definitions["Condition"],
@@ -72,7 +68,6 @@ export const condition_partial_update = async (
     headers,
   });
 };
-
 export const condition_delete = async (
   id: string,
   headers: any

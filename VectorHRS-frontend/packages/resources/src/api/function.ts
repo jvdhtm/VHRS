@@ -13,7 +13,6 @@ export const function_list = async (
     headers,
   });
 };
-
 export const function_create = async (
   data: definitions["Function"],
   headers: any
@@ -26,7 +25,6 @@ export const function_create = async (
     headers,
   });
 };
-
 export const function_read = async (
   id: string,
   headers: any
@@ -40,7 +38,6 @@ export const function_read = async (
     headers,
   });
 };
-
 export const function_update = async (
   id: string,
   data: definitions["Function"],
@@ -55,7 +52,6 @@ export const function_update = async (
     headers,
   });
 };
-
 export const function_partial_update = async (
   id: string,
   data: definitions["Function"],
@@ -72,7 +68,6 @@ export const function_partial_update = async (
     headers,
   });
 };
-
 export const function_delete = async (
   id: string,
   headers: any

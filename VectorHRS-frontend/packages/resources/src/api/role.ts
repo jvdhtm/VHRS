@@ -13,7 +13,6 @@ export const role_list = async (
     headers,
   });
 };
-
 export const role_create = async (
   data: definitions["Role"],
   headers: any
@@ -26,7 +25,6 @@ export const role_create = async (
     headers,
   });
 };
-
 export const role_read = async (
   id: string,
   headers: any
@@ -40,7 +38,6 @@ export const role_read = async (
     headers,
   });
 };
-
 export const role_update = async (
   id: string,
   data: definitions["Role"],
@@ -55,7 +52,6 @@ export const role_update = async (
     headers,
   });
 };
-
 export const role_partial_update = async (
   id: string,
   data: definitions["Role"],
@@ -72,7 +68,6 @@ export const role_partial_update = async (
     headers,
   });
 };
-
 export const role_delete = async (
   id: string,
   headers: any

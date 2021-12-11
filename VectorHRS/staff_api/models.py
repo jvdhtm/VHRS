@@ -86,7 +86,7 @@ class PersonLog(models.Model):
 class Expertise(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
     description = models.CharField(max_length=100, null=True, blank=True)
-    parentId = models.ForeignKey('self', on_delete=models.PROTECT)
+    parentId = models.ForeignKey('self', null=True, blank=True, on_delete=models.PROTECT)
     status = models.CharField(max_length=300, choices=STATUS_CHOICES, default='r')
     created_date_time = models.DateTimeField(default=now)
     
@@ -109,11 +109,12 @@ class Department(models.Model):
     status = models.CharField(max_length=300, choices=STATUS_CHOICES, default='r')
     created_date_time = models.DateTimeField(default=now)
     
-class Staff(Person):
+class Staff(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     condition = models.ForeignKey(Condition, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, null=True, blank=True)
-    bossId = models.ForeignKey('self', on_delete=models.PROTECT)
+    bossId = models.ForeignKey('self', null=True, blank=True , on_delete=models.PROTECT)
+    who = models.ForeignKey(Person, on_delete=models.CASCADE)
     x = models.FloatField()
     y = models.FloatField()
     level = models.IntegerField()
@@ -121,7 +122,7 @@ class Staff(Person):
 class StaffLog(models.Model):
     description = models.CharField(max_length=100, null=True, blank=True)
     stage = models.ForeignKey(PersonStage, on_delete=models.CASCADE)
-    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    with_person = models.ForeignKey(Person, on_delete=models.CASCADE , null=True, blank=True)
     status = models.CharField(max_length=300, choices=STATUS_CHOICES, default='r')
     created_date_time = models.DateTimeField(default=now)
 

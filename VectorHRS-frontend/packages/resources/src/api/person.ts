@@ -13,7 +13,6 @@ export const person_list = async (
     headers,
   });
 };
-
 export const person_create = async (
   data: definitions["Person"],
   headers: any
@@ -26,7 +25,6 @@ export const person_create = async (
     headers,
   });
 };
-
 export const person_read = async (
   id: string,
   headers: any
@@ -40,7 +38,6 @@ export const person_read = async (
     headers,
   });
 };
-
 export const person_update = async (
   id: string,
   data: definitions["Person"],
@@ -55,7 +52,6 @@ export const person_update = async (
     headers,
   });
 };
-
 export const person_partial_update = async (
   id: string,
   data: definitions["Person"],
@@ -72,7 +68,6 @@ export const person_partial_update = async (
     headers,
   });
 };
-
 export const person_delete = async (
   id: string,
   headers: any

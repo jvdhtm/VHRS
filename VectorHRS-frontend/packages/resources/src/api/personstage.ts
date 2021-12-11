@@ -13,7 +13,6 @@ export const personstage_list = async (
     headers,
   });
 };
-
 export const personstage_create = async (
   data: definitions["PersonStage"],
   headers: any
@@ -28,7 +27,6 @@ export const personstage_create = async (
     headers,
   });
 };
-
 export const personstage_read = async (
   id: string,
   headers: any
@@ -42,7 +40,6 @@ export const personstage_read = async (
     headers,
   });
 };
-
 export const personstage_update = async (
   id: string,
   data: definitions["PersonStage"],
@@ -59,7 +56,6 @@ export const personstage_update = async (
     headers,
   });
 };
-
 export const personstage_partial_update = async (
   id: string,
   data: definitions["PersonStage"],
@@ -76,7 +72,6 @@ export const personstage_partial_update = async (
     headers,
   });
 };
-
 export const personstage_delete = async (
   id: string,
   headers: any

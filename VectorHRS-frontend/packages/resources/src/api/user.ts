@@ -13,7 +13,6 @@ export const user_list = async (
     headers,
   });
 };
-
 export const user_create = async (
   data: definitions["User"],
   headers: any
@@ -26,7 +25,6 @@ export const user_create = async (
     headers,
   });
 };
-
 export const user_read = async (
   id: string,
   headers: any
@@ -40,7 +38,6 @@ export const user_read = async (
     headers,
   });
 };
-
 export const user_update = async (
   id: string,
   data: definitions["User"],
@@ -55,7 +52,6 @@ export const user_update = async (
     headers,
   });
 };
-
 export const user_partial_update = async (
   id: string,
   data: definitions["User"],
@@ -72,7 +68,6 @@ export const user_partial_update = async (
     headers,
   });
 };
-
 export const user_delete = async (
   id: string,
   headers: any

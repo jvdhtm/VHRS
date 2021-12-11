@@ -13,7 +13,6 @@ export const department_list = async (
     headers,
   });
 };
-
 export const department_create = async (
   data: definitions["Department"],
   headers: any
@@ -28,7 +27,6 @@ export const department_create = async (
     headers,
   });
 };
-
 export const department_read = async (
   id: string,
   headers: any
@@ -42,7 +40,6 @@ export const department_read = async (
     headers,
   });
 };
-
 export const department_update = async (
   id: string,
   data: definitions["Department"],
@@ -59,7 +56,6 @@ export const department_update = async (
     headers,
   });
 };
-
 export const department_partial_update = async (
   id: string,
   data: definitions["Department"],
@@ -76,7 +72,6 @@ export const department_partial_update = async (
     headers,
   });
 };
-
 export const department_delete = async (
   id: string,
   headers: any

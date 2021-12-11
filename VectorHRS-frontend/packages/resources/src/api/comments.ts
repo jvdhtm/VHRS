@@ -13,7 +13,6 @@ export const comments_list = async (
     headers,
   });
 };
-
 export const comments_create = async (
   data: definitions["Comments"],
   headers: any
@@ -26,7 +25,6 @@ export const comments_create = async (
     headers,
   });
 };
-
 export const comments_read = async (
   id: string,
   headers: any
@@ -40,7 +38,6 @@ export const comments_read = async (
     headers,
   });
 };
-
 export const comments_update = async (
   id: string,
   data: definitions["Comments"],
@@ -55,7 +52,6 @@ export const comments_update = async (
     headers,
   });
 };
-
 export const comments_partial_update = async (
   id: string,
   data: definitions["Comments"],
@@ -72,7 +68,6 @@ export const comments_partial_update = async (
     headers,
   });
 };
-
 export const comments_delete = async (
   id: string,
   headers: any

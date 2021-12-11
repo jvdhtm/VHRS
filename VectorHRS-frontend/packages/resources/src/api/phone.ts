@@ -13,7 +13,6 @@ export const phone_list = async (
     headers,
   });
 };
-
 export const phone_create = async (
   data: definitions["Phone"],
   headers: any
@@ -26,7 +25,6 @@ export const phone_create = async (
     headers,
   });
 };
-
 export const phone_read = async (
   id: string,
   headers: any
@@ -40,7 +38,6 @@ export const phone_read = async (
     headers,
   });
 };
-
 export const phone_update = async (
   id: string,
   data: definitions["Phone"],
@@ -55,7 +52,6 @@ export const phone_update = async (
     headers,
   });
 };
-
 export const phone_partial_update = async (
   id: string,
   data: definitions["Phone"],
@@ -72,7 +68,6 @@ export const phone_partial_update = async (
     headers,
   });
 };
-
 export const phone_delete = async (
   id: string,
   headers: any

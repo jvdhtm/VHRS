@@ -13,7 +13,6 @@ export const app_list = async (
     headers,
   });
 };
-
 export const app_create = async (
   data: definitions["App"],
   headers: any
@@ -26,7 +25,6 @@ export const app_create = async (
     headers,
   });
 };
-
 export const app_read = async (
   id: string,
   headers: any
@@ -40,7 +38,6 @@ export const app_read = async (
     headers,
   });
 };
-
 export const app_update = async (
   id: string,
   data: definitions["App"],
@@ -55,7 +52,6 @@ export const app_update = async (
     headers,
   });
 };
-
 export const app_partial_update = async (
   id: string,
   data: definitions["App"],
@@ -72,7 +68,6 @@ export const app_partial_update = async (
     headers,
   });
 };
-
 export const app_delete = async (
   id: string,
   headers: any

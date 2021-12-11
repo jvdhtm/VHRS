@@ -13,7 +13,6 @@ export const personlog_list = async (
     headers,
   });
 };
-
 export const personlog_create = async (
   data: definitions["PersonLog"],
   headers: any
@@ -26,7 +25,6 @@ export const personlog_create = async (
     headers,
   });
 };
-
 export const personlog_read = async (
   id: string,
   headers: any
@@ -40,7 +38,6 @@ export const personlog_read = async (
     headers,
   });
 };
-
 export const personlog_update = async (
   id: string,
   data: definitions["PersonLog"],
@@ -55,7 +52,6 @@ export const personlog_update = async (
     headers,
   });
 };
-
 export const personlog_partial_update = async (
   id: string,
   data: definitions["PersonLog"],
@@ -72,7 +68,6 @@ export const personlog_partial_update = async (
     headers,
   });
 };
-
 export const personlog_delete = async (
   id: string,
   headers: any
