@@ -12,7 +12,7 @@ const swaggerDocUrl = `${Config_1.BASE_URL}/${Config_1.SWAGGER_ENDPOINT}`;
 const openapiTS = openApi.default;
 const GREEN = '\x1b[32m';
 const RED = '\x1b[41m';
-const PATH_DIR = '../../models/src/';
+const PATH_DIR = '../../resources/src/';
 const ChooseAndSync = () => {
     (0, axios_1.default)({
         method: 'GET',
@@ -29,6 +29,8 @@ const ChooseAndSync = () => {
                 fs.writeFile(dirPath + '/schemas.ts', output, 'utf8', async () => {
                     const pathsObj = swaggerDoc.data.paths;
                     let FileToWrite = {};
+                    let indexImportFileToWrite = {};
+                    let indexExportFileToWrite = {};
                     for (const path in pathsObj) {
                         if (Object.prototype.hasOwnProperty.call(pathsObj, path)) {
                             const element = pathsObj[path];
@@ -47,6 +49,12 @@ const ChooseAndSync = () => {
                                     let definition = '';
                                     let model = '';
                                     if (functionName) {
+                                        if (!indexImportFileToWrite[fileName]) {
+                                            indexImportFileToWrite[fileName] = `import {`;
+                                            indexExportFileToWrite[fileName] = '';
+                                        }
+                                        indexImportFileToWrite[fileName] += functionName + ',';
+                                        indexExportFileToWrite[fileName] += functionName + ',';
                                         if (parameters && parameters.length > 0) {
                                             if (parameters[0].in === 'body') {
                                                 definition = parameters[0].schema.$ref.replace('#/definitions/', '');
@@ -62,30 +70,68 @@ const ChooseAndSync = () => {
                                             FileToWrite[fileName] += `id: string,`;
                                         if (model)
                                             FileToWrite[fileName] += `data: ${model},`;
+                                        let response = `operations["${functionName}"]["responses"]`;
+                                        if (verb === 'get' || verb === 'put' || verb === 'patch')
+                                            response += "[200]";
+                                        if (verb === 'post')
+                                            response += "[201]";
+                                        if (verb === 'delete')
+                                            response = "any";
                                         FileToWrite[fileName] += `
-                       headers: any ) : Promise<AxiosResponse<operations["${functionName}"]["responses"]>> => {
+                       headers: any ) : Promise<AxiosResponse<${response}>> => {
                         let endpoint = "${path}";`;
                                         if (path.indexOf('{id}') > -1)
                                             FileToWrite[fileName] += `
                         endpoint = endpoint.replace("{id}", id.toString())`;
-                                        FileToWrite[fileName] += `
-                        return await axios({
-                        method: "${verb}",
-                        url: endpoint,
-                        `;
-                                        if (model)
-                                            FileToWrite[fileName] += `data,`;
-                                        FileToWrite[fileName] += `
-                        headers
-                      });
-  
-                    }
-                    `;
+                                        if (verb === 'post') {
+                                            FileToWrite[fileName] += `
+                          return await axios({
+                          method: "${verb}",
+                          url: endpoint,
+                          `;
+                                            if (model)
+                                                FileToWrite[fileName] += `data,`;
+                                            FileToWrite[fileName] += `
+                            headers
+                          });`;
+                                        }
+                                        else {
+                                            FileToWrite[fileName] += `
+                          return await axios({
+                          method: "${verb}",
+                          url: endpoint,
+                          `;
+                                            if (model)
+                                                FileToWrite[fileName] += `data,`;
+                                            FileToWrite[fileName] += `
+                            headers
+                          });`;
+                                        }
+                                        FileToWrite[fileName] += `}`;
                                     }
                                 }
                             }
                         }
                     }
+                    let indexToWrite = '';
+                    for (const fileName in indexImportFileToWrite) {
+                        if (Object.prototype.hasOwnProperty.call(indexImportFileToWrite, fileName)) {
+                            let file = indexImportFileToWrite[fileName].slice(0, -1);
+                            file += `} from  "./${fileName}";
+                `;
+                            indexToWrite += file;
+                        }
+                    }
+                    indexToWrite += 'export {';
+                    for (const fileName in indexExportFileToWrite) {
+                        if (Object.prototype.hasOwnProperty.call(indexExportFileToWrite, fileName)) {
+                            let file = indexExportFileToWrite[fileName];
+                            indexToWrite += file;
+                        }
+                    }
+                    indexToWrite = indexToWrite.slice(0, -1) + '};';
+                    const index = prettier_1.default.format(indexToWrite);
+                    fs.writeFile(dirPath + '/api/index.ts', index, 'utf8', async () => { });
                     for (const fileName in FileToWrite) {
                         if (Object.prototype.hasOwnProperty.call(FileToWrite, fileName)) {
                             const file = prettier_1.default.format(FileToWrite[fileName]);

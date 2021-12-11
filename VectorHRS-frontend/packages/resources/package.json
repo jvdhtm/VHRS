@@ -1,0 +1,23 @@
+{
+    "name": "@vhrs/resources",
+    "version": "1.0.0",
+    "description": "Reactive resource managment library  for VectorHRS apps",
+    "main": "dist/index",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc --project ."
+    },
+    "keywords": [
+        "vue",
+        "vue",
+        "composition",
+        "api"
+    ],
+    "author": "jvdhtm@gmail.com",
+    "devDependencies": {
+        "@types/node": "^16.11.1",
+        "axios": "^0.24.0",
+        "openapi-typescript": "^4.0.1",
+        "typescript": "^4.4.4"
+    }
+}

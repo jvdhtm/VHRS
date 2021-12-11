@@ -9,7 +9,7 @@ const swaggerDocUrl = `${BASE_URL}/${SWAGGER_ENDPOINT}`;
 const openapiTS = openApi.default;
 const GREEN = '\x1b[32m';
 const RED = '\x1b[41m';
-const PATH_DIR = '../../models/src/';
+const PATH_DIR = '../../resources/src/';
 
 export const ChooseAndSync = () => {
   axios({
@@ -28,6 +28,8 @@ export const ChooseAndSync = () => {
             const pathsObj: any = swaggerDoc.data.paths;
 
             let FileToWrite: any = {};
+            let indexImportFileToWrite: any = {};
+            let indexExportFileToWrite: any = {};
             for (const path in pathsObj) {
               if (Object.prototype.hasOwnProperty.call(pathsObj, path)) {
                 const element = pathsObj[path];
@@ -45,9 +47,18 @@ export const ChooseAndSync = () => {
 
                     const functionName = element[verb].operationId;
                     const parameters = element[verb].parameters;
+
                     let definition = '';
                     let model = '';
                     if (functionName) {
+
+                      if (!indexImportFileToWrite[fileName]) {
+                        indexImportFileToWrite[fileName] = `import {`;
+                        indexExportFileToWrite[fileName] = '';
+                      }
+                      indexImportFileToWrite[fileName] += functionName +',';
+                      indexExportFileToWrite[fileName] += functionName +',';
+
                       if (parameters && parameters.length > 0) {
                         if (parameters[0].in === 'body') {
                           definition = parameters[0].schema.$ref.replace(
@@ -65,30 +76,77 @@ export const ChooseAndSync = () => {
                       if (path.indexOf('{id}') > -1)
                         FileToWrite[fileName] += `id: string,`;
                       if (model) FileToWrite[fileName] += `data: ${model},`;
+                      let response = `operations["${functionName}"]["responses"]`;
+
+                      if(verb === 'get'|| verb === 'put' || verb === 'patch') response += "[200]";
+                      if(verb === 'post') response += "[201]";
+                      if(verb === 'delete') response = "any";
 
                       FileToWrite[fileName] += `
-                       headers: any ) : Promise<AxiosResponse<operations["${functionName}"]["responses"]>> => {
+                       headers: any ) : Promise<AxiosResponse<${response}>> => {
                         let endpoint = "${path}";`;
                       if (path.indexOf('{id}') > -1)
                         FileToWrite[fileName] += `
                         endpoint = endpoint.replace("{id}", id.toString())`;
-                      FileToWrite[fileName] += `
-                        return await axios({
-                        method: "${verb}",
-                        url: endpoint,
-                        `;
-                      if (model) FileToWrite[fileName] += `data,`;
-                      FileToWrite[fileName] += `
-                        headers
-                      });
-  
-                    }
-                    `;
+
+                        if(verb === 'post')
+                        {
+                          FileToWrite[fileName] += `
+                          return await axios({
+                          method: "${verb}",
+                          url: endpoint,
+                          `;
+                          if (model) FileToWrite[fileName] += `data,`;
+                          FileToWrite[fileName] += `
+                            headers
+                          });`
+
+                        }
+                        else
+                        {
+                          FileToWrite[fileName] += `
+                          return await axios({
+                          method: "${verb}",
+                          url: endpoint,
+                          `;
+                          if (model) FileToWrite[fileName] += `data,`;
+                          FileToWrite[fileName] += `
+                            headers
+                          });`
+                        }
+
+                      FileToWrite[fileName] += `}`;
                     }
                   }
                 }
               }
             }
+
+            let indexToWrite : string  = '';
+            for (const fileName in indexImportFileToWrite) {
+              if (Object.prototype.hasOwnProperty.call(indexImportFileToWrite, fileName)) {
+                let file = indexImportFileToWrite[fileName].slice(0, -1);
+                file +=`} from  "./${fileName}";
+                `
+                indexToWrite += file;
+              }
+
+            }
+            indexToWrite += 'export {';
+            for (const fileName in indexExportFileToWrite) {
+              if (Object.prototype.hasOwnProperty.call(indexExportFileToWrite, fileName)) {
+                let file = indexExportFileToWrite[fileName];
+                indexToWrite += file;
+              }
+            }
+            indexToWrite = indexToWrite.slice(0, -1)  + '};'
+            const index = prettier.format(indexToWrite);
+            fs.writeFile(
+              dirPath + '/api/index.ts',
+              index,
+              'utf8',
+              async () => {}
+            );
 
             for (const fileName in FileToWrite) {
               if (Object.prototype.hasOwnProperty.call(FileToWrite, fileName)) {
