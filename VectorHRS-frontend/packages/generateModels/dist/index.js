@@ -58,7 +58,7 @@ const ChooseAndSync = () => {
                                         if (parameters && parameters.length > 0) {
                                             if (parameters[0].in === 'body') {
                                                 definition = parameters[0].schema.$ref.replace('#/definitions/', '');
-                                                model = `definitions["${definition}"]`;
+                                                model = `definitions["${definition}"] | definitions["${definition}"][]`;
                                             }
                                             else {
                                                 model = `operations["${functionName}"]["parameters"]`;

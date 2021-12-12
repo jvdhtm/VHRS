@@ -14,7 +14,7 @@ export const function_list = async (
   });
 };
 export const function_create = async (
-  data: definitions["Function"],
+  data: definitions["Function"] | definitions["Function"][],
   headers: any
 ): Promise<AxiosResponse<operations["function_create"]["responses"][201]>> => {
   let endpoint = "/function/";
@@ -40,7 +40,7 @@ export const function_read = async (
 };
 export const function_update = async (
   id: string,
-  data: definitions["Function"],
+  data: definitions["Function"] | definitions["Function"][],
   headers: any
 ): Promise<AxiosResponse<operations["function_update"]["responses"][200]>> => {
   let endpoint = "/function/{id}/";
@@ -54,7 +54,7 @@ export const function_update = async (
 };
 export const function_partial_update = async (
   id: string,
-  data: definitions["Function"],
+  data: definitions["Function"] | definitions["Function"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["function_partial_update"]["responses"][200]>

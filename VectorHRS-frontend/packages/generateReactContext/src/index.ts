@@ -43,7 +43,7 @@ export const ChooseAndSync = () => {
 
                 if (!filesToParse[fileName]) {
                   filesToParse[fileName] = {
-                    definitionsToContext: {},
+                    definitionsToContext: undefined,
                     FunctionsToContext: [] as [],
                     path: [] as string[]
                   };
@@ -62,9 +62,9 @@ export const ChooseAndSync = () => {
                       );
                       modelToContext = `definitions["${definition}"]`;
 
-                      filesToParse[fileName].definitionsToContext[definition] = modelToContext
+                      filesToParse[fileName].definitionsToContext = definition
 
-                      paramsToContext = `${modelToContext}[]`;
+                      paramsToContext = `${modelToContext}[] | ${modelToContext}[]`;
                     }
                     else {
                       paramsToContext = `operations["${functionName}"]["parameters"]`;
@@ -75,7 +75,6 @@ export const ChooseAndSync = () => {
                     {
                       functionName,
                       parameters: paramsToContext,
-                      modelRef: modelToContext,
                       verb:verb,
                       path: path
                     }
@@ -117,15 +116,10 @@ export const ChooseAndSync = () => {
               fileToWrite[fileName] += `
                 interface I${fileName} {
                 `;
-              for (const model in modelsToParse) {
-                if (
-                  Object.prototype.hasOwnProperty.call(modelsToParse, model)
-                ) {
-                  fileToWrite[fileName] += `
-                      ${model}Data?:${modelsToParse[model]}[];
-                    `;
-                }
-              }
+              fileToWrite[fileName] += `
+                  ${fileName}Data?:${modelsToParse}[];
+                `;
+     
 
               for (const func in functionsToParse) {
                 if (
@@ -168,15 +162,10 @@ export const ChooseAndSync = () => {
                 )}Provider: React.FC<IcontextProvider> = ({ children, headers }) => {
                   `;
 
-              for (const model in modelsToParse) {
-                if (
-                  Object.prototype.hasOwnProperty.call(modelsToParse, model)
-                ) {
                   fileToWrite[fileName] += `
                   /* prettier-ignore */
-                  const [${model}DataList, set${model}DataList] = React.useState<Array<${modelsToParse[model]}>> ([]);`;
-                }
-              }
+                  const [${modelsToParse}DataList, set${modelsToParse}DataList] = React.useState<Array<${modelsToParse}>> ([]);`;
+
 
               for (const func in functionsToParse) {
                 if (
@@ -186,7 +175,7 @@ export const ChooseAndSync = () => {
                   let args = ``;
                   let args2 = ''
                   if (functionsToParse[func].path.indexOf('{id}') > -1) {
-                    args += `id:number,`;
+                    args += `id:string,`;
                     args2 += 'id,';
                   }
                   if (functionsToParse[func].parameters) {
@@ -197,22 +186,73 @@ export const ChooseAndSync = () => {
                   const newNameFunction =functionsToParse[func].functionName.split('_')[0]+ titleCaseWord(functionsToParse[func].functionName.split('_')[1])
                   fileToWrite[fileName] += `
                   const ${newNameFunction} = async ( ${args.slice(0, -1)} ) => {
-                   if(data)
-                   {
-                    const result = await ${functionsToParse[func].functionName}( ${args2.slice(0, -1)}, headers);
-                    let prevState = ${functionsToParse[func].modelRef}DataList;
+                    if(data)
+                    {
+                      const result = await ${functionsToParse[func].functionName}( ${args2.slice(0, -1)}, headers);
+                      let prevState = ${modelsToParse}DataList;
+                      `
+                      
 
+                      if(functionsToParse[func].verb === 'get')
+                      fileToWrite[fileName] += `
+                      let found = false;
+                      const new${modelsToParse} = prevState.map((el:any) => {
+                        if(el.id === result.data.id)
+                        {
 
-                    //update
-                    const new${functionsToParse[func].modelRef} = prevState.map(el => (
-                      el.id === ? {...el, key: value}: el
-                    ))
+                          found = true;
+                          return {...el, result.data };
 
+                        }
+                        else
+                        {
+                          return el;
+                        }
+                      }
+                      ))
 
+                      if(!found)
+                      {
+                        let new${modelsToParse}
+                        if(!Array.isArray(result.data))
+                        new${modelsToParse} = prevState.push(result.data);
+                        else
+                        new${modelsToParse} = prevState.concat(result.data);
+                      }
+                      `
 
-                   }
-                    
-                   
+                      if(functionsToParse[func].verb === 'post')
+                      fileToWrite[fileName] += `  
+                      //Read or Create
+                      let new${modelsToParse}
+                      if(!Array.isArray(result.data))
+                      new${modelsToParse} = prevState.push(result.data);
+                      else
+                      new${modelsToParse} = prevState.concat(result.data);
+                      `
+                      
+                      if(functionsToParse[func].verb === 'put')
+                      fileToWrite[fileName] += `  
+                      //update
+                      let new${modelsToParse}
+                      if(!Array.isArray(result.data))
+                      new${modelsToParse} = prevState.map((el:any) => (
+                        el.id === result.data.id ? {...el, result.data }: el
+                      ))
+                      else
+                      //update bulk 
+                      new${modelsToParse} = prevState.map((el:any) => (
+                        el.id === result.data.id ? {...el, result.data }: el
+                      ))
+
+                      `
+                      if(functionsToParse[func].verb === 'delete')
+                      fileToWrite[fileName] += `  
+                      //delete
+                      const new${modelsToParse} = prevState.filter( (el:any) => (el.id !== result.data.id )
+                      `
+                    fileToWrite[fileName] += `  
+                    }
                   }
                   `;
                 }
@@ -224,20 +264,8 @@ export const ChooseAndSync = () => {
               <${titleCaseWord(fileName)}Context.Provider
               
               value={{
+                ${fileName}Data:${modelsToParse}DataList,
               `
-              
-              
-              for (const model in modelsToParse) {
-                if (
-                  Object.prototype.hasOwnProperty.call(modelsToParse, model)
-                ) {
-                  fileToWrite[fileName] += `
-                      ${model}Data:${model}DataList,
-                    `;
-                }
-              }
-
-
               for (const func in functionsToParse) {
                 if (
                   Object.prototype.hasOwnProperty.call(functionsToParse, func)
@@ -264,7 +292,8 @@ export const ChooseAndSync = () => {
 
         for (const fileName in fileToWrite) {
           if (Object.prototype.hasOwnProperty.call(fileToWrite, fileName)) {
-            const file = prettier.format(fileToWrite[fileName]);
+            //const file = prettier.format(fileToWrite[fileName]);
+            const file = fileToWrite[fileName];
             fs.writeFile(
               dirPath + '/context/' + fileName + '.tsx',
               file,

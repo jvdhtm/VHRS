@@ -1,107 +1,187 @@
-import { operations, definitions } from "../Schemas";
-import {
-  app_list,
-  app_create,
-  app_read,
-  app_update,
-  app_partial_update,
-  app_delete,
-} from "../api";
 
-import React, { createContext, useState, FC } from "react";
+              import { operations, definitions } from "../Schemas";
+              import {app_list,app_create,app_read,app_update,app_partial_update,app_delete,
+               } from "../api";
+              
+                import React, { createContext, useState, FC } from "react";
+                
+                interface Iapp {
+                
+                  appData?:App[];
+                
+                  appListFuncProp?: ( data:operations["app_list"]["parameters"] ) => Promise<void>;
+                  
+                  appCreateFuncProp?: ( data:definitions["App"][] | definitions["App"][] ) => Promise<void>;
+                  
+                  appReadFuncProp?: ( id:number ) => Promise<void>;
+                  
+                  appUpdateFuncProp?: ( id:number,data:definitions["App"][] | definitions["App"][] ) => Promise<void>;
+                  
+                  appPartialFuncProp?: ( id:number,data:definitions["App"][] | definitions["App"][] ) => Promise<void>;
+                  
+                  appDeleteFuncProp?: ( id:number ) => Promise<void>;
+                  
+              }
+              interface IcontextProvider{
+                children: React.ReactNode,
+                headers: any
+              }
 
-interface Iapp {
-  AppData?: definitions["App"][];
+              const defaultState = {};
+                /* prettier-ignore */
+                const AppContext = React.createContext<Iapp>(defaultState);
+                const AppProvider: React.FC<IcontextProvider> = ({ children, headers }) => {
+                  
+                  /* prettier-ignore */
+                  const [AppDataList, setAppDataList] = React.useState<Array<App>> ([]);
+                  const appList = async ( data:operations["app_list"]["parameters"] ) => {
+                    if(data)
+                    {
+                      const result = await app_list( data, headers);
+                      let prevState = AppDataList;
+                      
+                      let found = false;
+                      const newApp = prevState.map((el:any) => {
+                        if(el.id === result.data.id)
+                        {
 
-  appListFuncProp?: (
-    data: operations["app_list"]["parameters"]
-  ) => Promise<void>;
+                          found = true;
+                          return {...el, result.data };
 
-  appCreateFuncProp?: (data: definitions["App"][]) => Promise<void>;
+                        }
+                        else
+                        {
+                          return el;
+                        }
+                      }
+                      ))
 
-  appReadFuncProp?: (id: number) => Promise<void>;
+                      if(!found)
+                      {
+                        let newApp
+                        if(!Array.isArray(result.data))
+                        newApp = prevState.push(result.data);
+                        else
+                        newApp = prevState.concat(result.data);
+                      }
+                        
+                    }
+                  }
+                  
+                  const appCreate = async ( data:definitions["App"][] | definitions["App"][] ) => {
+                    if(data)
+                    {
+                      const result = await app_create( data, headers);
+                      let prevState = AppDataList;
+                        
+                      //Read or Create
+                      let newApp
+                      if(!Array.isArray(result.data))
+                      newApp = prevState.push(result.data);
+                      else
+                      newApp = prevState.concat(result.data);
+                        
+                    }
+                  }
+                  
+                  const appRead = async ( id:string ) => {
+                    if(data)
+                    {
+                      const result = await app_read( id, headers);
+                      let prevState = AppDataList;
+                      
+                      let found = false;
+                      const newApp = prevState.map((el:any) => {
+                        if(el.id === result.data.id)
+                        {
 
-  appUpdateFuncProp?: (id: number, data: definitions["App"][]) => Promise<void>;
+                          found = true;
+                          return {...el, result.data };
 
-  appPartialFuncProp?: (
-    id: number,
-    data: definitions["App"][]
-  ) => Promise<void>;
+                        }
+                        else
+                        {
+                          return el;
+                        }
+                      }
+                      ))
 
-  appDeleteFuncProp?: (id: number) => Promise<void>;
-}
-interface Icontext {
-  children: React.ReactNode;
-  headers: any;
-}
+                      if(!found)
+                      {
+                        let newApp
+                        if(!Array.isArray(result.data))
+                        newApp = prevState.push(result.data);
+                        else
+                        newApp = prevState.concat(result.data);
+                      }
+                        
+                    }
+                  }
+                  
+                  const appUpdate = async ( id:string,data:definitions["App"][] | definitions["App"][] ) => {
+                    if(data)
+                    {
+                      const result = await app_update( id,data, headers);
+                      let prevState = AppDataList;
+                        
+                      //update
+                      let newApp
+                      if(!Array.isArray(result.data))
+                      newApp = prevState.map((el:any) => (
+                        el.id === result.data.id ? {...el, result.data }: el
+                      ))
+                      else
+                      //update bulk 
+                      newApp = prevState.map((el:any) => (
+                        el.id === result.data.id ? {...el, result.data }: el
+                      ))
 
-const defaultState = {};
-/* prettier-ignore */
-const AppContext = React.createContext<Iapp>(defaultState);
-const AppProvider: React.FC<Icontext> = ({ children, headers }) => {
-  /* prettier-ignore */
-  const [AppDataList, setAppDataList] = React.useState<Array<definitions["App"]>> ([]);
-  const appList = async (data: operations["app_list"]["parameters"]) => {
-    const result = await app_list(data, headers);
-
-    if (result) {
-    }
-  };
-
-  const appCreate = async (data: definitions["App"][]) => {
-    const result = await app_create(data, headers);
-
-    if (result) {
-    }
-  };
-
-  const appRead = async (id: number) => {
-    const result = await app_read(id, headers);
-
-    if (result) {
-    }
-  };
-
-  const appUpdate = async (id: number, data: definitions["App"][]) => {
-    const result = await app_update(id, data, headers);
-
-    if (result) {
-    }
-  };
-
-  const appPartial = async (id: number, data: definitions["App"][]) => {
-    const result = await app_partial_update(id, data, headers);
-
-    if (result) {
-    }
-  };
-
-  const appDelete = async (id: number) => {
-    const result = await app_delete(id, headers);
-
-    if (result) {
-    }
-  };
-
-  return (
-    <AppContext.Provider
-      value={{
-        AppData: AppDataList,
-
-        appListFuncProp: appList,
-
-        appCreateFuncProp: appCreate,
-
-        appReadFuncProp: appRead,
-
-        appUpdateFuncProp: appUpdate,
-
-        appPartialFuncProp: appPartial,
-
-        appDeleteFuncProp: appDelete,
-      }}
-    >
-      {children}
-    </AppContext.Provider>
-  );
-};
+                        
+                    }
+                  }
+                  
+                  const appPartial = async ( id:string,data:definitions["App"][] | definitions["App"][] ) => {
+                    if(data)
+                    {
+                      const result = await app_partial_update( id,data, headers);
+                      let prevState = AppDataList;
+                        
+                    }
+                  }
+                  
+                  const appDelete = async ( id:string ) => {
+                    if(data)
+                    {
+                      const result = await app_delete( id, headers);
+                      let prevState = AppDataList;
+                        
+                      //delete
+                      const newApp = prevState.filter( (el:any) => (el.id !== result.data.id )
+                        
+                    }
+                  }
+                  
+              return (
+              <AppContext.Provider
+              
+              value={{
+                appData:AppDataList,
+              
+                  appListFuncProp: appList,
+                  
+                  appCreateFuncProp: appCreate,
+                  
+                  appReadFuncProp: appRead,
+                  
+                  appUpdateFuncProp: appUpdate,
+                  
+                  appPartialFuncProp: appPartial,
+                  
+                  appDeleteFuncProp: appDelete,
+                  
+                }}
+              >
+              { children }
+              </AppContext.Provider>
+            );};
+              

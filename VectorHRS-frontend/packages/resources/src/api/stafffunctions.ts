@@ -16,7 +16,7 @@ export const stafffunctions_list = async (
   });
 };
 export const stafffunctions_create = async (
-  data: definitions["StaffFunctions"],
+  data: definitions["StaffFunctions"] | definitions["StaffFunctions"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["stafffunctions_create"]["responses"][201]>
@@ -46,7 +46,7 @@ export const stafffunctions_read = async (
 };
 export const stafffunctions_update = async (
   id: string,
-  data: definitions["StaffFunctions"],
+  data: definitions["StaffFunctions"] | definitions["StaffFunctions"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["stafffunctions_update"]["responses"][200]>
@@ -62,7 +62,7 @@ export const stafffunctions_update = async (
 };
 export const stafffunctions_partial_update = async (
   id: string,
-  data: definitions["StaffFunctions"],
+  data: definitions["StaffFunctions"] | definitions["StaffFunctions"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["stafffunctions_partial_update"]["responses"][200]>

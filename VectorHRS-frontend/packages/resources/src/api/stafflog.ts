@@ -14,7 +14,7 @@ export const stafflog_list = async (
   });
 };
 export const stafflog_create = async (
-  data: definitions["StaffLog"],
+  data: definitions["StaffLog"] | definitions["StaffLog"][],
   headers: any
 ): Promise<AxiosResponse<operations["stafflog_create"]["responses"][201]>> => {
   let endpoint = "/stafflog/";
@@ -40,7 +40,7 @@ export const stafflog_read = async (
 };
 export const stafflog_update = async (
   id: string,
-  data: definitions["StaffLog"],
+  data: definitions["StaffLog"] | definitions["StaffLog"][],
   headers: any
 ): Promise<AxiosResponse<operations["stafflog_update"]["responses"][200]>> => {
   let endpoint = "/stafflog/{id}/";
@@ -54,7 +54,7 @@ export const stafflog_update = async (
 };
 export const stafflog_partial_update = async (
   id: string,
-  data: definitions["StaffLog"],
+  data: definitions["StaffLog"] | definitions["StaffLog"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["stafflog_partial_update"]["responses"][200]>

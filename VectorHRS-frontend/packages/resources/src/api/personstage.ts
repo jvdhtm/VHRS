@@ -14,7 +14,7 @@ export const personstage_list = async (
   });
 };
 export const personstage_create = async (
-  data: definitions["PersonStage"],
+  data: definitions["PersonStage"] | definitions["PersonStage"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["personstage_create"]["responses"][201]>
@@ -42,7 +42,7 @@ export const personstage_read = async (
 };
 export const personstage_update = async (
   id: string,
-  data: definitions["PersonStage"],
+  data: definitions["PersonStage"] | definitions["PersonStage"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["personstage_update"]["responses"][200]>
@@ -58,7 +58,7 @@ export const personstage_update = async (
 };
 export const personstage_partial_update = async (
   id: string,
-  data: definitions["PersonStage"],
+  data: definitions["PersonStage"] | definitions["PersonStage"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["personstage_partial_update"]["responses"][200]>

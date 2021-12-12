@@ -14,7 +14,7 @@ export const condition_list = async (
   });
 };
 export const condition_create = async (
-  data: definitions["Condition"],
+  data: definitions["Condition"] | definitions["Condition"][],
   headers: any
 ): Promise<AxiosResponse<operations["condition_create"]["responses"][201]>> => {
   let endpoint = "/condition/";
@@ -40,7 +40,7 @@ export const condition_read = async (
 };
 export const condition_update = async (
   id: string,
-  data: definitions["Condition"],
+  data: definitions["Condition"] | definitions["Condition"][],
   headers: any
 ): Promise<AxiosResponse<operations["condition_update"]["responses"][200]>> => {
   let endpoint = "/condition/{id}/";
@@ -54,7 +54,7 @@ export const condition_update = async (
 };
 export const condition_partial_update = async (
   id: string,
-  data: definitions["Condition"],
+  data: definitions["Condition"] | definitions["Condition"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["condition_partial_update"]["responses"][200]>

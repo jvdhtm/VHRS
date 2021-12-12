@@ -16,7 +16,7 @@ export const expertiseprofile_list = async (
   });
 };
 export const expertiseprofile_create = async (
-  data: definitions["ExpertiseProfile"],
+  data: definitions["ExpertiseProfile"] | definitions["ExpertiseProfile"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["expertiseprofile_create"]["responses"][201]>
@@ -46,7 +46,7 @@ export const expertiseprofile_read = async (
 };
 export const expertiseprofile_update = async (
   id: string,
-  data: definitions["ExpertiseProfile"],
+  data: definitions["ExpertiseProfile"] | definitions["ExpertiseProfile"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["expertiseprofile_update"]["responses"][200]>
@@ -62,7 +62,7 @@ export const expertiseprofile_update = async (
 };
 export const expertiseprofile_partial_update = async (
   id: string,
-  data: definitions["ExpertiseProfile"],
+  data: definitions["ExpertiseProfile"] | definitions["ExpertiseProfile"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["expertiseprofile_partial_update"]["responses"][200]>

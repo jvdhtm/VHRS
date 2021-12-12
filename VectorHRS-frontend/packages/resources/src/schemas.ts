@@ -322,7 +322,7 @@ export interface definitions {
     zip?: string;
     city?: string;
     country?: string;
-    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };
   App: {
@@ -335,20 +335,20 @@ export interface definitions {
     staff: number;
     name?: string;
     description?: string;
-    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };
   Condition: {
     id?: number;
-    severity?: "1" | "2" | "3";
-    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    severity: "1" | "2" | "3";
+    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };
   Department: {
     id?: number;
     description?: string;
-    shape?: "circle" | "square" | "rectangle" | "triangle";
-    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    shape: "circle" | "square" | "rectangle" | "triangle";
+    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };
   Expertise: {
@@ -356,7 +356,7 @@ export interface definitions {
     name?: string;
     description?: string;
     parentId?: number;
-    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };
   ExpertiseProfile: {
@@ -365,15 +365,15 @@ export interface definitions {
     description?: string;
     person: number;
     expertise: number;
-    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };
   Function: {
     id?: number;
     name?: string;
     description?: string;
-    shape?: "circle" | "square" | "rectangle" | "triangle";
-    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    shape: "circle" | "square" | "rectangle" | "triangle";
+    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };
   Person: {
@@ -382,7 +382,7 @@ export interface definitions {
     lastname?: string;
     age: number;
     nationalId?: string;
-    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };
   PersonLog: {
@@ -390,14 +390,14 @@ export interface definitions {
     description?: string;
     stage: number;
     person: number;
-    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };
   PersonStage: {
     id?: number;
     name?: string;
     description?: string;
-    step?:
+    step:
       | "communication"
       | "answers"
       | "pending"
@@ -409,7 +409,7 @@ export interface definitions {
       | "questions"
       | "invitations";
     x: number;
-    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };
   Phone: {
@@ -417,7 +417,7 @@ export interface definitions {
     staff: number;
     description?: string;
     phoneNumber?: string;
-    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };
   Role: {
@@ -442,7 +442,7 @@ export interface definitions {
     id?: number;
     function: number;
     staff: number;
-    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };
   StaffLog: {
@@ -450,14 +450,14 @@ export interface definitions {
     description?: string;
     stage: number;
     with_person?: number;
-    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };
   StaffStage: {
     id?: number;
     name?: string;
     description?: string;
-    step?:
+    step:
       | "communication"
       | "answers"
       | "meeting"
@@ -472,7 +472,7 @@ export interface definitions {
       | "gifts"
       | "invitations";
     x: number;
-    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     created_date_time?: string;
   };
   User: {

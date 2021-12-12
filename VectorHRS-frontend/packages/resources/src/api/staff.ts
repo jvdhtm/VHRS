@@ -14,7 +14,7 @@ export const staff_list = async (
   });
 };
 export const staff_create = async (
-  data: definitions["Staff"],
+  data: definitions["Staff"] | definitions["Staff"][],
   headers: any
 ): Promise<AxiosResponse<operations["staff_create"]["responses"][201]>> => {
   let endpoint = "/staff/";
@@ -40,7 +40,7 @@ export const staff_read = async (
 };
 export const staff_update = async (
   id: string,
-  data: definitions["Staff"],
+  data: definitions["Staff"] | definitions["Staff"][],
   headers: any
 ): Promise<AxiosResponse<operations["staff_update"]["responses"][200]>> => {
   let endpoint = "/staff/{id}/";
@@ -54,7 +54,7 @@ export const staff_update = async (
 };
 export const staff_partial_update = async (
   id: string,
-  data: definitions["Staff"],
+  data: definitions["Staff"] | definitions["Staff"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["staff_partial_update"]["responses"][200]>

@@ -14,7 +14,7 @@ export const user_list = async (
   });
 };
 export const user_create = async (
-  data: definitions["User"],
+  data: definitions["User"] | definitions["User"][],
   headers: any
 ): Promise<AxiosResponse<operations["user_create"]["responses"][201]>> => {
   let endpoint = "/user/";
@@ -40,7 +40,7 @@ export const user_read = async (
 };
 export const user_update = async (
   id: string,
-  data: definitions["User"],
+  data: definitions["User"] | definitions["User"][],
   headers: any
 ): Promise<AxiosResponse<operations["user_update"]["responses"][200]>> => {
   let endpoint = "/user/{id}/";
@@ -54,7 +54,7 @@ export const user_update = async (
 };
 export const user_partial_update = async (
   id: string,
-  data: definitions["User"],
+  data: definitions["User"] | definitions["User"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["user_partial_update"]["responses"][200]>

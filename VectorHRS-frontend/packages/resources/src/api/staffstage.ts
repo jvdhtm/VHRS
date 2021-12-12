@@ -14,7 +14,7 @@ export const staffstage_list = async (
   });
 };
 export const staffstage_create = async (
-  data: definitions["StaffStage"],
+  data: definitions["StaffStage"] | definitions["StaffStage"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["staffstage_create"]["responses"][201]>
@@ -42,7 +42,7 @@ export const staffstage_read = async (
 };
 export const staffstage_update = async (
   id: string,
-  data: definitions["StaffStage"],
+  data: definitions["StaffStage"] | definitions["StaffStage"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["staffstage_update"]["responses"][200]>
@@ -58,7 +58,7 @@ export const staffstage_update = async (
 };
 export const staffstage_partial_update = async (
   id: string,
-  data: definitions["StaffStage"],
+  data: definitions["StaffStage"] | definitions["StaffStage"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["staffstage_partial_update"]["responses"][200]>

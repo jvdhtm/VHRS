@@ -14,7 +14,7 @@ export const role_list = async (
   });
 };
 export const role_create = async (
-  data: definitions["Role"],
+  data: definitions["Role"] | definitions["Role"][],
   headers: any
 ): Promise<AxiosResponse<operations["role_create"]["responses"][201]>> => {
   let endpoint = "/role/";
@@ -40,7 +40,7 @@ export const role_read = async (
 };
 export const role_update = async (
   id: string,
-  data: definitions["Role"],
+  data: definitions["Role"] | definitions["Role"][],
   headers: any
 ): Promise<AxiosResponse<operations["role_update"]["responses"][200]>> => {
   let endpoint = "/role/{id}/";
@@ -54,7 +54,7 @@ export const role_update = async (
 };
 export const role_partial_update = async (
   id: string,
-  data: definitions["Role"],
+  data: definitions["Role"] | definitions["Role"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["role_partial_update"]["responses"][200]>

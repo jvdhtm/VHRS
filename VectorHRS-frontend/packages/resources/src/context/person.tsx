@@ -1,110 +1,187 @@
-import { operations, definitions } from "../Schemas";
-import {
-  person_list,
-  person_create,
-  person_read,
-  person_update,
-  person_partial_update,
-  person_delete,
-} from "../api";
 
-import React, { createContext, useState, FC } from "react";
+              import { operations, definitions } from "../Schemas";
+              import {person_list,person_create,person_read,person_update,person_partial_update,person_delete,
+               } from "../api";
+              
+                import React, { createContext, useState, FC } from "react";
+                
+                interface Iperson {
+                
+                  personData?:Person[];
+                
+                  personListFuncProp?: ( data:operations["person_list"]["parameters"] ) => Promise<void>;
+                  
+                  personCreateFuncProp?: ( data:definitions["Person"][] | definitions["Person"][] ) => Promise<void>;
+                  
+                  personReadFuncProp?: ( id:number ) => Promise<void>;
+                  
+                  personUpdateFuncProp?: ( id:number,data:definitions["Person"][] | definitions["Person"][] ) => Promise<void>;
+                  
+                  personPartialFuncProp?: ( id:number,data:definitions["Person"][] | definitions["Person"][] ) => Promise<void>;
+                  
+                  personDeleteFuncProp?: ( id:number ) => Promise<void>;
+                  
+              }
+              interface IcontextProvider{
+                children: React.ReactNode,
+                headers: any
+              }
 
-interface Iperson {
-  PersonData?: definitions["Person"][];
+              const defaultState = {};
+                /* prettier-ignore */
+                const PersonContext = React.createContext<Iperson>(defaultState);
+                const PersonProvider: React.FC<IcontextProvider> = ({ children, headers }) => {
+                  
+                  /* prettier-ignore */
+                  const [PersonDataList, setPersonDataList] = React.useState<Array<Person>> ([]);
+                  const personList = async ( data:operations["person_list"]["parameters"] ) => {
+                    if(data)
+                    {
+                      const result = await person_list( data, headers);
+                      let prevState = PersonDataList;
+                      
+                      let found = false;
+                      const newPerson = prevState.map((el:any) => {
+                        if(el.id === result.data.id)
+                        {
 
-  personListFuncProp?: (
-    data: operations["person_list"]["parameters"]
-  ) => Promise<void>;
+                          found = true;
+                          return {...el, result.data };
 
-  personCreateFuncProp?: (data: definitions["Person"][]) => Promise<void>;
+                        }
+                        else
+                        {
+                          return el;
+                        }
+                      }
+                      ))
 
-  personReadFuncProp?: (id: number) => Promise<void>;
+                      if(!found)
+                      {
+                        let newPerson
+                        if(!Array.isArray(result.data))
+                        newPerson = prevState.push(result.data);
+                        else
+                        newPerson = prevState.concat(result.data);
+                      }
+                        
+                    }
+                  }
+                  
+                  const personCreate = async ( data:definitions["Person"][] | definitions["Person"][] ) => {
+                    if(data)
+                    {
+                      const result = await person_create( data, headers);
+                      let prevState = PersonDataList;
+                        
+                      //Read or Create
+                      let newPerson
+                      if(!Array.isArray(result.data))
+                      newPerson = prevState.push(result.data);
+                      else
+                      newPerson = prevState.concat(result.data);
+                        
+                    }
+                  }
+                  
+                  const personRead = async ( id:string ) => {
+                    if(data)
+                    {
+                      const result = await person_read( id, headers);
+                      let prevState = PersonDataList;
+                      
+                      let found = false;
+                      const newPerson = prevState.map((el:any) => {
+                        if(el.id === result.data.id)
+                        {
 
-  personUpdateFuncProp?: (
-    id: number,
-    data: definitions["Person"][]
-  ) => Promise<void>;
+                          found = true;
+                          return {...el, result.data };
 
-  personPartialFuncProp?: (
-    id: number,
-    data: definitions["Person"][]
-  ) => Promise<void>;
+                        }
+                        else
+                        {
+                          return el;
+                        }
+                      }
+                      ))
 
-  personDeleteFuncProp?: (id: number) => Promise<void>;
-}
-interface Icontext {
-  children: React.ReactNode;
-  headers: any;
-}
+                      if(!found)
+                      {
+                        let newPerson
+                        if(!Array.isArray(result.data))
+                        newPerson = prevState.push(result.data);
+                        else
+                        newPerson = prevState.concat(result.data);
+                      }
+                        
+                    }
+                  }
+                  
+                  const personUpdate = async ( id:string,data:definitions["Person"][] | definitions["Person"][] ) => {
+                    if(data)
+                    {
+                      const result = await person_update( id,data, headers);
+                      let prevState = PersonDataList;
+                        
+                      //update
+                      let newPerson
+                      if(!Array.isArray(result.data))
+                      newPerson = prevState.map((el:any) => (
+                        el.id === result.data.id ? {...el, result.data }: el
+                      ))
+                      else
+                      //update bulk 
+                      newPerson = prevState.map((el:any) => (
+                        el.id === result.data.id ? {...el, result.data }: el
+                      ))
 
-const defaultState = {};
-/* prettier-ignore */
-const PersonContext = React.createContext<Iperson>(defaultState);
-const PersonProvider: React.FC<Icontext> = ({ children, headers }) => {
-  /* prettier-ignore */
-  const [PersonDataList, setPersonDataList] = React.useState<Array<definitions["Person"]>> ([]);
-  const personList = async (data: operations["person_list"]["parameters"]) => {
-    const result = await person_list(data, headers);
-
-    if (result) {
-    }
-  };
-
-  const personCreate = async (data: definitions["Person"][]) => {
-    const result = await person_create(data, headers);
-
-    if (result) {
-    }
-  };
-
-  const personRead = async (id: number) => {
-    const result = await person_read(id, headers);
-
-    if (result) {
-    }
-  };
-
-  const personUpdate = async (id: number, data: definitions["Person"][]) => {
-    const result = await person_update(id, data, headers);
-
-    if (result) {
-    }
-  };
-
-  const personPartial = async (id: number, data: definitions["Person"][]) => {
-    const result = await person_partial_update(id, data, headers);
-
-    if (result) {
-    }
-  };
-
-  const personDelete = async (id: number) => {
-    const result = await person_delete(id, headers);
-
-    if (result) {
-    }
-  };
-
-  return (
-    <PersonContext.Provider
-      value={{
-        PersonData: PersonDataList,
-
-        personListFuncProp: personList,
-
-        personCreateFuncProp: personCreate,
-
-        personReadFuncProp: personRead,
-
-        personUpdateFuncProp: personUpdate,
-
-        personPartialFuncProp: personPartial,
-
-        personDeleteFuncProp: personDelete,
-      }}
-    >
-      {children}
-    </PersonContext.Provider>
-  );
-};
+                        
+                    }
+                  }
+                  
+                  const personPartial = async ( id:string,data:definitions["Person"][] | definitions["Person"][] ) => {
+                    if(data)
+                    {
+                      const result = await person_partial_update( id,data, headers);
+                      let prevState = PersonDataList;
+                        
+                    }
+                  }
+                  
+                  const personDelete = async ( id:string ) => {
+                    if(data)
+                    {
+                      const result = await person_delete( id, headers);
+                      let prevState = PersonDataList;
+                        
+                      //delete
+                      const newPerson = prevState.filter( (el:any) => (el.id !== result.data.id )
+                        
+                    }
+                  }
+                  
+              return (
+              <PersonContext.Provider
+              
+              value={{
+                personData:PersonDataList,
+              
+                  personListFuncProp: personList,
+                  
+                  personCreateFuncProp: personCreate,
+                  
+                  personReadFuncProp: personRead,
+                  
+                  personUpdateFuncProp: personUpdate,
+                  
+                  personPartialFuncProp: personPartial,
+                  
+                  personDeleteFuncProp: personDelete,
+                  
+                }}
+              >
+              { children }
+              </PersonContext.Provider>
+            );};
+              

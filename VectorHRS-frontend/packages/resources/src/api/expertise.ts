@@ -14,7 +14,7 @@ export const expertise_list = async (
   });
 };
 export const expertise_create = async (
-  data: definitions["Expertise"],
+  data: definitions["Expertise"] | definitions["Expertise"][],
   headers: any
 ): Promise<AxiosResponse<operations["expertise_create"]["responses"][201]>> => {
   let endpoint = "/expertise/";
@@ -40,7 +40,7 @@ export const expertise_read = async (
 };
 export const expertise_update = async (
   id: string,
-  data: definitions["Expertise"],
+  data: definitions["Expertise"] | definitions["Expertise"][],
   headers: any
 ): Promise<AxiosResponse<operations["expertise_update"]["responses"][200]>> => {
   let endpoint = "/expertise/{id}/";
@@ -54,7 +54,7 @@ export const expertise_update = async (
 };
 export const expertise_partial_update = async (
   id: string,
-  data: definitions["Expertise"],
+  data: definitions["Expertise"] | definitions["Expertise"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["expertise_partial_update"]["responses"][200]>

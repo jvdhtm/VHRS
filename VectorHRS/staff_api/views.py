@@ -5,20 +5,11 @@ from staff_api.models import PersonStage, StaffStage, Person, PersonLog, Experti
 
 
 class CreateListMixin:
-
     def get_serializer(self, *args, **kwargs):
         if isinstance(kwargs.get('data', {}), list):
             kwargs['many'] = True
 
         return super().get_serializer(*args, **kwargs)
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response({"result": serializer.data, "errors": serializer.errors_list},
-                        status=status.HTTP_202_ACCEPTED, headers=headers)
 
 
 class PersonStageViewSet(CreateListMixin, ModelViewSet):

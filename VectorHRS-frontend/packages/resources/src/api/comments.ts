@@ -14,7 +14,7 @@ export const comments_list = async (
   });
 };
 export const comments_create = async (
-  data: definitions["Comments"],
+  data: definitions["Comments"] | definitions["Comments"][],
   headers: any
 ): Promise<AxiosResponse<operations["comments_create"]["responses"][201]>> => {
   let endpoint = "/comments/";
@@ -40,7 +40,7 @@ export const comments_read = async (
 };
 export const comments_update = async (
   id: string,
-  data: definitions["Comments"],
+  data: definitions["Comments"] | definitions["Comments"][],
   headers: any
 ): Promise<AxiosResponse<operations["comments_update"]["responses"][200]>> => {
   let endpoint = "/comments/{id}/";
@@ -54,7 +54,7 @@ export const comments_update = async (
 };
 export const comments_partial_update = async (
   id: string,
-  data: definitions["Comments"],
+  data: definitions["Comments"] | definitions["Comments"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["comments_partial_update"]["responses"][200]>

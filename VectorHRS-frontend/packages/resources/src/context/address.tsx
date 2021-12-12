@@ -1,112 +1,187 @@
-import { operations, definitions } from "../Schemas";
-import {
-  address_list,
-  address_create,
-  address_read,
-  address_update,
-  address_partial_update,
-  address_delete,
-} from "../api";
 
-import React, { createContext, useState, FC } from "react";
+              import { operations, definitions } from "../Schemas";
+              import {address_list,address_create,address_read,address_update,address_partial_update,address_delete,
+               } from "../api";
+              
+                import React, { createContext, useState, FC } from "react";
+                
+                interface Iaddress {
+                
+                  addressData?:Address[];
+                
+                  addressListFuncProp?: ( data:operations["address_list"]["parameters"] ) => Promise<void>;
+                  
+                  addressCreateFuncProp?: ( data:definitions["Address"][] | definitions["Address"][] ) => Promise<void>;
+                  
+                  addressReadFuncProp?: ( id:number ) => Promise<void>;
+                  
+                  addressUpdateFuncProp?: ( id:number,data:definitions["Address"][] | definitions["Address"][] ) => Promise<void>;
+                  
+                  addressPartialFuncProp?: ( id:number,data:definitions["Address"][] | definitions["Address"][] ) => Promise<void>;
+                  
+                  addressDeleteFuncProp?: ( id:number ) => Promise<void>;
+                  
+              }
+              interface IcontextProvider{
+                children: React.ReactNode,
+                headers: any
+              }
 
-interface Iaddress {
-  AddressData?: definitions["Address"][];
+              const defaultState = {};
+                /* prettier-ignore */
+                const AddressContext = React.createContext<Iaddress>(defaultState);
+                const AddressProvider: React.FC<IcontextProvider> = ({ children, headers }) => {
+                  
+                  /* prettier-ignore */
+                  const [AddressDataList, setAddressDataList] = React.useState<Array<Address>> ([]);
+                  const addressList = async ( data:operations["address_list"]["parameters"] ) => {
+                    if(data)
+                    {
+                      const result = await address_list( data, headers);
+                      let prevState = AddressDataList;
+                      
+                      let found = false;
+                      const newAddress = prevState.map((el:any) => {
+                        if(el.id === result.data.id)
+                        {
 
-  addressListFuncProp?: (
-    data: operations["address_list"]["parameters"]
-  ) => Promise<void>;
+                          found = true;
+                          return {...el, result.data };
 
-  addressCreateFuncProp?: (data: definitions["Address"][]) => Promise<void>;
+                        }
+                        else
+                        {
+                          return el;
+                        }
+                      }
+                      ))
 
-  addressReadFuncProp?: (id: number) => Promise<void>;
+                      if(!found)
+                      {
+                        let newAddress
+                        if(!Array.isArray(result.data))
+                        newAddress = prevState.push(result.data);
+                        else
+                        newAddress = prevState.concat(result.data);
+                      }
+                        
+                    }
+                  }
+                  
+                  const addressCreate = async ( data:definitions["Address"][] | definitions["Address"][] ) => {
+                    if(data)
+                    {
+                      const result = await address_create( data, headers);
+                      let prevState = AddressDataList;
+                        
+                      //Read or Create
+                      let newAddress
+                      if(!Array.isArray(result.data))
+                      newAddress = prevState.push(result.data);
+                      else
+                      newAddress = prevState.concat(result.data);
+                        
+                    }
+                  }
+                  
+                  const addressRead = async ( id:string ) => {
+                    if(data)
+                    {
+                      const result = await address_read( id, headers);
+                      let prevState = AddressDataList;
+                      
+                      let found = false;
+                      const newAddress = prevState.map((el:any) => {
+                        if(el.id === result.data.id)
+                        {
 
-  addressUpdateFuncProp?: (
-    id: number,
-    data: definitions["Address"][]
-  ) => Promise<void>;
+                          found = true;
+                          return {...el, result.data };
 
-  addressPartialFuncProp?: (
-    id: number,
-    data: definitions["Address"][]
-  ) => Promise<void>;
+                        }
+                        else
+                        {
+                          return el;
+                        }
+                      }
+                      ))
 
-  addressDeleteFuncProp?: (id: number) => Promise<void>;
-}
-interface Icontext {
-  children: React.ReactNode;
-  headers: any;
-}
+                      if(!found)
+                      {
+                        let newAddress
+                        if(!Array.isArray(result.data))
+                        newAddress = prevState.push(result.data);
+                        else
+                        newAddress = prevState.concat(result.data);
+                      }
+                        
+                    }
+                  }
+                  
+                  const addressUpdate = async ( id:string,data:definitions["Address"][] | definitions["Address"][] ) => {
+                    if(data)
+                    {
+                      const result = await address_update( id,data, headers);
+                      let prevState = AddressDataList;
+                        
+                      //update
+                      let newAddress
+                      if(!Array.isArray(result.data))
+                      newAddress = prevState.map((el:any) => (
+                        el.id === result.data.id ? {...el, result.data }: el
+                      ))
+                      else
+                      //update bulk 
+                      newAddress = prevState.map((el:any) => (
+                        el.id === result.data.id ? {...el, result.data }: el
+                      ))
 
-const defaultState = {};
-/* prettier-ignore */
-const AddressContext = React.createContext<Iaddress>(defaultState);
-const AddressProvider: React.FC<Icontext> = ({ children, headers }) => {
-  /* prettier-ignore */
-  const [AddressDataList, setAddressDataList] = React.useState<Array<definitions["Address"]>> ([]);
-  const addressList = async (
-    data: operations["address_list"]["parameters"]
-  ) => {
-    const result = await address_list(data, headers);
-
-    if (result) {
-    }
-  };
-
-  const addressCreate = async (data: definitions["Address"][]) => {
-    const result = await address_create(data, headers);
-
-    if (result) {
-    }
-  };
-
-  const addressRead = async (id: number) => {
-    const result = await address_read(id, headers);
-
-    if (result) {
-    }
-  };
-
-  const addressUpdate = async (id: number, data: definitions["Address"][]) => {
-    const result = await address_update(id, data, headers);
-
-    if (result) {
-    }
-  };
-
-  const addressPartial = async (id: number, data: definitions["Address"][]) => {
-    const result = await address_partial_update(id, data, headers);
-
-    if (result) {
-    }
-  };
-
-  const addressDelete = async (id: number) => {
-    const result = await address_delete(id, headers);
-
-    if (result) {
-    }
-  };
-
-  return (
-    <AddressContext.Provider
-      value={{
-        AddressData: AddressDataList,
-
-        addressListFuncProp: addressList,
-
-        addressCreateFuncProp: addressCreate,
-
-        addressReadFuncProp: addressRead,
-
-        addressUpdateFuncProp: addressUpdate,
-
-        addressPartialFuncProp: addressPartial,
-
-        addressDeleteFuncProp: addressDelete,
-      }}
-    >
-      {children}
-    </AddressContext.Provider>
-  );
-};
+                        
+                    }
+                  }
+                  
+                  const addressPartial = async ( id:string,data:definitions["Address"][] | definitions["Address"][] ) => {
+                    if(data)
+                    {
+                      const result = await address_partial_update( id,data, headers);
+                      let prevState = AddressDataList;
+                        
+                    }
+                  }
+                  
+                  const addressDelete = async ( id:string ) => {
+                    if(data)
+                    {
+                      const result = await address_delete( id, headers);
+                      let prevState = AddressDataList;
+                        
+                      //delete
+                      const newAddress = prevState.filter( (el:any) => (el.id !== result.data.id )
+                        
+                    }
+                  }
+                  
+              return (
+              <AddressContext.Provider
+              
+              value={{
+                addressData:AddressDataList,
+              
+                  addressListFuncProp: addressList,
+                  
+                  addressCreateFuncProp: addressCreate,
+                  
+                  addressReadFuncProp: addressRead,
+                  
+                  addressUpdateFuncProp: addressUpdate,
+                  
+                  addressPartialFuncProp: addressPartial,
+                  
+                  addressDeleteFuncProp: addressDelete,
+                  
+                }}
+              >
+              { children }
+              </AddressContext.Provider>
+            );};
+              

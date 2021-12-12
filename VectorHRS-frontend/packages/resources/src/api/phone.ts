@@ -14,7 +14,7 @@ export const phone_list = async (
   });
 };
 export const phone_create = async (
-  data: definitions["Phone"],
+  data: definitions["Phone"] | definitions["Phone"][],
   headers: any
 ): Promise<AxiosResponse<operations["phone_create"]["responses"][201]>> => {
   let endpoint = "/phone/";
@@ -40,7 +40,7 @@ export const phone_read = async (
 };
 export const phone_update = async (
   id: string,
-  data: definitions["Phone"],
+  data: definitions["Phone"] | definitions["Phone"][],
   headers: any
 ): Promise<AxiosResponse<operations["phone_update"]["responses"][200]>> => {
   let endpoint = "/phone/{id}/";
@@ -54,7 +54,7 @@ export const phone_update = async (
 };
 export const phone_partial_update = async (
   id: string,
-  data: definitions["Phone"],
+  data: definitions["Phone"] | definitions["Phone"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["phone_partial_update"]["responses"][200]>

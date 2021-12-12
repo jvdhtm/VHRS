@@ -14,7 +14,7 @@ export const department_list = async (
   });
 };
 export const department_create = async (
-  data: definitions["Department"],
+  data: definitions["Department"] | definitions["Department"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["department_create"]["responses"][201]>
@@ -42,7 +42,7 @@ export const department_read = async (
 };
 export const department_update = async (
   id: string,
-  data: definitions["Department"],
+  data: definitions["Department"] | definitions["Department"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["department_update"]["responses"][200]>
@@ -58,7 +58,7 @@ export const department_update = async (
 };
 export const department_partial_update = async (
   id: string,
-  data: definitions["Department"],
+  data: definitions["Department"] | definitions["Department"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["department_partial_update"]["responses"][200]>

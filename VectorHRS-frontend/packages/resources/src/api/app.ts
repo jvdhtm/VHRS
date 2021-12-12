@@ -14,7 +14,7 @@ export const app_list = async (
   });
 };
 export const app_create = async (
-  data: definitions["App"],
+  data: definitions["App"] | definitions["App"][],
   headers: any
 ): Promise<AxiosResponse<operations["app_create"]["responses"][201]>> => {
   let endpoint = "/app/";
@@ -40,7 +40,7 @@ export const app_read = async (
 };
 export const app_update = async (
   id: string,
-  data: definitions["App"],
+  data: definitions["App"] | definitions["App"][],
   headers: any
 ): Promise<AxiosResponse<operations["app_update"]["responses"][200]>> => {
   let endpoint = "/app/{id}/";
@@ -54,7 +54,7 @@ export const app_update = async (
 };
 export const app_partial_update = async (
   id: string,
-  data: definitions["App"],
+  data: definitions["App"] | definitions["App"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["app_partial_update"]["responses"][200]>

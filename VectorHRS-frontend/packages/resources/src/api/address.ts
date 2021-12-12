@@ -14,7 +14,7 @@ export const address_list = async (
   });
 };
 export const address_create = async (
-  data: definitions["Address"],
+  data: definitions["Address"] | definitions["Address"][],
   headers: any
 ): Promise<AxiosResponse<operations["address_create"]["responses"][201]>> => {
   let endpoint = "/address/";
@@ -40,7 +40,7 @@ export const address_read = async (
 };
 export const address_update = async (
   id: string,
-  data: definitions["Address"],
+  data: definitions["Address"] | definitions["Address"][],
   headers: any
 ): Promise<AxiosResponse<operations["address_update"]["responses"][200]>> => {
   let endpoint = "/address/{id}/";
@@ -54,7 +54,7 @@ export const address_update = async (
 };
 export const address_partial_update = async (
   id: string,
-  data: definitions["Address"],
+  data: definitions["Address"] | definitions["Address"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["address_partial_update"]["responses"][200]>

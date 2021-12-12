@@ -65,7 +65,7 @@ export const ChooseAndSync = () => {
                             '#/definitions/',
                             ''
                           );
-                          model = `definitions["${definition}"]`;
+                          model = `definitions["${definition}"] | definitions["${definition}"][]`;
                         } else {
                           model = `operations["${functionName}"]["parameters"]`;
                         }

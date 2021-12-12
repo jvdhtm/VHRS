@@ -14,7 +14,7 @@ export const personlog_list = async (
   });
 };
 export const personlog_create = async (
-  data: definitions["PersonLog"],
+  data: definitions["PersonLog"] | definitions["PersonLog"][],
   headers: any
 ): Promise<AxiosResponse<operations["personlog_create"]["responses"][201]>> => {
   let endpoint = "/personlog/";
@@ -40,7 +40,7 @@ export const personlog_read = async (
 };
 export const personlog_update = async (
   id: string,
-  data: definitions["PersonLog"],
+  data: definitions["PersonLog"] | definitions["PersonLog"][],
   headers: any
 ): Promise<AxiosResponse<operations["personlog_update"]["responses"][200]>> => {
   let endpoint = "/personlog/{id}/";
@@ -54,7 +54,7 @@ export const personlog_update = async (
 };
 export const personlog_partial_update = async (
   id: string,
-  data: definitions["PersonLog"],
+  data: definitions["PersonLog"] | definitions["PersonLog"][],
   headers: any
 ): Promise<
   AxiosResponse<operations["personlog_partial_update"]["responses"][200]>
