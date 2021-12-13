@@ -4,7 +4,9 @@ import axios, { AxiosResponse } from "axios";
 export const personstage_list = async (
   data: operations["personstage_list"]["parameters"],
   headers: any
-): Promise<AxiosResponse<operations["personstage_list"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["personstage_list"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/personstage/";
   return await axios({
     method: "get",
@@ -17,7 +19,7 @@ export const personstage_create = async (
   data: definitions["PersonStage"] | definitions["PersonStage"][],
   headers: any
 ): Promise<
-  AxiosResponse<operations["personstage_create"]["responses"][201]>
+  AxiosResponse<operations["personstage_create"]["responses"][201]["schema"]>
 > => {
   let endpoint = "/personstage/";
   return await axios({
@@ -30,7 +32,9 @@ export const personstage_create = async (
 export const personstage_read = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<operations["personstage_read"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["personstage_read"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/personstage/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -45,7 +49,7 @@ export const personstage_update = async (
   data: definitions["PersonStage"] | definitions["PersonStage"][],
   headers: any
 ): Promise<
-  AxiosResponse<operations["personstage_update"]["responses"][200]>
+  AxiosResponse<operations["personstage_update"]["responses"][200]["schema"]>
 > => {
   let endpoint = "/personstage/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
@@ -61,7 +65,9 @@ export const personstage_partial_update = async (
   data: definitions["PersonStage"] | definitions["PersonStage"][],
   headers: any
 ): Promise<
-  AxiosResponse<operations["personstage_partial_update"]["responses"][200]>
+  AxiosResponse<
+    operations["personstage_partial_update"]["responses"][200]["schema"]
+  >
 > => {
   let endpoint = "/personstage/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
@@ -75,7 +81,7 @@ export const personstage_partial_update = async (
 export const personstage_delete = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<any>> => {
+): Promise<AxiosResponse<any["schema"]>> => {
   let endpoint = "/personstage/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({

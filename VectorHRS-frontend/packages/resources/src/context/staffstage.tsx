@@ -1,187 +1,310 @@
+import { operations, definitions } from "../Schemas";
+import {
+  staffstage_list,
+  staffstage_create,
+  staffstage_read,
+  staffstage_update,
+  staffstage_partial_update,
+  staffstage_delete,
+} from "../api";
 
-              import { operations, definitions } from "../Schemas";
-              import {staffstage_list,staffstage_create,staffstage_read,staffstage_update,staffstage_partial_update,staffstage_delete,
-               } from "../api";
-              
-                import React, { createContext, useState, FC } from "react";
-                
-                interface Istaffstage {
-                
-                  staffstageData?:StaffStage[];
-                
-                  staffstageListFuncProp?: ( data:operations["staffstage_list"]["parameters"] ) => Promise<void>;
-                  
-                  staffstageCreateFuncProp?: ( data:definitions["StaffStage"][] | definitions["StaffStage"][] ) => Promise<void>;
-                  
-                  staffstageReadFuncProp?: ( id:number ) => Promise<void>;
-                  
-                  staffstageUpdateFuncProp?: ( id:number,data:definitions["StaffStage"][] | definitions["StaffStage"][] ) => Promise<void>;
-                  
-                  staffstagePartialFuncProp?: ( id:number,data:definitions["StaffStage"][] | definitions["StaffStage"][] ) => Promise<void>;
-                  
-                  staffstageDeleteFuncProp?: ( id:number ) => Promise<void>;
-                  
-              }
-              interface IcontextProvider{
-                children: React.ReactNode,
-                headers: any
-              }
+import { createContext, useState, FC, ReactNode } from "react";
 
-              const defaultState = {};
-                /* prettier-ignore */
-                const StaffstageContext = React.createContext<Istaffstage>(defaultState);
-                const StaffstageProvider: React.FC<IcontextProvider> = ({ children, headers }) => {
-                  
-                  /* prettier-ignore */
-                  const [StaffStageDataList, setStaffStageDataList] = React.useState<Array<StaffStage>> ([]);
-                  const staffstageList = async ( data:operations["staffstage_list"]["parameters"] ) => {
-                    if(data)
-                    {
-                      const result = await staffstage_list( data, headers);
-                      let prevState = StaffStageDataList;
-                      
-                      let found = false;
-                      const newStaffStage = prevState.map((el:any) => {
-                        if(el.id === result.data.id)
-                        {
+interface IAction {
+  verb: string;
+  results: number | definitions["StaffStage"] | definitions["StaffStage"][];
+}
 
-                          found = true;
-                          return {...el, result.data };
+interface Istaffstage {
+  loading: boolean;
+  count: number;
+  next?: string;
+  previous?: string;
+  logActions: IAction[];
 
-                        }
-                        else
-                        {
-                          return el;
-                        }
-                      }
-                      ))
+  staffstageData?: definitions["StaffStage"][];
 
-                      if(!found)
-                      {
-                        let newStaffStage
-                        if(!Array.isArray(result.data))
-                        newStaffStage = prevState.push(result.data);
-                        else
-                        newStaffStage = prevState.concat(result.data);
-                      }
-                        
-                    }
-                  }
-                  
-                  const staffstageCreate = async ( data:definitions["StaffStage"][] | definitions["StaffStage"][] ) => {
-                    if(data)
-                    {
-                      const result = await staffstage_create( data, headers);
-                      let prevState = StaffStageDataList;
-                        
-                      //Read or Create
-                      let newStaffStage
-                      if(!Array.isArray(result.data))
-                      newStaffStage = prevState.push(result.data);
-                      else
-                      newStaffStage = prevState.concat(result.data);
-                        
-                    }
-                  }
-                  
-                  const staffstageRead = async ( id:string ) => {
-                    if(data)
-                    {
-                      const result = await staffstage_read( id, headers);
-                      let prevState = StaffStageDataList;
-                      
-                      let found = false;
-                      const newStaffStage = prevState.map((el:any) => {
-                        if(el.id === result.data.id)
-                        {
+  staffstageListFuncProp?: (
+    data: operations["staffstage_list"]["parameters"]
+  ) => Promise<void>;
 
-                          found = true;
-                          return {...el, result.data };
+  staffstageCreateFuncProp?: (
+    data: definitions["StaffStage"] | definitions["StaffStage"][]
+  ) => Promise<void>;
 
-                        }
-                        else
-                        {
-                          return el;
-                        }
-                      }
-                      ))
+  staffstageReadFuncProp?: (id: number) => Promise<void>;
 
-                      if(!found)
-                      {
-                        let newStaffStage
-                        if(!Array.isArray(result.data))
-                        newStaffStage = prevState.push(result.data);
-                        else
-                        newStaffStage = prevState.concat(result.data);
-                      }
-                        
-                    }
-                  }
-                  
-                  const staffstageUpdate = async ( id:string,data:definitions["StaffStage"][] | definitions["StaffStage"][] ) => {
-                    if(data)
-                    {
-                      const result = await staffstage_update( id,data, headers);
-                      let prevState = StaffStageDataList;
-                        
-                      //update
-                      let newStaffStage
-                      if(!Array.isArray(result.data))
-                      newStaffStage = prevState.map((el:any) => (
-                        el.id === result.data.id ? {...el, result.data }: el
-                      ))
-                      else
-                      //update bulk 
-                      newStaffStage = prevState.map((el:any) => (
-                        el.id === result.data.id ? {...el, result.data }: el
-                      ))
+  staffstageUpdateFuncProp?: (
+    id: number,
+    data: definitions["StaffStage"] | definitions["StaffStage"][]
+  ) => Promise<void>;
 
-                        
-                    }
-                  }
-                  
-                  const staffstagePartial = async ( id:string,data:definitions["StaffStage"][] | definitions["StaffStage"][] ) => {
-                    if(data)
-                    {
-                      const result = await staffstage_partial_update( id,data, headers);
-                      let prevState = StaffStageDataList;
-                        
-                    }
-                  }
-                  
-                  const staffstageDelete = async ( id:string ) => {
-                    if(data)
-                    {
-                      const result = await staffstage_delete( id, headers);
-                      let prevState = StaffStageDataList;
-                        
-                      //delete
-                      const newStaffStage = prevState.filter( (el:any) => (el.id !== result.data.id )
-                        
-                    }
-                  }
-                  
-              return (
-              <StaffstageContext.Provider
-              
-              value={{
-                staffstageData:StaffStageDataList,
-              
-                  staffstageListFuncProp: staffstageList,
-                  
-                  staffstageCreateFuncProp: staffstageCreate,
-                  
-                  staffstageReadFuncProp: staffstageRead,
-                  
-                  staffstageUpdateFuncProp: staffstageUpdate,
-                  
-                  staffstagePartialFuncProp: staffstagePartial,
-                  
-                  staffstageDeleteFuncProp: staffstageDelete,
-                  
-                }}
-              >
-              { children }
-              </StaffstageContext.Provider>
-            );};
-              
+  staffstagePartialFuncProp?: (
+    id: number,
+    data: definitions["StaffStage"] | definitions["StaffStage"][]
+  ) => Promise<void>;
+
+  staffstageDeleteFuncProp?: (id: number) => Promise<void>;
+}
+interface IcontextProvider {
+  children: ReactNode;
+  headers: any;
+}
+
+interface Istate {
+  count: number;
+  next?: string;
+  previous?: string;
+  logActions: IAction[];
+  results: definitions["StaffStage"][];
+}
+
+const initialState: Istate = {
+  count: 0,
+  logActions: [],
+  results: [],
+};
+
+const defaultContextState = {
+  count: 0,
+  loading: false,
+  logActions: [],
+};
+/* prettier-ignore */
+const StaffstageContext = createContext<Istaffstage>(defaultContextState);
+export const StaffstageProvider: FC<IcontextProvider> = ({
+  children,
+  headers,
+}) => {
+  /* prettier-ignore */
+  const [StaffStageDataList, setStaffStageDataList] = useState<Istate> (initialState);
+  /* prettier-ignore */
+  const [loading, setLoading] = useState<boolean> (false);
+
+  const staffstageList = async (
+    data: operations["staffstage_list"]["parameters"]
+  ): Promise<void> => {
+    if (data) {
+      setLoading(true);
+      const result = await staffstage_list(data, headers);
+      let prevStateResults = StaffStageDataList.results;
+      let logActions = StaffStageDataList.logActions;
+
+      logActions.push({ verb: "get", results: result.data.results });
+      let found = false;
+      let newCount = StaffStageDataList.count + result.data.count;
+      let newNext = result.data.next;
+      let newPrevious = result.data.previous;
+
+      let newStaffStage = prevStateResults.map(
+        (el: definitions["StaffStage"]) => {
+          const preEl = prevStateResults.filter(
+            (resultEl: definitions["StaffStage"]) => {
+              return el.id === resultEl.id;
+            }
+          );
+
+          if (preEl.length > 0) {
+            found = true;
+            return { ...el, ...preEl[0] };
+          } else {
+            return el;
+          }
+        }
+      );
+
+      if (!found) {
+        newStaffStage = prevStateResults.concat(result.data.results);
+      }
+
+      setStaffStageDataList({
+        count: newCount,
+        next: newNext,
+        previous: newPrevious,
+        logActions: logActions,
+        results: newStaffStage,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  const staffstageCreate = async (
+    data: definitions["StaffStage"] | definitions["StaffStage"][]
+  ): Promise<void> => {
+    if (data) {
+      setLoading(true);
+      const result = await staffstage_create(data, headers);
+      let prevStateResults = StaffStageDataList.results;
+      let logActions = StaffStageDataList.logActions;
+
+      //Create
+
+      let newCount = StaffStageDataList.count;
+      logActions.push({ verb: "post", results: result.data });
+      if (!Array.isArray(result.data)) {
+        newCount = prevStateResults.push(result.data);
+      } else {
+        prevStateResults = prevStateResults.concat(result.data);
+        newCount = prevStateResults.length;
+      }
+
+      setStaffStageDataList({
+        ...StaffStageDataList,
+        count: newCount,
+        results: prevStateResults,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  const staffstageRead = async (id: number): Promise<void> => {
+    if (id) {
+      setLoading(true);
+      const result = await staffstage_read(id.toString(), headers);
+      let prevStateResults = StaffStageDataList.results;
+      let logActions = StaffStageDataList.logActions;
+
+      logActions.push({ verb: "get", results: result.data });
+      let found = false;
+      let newStaffStage = prevStateResults.map(
+        (el: definitions["StaffStage"]) => {
+          if (el.id === result.data.id) {
+            found = true;
+            return { ...el, ...result.data };
+          } else {
+            return el;
+          }
+        }
+      );
+      if (!found) {
+        newStaffStage = prevStateResults.concat(result.data);
+      }
+
+      setStaffStageDataList({
+        ...StaffStageDataList,
+        results: newStaffStage,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  const staffstageUpdate = async (
+    id: number,
+    data: definitions["StaffStage"] | definitions["StaffStage"][]
+  ): Promise<void> => {
+    if (id && data) {
+      setLoading(true);
+      const result = await staffstage_update(id.toString(), data, headers);
+      let prevStateResults = StaffStageDataList.results;
+      let logActions = StaffStageDataList.logActions;
+
+      //update
+      logActions.push({ verb: "put", results: result.data });
+      let newStaffStage;
+      if (!Array.isArray(result.data))
+        newStaffStage = prevStateResults.map((el: definitions["StaffStage"]) =>
+          el.id === result.data.id ? { ...el, ...result.data } : el
+        );
+      //update bulk
+      else
+        newStaffStage = prevStateResults.map((el: definitions["StaffStage"]) =>
+          el.id === result.data.id ? { ...el, ...result.data } : el
+        );
+
+      setStaffStageDataList({
+        ...StaffStageDataList,
+        results: newStaffStage,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  const staffstagePartial = async (
+    id: number,
+    data: definitions["StaffStage"] | definitions["StaffStage"][]
+  ): Promise<void> => {
+    if (id && data) {
+      setLoading(true);
+      const result = await staffstage_partial_update(
+        id.toString(),
+        data,
+        headers
+      );
+      let prevStateResults = StaffStageDataList.results;
+      let logActions = StaffStageDataList.logActions;
+
+      //update
+      logActions.push({ verb: "patch", results: result.data });
+      let newStaffStage;
+      if (!Array.isArray(result.data))
+        newStaffStage = prevStateResults.map((el: definitions["StaffStage"]) =>
+          el.id === result.data.id ? { ...el, ...result.data } : el
+        );
+      //update bulk
+      else
+        newStaffStage = prevStateResults.map((el: definitions["StaffStage"]) =>
+          el.id === result.data.id ? { ...el, ...result.data } : el
+        );
+
+      setStaffStageDataList({
+        ...StaffStageDataList,
+        results: newStaffStage,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  const staffstageDelete = async (id: number): Promise<void> => {
+    if (id) {
+      setLoading(true);
+      const result = await staffstage_delete(id.toString(), headers);
+      let prevStateResults = StaffStageDataList.results;
+      let logActions = StaffStageDataList.logActions;
+
+      logActions.push({ verb: "delete", results: id });
+      //delete
+      const newStaffStage = prevStateResults.filter(
+        (el: definitions["StaffStage"]) => el.id !== id
+      );
+
+      setStaffStageDataList({
+        ...StaffStageDataList,
+        results: newStaffStage,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  return (
+    <StaffstageContext.Provider
+      value={{
+        count: StaffStageDataList.count,
+        next: StaffStageDataList.next,
+        previous: StaffStageDataList.previous,
+        logActions: StaffStageDataList.logActions,
+        loading: loading,
+        staffstageData: StaffStageDataList.results,
+
+        staffstageListFuncProp: staffstageList,
+
+        staffstageCreateFuncProp: staffstageCreate,
+
+        staffstageReadFuncProp: staffstageRead,
+
+        staffstageUpdateFuncProp: staffstageUpdate,
+
+        staffstagePartialFuncProp: staffstagePartial,
+
+        staffstageDeleteFuncProp: staffstageDelete,
+      }}
+    >
+      {children}
+    </StaffstageContext.Provider>
+  );
+};

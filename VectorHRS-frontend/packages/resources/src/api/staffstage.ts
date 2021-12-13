@@ -4,7 +4,9 @@ import axios, { AxiosResponse } from "axios";
 export const staffstage_list = async (
   data: operations["staffstage_list"]["parameters"],
   headers: any
-): Promise<AxiosResponse<operations["staffstage_list"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["staffstage_list"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/staffstage/";
   return await axios({
     method: "get",
@@ -17,7 +19,7 @@ export const staffstage_create = async (
   data: definitions["StaffStage"] | definitions["StaffStage"][],
   headers: any
 ): Promise<
-  AxiosResponse<operations["staffstage_create"]["responses"][201]>
+  AxiosResponse<operations["staffstage_create"]["responses"][201]["schema"]>
 > => {
   let endpoint = "/staffstage/";
   return await axios({
@@ -30,7 +32,9 @@ export const staffstage_create = async (
 export const staffstage_read = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<operations["staffstage_read"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["staffstage_read"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/staffstage/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -45,7 +49,7 @@ export const staffstage_update = async (
   data: definitions["StaffStage"] | definitions["StaffStage"][],
   headers: any
 ): Promise<
-  AxiosResponse<operations["staffstage_update"]["responses"][200]>
+  AxiosResponse<operations["staffstage_update"]["responses"][200]["schema"]>
 > => {
   let endpoint = "/staffstage/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
@@ -61,7 +65,9 @@ export const staffstage_partial_update = async (
   data: definitions["StaffStage"] | definitions["StaffStage"][],
   headers: any
 ): Promise<
-  AxiosResponse<operations["staffstage_partial_update"]["responses"][200]>
+  AxiosResponse<
+    operations["staffstage_partial_update"]["responses"][200]["schema"]
+  >
 > => {
   let endpoint = "/staffstage/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
@@ -75,7 +81,7 @@ export const staffstage_partial_update = async (
 export const staffstage_delete = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<any>> => {
+): Promise<AxiosResponse<any["schema"]>> => {
   let endpoint = "/staffstage/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({

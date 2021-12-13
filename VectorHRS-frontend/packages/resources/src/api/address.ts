@@ -4,7 +4,9 @@ import axios, { AxiosResponse } from "axios";
 export const address_list = async (
   data: operations["address_list"]["parameters"],
   headers: any
-): Promise<AxiosResponse<operations["address_list"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["address_list"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/address/";
   return await axios({
     method: "get",
@@ -16,7 +18,9 @@ export const address_list = async (
 export const address_create = async (
   data: definitions["Address"] | definitions["Address"][],
   headers: any
-): Promise<AxiosResponse<operations["address_create"]["responses"][201]>> => {
+): Promise<
+  AxiosResponse<operations["address_create"]["responses"][201]["schema"]>
+> => {
   let endpoint = "/address/";
   return await axios({
     method: "post",
@@ -28,7 +32,9 @@ export const address_create = async (
 export const address_read = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<operations["address_read"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["address_read"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/address/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -42,7 +48,9 @@ export const address_update = async (
   id: string,
   data: definitions["Address"] | definitions["Address"][],
   headers: any
-): Promise<AxiosResponse<operations["address_update"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["address_update"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/address/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -57,7 +65,9 @@ export const address_partial_update = async (
   data: definitions["Address"] | definitions["Address"][],
   headers: any
 ): Promise<
-  AxiosResponse<operations["address_partial_update"]["responses"][200]>
+  AxiosResponse<
+    operations["address_partial_update"]["responses"][200]["schema"]
+  >
 > => {
   let endpoint = "/address/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
@@ -71,7 +81,7 @@ export const address_partial_update = async (
 export const address_delete = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<any>> => {
+): Promise<AxiosResponse<any["schema"]>> => {
   let endpoint = "/address/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({

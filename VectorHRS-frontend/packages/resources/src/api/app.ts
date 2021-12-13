@@ -4,7 +4,9 @@ import axios, { AxiosResponse } from "axios";
 export const app_list = async (
   data: operations["app_list"]["parameters"],
   headers: any
-): Promise<AxiosResponse<operations["app_list"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["app_list"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/app/";
   return await axios({
     method: "get",
@@ -16,7 +18,9 @@ export const app_list = async (
 export const app_create = async (
   data: definitions["App"] | definitions["App"][],
   headers: any
-): Promise<AxiosResponse<operations["app_create"]["responses"][201]>> => {
+): Promise<
+  AxiosResponse<operations["app_create"]["responses"][201]["schema"]>
+> => {
   let endpoint = "/app/";
   return await axios({
     method: "post",
@@ -28,7 +32,9 @@ export const app_create = async (
 export const app_read = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<operations["app_read"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["app_read"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/app/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -42,7 +48,9 @@ export const app_update = async (
   id: string,
   data: definitions["App"] | definitions["App"][],
   headers: any
-): Promise<AxiosResponse<operations["app_update"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["app_update"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/app/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -57,7 +65,7 @@ export const app_partial_update = async (
   data: definitions["App"] | definitions["App"][],
   headers: any
 ): Promise<
-  AxiosResponse<operations["app_partial_update"]["responses"][200]>
+  AxiosResponse<operations["app_partial_update"]["responses"][200]["schema"]>
 > => {
   let endpoint = "/app/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
@@ -71,7 +79,7 @@ export const app_partial_update = async (
 export const app_delete = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<any>> => {
+): Promise<AxiosResponse<any["schema"]>> => {
   let endpoint = "/app/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({

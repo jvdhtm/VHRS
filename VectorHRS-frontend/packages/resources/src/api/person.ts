@@ -4,7 +4,9 @@ import axios, { AxiosResponse } from "axios";
 export const person_list = async (
   data: operations["person_list"]["parameters"],
   headers: any
-): Promise<AxiosResponse<operations["person_list"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["person_list"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/person/";
   return await axios({
     method: "get",
@@ -16,7 +18,9 @@ export const person_list = async (
 export const person_create = async (
   data: definitions["Person"] | definitions["Person"][],
   headers: any
-): Promise<AxiosResponse<operations["person_create"]["responses"][201]>> => {
+): Promise<
+  AxiosResponse<operations["person_create"]["responses"][201]["schema"]>
+> => {
   let endpoint = "/person/";
   return await axios({
     method: "post",
@@ -28,7 +32,9 @@ export const person_create = async (
 export const person_read = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<operations["person_read"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["person_read"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/person/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -42,7 +48,9 @@ export const person_update = async (
   id: string,
   data: definitions["Person"] | definitions["Person"][],
   headers: any
-): Promise<AxiosResponse<operations["person_update"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["person_update"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/person/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -57,7 +65,7 @@ export const person_partial_update = async (
   data: definitions["Person"] | definitions["Person"][],
   headers: any
 ): Promise<
-  AxiosResponse<operations["person_partial_update"]["responses"][200]>
+  AxiosResponse<operations["person_partial_update"]["responses"][200]["schema"]>
 > => {
   let endpoint = "/person/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
@@ -71,7 +79,7 @@ export const person_partial_update = async (
 export const person_delete = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<any>> => {
+): Promise<AxiosResponse<any["schema"]>> => {
   let endpoint = "/person/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({

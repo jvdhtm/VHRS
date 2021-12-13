@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChooseAndSync = void 0;
 const tslib_1 = require("tslib");
 const openApi = (0, tslib_1.__importStar)(require("openapi-typescript"));
+const prettier_1 = (0, tslib_1.__importDefault)(require("prettier"));
 const Config_1 = require("./constants/Config");
 const fs = (0, tslib_1.__importStar)(require("fs"));
 const path = (0, tslib_1.__importStar)(require("path"));
@@ -29,6 +30,8 @@ const ChooseAndSync = () => {
             const pathsObj = swaggerDoc.data.paths;
             let filesToParse = {};
             let fileToWrite = {};
+            let indexImportFileToWrite = {};
+            let indexExportFileToWrite = {};
             for (const path in pathsObj) {
                 if (Object.prototype.hasOwnProperty.call(pathsObj, path)) {
                     const element = pathsObj[path];
@@ -45,6 +48,7 @@ const ChooseAndSync = () => {
                                 };
                             }
                             let definition = '';
+                            let list = false;
                             filesToParse[fileName].path.push(path);
                             if (functionName) {
                                 let paramsToContext;
@@ -54,16 +58,18 @@ const ChooseAndSync = () => {
                                         definition = parameters[0].schema.$ref.replace('#/definitions/', '');
                                         modelToContext = `definitions["${definition}"]`;
                                         filesToParse[fileName].definitionsToContext = definition;
-                                        paramsToContext = `${modelToContext}[] | ${modelToContext}[]`;
+                                        paramsToContext = `${modelToContext} | ${modelToContext}[]`;
                                     }
                                     else {
                                         paramsToContext = `operations["${functionName}"]["parameters"]`;
+                                        list = true;
                                     }
                                 }
                                 filesToParse[fileName].FunctionsToContext.push({
                                     functionName,
                                     parameters: paramsToContext,
                                     verb: verb,
+                                    list: list,
                                     path: path
                                 });
                             }
@@ -76,7 +82,7 @@ const ChooseAndSync = () => {
                     const filetoparse = filesToParse[fileName];
                     const modelsToParse = filetoparse.definitionsToContext;
                     const functionsToParse = filetoparse.FunctionsToContext;
-                    if (!fileToWrite[fileName]) {
+                    if (!fileToWrite[fileName] && modelsToParse) {
                         fileToWrite[fileName] = '';
                         fileToWrite[fileName] += `
               import { operations, definitions } from "../Schemas";
@@ -90,13 +96,25 @@ const ChooseAndSync = () => {
                } from "../api";
               `;
                         fileToWrite[fileName] += `
-                import React, { createContext, useState, FC } from "react";
+                import { createContext, useState, FC, ReactNode } from "react";
                 `;
                         fileToWrite[fileName] += `
+                interface IAction {
+                  verb:string,
+                  results:  number | definitions["${modelsToParse}"] | definitions["${modelsToParse}"][],
+                }
+
+
                 interface I${fileName} {
+                  loading: boolean;
+                  count: number;
+                  next?: string;
+                  previous?: string;
+                  logActions: IAction[];
+
                 `;
                         fileToWrite[fileName] += `
-                  ${fileName}Data?:${modelsToParse}[];
+                  ${fileName}Data?:definitions["${modelsToParse}"][];
                 `;
                         for (const func in functionsToParse) {
                             if (Object.prototype.hasOwnProperty.call(functionsToParse, func)) {
@@ -108,104 +126,220 @@ const ChooseAndSync = () => {
                                     args += `data:${functionsToParse[func].parameters},`;
                                 }
                                 const newNameFunction = functionsToParse[func].functionName.split('_')[0] + titleCaseWord(functionsToParse[func].functionName.split('_')[1]);
+                                let returnType = 'void';
                                 fileToWrite[fileName] += `
-                  ${newNameFunction}FuncProp?: ( ${args.slice(0, -1)} ) => Promise<void>;
+                  ${newNameFunction}FuncProp?: ( ${args.slice(0, -1)} ) => Promise<${returnType}>;
                   `;
                             }
                         }
                         fileToWrite[fileName] += `
               }
               interface IcontextProvider{
-                children: React.ReactNode,
+                children: ReactNode,
                 headers: any
               }
 
-              const defaultState = {};
+
+              interface Istate{
+                count: number;
+                next?: string;
+                previous?: string;
+                logActions: IAction[];
+                results : definitions["${modelsToParse}"][]
+              }
+
+              const  initialState:Istate = {
+                count: 0,
+                logActions:[],
+                results : []
+              }
+
+
+              const defaultContextState = {
+                count: 0,
+                loading: false,
+                logActions:[],
+              };
                 /* prettier-ignore */
-                const ${titleCaseWord(fileName)}Context = React.createContext<I${fileName}>(defaultState);`;
-                        fileToWrite[fileName] += `
-                const ${titleCaseWord(fileName)}Provider: React.FC<IcontextProvider> = ({ children, headers }) => {
+                const ${titleCaseWord(fileName)}Context = createContext<I${fileName}>(defaultContextState);`;
+                        indexImportFileToWrite[fileName] = `${titleCaseWord(fileName)}Provider`;
+                        indexExportFileToWrite[fileName] = `${titleCaseWord(fileName)}Provider`;
+                        fileToWrite[fileName] += `export 
+                const ${titleCaseWord(fileName)}Provider: FC<IcontextProvider> = ({ children, headers }) => {
                   `;
                         fileToWrite[fileName] += `
                   /* prettier-ignore */
-                  const [${modelsToParse}DataList, set${modelsToParse}DataList] = React.useState<Array<${modelsToParse}>> ([]);`;
+                  const [${modelsToParse}DataList, set${modelsToParse}DataList] = useState<Istate> (initialState);
+                  /* prettier-ignore */
+                  const [loading, setLoading] = useState<boolean> (false);
+                  
+                  `;
                         for (const func in functionsToParse) {
                             if (Object.prototype.hasOwnProperty.call(functionsToParse, func)) {
                                 let args = ``;
                                 let args2 = '';
+                                let cond = '';
                                 if (functionsToParse[func].path.indexOf('{id}') > -1) {
-                                    args += `id:string,`;
-                                    args2 += 'id,';
+                                    args += `id:number,`;
+                                    args2 += 'id.toString(),';
+                                    cond += 'id &&';
                                 }
                                 if (functionsToParse[func].parameters) {
                                     args += `data:${functionsToParse[func].parameters},`;
                                     args2 += 'data,';
+                                    cond += 'data &&';
                                 }
+                                let returnType = 'void';
                                 const newNameFunction = functionsToParse[func].functionName.split('_')[0] + titleCaseWord(functionsToParse[func].functionName.split('_')[1]);
                                 fileToWrite[fileName] += `
-                  const ${newNameFunction} = async ( ${args.slice(0, -1)} ) => {
-                    if(data)
+                  const ${newNameFunction} = async ( ${args.slice(0, -1)} ):Promise<${returnType}> => {
+                    if(${cond.slice(0, -2)})
                     {
+                      setLoading(true);
                       const result = await ${functionsToParse[func].functionName}( ${args2.slice(0, -1)}, headers);
-                      let prevState = ${modelsToParse}DataList;
+                      let prevStateResults = ${modelsToParse}DataList.results;
+                      let logActions = ${modelsToParse}DataList.logActions;
+                      
+
                       `;
-                                if (functionsToParse[func].verb === 'get')
+                                if (functionsToParse[func].verb === 'get' && !functionsToParse[func].list)
                                     fileToWrite[fileName] += `
+                      logActions.push({verb:"${functionsToParse[func].verb}", results: result.data });
                       let found = false;
-                      const new${modelsToParse} = prevState.map((el:any) => {
+                      let new${modelsToParse} = prevStateResults.map((el:definitions["${modelsToParse}"]) => {
                         if(el.id === result.data.id)
                         {
 
                           found = true;
-                          return {...el, result.data };
+                          return {...el, ...result.data  };
 
                         }
                         else
                         {
                           return el;
                         }
+                      })
+                      if(!found)
+                      {
+                        new${modelsToParse} = prevStateResults.concat(result.data);
                       }
-                      ))
+
+
+                      set${modelsToParse}DataList(
+                        {
+                          ...${modelsToParse}DataList,
+                          results : new${modelsToParse}
+                        }
+                      )
+                      `;
+                                if (functionsToParse[func].verb === 'get' && functionsToParse[func].list)
+                                    fileToWrite[fileName] += `
+                      logActions.push({verb:"${functionsToParse[func].verb}", results: result.data.results });
+                      let found = false;
+                      let newCount= ${modelsToParse}DataList.count + result.data.count;
+                      let newNext= result.data.next;
+                      let newPrevious = result.data.previous;
+
+                      let new${modelsToParse} = prevStateResults.map((el:definitions["${modelsToParse}"]) => {
+                        const preEl = prevStateResults.filter((resultEl:definitions["${modelsToParse}"]) => {
+                          return el.id === resultEl.id 
+                        });
+                        
+                        if(preEl.length > 0 )
+                        {
+
+                          found = true;
+                          return {...el, ...preEl[0] };
+
+                        }
+                        else
+                        {
+                          return el;
+                        }
+                      });
 
                       if(!found)
                       {
-                        let new${modelsToParse}
-                        if(!Array.isArray(result.data))
-                        new${modelsToParse} = prevState.push(result.data);
-                        else
-                        new${modelsToParse} = prevState.concat(result.data);
+                        new${modelsToParse} = prevStateResults.concat(result.data.results);
                       }
+
+
+                      set${modelsToParse}DataList(
+                          {
+                            count: newCount,
+                            next: newNext,
+                            previous: newPrevious,
+                            logActions: logActions,
+                            results : new${modelsToParse}
+                          }
+                      )
+
                       `;
                                 if (functionsToParse[func].verb === 'post')
                                     fileToWrite[fileName] += `  
-                      //Read or Create
-                      let new${modelsToParse}
+                      //Create
+
+                      let newCount = ${modelsToParse}DataList.count;
+                      logActions.push({verb:"${functionsToParse[func].verb}", results: result.data });
                       if(!Array.isArray(result.data))
-                      new${modelsToParse} = prevState.push(result.data);
+                      {
+                        newCount = prevStateResults.push(result.data);
+                      }
                       else
-                      new${modelsToParse} = prevState.concat(result.data);
+                      {
+                        prevStateResults = prevStateResults.concat(result.data);
+                        newCount = prevStateResults.length
+                      }
+
+                      set${modelsToParse}DataList(
+                        {
+                          ...${modelsToParse}DataList,
+                          count: newCount,
+                          results : prevStateResults
+                        }
+                      )
                       `;
-                                if (functionsToParse[func].verb === 'put')
+                                if (functionsToParse[func].verb === 'put' || functionsToParse[func].verb === 'patch')
                                     fileToWrite[fileName] += `  
                       //update
+                      logActions.push({verb:"${functionsToParse[func].verb}", results: result.data });
                       let new${modelsToParse}
                       if(!Array.isArray(result.data))
-                      new${modelsToParse} = prevState.map((el:any) => (
-                        el.id === result.data.id ? {...el, result.data }: el
+                      new${modelsToParse} = prevStateResults.map((el:definitions["${modelsToParse}"]) => (
+                        el.id === result.data.id ? {...el, ...result.data }: el
                       ))
                       else
                       //update bulk 
-                      new${modelsToParse} = prevState.map((el:any) => (
-                        el.id === result.data.id ? {...el, result.data }: el
+                      new${modelsToParse} = prevStateResults.map((el:definitions["${modelsToParse}"]) => (
+                        el.id === result.data.id ? {...el, ...result.data }: el
                       ))
+
+                      set${modelsToParse}DataList(
+                        {
+                          ...${modelsToParse}DataList,
+                          results : new${modelsToParse}
+                        }
+                      )
 
                       `;
                                 if (functionsToParse[func].verb === 'delete')
-                                    fileToWrite[fileName] += `  
+                                    fileToWrite[fileName] += `
+                      logActions.push({verb:"${functionsToParse[func].verb}", results: id });  
                       //delete
-                      const new${modelsToParse} = prevState.filter( (el:any) => (el.id !== result.data.id )
+                      const new${modelsToParse} = prevStateResults.filter( (el:definitions["${modelsToParse}"]) => (el.id !== id ))
+
+                      set${modelsToParse}DataList(
+                        {
+                          ...${modelsToParse}DataList,
+                          results : new${modelsToParse}
+                        }
+                      )
+
+
                       `;
-                                fileToWrite[fileName] += `  
+                                fileToWrite[fileName] += `
+                    
+                      setLoading(false);
                     }
                   }
                   `;
@@ -216,7 +350,12 @@ const ChooseAndSync = () => {
               <${titleCaseWord(fileName)}Context.Provider
               
               value={{
-                ${fileName}Data:${modelsToParse}DataList,
+                count: ${modelsToParse}DataList.count,
+                next: ${modelsToParse}DataList.next,
+                previous: ${modelsToParse}DataList.previous,
+                logActions: ${modelsToParse}DataList.logActions,
+                loading: loading,
+                ${fileName}Data:${modelsToParse}DataList.results,
               `;
                         for (const func in functionsToParse) {
                             if (Object.prototype.hasOwnProperty.call(functionsToParse, func)) {
@@ -236,10 +375,28 @@ const ChooseAndSync = () => {
                     }
                 }
             }
+            let indexToWrite = '';
+            for (const fileName in indexImportFileToWrite) {
+                if (Object.prototype.hasOwnProperty.call(indexImportFileToWrite, fileName)) {
+                    let file = 'import {' + indexImportFileToWrite[fileName];
+                    file += `} from  "./${fileName}";
+            `;
+                    indexToWrite += file;
+                }
+            }
+            indexToWrite += 'export {';
+            for (const fileName in indexExportFileToWrite) {
+                if (Object.prototype.hasOwnProperty.call(indexExportFileToWrite, fileName)) {
+                    let file = indexExportFileToWrite[fileName] + ',';
+                    indexToWrite += file;
+                }
+            }
+            indexToWrite = indexToWrite.slice(0, -1) + '};';
+            const index = prettier_1.default.format(indexToWrite);
+            fs.writeFile(dirPath + '/context/index.ts', index, 'utf8', async () => { });
             for (const fileName in fileToWrite) {
                 if (Object.prototype.hasOwnProperty.call(fileToWrite, fileName)) {
-                    //const file = prettier.format(fileToWrite[fileName]);
-                    const file = fileToWrite[fileName];
+                    const file = prettier_1.default.format(fileToWrite[fileName]);
                     fs.writeFile(dirPath + '/context/' + fileName + '.tsx', file, 'utf8', async () => {
                         return console.log(GREEN, 'context are Generated in ' +
                             dirPath +

@@ -37,39 +37,38 @@ export const ChooseAndSync = () => {
                 for (const verb in element) {
                   if (Object.prototype.hasOwnProperty.call(element, verb)) {
                     const fileName = element[verb].tags;
-                    if (!FileToWrite[fileName]) {
-                      FileToWrite[fileName] = '';
-                      FileToWrite[fileName] += `
+                    const functionName = element[verb].operationId;
+                    const parameters = element[verb].parameters;
+                    let definition = '';
+                    let model = '';
+
+                    if (parameters && parameters.length > 0) {
+                      if (parameters[0].in === 'body') {
+                        definition = parameters[0].schema.$ref.replace(
+                          '#/definitions/',
+                          ''
+                        );
+                        model = `definitions["${definition}"] | definitions["${definition}"][]`;
+                      } else {
+                        model = `operations["${functionName}"]["parameters"]`;
+                      }
+                    }
+
+                    if (functionName) {
+                      if (!FileToWrite[fileName]) {
+                        FileToWrite[fileName] = '';
+                        FileToWrite[fileName] += `
                         import {operations, definitions} from "../Schemas";
                         import axios,{AxiosResponse} from "axios"
                         `;
-                    }
-
-                    const functionName = element[verb].operationId;
-                    const parameters = element[verb].parameters;
-
-                    let definition = '';
-                    let model = '';
-                    if (functionName) {
+                      }
 
                       if (!indexImportFileToWrite[fileName]) {
                         indexImportFileToWrite[fileName] = `import {`;
                         indexExportFileToWrite[fileName] = '';
                       }
-                      indexImportFileToWrite[fileName] += functionName +',';
-                      indexExportFileToWrite[fileName] += functionName +',';
-
-                      if (parameters && parameters.length > 0) {
-                        if (parameters[0].in === 'body') {
-                          definition = parameters[0].schema.$ref.replace(
-                            '#/definitions/',
-                            ''
-                          );
-                          model = `definitions["${definition}"] | definitions["${definition}"][]`;
-                        } else {
-                          model = `operations["${functionName}"]["parameters"]`;
-                        }
-                      }
+                      indexImportFileToWrite[fileName] += functionName + ',';
+                      indexExportFileToWrite[fileName] += functionName + ',';
 
                       FileToWrite[fileName] += `
                     export const ${functionName} = async ( `;
@@ -78,42 +77,39 @@ export const ChooseAndSync = () => {
                       if (model) FileToWrite[fileName] += `data: ${model},`;
                       let response = `operations["${functionName}"]["responses"]`;
 
-                      if(verb === 'get'|| verb === 'put' || verb === 'patch') response += "[200]";
-                      if(verb === 'post') response += "[201]";
-                      if(verb === 'delete') response = "any";
+                      if (verb === 'get' || verb === 'put' || verb === 'patch')
+                        response += '[200]';
+                      if (verb === 'post') response += '[201]';
+                      if (verb === 'delete') response = 'any';
 
                       FileToWrite[fileName] += `
-                       headers: any ) : Promise<AxiosResponse<${response}>> => {
+                       headers: any ) : Promise<AxiosResponse<${response}["schema"]>> => {
                         let endpoint = "${path}";`;
                       if (path.indexOf('{id}') > -1)
                         FileToWrite[fileName] += `
                         endpoint = endpoint.replace("{id}", id.toString())`;
 
-                        if(verb === 'post')
-                        {
-                          FileToWrite[fileName] += `
+                      if (verb === 'post') {
+                        FileToWrite[fileName] += `
                           return await axios({
                           method: "${verb}",
                           url: endpoint,
                           `;
-                          if (model) FileToWrite[fileName] += `data,`;
-                          FileToWrite[fileName] += `
+                        if (model) FileToWrite[fileName] += `data,`;
+                        FileToWrite[fileName] += `
                             headers
-                          });`
-
-                        }
-                        else
-                        {
-                          FileToWrite[fileName] += `
+                          });`;
+                      } else {
+                        FileToWrite[fileName] += `
                           return await axios({
                           method: "${verb}",
                           url: endpoint,
                           `;
-                          if (model) FileToWrite[fileName] += `data,`;
-                          FileToWrite[fileName] += `
+                        if (model) FileToWrite[fileName] += `data,`;
+                        FileToWrite[fileName] += `
                             headers
-                          });`
-                        }
+                          });`;
+                      }
 
                       FileToWrite[fileName] += `}`;
                     }
@@ -122,24 +118,33 @@ export const ChooseAndSync = () => {
               }
             }
 
-            let indexToWrite : string  = '';
+            let indexToWrite: string = '';
             for (const fileName in indexImportFileToWrite) {
-              if (Object.prototype.hasOwnProperty.call(indexImportFileToWrite, fileName)) {
+              if (
+                Object.prototype.hasOwnProperty.call(
+                  indexImportFileToWrite,
+                  fileName
+                )
+              ) {
                 let file = indexImportFileToWrite[fileName].slice(0, -1);
-                file +=`} from  "./${fileName}";
-                `
+                file += `} from  "./${fileName}";
+                `;
                 indexToWrite += file;
               }
-
             }
             indexToWrite += 'export {';
             for (const fileName in indexExportFileToWrite) {
-              if (Object.prototype.hasOwnProperty.call(indexExportFileToWrite, fileName)) {
+              if (
+                Object.prototype.hasOwnProperty.call(
+                  indexExportFileToWrite,
+                  fileName
+                )
+              ) {
                 let file = indexExportFileToWrite[fileName];
                 indexToWrite += file;
               }
             }
-            indexToWrite = indexToWrite.slice(0, -1)  + '};'
+            indexToWrite = indexToWrite.slice(0, -1) + '};';
             const index = prettier.format(indexToWrite);
             fs.writeFile(
               dirPath + '/api/index.ts',

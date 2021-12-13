@@ -1,187 +1,299 @@
+import { operations, definitions } from "../Schemas";
+import {
+  person_list,
+  person_create,
+  person_read,
+  person_update,
+  person_partial_update,
+  person_delete,
+} from "../api";
 
-              import { operations, definitions } from "../Schemas";
-              import {person_list,person_create,person_read,person_update,person_partial_update,person_delete,
-               } from "../api";
-              
-                import React, { createContext, useState, FC } from "react";
-                
-                interface Iperson {
-                
-                  personData?:Person[];
-                
-                  personListFuncProp?: ( data:operations["person_list"]["parameters"] ) => Promise<void>;
-                  
-                  personCreateFuncProp?: ( data:definitions["Person"][] | definitions["Person"][] ) => Promise<void>;
-                  
-                  personReadFuncProp?: ( id:number ) => Promise<void>;
-                  
-                  personUpdateFuncProp?: ( id:number,data:definitions["Person"][] | definitions["Person"][] ) => Promise<void>;
-                  
-                  personPartialFuncProp?: ( id:number,data:definitions["Person"][] | definitions["Person"][] ) => Promise<void>;
-                  
-                  personDeleteFuncProp?: ( id:number ) => Promise<void>;
-                  
-              }
-              interface IcontextProvider{
-                children: React.ReactNode,
-                headers: any
-              }
+import { createContext, useState, FC, ReactNode } from "react";
 
-              const defaultState = {};
-                /* prettier-ignore */
-                const PersonContext = React.createContext<Iperson>(defaultState);
-                const PersonProvider: React.FC<IcontextProvider> = ({ children, headers }) => {
-                  
-                  /* prettier-ignore */
-                  const [PersonDataList, setPersonDataList] = React.useState<Array<Person>> ([]);
-                  const personList = async ( data:operations["person_list"]["parameters"] ) => {
-                    if(data)
-                    {
-                      const result = await person_list( data, headers);
-                      let prevState = PersonDataList;
-                      
-                      let found = false;
-                      const newPerson = prevState.map((el:any) => {
-                        if(el.id === result.data.id)
-                        {
+interface IAction {
+  verb: string;
+  results: number | definitions["Person"] | definitions["Person"][];
+}
 
-                          found = true;
-                          return {...el, result.data };
+interface Iperson {
+  loading: boolean;
+  count: number;
+  next?: string;
+  previous?: string;
+  logActions: IAction[];
 
-                        }
-                        else
-                        {
-                          return el;
-                        }
-                      }
-                      ))
+  personData?: definitions["Person"][];
 
-                      if(!found)
-                      {
-                        let newPerson
-                        if(!Array.isArray(result.data))
-                        newPerson = prevState.push(result.data);
-                        else
-                        newPerson = prevState.concat(result.data);
-                      }
-                        
-                    }
-                  }
-                  
-                  const personCreate = async ( data:definitions["Person"][] | definitions["Person"][] ) => {
-                    if(data)
-                    {
-                      const result = await person_create( data, headers);
-                      let prevState = PersonDataList;
-                        
-                      //Read or Create
-                      let newPerson
-                      if(!Array.isArray(result.data))
-                      newPerson = prevState.push(result.data);
-                      else
-                      newPerson = prevState.concat(result.data);
-                        
-                    }
-                  }
-                  
-                  const personRead = async ( id:string ) => {
-                    if(data)
-                    {
-                      const result = await person_read( id, headers);
-                      let prevState = PersonDataList;
-                      
-                      let found = false;
-                      const newPerson = prevState.map((el:any) => {
-                        if(el.id === result.data.id)
-                        {
+  personListFuncProp?: (
+    data: operations["person_list"]["parameters"]
+  ) => Promise<void>;
 
-                          found = true;
-                          return {...el, result.data };
+  personCreateFuncProp?: (
+    data: definitions["Person"] | definitions["Person"][]
+  ) => Promise<void>;
 
-                        }
-                        else
-                        {
-                          return el;
-                        }
-                      }
-                      ))
+  personReadFuncProp?: (id: number) => Promise<void>;
 
-                      if(!found)
-                      {
-                        let newPerson
-                        if(!Array.isArray(result.data))
-                        newPerson = prevState.push(result.data);
-                        else
-                        newPerson = prevState.concat(result.data);
-                      }
-                        
-                    }
-                  }
-                  
-                  const personUpdate = async ( id:string,data:definitions["Person"][] | definitions["Person"][] ) => {
-                    if(data)
-                    {
-                      const result = await person_update( id,data, headers);
-                      let prevState = PersonDataList;
-                        
-                      //update
-                      let newPerson
-                      if(!Array.isArray(result.data))
-                      newPerson = prevState.map((el:any) => (
-                        el.id === result.data.id ? {...el, result.data }: el
-                      ))
-                      else
-                      //update bulk 
-                      newPerson = prevState.map((el:any) => (
-                        el.id === result.data.id ? {...el, result.data }: el
-                      ))
+  personUpdateFuncProp?: (
+    id: number,
+    data: definitions["Person"] | definitions["Person"][]
+  ) => Promise<void>;
 
-                        
-                    }
-                  }
-                  
-                  const personPartial = async ( id:string,data:definitions["Person"][] | definitions["Person"][] ) => {
-                    if(data)
-                    {
-                      const result = await person_partial_update( id,data, headers);
-                      let prevState = PersonDataList;
-                        
-                    }
-                  }
-                  
-                  const personDelete = async ( id:string ) => {
-                    if(data)
-                    {
-                      const result = await person_delete( id, headers);
-                      let prevState = PersonDataList;
-                        
-                      //delete
-                      const newPerson = prevState.filter( (el:any) => (el.id !== result.data.id )
-                        
-                    }
-                  }
-                  
-              return (
-              <PersonContext.Provider
-              
-              value={{
-                personData:PersonDataList,
-              
-                  personListFuncProp: personList,
-                  
-                  personCreateFuncProp: personCreate,
-                  
-                  personReadFuncProp: personRead,
-                  
-                  personUpdateFuncProp: personUpdate,
-                  
-                  personPartialFuncProp: personPartial,
-                  
-                  personDeleteFuncProp: personDelete,
-                  
-                }}
-              >
-              { children }
-              </PersonContext.Provider>
-            );};
-              
+  personPartialFuncProp?: (
+    id: number,
+    data: definitions["Person"] | definitions["Person"][]
+  ) => Promise<void>;
+
+  personDeleteFuncProp?: (id: number) => Promise<void>;
+}
+interface IcontextProvider {
+  children: ReactNode;
+  headers: any;
+}
+
+interface Istate {
+  count: number;
+  next?: string;
+  previous?: string;
+  logActions: IAction[];
+  results: definitions["Person"][];
+}
+
+const initialState: Istate = {
+  count: 0,
+  logActions: [],
+  results: [],
+};
+
+const defaultContextState = {
+  count: 0,
+  loading: false,
+  logActions: [],
+};
+/* prettier-ignore */
+const PersonContext = createContext<Iperson>(defaultContextState);
+export const PersonProvider: FC<IcontextProvider> = ({ children, headers }) => {
+  /* prettier-ignore */
+  const [PersonDataList, setPersonDataList] = useState<Istate> (initialState);
+  /* prettier-ignore */
+  const [loading, setLoading] = useState<boolean> (false);
+
+  const personList = async (
+    data: operations["person_list"]["parameters"]
+  ): Promise<void> => {
+    if (data) {
+      setLoading(true);
+      const result = await person_list(data, headers);
+      let prevStateResults = PersonDataList.results;
+      let logActions = PersonDataList.logActions;
+
+      logActions.push({ verb: "get", results: result.data.results });
+      let found = false;
+      let newCount = PersonDataList.count + result.data.count;
+      let newNext = result.data.next;
+      let newPrevious = result.data.previous;
+
+      let newPerson = prevStateResults.map((el: definitions["Person"]) => {
+        const preEl = prevStateResults.filter(
+          (resultEl: definitions["Person"]) => {
+            return el.id === resultEl.id;
+          }
+        );
+
+        if (preEl.length > 0) {
+          found = true;
+          return { ...el, ...preEl[0] };
+        } else {
+          return el;
+        }
+      });
+
+      if (!found) {
+        newPerson = prevStateResults.concat(result.data.results);
+      }
+
+      setPersonDataList({
+        count: newCount,
+        next: newNext,
+        previous: newPrevious,
+        logActions: logActions,
+        results: newPerson,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  const personCreate = async (
+    data: definitions["Person"] | definitions["Person"][]
+  ): Promise<void> => {
+    if (data) {
+      setLoading(true);
+      const result = await person_create(data, headers);
+      let prevStateResults = PersonDataList.results;
+      let logActions = PersonDataList.logActions;
+
+      //Create
+
+      let newCount = PersonDataList.count;
+      logActions.push({ verb: "post", results: result.data });
+      if (!Array.isArray(result.data)) {
+        newCount = prevStateResults.push(result.data);
+      } else {
+        prevStateResults = prevStateResults.concat(result.data);
+        newCount = prevStateResults.length;
+      }
+
+      setPersonDataList({
+        ...PersonDataList,
+        count: newCount,
+        results: prevStateResults,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  const personRead = async (id: number): Promise<void> => {
+    if (id) {
+      setLoading(true);
+      const result = await person_read(id.toString(), headers);
+      let prevStateResults = PersonDataList.results;
+      let logActions = PersonDataList.logActions;
+
+      logActions.push({ verb: "get", results: result.data });
+      let found = false;
+      let newPerson = prevStateResults.map((el: definitions["Person"]) => {
+        if (el.id === result.data.id) {
+          found = true;
+          return { ...el, ...result.data };
+        } else {
+          return el;
+        }
+      });
+      if (!found) {
+        newPerson = prevStateResults.concat(result.data);
+      }
+
+      setPersonDataList({
+        ...PersonDataList,
+        results: newPerson,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  const personUpdate = async (
+    id: number,
+    data: definitions["Person"] | definitions["Person"][]
+  ): Promise<void> => {
+    if (id && data) {
+      setLoading(true);
+      const result = await person_update(id.toString(), data, headers);
+      let prevStateResults = PersonDataList.results;
+      let logActions = PersonDataList.logActions;
+
+      //update
+      logActions.push({ verb: "put", results: result.data });
+      let newPerson;
+      if (!Array.isArray(result.data))
+        newPerson = prevStateResults.map((el: definitions["Person"]) =>
+          el.id === result.data.id ? { ...el, ...result.data } : el
+        );
+      //update bulk
+      else
+        newPerson = prevStateResults.map((el: definitions["Person"]) =>
+          el.id === result.data.id ? { ...el, ...result.data } : el
+        );
+
+      setPersonDataList({
+        ...PersonDataList,
+        results: newPerson,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  const personPartial = async (
+    id: number,
+    data: definitions["Person"] | definitions["Person"][]
+  ): Promise<void> => {
+    if (id && data) {
+      setLoading(true);
+      const result = await person_partial_update(id.toString(), data, headers);
+      let prevStateResults = PersonDataList.results;
+      let logActions = PersonDataList.logActions;
+
+      //update
+      logActions.push({ verb: "patch", results: result.data });
+      let newPerson;
+      if (!Array.isArray(result.data))
+        newPerson = prevStateResults.map((el: definitions["Person"]) =>
+          el.id === result.data.id ? { ...el, ...result.data } : el
+        );
+      //update bulk
+      else
+        newPerson = prevStateResults.map((el: definitions["Person"]) =>
+          el.id === result.data.id ? { ...el, ...result.data } : el
+        );
+
+      setPersonDataList({
+        ...PersonDataList,
+        results: newPerson,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  const personDelete = async (id: number): Promise<void> => {
+    if (id) {
+      setLoading(true);
+      const result = await person_delete(id.toString(), headers);
+      let prevStateResults = PersonDataList.results;
+      let logActions = PersonDataList.logActions;
+
+      logActions.push({ verb: "delete", results: id });
+      //delete
+      const newPerson = prevStateResults.filter(
+        (el: definitions["Person"]) => el.id !== id
+      );
+
+      setPersonDataList({
+        ...PersonDataList,
+        results: newPerson,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  return (
+    <PersonContext.Provider
+      value={{
+        count: PersonDataList.count,
+        next: PersonDataList.next,
+        previous: PersonDataList.previous,
+        logActions: PersonDataList.logActions,
+        loading: loading,
+        personData: PersonDataList.results,
+
+        personListFuncProp: personList,
+
+        personCreateFuncProp: personCreate,
+
+        personReadFuncProp: personRead,
+
+        personUpdateFuncProp: personUpdate,
+
+        personPartialFuncProp: personPartial,
+
+        personDeleteFuncProp: personDelete,
+      }}
+    >
+      {children}
+    </PersonContext.Provider>
+  );
+};

@@ -4,7 +4,9 @@ import axios, { AxiosResponse } from "axios";
 export const comments_list = async (
   data: operations["comments_list"]["parameters"],
   headers: any
-): Promise<AxiosResponse<operations["comments_list"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["comments_list"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/comments/";
   return await axios({
     method: "get",
@@ -16,7 +18,9 @@ export const comments_list = async (
 export const comments_create = async (
   data: definitions["Comments"] | definitions["Comments"][],
   headers: any
-): Promise<AxiosResponse<operations["comments_create"]["responses"][201]>> => {
+): Promise<
+  AxiosResponse<operations["comments_create"]["responses"][201]["schema"]>
+> => {
   let endpoint = "/comments/";
   return await axios({
     method: "post",
@@ -28,7 +32,9 @@ export const comments_create = async (
 export const comments_read = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<operations["comments_read"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["comments_read"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/comments/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -42,7 +48,9 @@ export const comments_update = async (
   id: string,
   data: definitions["Comments"] | definitions["Comments"][],
   headers: any
-): Promise<AxiosResponse<operations["comments_update"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["comments_update"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/comments/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -57,7 +65,9 @@ export const comments_partial_update = async (
   data: definitions["Comments"] | definitions["Comments"][],
   headers: any
 ): Promise<
-  AxiosResponse<operations["comments_partial_update"]["responses"][200]>
+  AxiosResponse<
+    operations["comments_partial_update"]["responses"][200]["schema"]
+  >
 > => {
   let endpoint = "/comments/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
@@ -71,7 +81,7 @@ export const comments_partial_update = async (
 export const comments_delete = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<any>> => {
+): Promise<AxiosResponse<any["schema"]>> => {
   let endpoint = "/comments/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({

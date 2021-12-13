@@ -37,33 +37,33 @@ const ChooseAndSync = () => {
                             for (const verb in element) {
                                 if (Object.prototype.hasOwnProperty.call(element, verb)) {
                                     const fileName = element[verb].tags;
-                                    if (!FileToWrite[fileName]) {
-                                        FileToWrite[fileName] = '';
-                                        FileToWrite[fileName] += `
-                        import {operations, definitions} from "../Schemas";
-                        import axios,{AxiosResponse} from "axios"
-                        `;
-                                    }
                                     const functionName = element[verb].operationId;
                                     const parameters = element[verb].parameters;
                                     let definition = '';
                                     let model = '';
+                                    if (parameters && parameters.length > 0) {
+                                        if (parameters[0].in === 'body') {
+                                            definition = parameters[0].schema.$ref.replace('#/definitions/', '');
+                                            model = `definitions["${definition}"] | definitions["${definition}"][]`;
+                                        }
+                                        else {
+                                            model = `operations["${functionName}"]["parameters"]`;
+                                        }
+                                    }
                                     if (functionName) {
+                                        if (!FileToWrite[fileName]) {
+                                            FileToWrite[fileName] = '';
+                                            FileToWrite[fileName] += `
+                        import {operations, definitions} from "../Schemas";
+                        import axios,{AxiosResponse} from "axios"
+                        `;
+                                        }
                                         if (!indexImportFileToWrite[fileName]) {
                                             indexImportFileToWrite[fileName] = `import {`;
                                             indexExportFileToWrite[fileName] = '';
                                         }
                                         indexImportFileToWrite[fileName] += functionName + ',';
                                         indexExportFileToWrite[fileName] += functionName + ',';
-                                        if (parameters && parameters.length > 0) {
-                                            if (parameters[0].in === 'body') {
-                                                definition = parameters[0].schema.$ref.replace('#/definitions/', '');
-                                                model = `definitions["${definition}"] | definitions["${definition}"][]`;
-                                            }
-                                            else {
-                                                model = `operations["${functionName}"]["parameters"]`;
-                                            }
-                                        }
                                         FileToWrite[fileName] += `
                     export const ${functionName} = async ( `;
                                         if (path.indexOf('{id}') > -1)
@@ -72,13 +72,13 @@ const ChooseAndSync = () => {
                                             FileToWrite[fileName] += `data: ${model},`;
                                         let response = `operations["${functionName}"]["responses"]`;
                                         if (verb === 'get' || verb === 'put' || verb === 'patch')
-                                            response += "[200]";
+                                            response += '[200]';
                                         if (verb === 'post')
-                                            response += "[201]";
+                                            response += '[201]';
                                         if (verb === 'delete')
-                                            response = "any";
+                                            response = 'any';
                                         FileToWrite[fileName] += `
-                       headers: any ) : Promise<AxiosResponse<${response}>> => {
+                       headers: any ) : Promise<AxiosResponse<${response}["schema"]>> => {
                         let endpoint = "${path}";`;
                                         if (path.indexOf('{id}') > -1)
                                             FileToWrite[fileName] += `

@@ -4,7 +4,9 @@ import axios, { AxiosResponse } from "axios";
 export const expertise_list = async (
   data: operations["expertise_list"]["parameters"],
   headers: any
-): Promise<AxiosResponse<operations["expertise_list"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["expertise_list"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/expertise/";
   return await axios({
     method: "get",
@@ -16,7 +18,9 @@ export const expertise_list = async (
 export const expertise_create = async (
   data: definitions["Expertise"] | definitions["Expertise"][],
   headers: any
-): Promise<AxiosResponse<operations["expertise_create"]["responses"][201]>> => {
+): Promise<
+  AxiosResponse<operations["expertise_create"]["responses"][201]["schema"]>
+> => {
   let endpoint = "/expertise/";
   return await axios({
     method: "post",
@@ -28,7 +32,9 @@ export const expertise_create = async (
 export const expertise_read = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<operations["expertise_read"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["expertise_read"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/expertise/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -42,7 +48,9 @@ export const expertise_update = async (
   id: string,
   data: definitions["Expertise"] | definitions["Expertise"][],
   headers: any
-): Promise<AxiosResponse<operations["expertise_update"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["expertise_update"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/expertise/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -57,7 +65,9 @@ export const expertise_partial_update = async (
   data: definitions["Expertise"] | definitions["Expertise"][],
   headers: any
 ): Promise<
-  AxiosResponse<operations["expertise_partial_update"]["responses"][200]>
+  AxiosResponse<
+    operations["expertise_partial_update"]["responses"][200]["schema"]
+  >
 > => {
   let endpoint = "/expertise/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
@@ -71,7 +81,7 @@ export const expertise_partial_update = async (
 export const expertise_delete = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<any>> => {
+): Promise<AxiosResponse<any["schema"]>> => {
   let endpoint = "/expertise/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({

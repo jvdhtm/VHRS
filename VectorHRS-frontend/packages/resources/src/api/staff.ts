@@ -4,7 +4,9 @@ import axios, { AxiosResponse } from "axios";
 export const staff_list = async (
   data: operations["staff_list"]["parameters"],
   headers: any
-): Promise<AxiosResponse<operations["staff_list"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["staff_list"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/staff/";
   return await axios({
     method: "get",
@@ -16,7 +18,9 @@ export const staff_list = async (
 export const staff_create = async (
   data: definitions["Staff"] | definitions["Staff"][],
   headers: any
-): Promise<AxiosResponse<operations["staff_create"]["responses"][201]>> => {
+): Promise<
+  AxiosResponse<operations["staff_create"]["responses"][201]["schema"]>
+> => {
   let endpoint = "/staff/";
   return await axios({
     method: "post",
@@ -28,7 +32,9 @@ export const staff_create = async (
 export const staff_read = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<operations["staff_read"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["staff_read"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/staff/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -42,7 +48,9 @@ export const staff_update = async (
   id: string,
   data: definitions["Staff"] | definitions["Staff"][],
   headers: any
-): Promise<AxiosResponse<operations["staff_update"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["staff_update"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/staff/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -57,7 +65,7 @@ export const staff_partial_update = async (
   data: definitions["Staff"] | definitions["Staff"][],
   headers: any
 ): Promise<
-  AxiosResponse<operations["staff_partial_update"]["responses"][200]>
+  AxiosResponse<operations["staff_partial_update"]["responses"][200]["schema"]>
 > => {
   let endpoint = "/staff/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
@@ -71,7 +79,7 @@ export const staff_partial_update = async (
 export const staff_delete = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<any>> => {
+): Promise<AxiosResponse<any["schema"]>> => {
   let endpoint = "/staff/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({

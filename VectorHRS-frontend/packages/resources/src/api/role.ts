@@ -4,7 +4,9 @@ import axios, { AxiosResponse } from "axios";
 export const role_list = async (
   data: operations["role_list"]["parameters"],
   headers: any
-): Promise<AxiosResponse<operations["role_list"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["role_list"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/role/";
   return await axios({
     method: "get",
@@ -16,7 +18,9 @@ export const role_list = async (
 export const role_create = async (
   data: definitions["Role"] | definitions["Role"][],
   headers: any
-): Promise<AxiosResponse<operations["role_create"]["responses"][201]>> => {
+): Promise<
+  AxiosResponse<operations["role_create"]["responses"][201]["schema"]>
+> => {
   let endpoint = "/role/";
   return await axios({
     method: "post",
@@ -28,7 +32,9 @@ export const role_create = async (
 export const role_read = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<operations["role_read"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["role_read"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/role/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -42,7 +48,9 @@ export const role_update = async (
   id: string,
   data: definitions["Role"] | definitions["Role"][],
   headers: any
-): Promise<AxiosResponse<operations["role_update"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["role_update"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/role/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -57,7 +65,7 @@ export const role_partial_update = async (
   data: definitions["Role"] | definitions["Role"][],
   headers: any
 ): Promise<
-  AxiosResponse<operations["role_partial_update"]["responses"][200]>
+  AxiosResponse<operations["role_partial_update"]["responses"][200]["schema"]>
 > => {
   let endpoint = "/role/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
@@ -71,7 +79,7 @@ export const role_partial_update = async (
 export const role_delete = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<any>> => {
+): Promise<AxiosResponse<any["schema"]>> => {
   let endpoint = "/role/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({

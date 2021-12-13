@@ -4,7 +4,9 @@ import axios, { AxiosResponse } from "axios";
 export const condition_list = async (
   data: operations["condition_list"]["parameters"],
   headers: any
-): Promise<AxiosResponse<operations["condition_list"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["condition_list"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/condition/";
   return await axios({
     method: "get",
@@ -16,7 +18,9 @@ export const condition_list = async (
 export const condition_create = async (
   data: definitions["Condition"] | definitions["Condition"][],
   headers: any
-): Promise<AxiosResponse<operations["condition_create"]["responses"][201]>> => {
+): Promise<
+  AxiosResponse<operations["condition_create"]["responses"][201]["schema"]>
+> => {
   let endpoint = "/condition/";
   return await axios({
     method: "post",
@@ -28,7 +32,9 @@ export const condition_create = async (
 export const condition_read = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<operations["condition_read"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["condition_read"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/condition/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -42,7 +48,9 @@ export const condition_update = async (
   id: string,
   data: definitions["Condition"] | definitions["Condition"][],
   headers: any
-): Promise<AxiosResponse<operations["condition_update"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["condition_update"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/condition/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -57,7 +65,9 @@ export const condition_partial_update = async (
   data: definitions["Condition"] | definitions["Condition"][],
   headers: any
 ): Promise<
-  AxiosResponse<operations["condition_partial_update"]["responses"][200]>
+  AxiosResponse<
+    operations["condition_partial_update"]["responses"][200]["schema"]
+  >
 > => {
   let endpoint = "/condition/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
@@ -71,7 +81,7 @@ export const condition_partial_update = async (
 export const condition_delete = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<any>> => {
+): Promise<AxiosResponse<any["schema"]>> => {
   let endpoint = "/condition/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({

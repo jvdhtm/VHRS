@@ -1,187 +1,299 @@
+import { operations, definitions } from "../Schemas";
+import {
+  role_list,
+  role_create,
+  role_read,
+  role_update,
+  role_partial_update,
+  role_delete,
+} from "../api";
 
-              import { operations, definitions } from "../Schemas";
-              import {role_list,role_create,role_read,role_update,role_partial_update,role_delete,
-               } from "../api";
-              
-                import React, { createContext, useState, FC } from "react";
-                
-                interface Irole {
-                
-                  roleData?:Role[];
-                
-                  roleListFuncProp?: ( data:operations["role_list"]["parameters"] ) => Promise<void>;
-                  
-                  roleCreateFuncProp?: ( data:definitions["Role"][] | definitions["Role"][] ) => Promise<void>;
-                  
-                  roleReadFuncProp?: ( id:number ) => Promise<void>;
-                  
-                  roleUpdateFuncProp?: ( id:number,data:definitions["Role"][] | definitions["Role"][] ) => Promise<void>;
-                  
-                  rolePartialFuncProp?: ( id:number,data:definitions["Role"][] | definitions["Role"][] ) => Promise<void>;
-                  
-                  roleDeleteFuncProp?: ( id:number ) => Promise<void>;
-                  
-              }
-              interface IcontextProvider{
-                children: React.ReactNode,
-                headers: any
-              }
+import { createContext, useState, FC, ReactNode } from "react";
 
-              const defaultState = {};
-                /* prettier-ignore */
-                const RoleContext = React.createContext<Irole>(defaultState);
-                const RoleProvider: React.FC<IcontextProvider> = ({ children, headers }) => {
-                  
-                  /* prettier-ignore */
-                  const [RoleDataList, setRoleDataList] = React.useState<Array<Role>> ([]);
-                  const roleList = async ( data:operations["role_list"]["parameters"] ) => {
-                    if(data)
-                    {
-                      const result = await role_list( data, headers);
-                      let prevState = RoleDataList;
-                      
-                      let found = false;
-                      const newRole = prevState.map((el:any) => {
-                        if(el.id === result.data.id)
-                        {
+interface IAction {
+  verb: string;
+  results: number | definitions["Role"] | definitions["Role"][];
+}
 
-                          found = true;
-                          return {...el, result.data };
+interface Irole {
+  loading: boolean;
+  count: number;
+  next?: string;
+  previous?: string;
+  logActions: IAction[];
 
-                        }
-                        else
-                        {
-                          return el;
-                        }
-                      }
-                      ))
+  roleData?: definitions["Role"][];
 
-                      if(!found)
-                      {
-                        let newRole
-                        if(!Array.isArray(result.data))
-                        newRole = prevState.push(result.data);
-                        else
-                        newRole = prevState.concat(result.data);
-                      }
-                        
-                    }
-                  }
-                  
-                  const roleCreate = async ( data:definitions["Role"][] | definitions["Role"][] ) => {
-                    if(data)
-                    {
-                      const result = await role_create( data, headers);
-                      let prevState = RoleDataList;
-                        
-                      //Read or Create
-                      let newRole
-                      if(!Array.isArray(result.data))
-                      newRole = prevState.push(result.data);
-                      else
-                      newRole = prevState.concat(result.data);
-                        
-                    }
-                  }
-                  
-                  const roleRead = async ( id:string ) => {
-                    if(data)
-                    {
-                      const result = await role_read( id, headers);
-                      let prevState = RoleDataList;
-                      
-                      let found = false;
-                      const newRole = prevState.map((el:any) => {
-                        if(el.id === result.data.id)
-                        {
+  roleListFuncProp?: (
+    data: operations["role_list"]["parameters"]
+  ) => Promise<void>;
 
-                          found = true;
-                          return {...el, result.data };
+  roleCreateFuncProp?: (
+    data: definitions["Role"] | definitions["Role"][]
+  ) => Promise<void>;
 
-                        }
-                        else
-                        {
-                          return el;
-                        }
-                      }
-                      ))
+  roleReadFuncProp?: (id: number) => Promise<void>;
 
-                      if(!found)
-                      {
-                        let newRole
-                        if(!Array.isArray(result.data))
-                        newRole = prevState.push(result.data);
-                        else
-                        newRole = prevState.concat(result.data);
-                      }
-                        
-                    }
-                  }
-                  
-                  const roleUpdate = async ( id:string,data:definitions["Role"][] | definitions["Role"][] ) => {
-                    if(data)
-                    {
-                      const result = await role_update( id,data, headers);
-                      let prevState = RoleDataList;
-                        
-                      //update
-                      let newRole
-                      if(!Array.isArray(result.data))
-                      newRole = prevState.map((el:any) => (
-                        el.id === result.data.id ? {...el, result.data }: el
-                      ))
-                      else
-                      //update bulk 
-                      newRole = prevState.map((el:any) => (
-                        el.id === result.data.id ? {...el, result.data }: el
-                      ))
+  roleUpdateFuncProp?: (
+    id: number,
+    data: definitions["Role"] | definitions["Role"][]
+  ) => Promise<void>;
 
-                        
-                    }
-                  }
-                  
-                  const rolePartial = async ( id:string,data:definitions["Role"][] | definitions["Role"][] ) => {
-                    if(data)
-                    {
-                      const result = await role_partial_update( id,data, headers);
-                      let prevState = RoleDataList;
-                        
-                    }
-                  }
-                  
-                  const roleDelete = async ( id:string ) => {
-                    if(data)
-                    {
-                      const result = await role_delete( id, headers);
-                      let prevState = RoleDataList;
-                        
-                      //delete
-                      const newRole = prevState.filter( (el:any) => (el.id !== result.data.id )
-                        
-                    }
-                  }
-                  
-              return (
-              <RoleContext.Provider
-              
-              value={{
-                roleData:RoleDataList,
-              
-                  roleListFuncProp: roleList,
-                  
-                  roleCreateFuncProp: roleCreate,
-                  
-                  roleReadFuncProp: roleRead,
-                  
-                  roleUpdateFuncProp: roleUpdate,
-                  
-                  rolePartialFuncProp: rolePartial,
-                  
-                  roleDeleteFuncProp: roleDelete,
-                  
-                }}
-              >
-              { children }
-              </RoleContext.Provider>
-            );};
-              
+  rolePartialFuncProp?: (
+    id: number,
+    data: definitions["Role"] | definitions["Role"][]
+  ) => Promise<void>;
+
+  roleDeleteFuncProp?: (id: number) => Promise<void>;
+}
+interface IcontextProvider {
+  children: ReactNode;
+  headers: any;
+}
+
+interface Istate {
+  count: number;
+  next?: string;
+  previous?: string;
+  logActions: IAction[];
+  results: definitions["Role"][];
+}
+
+const initialState: Istate = {
+  count: 0,
+  logActions: [],
+  results: [],
+};
+
+const defaultContextState = {
+  count: 0,
+  loading: false,
+  logActions: [],
+};
+/* prettier-ignore */
+const RoleContext = createContext<Irole>(defaultContextState);
+export const RoleProvider: FC<IcontextProvider> = ({ children, headers }) => {
+  /* prettier-ignore */
+  const [RoleDataList, setRoleDataList] = useState<Istate> (initialState);
+  /* prettier-ignore */
+  const [loading, setLoading] = useState<boolean> (false);
+
+  const roleList = async (
+    data: operations["role_list"]["parameters"]
+  ): Promise<void> => {
+    if (data) {
+      setLoading(true);
+      const result = await role_list(data, headers);
+      let prevStateResults = RoleDataList.results;
+      let logActions = RoleDataList.logActions;
+
+      logActions.push({ verb: "get", results: result.data.results });
+      let found = false;
+      let newCount = RoleDataList.count + result.data.count;
+      let newNext = result.data.next;
+      let newPrevious = result.data.previous;
+
+      let newRole = prevStateResults.map((el: definitions["Role"]) => {
+        const preEl = prevStateResults.filter(
+          (resultEl: definitions["Role"]) => {
+            return el.id === resultEl.id;
+          }
+        );
+
+        if (preEl.length > 0) {
+          found = true;
+          return { ...el, ...preEl[0] };
+        } else {
+          return el;
+        }
+      });
+
+      if (!found) {
+        newRole = prevStateResults.concat(result.data.results);
+      }
+
+      setRoleDataList({
+        count: newCount,
+        next: newNext,
+        previous: newPrevious,
+        logActions: logActions,
+        results: newRole,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  const roleCreate = async (
+    data: definitions["Role"] | definitions["Role"][]
+  ): Promise<void> => {
+    if (data) {
+      setLoading(true);
+      const result = await role_create(data, headers);
+      let prevStateResults = RoleDataList.results;
+      let logActions = RoleDataList.logActions;
+
+      //Create
+
+      let newCount = RoleDataList.count;
+      logActions.push({ verb: "post", results: result.data });
+      if (!Array.isArray(result.data)) {
+        newCount = prevStateResults.push(result.data);
+      } else {
+        prevStateResults = prevStateResults.concat(result.data);
+        newCount = prevStateResults.length;
+      }
+
+      setRoleDataList({
+        ...RoleDataList,
+        count: newCount,
+        results: prevStateResults,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  const roleRead = async (id: number): Promise<void> => {
+    if (id) {
+      setLoading(true);
+      const result = await role_read(id.toString(), headers);
+      let prevStateResults = RoleDataList.results;
+      let logActions = RoleDataList.logActions;
+
+      logActions.push({ verb: "get", results: result.data });
+      let found = false;
+      let newRole = prevStateResults.map((el: definitions["Role"]) => {
+        if (el.id === result.data.id) {
+          found = true;
+          return { ...el, ...result.data };
+        } else {
+          return el;
+        }
+      });
+      if (!found) {
+        newRole = prevStateResults.concat(result.data);
+      }
+
+      setRoleDataList({
+        ...RoleDataList,
+        results: newRole,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  const roleUpdate = async (
+    id: number,
+    data: definitions["Role"] | definitions["Role"][]
+  ): Promise<void> => {
+    if (id && data) {
+      setLoading(true);
+      const result = await role_update(id.toString(), data, headers);
+      let prevStateResults = RoleDataList.results;
+      let logActions = RoleDataList.logActions;
+
+      //update
+      logActions.push({ verb: "put", results: result.data });
+      let newRole;
+      if (!Array.isArray(result.data))
+        newRole = prevStateResults.map((el: definitions["Role"]) =>
+          el.id === result.data.id ? { ...el, ...result.data } : el
+        );
+      //update bulk
+      else
+        newRole = prevStateResults.map((el: definitions["Role"]) =>
+          el.id === result.data.id ? { ...el, ...result.data } : el
+        );
+
+      setRoleDataList({
+        ...RoleDataList,
+        results: newRole,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  const rolePartial = async (
+    id: number,
+    data: definitions["Role"] | definitions["Role"][]
+  ): Promise<void> => {
+    if (id && data) {
+      setLoading(true);
+      const result = await role_partial_update(id.toString(), data, headers);
+      let prevStateResults = RoleDataList.results;
+      let logActions = RoleDataList.logActions;
+
+      //update
+      logActions.push({ verb: "patch", results: result.data });
+      let newRole;
+      if (!Array.isArray(result.data))
+        newRole = prevStateResults.map((el: definitions["Role"]) =>
+          el.id === result.data.id ? { ...el, ...result.data } : el
+        );
+      //update bulk
+      else
+        newRole = prevStateResults.map((el: definitions["Role"]) =>
+          el.id === result.data.id ? { ...el, ...result.data } : el
+        );
+
+      setRoleDataList({
+        ...RoleDataList,
+        results: newRole,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  const roleDelete = async (id: number): Promise<void> => {
+    if (id) {
+      setLoading(true);
+      const result = await role_delete(id.toString(), headers);
+      let prevStateResults = RoleDataList.results;
+      let logActions = RoleDataList.logActions;
+
+      logActions.push({ verb: "delete", results: id });
+      //delete
+      const newRole = prevStateResults.filter(
+        (el: definitions["Role"]) => el.id !== id
+      );
+
+      setRoleDataList({
+        ...RoleDataList,
+        results: newRole,
+      });
+
+      setLoading(false);
+    }
+  };
+
+  return (
+    <RoleContext.Provider
+      value={{
+        count: RoleDataList.count,
+        next: RoleDataList.next,
+        previous: RoleDataList.previous,
+        logActions: RoleDataList.logActions,
+        loading: loading,
+        roleData: RoleDataList.results,
+
+        roleListFuncProp: roleList,
+
+        roleCreateFuncProp: roleCreate,
+
+        roleReadFuncProp: roleRead,
+
+        roleUpdateFuncProp: roleUpdate,
+
+        rolePartialFuncProp: rolePartial,
+
+        roleDeleteFuncProp: roleDelete,
+      }}
+    >
+      {children}
+    </RoleContext.Provider>
+  );
+};

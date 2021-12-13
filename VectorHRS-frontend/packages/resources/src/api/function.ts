@@ -4,7 +4,9 @@ import axios, { AxiosResponse } from "axios";
 export const function_list = async (
   data: operations["function_list"]["parameters"],
   headers: any
-): Promise<AxiosResponse<operations["function_list"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["function_list"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/function/";
   return await axios({
     method: "get",
@@ -16,7 +18,9 @@ export const function_list = async (
 export const function_create = async (
   data: definitions["Function"] | definitions["Function"][],
   headers: any
-): Promise<AxiosResponse<operations["function_create"]["responses"][201]>> => {
+): Promise<
+  AxiosResponse<operations["function_create"]["responses"][201]["schema"]>
+> => {
   let endpoint = "/function/";
   return await axios({
     method: "post",
@@ -28,7 +32,9 @@ export const function_create = async (
 export const function_read = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<operations["function_read"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["function_read"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/function/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -42,7 +48,9 @@ export const function_update = async (
   id: string,
   data: definitions["Function"] | definitions["Function"][],
   headers: any
-): Promise<AxiosResponse<operations["function_update"]["responses"][200]>> => {
+): Promise<
+  AxiosResponse<operations["function_update"]["responses"][200]["schema"]>
+> => {
   let endpoint = "/function/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
@@ -57,7 +65,9 @@ export const function_partial_update = async (
   data: definitions["Function"] | definitions["Function"][],
   headers: any
 ): Promise<
-  AxiosResponse<operations["function_partial_update"]["responses"][200]>
+  AxiosResponse<
+    operations["function_partial_update"]["responses"][200]["schema"]
+  >
 > => {
   let endpoint = "/function/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
@@ -71,7 +81,7 @@ export const function_partial_update = async (
 export const function_delete = async (
   id: string,
   headers: any
-): Promise<AxiosResponse<any>> => {
+): Promise<AxiosResponse<any["schema"]>> => {
   let endpoint = "/function/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await axios({
