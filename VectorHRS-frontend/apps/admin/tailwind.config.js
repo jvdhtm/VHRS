@@ -1,5 +1,8 @@
 module.exports = {
-  content: [],
+  mode:'jit',
+  content: [
+    "./src/**/*.{js,jsx}",
+  ],
   theme: {
     extend: {},
   },
