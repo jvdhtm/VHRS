@@ -1,0 +1,25 @@
+{
+    "name": "@vhrs/test",
+    "version": "1.0.0",
+    "description": "Reactive resource managment library  for VectorHRS apps",
+    "main": "dist/index",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "vue",
+        "vue",
+        "composition",
+        "api"
+    ],
+    "author": "jvdhtm@gmail.com",
+    "dependencies": {
+        "lodash-es": "^4.17.21",
+        "path-to-regexp": "^6.2.0",
+        "react-hook-form": "^7.22.0",
+        "typescript-parser": "^2.6.1"
+    },
+    "devDependencies": {
+        "@types/lodash-es": "^4.17.5"
+    }
+}

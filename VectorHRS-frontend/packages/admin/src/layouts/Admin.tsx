@@ -1,7 +1,7 @@
-import { Drawer, Layout } from 'antd'
+import {  Layout } from 'antd'
 import { useState } from 'react'
 import useWindowSize from '../util/resize'
-import { Content, Header, Sidebar } from '../components'
+import { Content, Header } from '../components'
 
 const Admin = () => {
   const [collapsed, setCollapsed] = useState(false)
@@ -13,27 +13,8 @@ const Admin = () => {
 
   return (
     <Layout className="h-screen">
-      <Header toggleCollapse={toggleCollapse} collapsed={collapsed} />
-      {isMoblie ? (
-        <Drawer
-          maskClosable
-          closable={false}
-          onClose={toggleCollapse}
-          visible={!collapsed}
-          placement="left"
-          bodyStyle={{ padding: 0 }}
-        >
-          <Sidebar
-            isMobile={isMoblie}
-            collapsed={false}
-            onCollapse={toggleCollapse}
-          />
-        </Drawer>
-      ) : (
-        <Sidebar collapsed={collapsed} onCollapse={toggleCollapse} />
-      )}
-        <Content />
-
+      <Header isMoblie={isMoblie} toggleCollapse={toggleCollapse} collapsed={collapsed} />
+      <Content />
     </Layout>
   )
 }

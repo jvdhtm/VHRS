@@ -5,9 +5,11 @@ const { Header } = Layout
 const { SubMenu } = Menu
 
 const AppHeader = ({
+    isMoblie,
     collapsed,
     toggleCollapse,
   }: {
+    isMoblie: boolean
     collapsed: boolean
     toggleCollapse: () => void
   }) => {
