@@ -1,12 +1,13 @@
 import { operations, definitions } from "../Schemas";
-import {
+import { Api } from "@vhrs/models";
+const {
   comments_list,
   comments_create,
   comments_read,
   comments_update,
   comments_partial_update,
   comments_delete,
-} from "../api";
+} = Api;
 
 import { createContext, useState, FC, ReactNode } from "react";
 

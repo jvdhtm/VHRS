@@ -98,8 +98,11 @@ export const ChooseAndSync = () => {
             if (!fileToWrite[fileName] && modelsToParse) {
               fileToWrite[fileName] = '';
               fileToWrite[fileName] += `
-              import { operations, definitions } from "../Schemas";
-              import {`;
+              import { operations, definitions } from "../Schemas";`
+              fileToWrite[fileName] += `
+              import { Api } from "@vhrs/models";`
+              fileToWrite[fileName] += `
+              const {`;
 
               for (const func in functionsToParse) {
                 if (
@@ -111,7 +114,7 @@ export const ChooseAndSync = () => {
               
               
               fileToWrite[fileName] += `
-               } from "../api";
+               } = Api;
               `
               fileToWrite[fileName] += `
                 import { createContext, useState, FC, ReactNode } from "react";

@@ -9,7 +9,7 @@ const swaggerDocUrl = `${BASE_URL}/${SWAGGER_ENDPOINT}`;
 const openapiTS = openApi.default;
 const GREEN = '\x1b[32m';
 const RED = '\x1b[41m';
-const PATH_DIR = '../../resources/src/';
+const PATH_DIR = '../../models/src/';
 
 export const ChooseAndSync = () => {
   axios({
@@ -84,7 +84,7 @@ export const ChooseAndSync = () => {
 
                       FileToWrite[fileName] += `
                        headers: any ) : Promise<AxiosResponse<${response}["schema"]>> => {
-                        let endpoint = "${path}";`;
+                        let endpoint = "/api${path}";`;
                       if (path.indexOf('{id}') > -1)
                         FileToWrite[fileName] += `
                         endpoint = endpoint.replace("{id}", id.toString())`;

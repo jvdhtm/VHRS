@@ -1,12 +1,13 @@
 import { operations, definitions } from "../Schemas";
-import {
+import { Api } from "@vhrs/models";
+const {
   role_list,
   role_create,
   role_read,
   role_update,
   role_partial_update,
   role_delete,
-} from "../api";
+} = Api;
 
 import { createContext, useState, FC, ReactNode } from "react";
 

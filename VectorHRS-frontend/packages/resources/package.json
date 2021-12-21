@@ -27,7 +27,8 @@
         "react-hook-form": "^7.21.2",
         "react-scripts": "4.0.3",
         "typescript": "^4.1.2",
-        "web-vitals": "^1.0.1"
+        "web-vitals": "^1.0.1",
+        "@vhrs/models": "^1.0.0"
     },
     "devDependencies": {
         "@types/node": "^16.11.1",

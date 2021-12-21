@@ -2,6 +2,7 @@ from rest_framework.serializers import ModelSerializer
 from identity_api.models import User, App, Role
 
 
+
 class UserSerializer(ModelSerializer):
 
     class Meta:

@@ -1,12 +1,13 @@
 import { operations, definitions } from "../Schemas";
-import {
+import { Api } from "@vhrs/models";
+const {
   expertiseprofile_list,
   expertiseprofile_create,
   expertiseprofile_read,
   expertiseprofile_update,
   expertiseprofile_partial_update,
   expertiseprofile_delete,
-} from "../api";
+} = Api;
 
 import { createContext, useState, FC, ReactNode } from "react";
 

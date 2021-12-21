@@ -1,11 +1,10 @@
 from rest_framework.routers import SimpleRouter
 from identity_api import views
 
-
 router = SimpleRouter()
 
-router.register(r'user', views.UserViewSet)
-router.register(r'app', views.AppViewSet)
-router.register(r'role', views.RoleViewSet)
+router.register(r'api/user', views.UserViewSet)
+router.register(r'api/app', views.AppViewSet)
+router.register(r'api/role', views.RoleViewSet)
 
 urlpatterns = router.urls

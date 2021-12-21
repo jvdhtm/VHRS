@@ -2,50 +2,32 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework import mixins
 from identity_api.serializers import UserSerializer, AppSerializer, RoleSerializer
 from identity_api.models import User, App, Role
+from rest_framework.permissions import IsAuthenticated
+
+class CreateListMixin:
+    def get_serializer(self, *args, **kwargs):
+        if isinstance(kwargs.get('data', {}), list):
+            kwargs['many'] = True
+
+        return super().get_serializer(*args, **kwargs)
 
 
-class BulkCreateModelMixin(mixins.CreateModelMixin):
-
-    def create(self, request, *args, **kwargs):
-        # The initial serializer
-        serializer = self.get_serializer(data=request.DATA)
-        return_list = []
-
-        for item in zip(serializer.errors, serializer.init_data):
-            # If item doesn't have errors
-            if not item[0]:
-
-                # Create a an individual serializer for the valid object and save it
-                object_serializer = self.get_serializer(data=[item[1]])
-                if object_serializer.is_valid():
-                    self.pre_save(object_serializer.object)
-                    self.object = object_serializer.save(force_insert=True)
-                    self.post_save(self.object, created=True)
-
-                    return_list.append(object_serializer.data[0])
-            else:
-                return_list.append(item[0])
-
-        # Status code
-        if serializer.errors:
-            return_status = status.HTTP_206_PARTIAL_CONTENT
-        else:
-            return_status = status.HTTP_201_CREATED
-
-        return Response(return_list, status=return_status)
-
-
-
-class UserViewSet(ModelViewSet, BulkCreateModelMixin):
+class UserViewSet(CreateListMixin, ModelViewSet):
     queryset = User.objects.order_by('pk')
     serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated,]
+    filter_fields = ["id",  "email",  "passcode",  "first_name",  "last_name",  "is_active" ]
 
 
-class AppViewSet(ModelViewSet, BulkCreateModelMixin):
+class AppViewSet(CreateListMixin, ModelViewSet):
     queryset = App.objects.order_by('pk')
     serializer_class = AppSerializer
+    permission_classes = [IsAuthenticated,]
+    filter_fields = ["id",  "title",  "pathUrl" ]
 
 
-class RoleViewSet(ModelViewSet, BulkCreateModelMixin):
+class RoleViewSet(CreateListMixin, ModelViewSet):
     queryset = Role.objects.order_by('pk')
     serializer_class = RoleSerializer
+    permission_classes = [IsAuthenticated,]
+    filter_fields = ["id",  "title",  "user",  "permission",  "app" ]

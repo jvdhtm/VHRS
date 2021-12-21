@@ -1,12 +1,13 @@
 import { operations, definitions } from "../Schemas";
-import {
+import { Api } from "@vhrs/models";
+const {
   stafffunctions_list,
   stafffunctions_create,
   stafffunctions_read,
   stafffunctions_update,
   stafffunctions_partial_update,
   stafffunctions_delete,
-} from "../api";
+} = Api;
 
 import { createContext, useState, FC, ReactNode } from "react";
 
