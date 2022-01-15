@@ -1,5 +1,4 @@
-import { operations, definitions } from "../Schemas";
-import { Api } from "@vhrs/models";
+import { Api, operations, definitions } from "@vhrs/models";
 const {
   staff_list,
   staff_create,
@@ -72,7 +71,7 @@ const defaultContextState = {
   logActions: [],
 };
 /* prettier-ignore */
-const StaffContext = createContext<Istaff>(defaultContextState);
+export const StaffContext = createContext<Istaff>(defaultContextState);
 export const StaffProvider: FC<IcontextProvider> = ({ children, headers }) => {
   /* prettier-ignore */
   const [StaffDataList, setStaffDataList] = useState<Istate> (initialState);

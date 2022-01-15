@@ -54,7 +54,7 @@ const ChooseAndSync = () => {
                                         if (!FileToWrite[fileName]) {
                                             FileToWrite[fileName] = '';
                                             FileToWrite[fileName] += `
-                        import {operations, definitions} from "../Schemas";
+                        import {operations, definitions} from "../schemas";
                         import axios,{AxiosResponse} from "axios"
                         `;
                                         }

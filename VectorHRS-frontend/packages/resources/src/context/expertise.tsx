@@ -1,5 +1,4 @@
-import { operations, definitions } from "../Schemas";
-import { Api } from "@vhrs/models";
+import { Api, operations, definitions } from "@vhrs/models";
 const {
   expertise_list,
   expertise_create,
@@ -72,7 +71,7 @@ const defaultContextState = {
   logActions: [],
 };
 /* prettier-ignore */
-const ExpertiseContext = createContext<Iexpertise>(defaultContextState);
+export const ExpertiseContext = createContext<Iexpertise>(defaultContextState);
 export const ExpertiseProvider: FC<IcontextProvider> = ({
   children,
   headers,

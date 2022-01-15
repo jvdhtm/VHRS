@@ -85,9 +85,7 @@ const ChooseAndSync = () => {
                     if (!fileToWrite[fileName] && modelsToParse) {
                         fileToWrite[fileName] = '';
                         fileToWrite[fileName] += `
-              import { operations, definitions } from "../Schemas";`;
-                        fileToWrite[fileName] += `
-              import { Api } from "@vhrs/models";`;
+              import { Api, operations, definitions } from "@vhrs/models";`;
                         fileToWrite[fileName] += `
               const {`;
                         for (const func in functionsToParse) {
@@ -164,9 +162,13 @@ const ChooseAndSync = () => {
                 logActions:[],
               };
                 /* prettier-ignore */
-                const ${titleCaseWord(fileName)}Context = createContext<I${fileName}>(defaultContextState);`;
-                        indexImportFileToWrite[fileName] = `${titleCaseWord(fileName)}Provider`;
-                        indexExportFileToWrite[fileName] = `${titleCaseWord(fileName)}Provider`;
+                export const ${titleCaseWord(fileName)}Context = createContext<I${fileName}>(defaultContextState);`;
+                        indexImportFileToWrite[fileName] = [];
+                        indexImportFileToWrite[fileName][0] = `${titleCaseWord(fileName)}Provider`;
+                        indexImportFileToWrite[fileName][1] = `${titleCaseWord(fileName)}Context`;
+                        indexExportFileToWrite[fileName] = [];
+                        indexExportFileToWrite[fileName][0] = `${titleCaseWord(fileName)}Provider`;
+                        indexExportFileToWrite[fileName][1] = `${titleCaseWord(fileName)}Context`;
                         fileToWrite[fileName] += `export 
                 const ${titleCaseWord(fileName)}Provider: FC<IcontextProvider> = ({ children, headers }) => {
                   `;
@@ -381,7 +383,7 @@ const ChooseAndSync = () => {
             let indexToWrite = '';
             for (const fileName in indexImportFileToWrite) {
                 if (Object.prototype.hasOwnProperty.call(indexImportFileToWrite, fileName)) {
-                    let file = 'import {' + indexImportFileToWrite[fileName];
+                    let file = 'import {' + indexImportFileToWrite[fileName][0] + ',' + indexImportFileToWrite[fileName][1];
                     file += `} from  "./${fileName}";
             `;
                     indexToWrite += file;
@@ -390,7 +392,7 @@ const ChooseAndSync = () => {
             indexToWrite += 'export {';
             for (const fileName in indexExportFileToWrite) {
                 if (Object.prototype.hasOwnProperty.call(indexExportFileToWrite, fileName)) {
-                    let file = indexExportFileToWrite[fileName] + ',';
+                    let file = indexExportFileToWrite[fileName][0] + ',' + indexExportFileToWrite[fileName][1] + ',';
                     indexToWrite += file;
                 }
             }

@@ -1,5 +1,4 @@
-import { operations, definitions } from "../Schemas";
-import { Api } from "@vhrs/models";
+import { Api, operations, definitions } from "@vhrs/models";
 const {
   role_list,
   role_create,
@@ -72,7 +71,7 @@ const defaultContextState = {
   logActions: [],
 };
 /* prettier-ignore */
-const RoleContext = createContext<Irole>(defaultContextState);
+export const RoleContext = createContext<Irole>(defaultContextState);
 export const RoleProvider: FC<IcontextProvider> = ({ children, headers }) => {
   /* prettier-ignore */
   const [RoleDataList, setRoleDataList] = useState<Istate> (initialState);

@@ -1,5 +1,4 @@
-import { operations, definitions } from "../Schemas";
-import { Api } from "@vhrs/models";
+import { Api, operations, definitions } from "@vhrs/models";
 const {
   person_list,
   person_create,
@@ -72,7 +71,7 @@ const defaultContextState = {
   logActions: [],
 };
 /* prettier-ignore */
-const PersonContext = createContext<Iperson>(defaultContextState);
+export const PersonContext = createContext<Iperson>(defaultContextState);
 export const PersonProvider: FC<IcontextProvider> = ({ children, headers }) => {
   /* prettier-ignore */
   const [PersonDataList, setPersonDataList] = useState<Istate> (initialState);

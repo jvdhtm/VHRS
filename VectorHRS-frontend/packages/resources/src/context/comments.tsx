@@ -1,5 +1,4 @@
-import { operations, definitions } from "../Schemas";
-import { Api } from "@vhrs/models";
+import { Api, operations, definitions } from "@vhrs/models";
 const {
   comments_list,
   comments_create,
@@ -72,7 +71,7 @@ const defaultContextState = {
   logActions: [],
 };
 /* prettier-ignore */
-const CommentsContext = createContext<Icomments>(defaultContextState);
+export const CommentsContext = createContext<Icomments>(defaultContextState);
 export const CommentsProvider: FC<IcontextProvider> = ({
   children,
   headers,

@@ -1,5 +1,4 @@
-import { operations, definitions } from "../Schemas";
-import { Api } from "@vhrs/models";
+import { Api, operations, definitions } from "@vhrs/models";
 const {
   stafffunctions_list,
   stafffunctions_create,
@@ -75,7 +74,7 @@ const defaultContextState = {
   logActions: [],
 };
 /* prettier-ignore */
-const StafffunctionsContext = createContext<Istafffunctions>(defaultContextState);
+export const StafffunctionsContext = createContext<Istafffunctions>(defaultContextState);
 export const StafffunctionsProvider: FC<IcontextProvider> = ({
   children,
   headers,

@@ -1,5 +1,4 @@
-import { operations, definitions } from "../Schemas";
-import { Api } from "@vhrs/models";
+import { Api, operations, definitions } from "@vhrs/models";
 const {
   condition_list,
   condition_create,
@@ -72,7 +71,7 @@ const defaultContextState = {
   logActions: [],
 };
 /* prettier-ignore */
-const ConditionContext = createContext<Icondition>(defaultContextState);
+export const ConditionContext = createContext<Icondition>(defaultContextState);
 export const ConditionProvider: FC<IcontextProvider> = ({
   children,
   headers,

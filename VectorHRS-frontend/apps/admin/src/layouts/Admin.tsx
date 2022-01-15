@@ -2,8 +2,9 @@ import {  Layout } from 'antd'
 import { useState } from 'react'
 import useWindowSize from '../util/resize'
 import { Content, Header } from '../components'
+import { FC } from "react";
 
-const Admin = () => {
+const Admin:FC = ({children}) => {
   const [collapsed, setCollapsed] = useState(false)
   const [screenWidth] = useWindowSize()
 
@@ -14,7 +15,9 @@ const Admin = () => {
   return (
     <Layout className="h-screen">
       <Header isMoblie={isMoblie} toggleCollapse={toggleCollapse} collapsed={collapsed} />
-      <Content />
+      <Content ClassName="p-4 overflow-auto" >
+        {children}
+      </Content>
     </Layout>
   )
 }

@@ -1,6 +1,5 @@
 import { Board } from '../components'
-
-
+import  Admin from '../layouts/Admin'
 
 const data = {
   lanes: [
@@ -26,9 +25,9 @@ const data = {
 
 const Dashboard = () => {
     return (
-      <div>
+      <Admin>
        <Board data={data}/>
-      </div>
+      </Admin>
     )
 }
   

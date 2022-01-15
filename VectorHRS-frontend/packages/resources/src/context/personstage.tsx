@@ -1,5 +1,4 @@
-import { operations, definitions } from "../Schemas";
-import { Api } from "@vhrs/models";
+import { Api, operations, definitions } from "@vhrs/models";
 const {
   personstage_list,
   personstage_create,
@@ -72,7 +71,7 @@ const defaultContextState = {
   logActions: [],
 };
 /* prettier-ignore */
-const PersonstageContext = createContext<Ipersonstage>(defaultContextState);
+export const PersonstageContext = createContext<Ipersonstage>(defaultContextState);
 export const PersonstageProvider: FC<IcontextProvider> = ({
   children,
   headers,

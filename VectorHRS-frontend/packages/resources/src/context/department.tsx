@@ -1,5 +1,4 @@
-import { operations, definitions } from "../Schemas";
-import { Api } from "@vhrs/models";
+import { Api, operations, definitions } from "@vhrs/models";
 const {
   department_list,
   department_create,
@@ -72,7 +71,7 @@ const defaultContextState = {
   logActions: [],
 };
 /* prettier-ignore */
-const DepartmentContext = createContext<Idepartment>(defaultContextState);
+export const DepartmentContext = createContext<Idepartment>(defaultContextState);
 export const DepartmentProvider: FC<IcontextProvider> = ({
   children,
   headers,

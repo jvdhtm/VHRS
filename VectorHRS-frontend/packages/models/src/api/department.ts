@@ -1,4 +1,4 @@
-import { operations, definitions } from "../Schemas";
+import { operations, definitions } from "../schemas";
 import axios, { AxiosResponse } from "axios";
 
 export const department_list = async (

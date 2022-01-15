@@ -1,39 +1,49 @@
 {
-    "name": "@vhrs/resources",
-    "version": "1.0.0",
-    "description": "Reactive resource managment library  for VectorHRS apps",
-    "main": "dist/index",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "tsc --project ."
-    },
-    "keywords": [
-        "vue",
-        "vue",
-        "composition",
-        "api"
-    ],
-    "author": "jvdhtm@gmail.com",
-    "dependencies": {
-        "@testing-library/jest-dom": "^5.11.4",
-        "@testing-library/react": "^11.1.0",
-        "@testing-library/user-event": "^12.1.10",
-        "@types/jest": "^26.0.15",
-        "@types/node": "^12.0.0",
-        "@types/react": "^17.0.0",
-        "@types/react-dom": "^17.0.0",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-hook-form": "^7.21.2",
-        "react-scripts": "4.0.3",
-        "typescript": "^4.1.2",
-        "web-vitals": "^1.0.1",
-        "@vhrs/models": "^1.0.0"
-    },
-    "devDependencies": {
-        "@types/node": "^16.11.1",
-        "axios": "^0.24.0",
-        "openapi-typescript": "^4.0.1",
-        "typescript": "^4.4.4"
-    }
+  "name": "@vhrs/resources",
+  "version": "1.0.0",
+  "description": "Reactive resource managment library  for VectorHRS apps",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf dist",
+    "build": "npm run clean && rollup -c"
+  },
+  "keywords": [
+    "vue",
+    "vue",
+    "composition",
+    "api"
+  ],
+  "author": "jvdhtm@gmail.com",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@vhrs/models": "^1.0.0",
+    "cross-env": "^7.0.3",
+    "postcss": "^8.4.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.21.2",
+    "react-scripts": "4.0.3",
+    "typescript": "^4.1.2",
+    "web-vitals": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.1",
+    "openapi-typescript": "^4.0.1",
+    "rollup-plugin-dts": "^4.1.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "typescript": "^4.4.4"
+  }
 }

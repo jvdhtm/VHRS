@@ -4,8 +4,12 @@ import {
     UnorderedListOutlined,
     SettingOutlined,
     BarChartOutlined,
+    LoginOutlined
   } from '@ant-design/icons'
-  import Dashboard from './pages/dashboard'
+import Dashboard from './pages/Dashboard'
+import Login from './pages/Login'
+import Notfound from './pages/Notfound404'
+  
   import { Route } from './types'
   
   const routes: Route[] = [
@@ -15,6 +19,13 @@ import {
       name: 'Dashboard',
       path: '/',
       component: Dashboard,
+    },
+    {
+      id: '0',
+      icon: LoginOutlined,
+      name: 'Login',
+      path: '/login',
+      component: Login,
     },
     {
       id: '2',
@@ -60,6 +71,13 @@ import {
       breadcrumbParentId: '2',
       icon: GroupOutlined,
       component: Dashboard,
+    },
+    {
+      id: '404',
+      path: '*',
+      name: 'Not found',
+      icon: SettingOutlined,
+      component: Notfound,
     },
   ]
   

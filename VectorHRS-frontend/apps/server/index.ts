@@ -65,7 +65,7 @@ const apiProxy = proxy(app.get("api_url"), {
   },
 });
 
-router.post("/checklogin", getToken);
+router.use("/auth", getToken);
 router.use("/loginout", logout);
 router.use("/api/*", apiProxy);
 

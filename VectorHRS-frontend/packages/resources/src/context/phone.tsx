@@ -1,5 +1,4 @@
-import { operations, definitions } from "../Schemas";
-import { Api } from "@vhrs/models";
+import { Api, operations, definitions } from "@vhrs/models";
 const {
   phone_list,
   phone_create,
@@ -72,7 +71,7 @@ const defaultContextState = {
   logActions: [],
 };
 /* prettier-ignore */
-const PhoneContext = createContext<Iphone>(defaultContextState);
+export const PhoneContext = createContext<Iphone>(defaultContextState);
 export const PhoneProvider: FC<IcontextProvider> = ({ children, headers }) => {
   /* prettier-ignore */
   const [PhoneDataList, setPhoneDataList] = useState<Istate> (initialState);
