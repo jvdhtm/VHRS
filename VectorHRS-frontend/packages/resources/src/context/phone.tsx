@@ -24,27 +24,27 @@ interface Iphone {
 
   phoneData?: definitions["Phone"][];
 
-  phoneListFuncProp?: (
+  phoneListFuncProp: (
     data: operations["phone_list"]["parameters"]
   ) => Promise<void>;
 
-  phoneCreateFuncProp?: (
+  phoneCreateFuncProp: (
     data: definitions["Phone"] | definitions["Phone"][]
   ) => Promise<void>;
 
-  phoneReadFuncProp?: (id: number) => Promise<void>;
+  phoneReadFuncProp: (id: number) => Promise<void>;
 
-  phoneUpdateFuncProp?: (
+  phoneUpdateFuncProp: (
     id: number,
     data: definitions["Phone"] | definitions["Phone"][]
   ) => Promise<void>;
 
-  phonePartialFuncProp?: (
+  phonePartialFuncProp: (
     id: number,
     data: definitions["Phone"] | definitions["Phone"][]
   ) => Promise<void>;
 
-  phoneDeleteFuncProp?: (id: number) => Promise<void>;
+  phoneDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -69,6 +69,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  phoneListFuncProp: async (
+    data: operations["phone_list"]["parameters"]
+  ): Promise<void> => {},
+
+  phoneCreateFuncProp: async (
+    data: definitions["Phone"] | definitions["Phone"][]
+  ): Promise<void> => {},
+
+  phoneReadFuncProp: async (id: number): Promise<void> => {},
+
+  phoneUpdateFuncProp: async (
+    id: number,
+    data: definitions["Phone"] | definitions["Phone"][]
+  ): Promise<void> => {},
+
+  phonePartialFuncProp: async (
+    id: number,
+    data: definitions["Phone"] | definitions["Phone"][]
+  ): Promise<void> => {},
+
+  phoneDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const PhoneContext = createContext<Iphone>(defaultContextState);

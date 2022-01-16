@@ -27,27 +27,27 @@ interface Iexpertiseprofile {
 
   expertiseprofileData?: definitions["ExpertiseProfile"][];
 
-  expertiseprofileListFuncProp?: (
+  expertiseprofileListFuncProp: (
     data: operations["expertiseprofile_list"]["parameters"]
   ) => Promise<void>;
 
-  expertiseprofileCreateFuncProp?: (
+  expertiseprofileCreateFuncProp: (
     data: definitions["ExpertiseProfile"] | definitions["ExpertiseProfile"][]
   ) => Promise<void>;
 
-  expertiseprofileReadFuncProp?: (id: number) => Promise<void>;
+  expertiseprofileReadFuncProp: (id: number) => Promise<void>;
 
-  expertiseprofileUpdateFuncProp?: (
+  expertiseprofileUpdateFuncProp: (
     id: number,
     data: definitions["ExpertiseProfile"] | definitions["ExpertiseProfile"][]
   ) => Promise<void>;
 
-  expertiseprofilePartialFuncProp?: (
+  expertiseprofilePartialFuncProp: (
     id: number,
     data: definitions["ExpertiseProfile"] | definitions["ExpertiseProfile"][]
   ) => Promise<void>;
 
-  expertiseprofileDeleteFuncProp?: (id: number) => Promise<void>;
+  expertiseprofileDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -72,6 +72,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  expertiseprofileListFuncProp: async (
+    data: operations["expertiseprofile_list"]["parameters"]
+  ): Promise<void> => {},
+
+  expertiseprofileCreateFuncProp: async (
+    data: definitions["ExpertiseProfile"] | definitions["ExpertiseProfile"][]
+  ): Promise<void> => {},
+
+  expertiseprofileReadFuncProp: async (id: number): Promise<void> => {},
+
+  expertiseprofileUpdateFuncProp: async (
+    id: number,
+    data: definitions["ExpertiseProfile"] | definitions["ExpertiseProfile"][]
+  ): Promise<void> => {},
+
+  expertiseprofilePartialFuncProp: async (
+    id: number,
+    data: definitions["ExpertiseProfile"] | definitions["ExpertiseProfile"][]
+  ): Promise<void> => {},
+
+  expertiseprofileDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const ExpertiseprofileContext = createContext<Iexpertiseprofile>(defaultContextState);

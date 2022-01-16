@@ -24,27 +24,27 @@ interface Istafflog {
 
   stafflogData?: definitions["StaffLog"][];
 
-  stafflogListFuncProp?: (
+  stafflogListFuncProp: (
     data: operations["stafflog_list"]["parameters"]
   ) => Promise<void>;
 
-  stafflogCreateFuncProp?: (
+  stafflogCreateFuncProp: (
     data: definitions["StaffLog"] | definitions["StaffLog"][]
   ) => Promise<void>;
 
-  stafflogReadFuncProp?: (id: number) => Promise<void>;
+  stafflogReadFuncProp: (id: number) => Promise<void>;
 
-  stafflogUpdateFuncProp?: (
+  stafflogUpdateFuncProp: (
     id: number,
     data: definitions["StaffLog"] | definitions["StaffLog"][]
   ) => Promise<void>;
 
-  stafflogPartialFuncProp?: (
+  stafflogPartialFuncProp: (
     id: number,
     data: definitions["StaffLog"] | definitions["StaffLog"][]
   ) => Promise<void>;
 
-  stafflogDeleteFuncProp?: (id: number) => Promise<void>;
+  stafflogDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -69,6 +69,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  stafflogListFuncProp: async (
+    data: operations["stafflog_list"]["parameters"]
+  ): Promise<void> => {},
+
+  stafflogCreateFuncProp: async (
+    data: definitions["StaffLog"] | definitions["StaffLog"][]
+  ): Promise<void> => {},
+
+  stafflogReadFuncProp: async (id: number): Promise<void> => {},
+
+  stafflogUpdateFuncProp: async (
+    id: number,
+    data: definitions["StaffLog"] | definitions["StaffLog"][]
+  ): Promise<void> => {},
+
+  stafflogPartialFuncProp: async (
+    id: number,
+    data: definitions["StaffLog"] | definitions["StaffLog"][]
+  ): Promise<void> => {},
+
+  stafflogDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const StafflogContext = createContext<Istafflog>(defaultContextState);

@@ -24,27 +24,27 @@ interface Iapp {
 
   appData?: definitions["App"][];
 
-  appListFuncProp?: (
+  appListFuncProp: (
     data: operations["app_list"]["parameters"]
   ) => Promise<void>;
 
-  appCreateFuncProp?: (
+  appCreateFuncProp: (
     data: definitions["App"] | definitions["App"][]
   ) => Promise<void>;
 
-  appReadFuncProp?: (id: number) => Promise<void>;
+  appReadFuncProp: (id: number) => Promise<void>;
 
-  appUpdateFuncProp?: (
+  appUpdateFuncProp: (
     id: number,
     data: definitions["App"] | definitions["App"][]
   ) => Promise<void>;
 
-  appPartialFuncProp?: (
+  appPartialFuncProp: (
     id: number,
     data: definitions["App"] | definitions["App"][]
   ) => Promise<void>;
 
-  appDeleteFuncProp?: (id: number) => Promise<void>;
+  appDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -69,6 +69,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  appListFuncProp: async (
+    data: operations["app_list"]["parameters"]
+  ): Promise<void> => {},
+
+  appCreateFuncProp: async (
+    data: definitions["App"] | definitions["App"][]
+  ): Promise<void> => {},
+
+  appReadFuncProp: async (id: number): Promise<void> => {},
+
+  appUpdateFuncProp: async (
+    id: number,
+    data: definitions["App"] | definitions["App"][]
+  ): Promise<void> => {},
+
+  appPartialFuncProp: async (
+    id: number,
+    data: definitions["App"] | definitions["App"][]
+  ): Promise<void> => {},
+
+  appDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const AppContext = createContext<Iapp>(defaultContextState);

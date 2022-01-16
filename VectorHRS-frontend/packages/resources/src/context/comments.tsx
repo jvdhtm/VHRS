@@ -24,27 +24,27 @@ interface Icomments {
 
   commentsData?: definitions["Comments"][];
 
-  commentsListFuncProp?: (
+  commentsListFuncProp: (
     data: operations["comments_list"]["parameters"]
   ) => Promise<void>;
 
-  commentsCreateFuncProp?: (
+  commentsCreateFuncProp: (
     data: definitions["Comments"] | definitions["Comments"][]
   ) => Promise<void>;
 
-  commentsReadFuncProp?: (id: number) => Promise<void>;
+  commentsReadFuncProp: (id: number) => Promise<void>;
 
-  commentsUpdateFuncProp?: (
+  commentsUpdateFuncProp: (
     id: number,
     data: definitions["Comments"] | definitions["Comments"][]
   ) => Promise<void>;
 
-  commentsPartialFuncProp?: (
+  commentsPartialFuncProp: (
     id: number,
     data: definitions["Comments"] | definitions["Comments"][]
   ) => Promise<void>;
 
-  commentsDeleteFuncProp?: (id: number) => Promise<void>;
+  commentsDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -69,6 +69,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  commentsListFuncProp: async (
+    data: operations["comments_list"]["parameters"]
+  ): Promise<void> => {},
+
+  commentsCreateFuncProp: async (
+    data: definitions["Comments"] | definitions["Comments"][]
+  ): Promise<void> => {},
+
+  commentsReadFuncProp: async (id: number): Promise<void> => {},
+
+  commentsUpdateFuncProp: async (
+    id: number,
+    data: definitions["Comments"] | definitions["Comments"][]
+  ): Promise<void> => {},
+
+  commentsPartialFuncProp: async (
+    id: number,
+    data: definitions["Comments"] | definitions["Comments"][]
+  ): Promise<void> => {},
+
+  commentsDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const CommentsContext = createContext<Icomments>(defaultContextState);

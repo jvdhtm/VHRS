@@ -24,27 +24,27 @@ interface Istaff {
 
   staffData?: definitions["Staff"][];
 
-  staffListFuncProp?: (
+  staffListFuncProp: (
     data: operations["staff_list"]["parameters"]
   ) => Promise<void>;
 
-  staffCreateFuncProp?: (
+  staffCreateFuncProp: (
     data: definitions["Staff"] | definitions["Staff"][]
   ) => Promise<void>;
 
-  staffReadFuncProp?: (id: number) => Promise<void>;
+  staffReadFuncProp: (id: number) => Promise<void>;
 
-  staffUpdateFuncProp?: (
+  staffUpdateFuncProp: (
     id: number,
     data: definitions["Staff"] | definitions["Staff"][]
   ) => Promise<void>;
 
-  staffPartialFuncProp?: (
+  staffPartialFuncProp: (
     id: number,
     data: definitions["Staff"] | definitions["Staff"][]
   ) => Promise<void>;
 
-  staffDeleteFuncProp?: (id: number) => Promise<void>;
+  staffDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -69,6 +69,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  staffListFuncProp: async (
+    data: operations["staff_list"]["parameters"]
+  ): Promise<void> => {},
+
+  staffCreateFuncProp: async (
+    data: definitions["Staff"] | definitions["Staff"][]
+  ): Promise<void> => {},
+
+  staffReadFuncProp: async (id: number): Promise<void> => {},
+
+  staffUpdateFuncProp: async (
+    id: number,
+    data: definitions["Staff"] | definitions["Staff"][]
+  ): Promise<void> => {},
+
+  staffPartialFuncProp: async (
+    id: number,
+    data: definitions["Staff"] | definitions["Staff"][]
+  ): Promise<void> => {},
+
+  staffDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const StaffContext = createContext<Istaff>(defaultContextState);

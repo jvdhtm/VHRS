@@ -24,27 +24,27 @@ interface Istaffstage {
 
   staffstageData?: definitions["StaffStage"][];
 
-  staffstageListFuncProp?: (
+  staffstageListFuncProp: (
     data: operations["staffstage_list"]["parameters"]
   ) => Promise<void>;
 
-  staffstageCreateFuncProp?: (
+  staffstageCreateFuncProp: (
     data: definitions["StaffStage"] | definitions["StaffStage"][]
   ) => Promise<void>;
 
-  staffstageReadFuncProp?: (id: number) => Promise<void>;
+  staffstageReadFuncProp: (id: number) => Promise<void>;
 
-  staffstageUpdateFuncProp?: (
+  staffstageUpdateFuncProp: (
     id: number,
     data: definitions["StaffStage"] | definitions["StaffStage"][]
   ) => Promise<void>;
 
-  staffstagePartialFuncProp?: (
+  staffstagePartialFuncProp: (
     id: number,
     data: definitions["StaffStage"] | definitions["StaffStage"][]
   ) => Promise<void>;
 
-  staffstageDeleteFuncProp?: (id: number) => Promise<void>;
+  staffstageDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -69,6 +69,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  staffstageListFuncProp: async (
+    data: operations["staffstage_list"]["parameters"]
+  ): Promise<void> => {},
+
+  staffstageCreateFuncProp: async (
+    data: definitions["StaffStage"] | definitions["StaffStage"][]
+  ): Promise<void> => {},
+
+  staffstageReadFuncProp: async (id: number): Promise<void> => {},
+
+  staffstageUpdateFuncProp: async (
+    id: number,
+    data: definitions["StaffStage"] | definitions["StaffStage"][]
+  ): Promise<void> => {},
+
+  staffstagePartialFuncProp: async (
+    id: number,
+    data: definitions["StaffStage"] | definitions["StaffStage"][]
+  ): Promise<void> => {},
+
+  staffstageDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const StaffstageContext = createContext<Istaffstage>(defaultContextState);

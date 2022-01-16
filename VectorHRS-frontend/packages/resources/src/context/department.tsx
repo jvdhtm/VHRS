@@ -24,27 +24,27 @@ interface Idepartment {
 
   departmentData?: definitions["Department"][];
 
-  departmentListFuncProp?: (
+  departmentListFuncProp: (
     data: operations["department_list"]["parameters"]
   ) => Promise<void>;
 
-  departmentCreateFuncProp?: (
+  departmentCreateFuncProp: (
     data: definitions["Department"] | definitions["Department"][]
   ) => Promise<void>;
 
-  departmentReadFuncProp?: (id: number) => Promise<void>;
+  departmentReadFuncProp: (id: number) => Promise<void>;
 
-  departmentUpdateFuncProp?: (
+  departmentUpdateFuncProp: (
     id: number,
     data: definitions["Department"] | definitions["Department"][]
   ) => Promise<void>;
 
-  departmentPartialFuncProp?: (
+  departmentPartialFuncProp: (
     id: number,
     data: definitions["Department"] | definitions["Department"][]
   ) => Promise<void>;
 
-  departmentDeleteFuncProp?: (id: number) => Promise<void>;
+  departmentDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -69,6 +69,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  departmentListFuncProp: async (
+    data: operations["department_list"]["parameters"]
+  ): Promise<void> => {},
+
+  departmentCreateFuncProp: async (
+    data: definitions["Department"] | definitions["Department"][]
+  ): Promise<void> => {},
+
+  departmentReadFuncProp: async (id: number): Promise<void> => {},
+
+  departmentUpdateFuncProp: async (
+    id: number,
+    data: definitions["Department"] | definitions["Department"][]
+  ): Promise<void> => {},
+
+  departmentPartialFuncProp: async (
+    id: number,
+    data: definitions["Department"] | definitions["Department"][]
+  ): Promise<void> => {},
+
+  departmentDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const DepartmentContext = createContext<Idepartment>(defaultContextState);

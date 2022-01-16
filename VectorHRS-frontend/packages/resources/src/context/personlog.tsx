@@ -24,27 +24,27 @@ interface Ipersonlog {
 
   personlogData?: definitions["PersonLog"][];
 
-  personlogListFuncProp?: (
+  personlogListFuncProp: (
     data: operations["personlog_list"]["parameters"]
   ) => Promise<void>;
 
-  personlogCreateFuncProp?: (
+  personlogCreateFuncProp: (
     data: definitions["PersonLog"] | definitions["PersonLog"][]
   ) => Promise<void>;
 
-  personlogReadFuncProp?: (id: number) => Promise<void>;
+  personlogReadFuncProp: (id: number) => Promise<void>;
 
-  personlogUpdateFuncProp?: (
+  personlogUpdateFuncProp: (
     id: number,
     data: definitions["PersonLog"] | definitions["PersonLog"][]
   ) => Promise<void>;
 
-  personlogPartialFuncProp?: (
+  personlogPartialFuncProp: (
     id: number,
     data: definitions["PersonLog"] | definitions["PersonLog"][]
   ) => Promise<void>;
 
-  personlogDeleteFuncProp?: (id: number) => Promise<void>;
+  personlogDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -69,6 +69,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  personlogListFuncProp: async (
+    data: operations["personlog_list"]["parameters"]
+  ): Promise<void> => {},
+
+  personlogCreateFuncProp: async (
+    data: definitions["PersonLog"] | definitions["PersonLog"][]
+  ): Promise<void> => {},
+
+  personlogReadFuncProp: async (id: number): Promise<void> => {},
+
+  personlogUpdateFuncProp: async (
+    id: number,
+    data: definitions["PersonLog"] | definitions["PersonLog"][]
+  ): Promise<void> => {},
+
+  personlogPartialFuncProp: async (
+    id: number,
+    data: definitions["PersonLog"] | definitions["PersonLog"][]
+  ): Promise<void> => {},
+
+  personlogDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const PersonlogContext = createContext<Ipersonlog>(defaultContextState);

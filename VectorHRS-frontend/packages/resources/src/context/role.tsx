@@ -24,27 +24,27 @@ interface Irole {
 
   roleData?: definitions["Role"][];
 
-  roleListFuncProp?: (
+  roleListFuncProp: (
     data: operations["role_list"]["parameters"]
   ) => Promise<void>;
 
-  roleCreateFuncProp?: (
+  roleCreateFuncProp: (
     data: definitions["Role"] | definitions["Role"][]
   ) => Promise<void>;
 
-  roleReadFuncProp?: (id: number) => Promise<void>;
+  roleReadFuncProp: (id: number) => Promise<void>;
 
-  roleUpdateFuncProp?: (
+  roleUpdateFuncProp: (
     id: number,
     data: definitions["Role"] | definitions["Role"][]
   ) => Promise<void>;
 
-  rolePartialFuncProp?: (
+  rolePartialFuncProp: (
     id: number,
     data: definitions["Role"] | definitions["Role"][]
   ) => Promise<void>;
 
-  roleDeleteFuncProp?: (id: number) => Promise<void>;
+  roleDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -69,6 +69,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  roleListFuncProp: async (
+    data: operations["role_list"]["parameters"]
+  ): Promise<void> => {},
+
+  roleCreateFuncProp: async (
+    data: definitions["Role"] | definitions["Role"][]
+  ): Promise<void> => {},
+
+  roleReadFuncProp: async (id: number): Promise<void> => {},
+
+  roleUpdateFuncProp: async (
+    id: number,
+    data: definitions["Role"] | definitions["Role"][]
+  ): Promise<void> => {},
+
+  rolePartialFuncProp: async (
+    id: number,
+    data: definitions["Role"] | definitions["Role"][]
+  ): Promise<void> => {},
+
+  roleDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const RoleContext = createContext<Irole>(defaultContextState);

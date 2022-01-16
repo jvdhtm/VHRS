@@ -1,18 +1,12 @@
 import { Form, Input, Button, Checkbox } from "antd";
 import Standard from "../layouts/Standard";
-import { useContext } from "react";
-import { Context } from "@vhrs/resources";
-const { UserContext } = Context;
+//import { useContext } from "react";
+//import { UserContext } from "@vhrs/resources";
 
-const Login = async () => {
-  const user =  useContext(UserContext);
-  if(user.userReadFuncProp ) await user.userReadFuncProp(1);
-
-  console.log(user);
-
+const Login =  () => {
+  //const user =  useContext(UserContext);
   const onFinish = (values: any) => {
     console.log("Success:", values);
-    
   };
 
   const onFinishFailed = (errorInfo: any) => {

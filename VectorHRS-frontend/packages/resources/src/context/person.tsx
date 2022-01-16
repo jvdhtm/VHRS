@@ -24,27 +24,27 @@ interface Iperson {
 
   personData?: definitions["Person"][];
 
-  personListFuncProp?: (
+  personListFuncProp: (
     data: operations["person_list"]["parameters"]
   ) => Promise<void>;
 
-  personCreateFuncProp?: (
+  personCreateFuncProp: (
     data: definitions["Person"] | definitions["Person"][]
   ) => Promise<void>;
 
-  personReadFuncProp?: (id: number) => Promise<void>;
+  personReadFuncProp: (id: number) => Promise<void>;
 
-  personUpdateFuncProp?: (
+  personUpdateFuncProp: (
     id: number,
     data: definitions["Person"] | definitions["Person"][]
   ) => Promise<void>;
 
-  personPartialFuncProp?: (
+  personPartialFuncProp: (
     id: number,
     data: definitions["Person"] | definitions["Person"][]
   ) => Promise<void>;
 
-  personDeleteFuncProp?: (id: number) => Promise<void>;
+  personDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -69,6 +69,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  personListFuncProp: async (
+    data: operations["person_list"]["parameters"]
+  ): Promise<void> => {},
+
+  personCreateFuncProp: async (
+    data: definitions["Person"] | definitions["Person"][]
+  ): Promise<void> => {},
+
+  personReadFuncProp: async (id: number): Promise<void> => {},
+
+  personUpdateFuncProp: async (
+    id: number,
+    data: definitions["Person"] | definitions["Person"][]
+  ): Promise<void> => {},
+
+  personPartialFuncProp: async (
+    id: number,
+    data: definitions["Person"] | definitions["Person"][]
+  ): Promise<void> => {},
+
+  personDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const PersonContext = createContext<Iperson>(defaultContextState);

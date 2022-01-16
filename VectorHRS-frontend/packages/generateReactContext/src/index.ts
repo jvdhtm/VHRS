@@ -157,7 +157,7 @@ export const ChooseAndSync = () => {
                   let returnType = 'void';
                   
                   fileToWrite[fileName] += `
-                  ${newNameFunction}FuncProp?: ( ${args.slice(0, -1)} ) => Promise<${returnType}>;
+                  ${newNameFunction}FuncProp: ( ${args.slice(0, -1)} ) => Promise<${returnType}>;
                   `;
                 }
               }
@@ -190,6 +190,30 @@ export const ChooseAndSync = () => {
                 count: 0,
                 loading: false,
                 logActions:[],
+                `
+                for (const func in functionsToParse) {
+                  if (
+                    Object.prototype.hasOwnProperty.call(functionsToParse, func)
+                  ) {
+
+                    let args = ``;
+                    if (functionsToParse[func].path.indexOf('{id}') > -1) {
+                      args += `id:number,`;
+                    }
+                    if (functionsToParse[func].parameters) {
+                      args += `data:${functionsToParse[func].parameters},`;
+                    }
+
+                    const newNameFunction =functionsToParse[func].functionName.split('_')[0]+ titleCaseWord(functionsToParse[func].functionName.split('_')[1])
+                  
+                    let returnType = 'void';
+                    
+                    fileToWrite[fileName] += `
+                    ${newNameFunction}FuncProp: async ( ${args.slice(0, -1)} ):Promise<${returnType}> => {},
+                    `;
+                  }
+                }
+              fileToWrite[fileName] +=`
               };
                 /* prettier-ignore */
                 export const ${titleCaseWord(

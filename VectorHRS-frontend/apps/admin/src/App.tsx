@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import routes from "./routes";
-import { Context } from "@vhrs/resources";
-const { UserProvider } = Context;
+import { UserProvider } from "@vhrs/resources";
 
 function App() {
   const appRoutes = routes.filter((route) => route.path);

@@ -27,27 +27,27 @@ interface Istafffunctions {
 
   stafffunctionsData?: definitions["StaffFunctions"][];
 
-  stafffunctionsListFuncProp?: (
+  stafffunctionsListFuncProp: (
     data: operations["stafffunctions_list"]["parameters"]
   ) => Promise<void>;
 
-  stafffunctionsCreateFuncProp?: (
+  stafffunctionsCreateFuncProp: (
     data: definitions["StaffFunctions"] | definitions["StaffFunctions"][]
   ) => Promise<void>;
 
-  stafffunctionsReadFuncProp?: (id: number) => Promise<void>;
+  stafffunctionsReadFuncProp: (id: number) => Promise<void>;
 
-  stafffunctionsUpdateFuncProp?: (
+  stafffunctionsUpdateFuncProp: (
     id: number,
     data: definitions["StaffFunctions"] | definitions["StaffFunctions"][]
   ) => Promise<void>;
 
-  stafffunctionsPartialFuncProp?: (
+  stafffunctionsPartialFuncProp: (
     id: number,
     data: definitions["StaffFunctions"] | definitions["StaffFunctions"][]
   ) => Promise<void>;
 
-  stafffunctionsDeleteFuncProp?: (id: number) => Promise<void>;
+  stafffunctionsDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -72,6 +72,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  stafffunctionsListFuncProp: async (
+    data: operations["stafffunctions_list"]["parameters"]
+  ): Promise<void> => {},
+
+  stafffunctionsCreateFuncProp: async (
+    data: definitions["StaffFunctions"] | definitions["StaffFunctions"][]
+  ): Promise<void> => {},
+
+  stafffunctionsReadFuncProp: async (id: number): Promise<void> => {},
+
+  stafffunctionsUpdateFuncProp: async (
+    id: number,
+    data: definitions["StaffFunctions"] | definitions["StaffFunctions"][]
+  ): Promise<void> => {},
+
+  stafffunctionsPartialFuncProp: async (
+    id: number,
+    data: definitions["StaffFunctions"] | definitions["StaffFunctions"][]
+  ): Promise<void> => {},
+
+  stafffunctionsDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const StafffunctionsContext = createContext<Istafffunctions>(defaultContextState);

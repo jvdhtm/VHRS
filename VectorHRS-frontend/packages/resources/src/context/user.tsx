@@ -24,27 +24,27 @@ interface Iuser {
 
   userData?: definitions["User"][];
 
-  userListFuncProp?: (
+  userListFuncProp: (
     data: operations["user_list"]["parameters"]
   ) => Promise<void>;
 
-  userCreateFuncProp?: (
+  userCreateFuncProp: (
     data: definitions["User"] | definitions["User"][]
   ) => Promise<void>;
 
-  userReadFuncProp?: (id: number) => Promise<void>;
+  userReadFuncProp: (id: number) => Promise<void>;
 
-  userUpdateFuncProp?: (
+  userUpdateFuncProp: (
     id: number,
     data: definitions["User"] | definitions["User"][]
   ) => Promise<void>;
 
-  userPartialFuncProp?: (
+  userPartialFuncProp: (
     id: number,
     data: definitions["User"] | definitions["User"][]
   ) => Promise<void>;
 
-  userDeleteFuncProp?: (id: number) => Promise<void>;
+  userDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -69,6 +69,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  userListFuncProp: async (
+    data: operations["user_list"]["parameters"]
+  ): Promise<void> => {},
+
+  userCreateFuncProp: async (
+    data: definitions["User"] | definitions["User"][]
+  ): Promise<void> => {},
+
+  userReadFuncProp: async (id: number): Promise<void> => {},
+
+  userUpdateFuncProp: async (
+    id: number,
+    data: definitions["User"] | definitions["User"][]
+  ): Promise<void> => {},
+
+  userPartialFuncProp: async (
+    id: number,
+    data: definitions["User"] | definitions["User"][]
+  ): Promise<void> => {},
+
+  userDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const UserContext = createContext<Iuser>(defaultContextState);

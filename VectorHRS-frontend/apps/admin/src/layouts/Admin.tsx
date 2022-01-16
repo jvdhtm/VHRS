@@ -1,7 +1,7 @@
 import {  Layout } from 'antd'
 import { useState } from 'react'
 import useWindowSize from '../util/resize'
-import { Content, Header } from '../components'
+import { Content, Header, Sidebar } from '../components'
 import { FC } from "react";
 
 const Admin:FC = ({children}) => {
@@ -13,12 +13,14 @@ const Admin:FC = ({children}) => {
   const toggleCollapse = () => setCollapsed((prev) => !prev)
 
   return (
+    <>
+    <Header isMoblie={isMoblie} toggleCollapse={toggleCollapse} collapsed={collapsed} />
     <Layout className="h-screen">
-      <Header isMoblie={isMoblie} toggleCollapse={toggleCollapse} collapsed={collapsed} />
-      <Content ClassName="p-4 overflow-auto" >
+      <Sidebar />
+      <Content ClassName="overflow-auto pt-10 pb-10">
         {children}
       </Content>
-    </Layout>
+    </Layout></>
   )
 }
 

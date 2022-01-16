@@ -24,27 +24,27 @@ interface Ifunction {
 
   functionData?: definitions["Function"][];
 
-  functionListFuncProp?: (
+  functionListFuncProp: (
     data: operations["function_list"]["parameters"]
   ) => Promise<void>;
 
-  functionCreateFuncProp?: (
+  functionCreateFuncProp: (
     data: definitions["Function"] | definitions["Function"][]
   ) => Promise<void>;
 
-  functionReadFuncProp?: (id: number) => Promise<void>;
+  functionReadFuncProp: (id: number) => Promise<void>;
 
-  functionUpdateFuncProp?: (
+  functionUpdateFuncProp: (
     id: number,
     data: definitions["Function"] | definitions["Function"][]
   ) => Promise<void>;
 
-  functionPartialFuncProp?: (
+  functionPartialFuncProp: (
     id: number,
     data: definitions["Function"] | definitions["Function"][]
   ) => Promise<void>;
 
-  functionDeleteFuncProp?: (id: number) => Promise<void>;
+  functionDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -69,6 +69,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  functionListFuncProp: async (
+    data: operations["function_list"]["parameters"]
+  ): Promise<void> => {},
+
+  functionCreateFuncProp: async (
+    data: definitions["Function"] | definitions["Function"][]
+  ): Promise<void> => {},
+
+  functionReadFuncProp: async (id: number): Promise<void> => {},
+
+  functionUpdateFuncProp: async (
+    id: number,
+    data: definitions["Function"] | definitions["Function"][]
+  ): Promise<void> => {},
+
+  functionPartialFuncProp: async (
+    id: number,
+    data: definitions["Function"] | definitions["Function"][]
+  ): Promise<void> => {},
+
+  functionDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const FunctionContext = createContext<Ifunction>(defaultContextState);

@@ -24,27 +24,27 @@ interface Iexpertise {
 
   expertiseData?: definitions["Expertise"][];
 
-  expertiseListFuncProp?: (
+  expertiseListFuncProp: (
     data: operations["expertise_list"]["parameters"]
   ) => Promise<void>;
 
-  expertiseCreateFuncProp?: (
+  expertiseCreateFuncProp: (
     data: definitions["Expertise"] | definitions["Expertise"][]
   ) => Promise<void>;
 
-  expertiseReadFuncProp?: (id: number) => Promise<void>;
+  expertiseReadFuncProp: (id: number) => Promise<void>;
 
-  expertiseUpdateFuncProp?: (
+  expertiseUpdateFuncProp: (
     id: number,
     data: definitions["Expertise"] | definitions["Expertise"][]
   ) => Promise<void>;
 
-  expertisePartialFuncProp?: (
+  expertisePartialFuncProp: (
     id: number,
     data: definitions["Expertise"] | definitions["Expertise"][]
   ) => Promise<void>;
 
-  expertiseDeleteFuncProp?: (id: number) => Promise<void>;
+  expertiseDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -69,6 +69,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  expertiseListFuncProp: async (
+    data: operations["expertise_list"]["parameters"]
+  ): Promise<void> => {},
+
+  expertiseCreateFuncProp: async (
+    data: definitions["Expertise"] | definitions["Expertise"][]
+  ): Promise<void> => {},
+
+  expertiseReadFuncProp: async (id: number): Promise<void> => {},
+
+  expertiseUpdateFuncProp: async (
+    id: number,
+    data: definitions["Expertise"] | definitions["Expertise"][]
+  ): Promise<void> => {},
+
+  expertisePartialFuncProp: async (
+    id: number,
+    data: definitions["Expertise"] | definitions["Expertise"][]
+  ): Promise<void> => {},
+
+  expertiseDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const ExpertiseContext = createContext<Iexpertise>(defaultContextState);

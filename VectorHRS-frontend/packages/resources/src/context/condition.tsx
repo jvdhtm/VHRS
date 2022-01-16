@@ -24,27 +24,27 @@ interface Icondition {
 
   conditionData?: definitions["Condition"][];
 
-  conditionListFuncProp?: (
+  conditionListFuncProp: (
     data: operations["condition_list"]["parameters"]
   ) => Promise<void>;
 
-  conditionCreateFuncProp?: (
+  conditionCreateFuncProp: (
     data: definitions["Condition"] | definitions["Condition"][]
   ) => Promise<void>;
 
-  conditionReadFuncProp?: (id: number) => Promise<void>;
+  conditionReadFuncProp: (id: number) => Promise<void>;
 
-  conditionUpdateFuncProp?: (
+  conditionUpdateFuncProp: (
     id: number,
     data: definitions["Condition"] | definitions["Condition"][]
   ) => Promise<void>;
 
-  conditionPartialFuncProp?: (
+  conditionPartialFuncProp: (
     id: number,
     data: definitions["Condition"] | definitions["Condition"][]
   ) => Promise<void>;
 
-  conditionDeleteFuncProp?: (id: number) => Promise<void>;
+  conditionDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -69,6 +69,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  conditionListFuncProp: async (
+    data: operations["condition_list"]["parameters"]
+  ): Promise<void> => {},
+
+  conditionCreateFuncProp: async (
+    data: definitions["Condition"] | definitions["Condition"][]
+  ): Promise<void> => {},
+
+  conditionReadFuncProp: async (id: number): Promise<void> => {},
+
+  conditionUpdateFuncProp: async (
+    id: number,
+    data: definitions["Condition"] | definitions["Condition"][]
+  ): Promise<void> => {},
+
+  conditionPartialFuncProp: async (
+    id: number,
+    data: definitions["Condition"] | definitions["Condition"][]
+  ): Promise<void> => {},
+
+  conditionDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const ConditionContext = createContext<Icondition>(defaultContextState);

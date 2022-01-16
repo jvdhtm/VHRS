@@ -24,27 +24,27 @@ interface Ipersonstage {
 
   personstageData?: definitions["PersonStage"][];
 
-  personstageListFuncProp?: (
+  personstageListFuncProp: (
     data: operations["personstage_list"]["parameters"]
   ) => Promise<void>;
 
-  personstageCreateFuncProp?: (
+  personstageCreateFuncProp: (
     data: definitions["PersonStage"] | definitions["PersonStage"][]
   ) => Promise<void>;
 
-  personstageReadFuncProp?: (id: number) => Promise<void>;
+  personstageReadFuncProp: (id: number) => Promise<void>;
 
-  personstageUpdateFuncProp?: (
+  personstageUpdateFuncProp: (
     id: number,
     data: definitions["PersonStage"] | definitions["PersonStage"][]
   ) => Promise<void>;
 
-  personstagePartialFuncProp?: (
+  personstagePartialFuncProp: (
     id: number,
     data: definitions["PersonStage"] | definitions["PersonStage"][]
   ) => Promise<void>;
 
-  personstageDeleteFuncProp?: (id: number) => Promise<void>;
+  personstageDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -69,6 +69,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  personstageListFuncProp: async (
+    data: operations["personstage_list"]["parameters"]
+  ): Promise<void> => {},
+
+  personstageCreateFuncProp: async (
+    data: definitions["PersonStage"] | definitions["PersonStage"][]
+  ): Promise<void> => {},
+
+  personstageReadFuncProp: async (id: number): Promise<void> => {},
+
+  personstageUpdateFuncProp: async (
+    id: number,
+    data: definitions["PersonStage"] | definitions["PersonStage"][]
+  ): Promise<void> => {},
+
+  personstagePartialFuncProp: async (
+    id: number,
+    data: definitions["PersonStage"] | definitions["PersonStage"][]
+  ): Promise<void> => {},
+
+  personstageDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const PersonstageContext = createContext<Ipersonstage>(defaultContextState);

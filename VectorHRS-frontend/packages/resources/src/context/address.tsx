@@ -24,27 +24,27 @@ interface Iaddress {
 
   addressData?: definitions["Address"][];
 
-  addressListFuncProp?: (
+  addressListFuncProp: (
     data: operations["address_list"]["parameters"]
   ) => Promise<void>;
 
-  addressCreateFuncProp?: (
+  addressCreateFuncProp: (
     data: definitions["Address"] | definitions["Address"][]
   ) => Promise<void>;
 
-  addressReadFuncProp?: (id: number) => Promise<void>;
+  addressReadFuncProp: (id: number) => Promise<void>;
 
-  addressUpdateFuncProp?: (
+  addressUpdateFuncProp: (
     id: number,
     data: definitions["Address"] | definitions["Address"][]
   ) => Promise<void>;
 
-  addressPartialFuncProp?: (
+  addressPartialFuncProp: (
     id: number,
     data: definitions["Address"] | definitions["Address"][]
   ) => Promise<void>;
 
-  addressDeleteFuncProp?: (id: number) => Promise<void>;
+  addressDeleteFuncProp: (id: number) => Promise<void>;
 }
 interface IcontextProvider {
   children: ReactNode;
@@ -69,6 +69,28 @@ const defaultContextState = {
   count: 0,
   loading: false,
   logActions: [],
+
+  addressListFuncProp: async (
+    data: operations["address_list"]["parameters"]
+  ): Promise<void> => {},
+
+  addressCreateFuncProp: async (
+    data: definitions["Address"] | definitions["Address"][]
+  ): Promise<void> => {},
+
+  addressReadFuncProp: async (id: number): Promise<void> => {},
+
+  addressUpdateFuncProp: async (
+    id: number,
+    data: definitions["Address"] | definitions["Address"][]
+  ): Promise<void> => {},
+
+  addressPartialFuncProp: async (
+    id: number,
+    data: definitions["Address"] | definitions["Address"][]
+  ): Promise<void> => {},
+
+  addressDeleteFuncProp: async (id: number): Promise<void> => {},
 };
 /* prettier-ignore */
 export const AddressContext = createContext<Iaddress>(defaultContextState);
