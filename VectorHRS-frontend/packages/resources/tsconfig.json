@@ -22,7 +22,7 @@
     ]
   },
   "include": [
-    "src/context/index.ts",
+    "src/index.ts",
   ],
   "exclude": [
     "node_modules"

@@ -8,14 +8,15 @@ const {
   address_delete,
 } = Api;
 
-import { createContext, useState, FC, ReactNode } from "react";
+import { createContext, useState, FC } from "react";
+import { IcontextProvider } from "../types";
 
 interface IAction {
   verb: string;
   results: number | definitions["Address"] | definitions["Address"][];
 }
 
-interface Iaddress {
+export interface Iaddress {
   loading: boolean;
   count: number;
   next?: string;
@@ -45,10 +46,6 @@ interface Iaddress {
   ) => Promise<void>;
 
   addressDeleteFuncProp: (id: number) => Promise<void>;
-}
-interface IcontextProvider {
-  children: ReactNode;
-  headers: any;
 }
 
 interface Istate {

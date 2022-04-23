@@ -8,7 +8,8 @@ const {
   expertiseprofile_delete,
 } = Api;
 
-import { createContext, useState, FC, ReactNode } from "react";
+import { createContext, useState, FC } from "react";
+import { IcontextProvider } from "../types";
 
 interface IAction {
   verb: string;
@@ -18,7 +19,7 @@ interface IAction {
     | definitions["ExpertiseProfile"][];
 }
 
-interface Iexpertiseprofile {
+export interface Iexpertiseprofile {
   loading: boolean;
   count: number;
   next?: string;
@@ -48,10 +49,6 @@ interface Iexpertiseprofile {
   ) => Promise<void>;
 
   expertiseprofileDeleteFuncProp: (id: number) => Promise<void>;
-}
-interface IcontextProvider {
-  children: ReactNode;
-  headers: any;
 }
 
 interface Istate {

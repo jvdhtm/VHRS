@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "commonjs",
+    "module": "esnext",
+    "target": "es5",
     "strict": true,
-    "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
     "skipLibCheck": true,
@@ -13,7 +12,7 @@
     "declaration": true,
     "declarationDir": "types",
     "baseUrl": ".",
-    "outDir":"dist",
+    "outDir": "lib/esm",
     "lib": [
       "esnext",
       "dom",

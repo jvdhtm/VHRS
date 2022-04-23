@@ -8,14 +8,15 @@ const {
   personlog_delete,
 } = Api;
 
-import { createContext, useState, FC, ReactNode } from "react";
+import { createContext, useState, FC } from "react";
+import { IcontextProvider } from "../types";
 
 interface IAction {
   verb: string;
   results: number | definitions["PersonLog"] | definitions["PersonLog"][];
 }
 
-interface Ipersonlog {
+export interface Ipersonlog {
   loading: boolean;
   count: number;
   next?: string;
@@ -45,10 +46,6 @@ interface Ipersonlog {
   ) => Promise<void>;
 
   personlogDeleteFuncProp: (id: number) => Promise<void>;
-}
-interface IcontextProvider {
-  children: ReactNode;
-  headers: any;
 }
 
 interface Istate {

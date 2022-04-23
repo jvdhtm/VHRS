@@ -1,0 +1,14 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    color: var(--quinary);
+}
+
+*{
+    box-sizing: border-box;
+}
+.ant-layout{
+
+    height: 100vh;
+    padding-top: var(--headerHeight);
+}

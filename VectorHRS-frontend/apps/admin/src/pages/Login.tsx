@@ -1,4 +1,5 @@
 import { Form, Input, Button, Checkbox } from "antd";
+import axios from "axios";
 import Standard from "../layouts/Standard";
 //import { useContext } from "react";
 //import { UserContext } from "@vhrs/resources";
@@ -6,7 +7,7 @@ import Standard from "../layouts/Standard";
 const Login =  () => {
   //const user =  useContext(UserContext);
   const onFinish = (values: any) => {
-    console.log("Success:", values);
+    axios.post('/auth', values)
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -15,7 +16,7 @@ const Login =  () => {
 
   return (
     <Standard>
-      <div className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm  p-4 sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700 my-auto mx-auto">
+      <div className="login">
         <Form
           className="space-y-6"
           name="basic"

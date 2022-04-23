@@ -8,14 +8,15 @@ const {
   department_delete,
 } = Api;
 
-import { createContext, useState, FC, ReactNode } from "react";
+import { createContext, useState, FC } from "react";
+import { IcontextProvider } from "../types";
 
 interface IAction {
   verb: string;
   results: number | definitions["Department"] | definitions["Department"][];
 }
 
-interface Idepartment {
+export interface Idepartment {
   loading: boolean;
   count: number;
   next?: string;
@@ -45,10 +46,6 @@ interface Idepartment {
   ) => Promise<void>;
 
   departmentDeleteFuncProp: (id: number) => Promise<void>;
-}
-interface IcontextProvider {
-  children: ReactNode;
-  headers: any;
 }
 
 interface Istate {

@@ -22,6 +22,7 @@ import {
 import { StafflogProvider, StafflogContext } from "./stafflog";
 import { StaffstageProvider, StaffstageContext } from "./staffstage";
 import { UserProvider, UserContext } from "./user";
+
 export {
   AddressProvider,
   AddressContext,
@@ -60,3 +61,4 @@ export {
   UserProvider,
   UserContext,
 };
+export default {}

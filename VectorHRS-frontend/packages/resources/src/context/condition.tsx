@@ -8,14 +8,15 @@ const {
   condition_delete,
 } = Api;
 
-import { createContext, useState, FC, ReactNode } from "react";
+import { createContext, useState, FC } from "react";
+import { IcontextProvider } from "../types";
 
 interface IAction {
   verb: string;
   results: number | definitions["Condition"] | definitions["Condition"][];
 }
 
-interface Icondition {
+export interface Icondition {
   loading: boolean;
   count: number;
   next?: string;
@@ -45,10 +46,6 @@ interface Icondition {
   ) => Promise<void>;
 
   conditionDeleteFuncProp: (id: number) => Promise<void>;
-}
-interface IcontextProvider {
-  children: ReactNode;
-  headers: any;
 }
 
 interface Istate {

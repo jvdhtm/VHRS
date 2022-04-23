@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ReactComponent as Logo } from "../logo.svg";
+import Logo from "../logo.svg?component";
 import { Link } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import {

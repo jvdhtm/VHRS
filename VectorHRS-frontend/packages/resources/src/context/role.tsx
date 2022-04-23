@@ -8,14 +8,15 @@ const {
   role_delete,
 } = Api;
 
-import { createContext, useState, FC, ReactNode } from "react";
+import { createContext, useState, FC } from "react";
+import { IcontextProvider } from "../types";
 
 interface IAction {
   verb: string;
   results: number | definitions["Role"] | definitions["Role"][];
 }
 
-interface Irole {
+export interface Irole {
   loading: boolean;
   count: number;
   next?: string;
@@ -45,10 +46,6 @@ interface Irole {
   ) => Promise<void>;
 
   roleDeleteFuncProp: (id: number) => Promise<void>;
-}
-interface IcontextProvider {
-  children: ReactNode;
-  headers: any;
 }
 
 interface Istate {

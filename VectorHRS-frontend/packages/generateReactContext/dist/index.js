@@ -2,12 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChooseAndSync = void 0;
 const tslib_1 = require("tslib");
-const openApi = (0, tslib_1.__importStar)(require("openapi-typescript"));
-const prettier_1 = (0, tslib_1.__importDefault)(require("prettier"));
+const openApi = tslib_1.__importStar(require("openapi-typescript"));
+const prettier_1 = tslib_1.__importDefault(require("prettier"));
 const Config_1 = require("./constants/Config");
-const fs = (0, tslib_1.__importStar)(require("fs"));
-const path = (0, tslib_1.__importStar)(require("path"));
-const axios_1 = (0, tslib_1.__importDefault)(require("axios"));
+const fs = tslib_1.__importStar(require("fs"));
+const path = tslib_1.__importStar(require("path"));
+const axios_1 = tslib_1.__importDefault(require("axios"));
 const swaggerDocUrl = `${Config_1.BASE_URL}/${Config_1.SWAGGER_ENDPOINT}`;
 const openapiTS = openApi.default;
 const GREEN = '\x1b[32m';
@@ -97,7 +97,8 @@ const ChooseAndSync = () => {
                } = Api;
               `;
                         fileToWrite[fileName] += `
-                import { createContext, useState, FC, ReactNode } from "react";
+                import { createContext, useState, FC } from "react";
+                import { IcontextProvider } from "../types";
                 `;
                         fileToWrite[fileName] += `
                 interface IAction {
@@ -106,7 +107,7 @@ const ChooseAndSync = () => {
                 }
 
 
-                interface I${fileName} {
+                export interface I${fileName} {
                   loading: boolean;
                   count: number;
                   next?: string;
@@ -134,10 +135,6 @@ const ChooseAndSync = () => {
                             }
                         }
                         fileToWrite[fileName] += `
-              }
-              interface IcontextProvider{
-                children: ReactNode,
-                headers: any
               }
 
 
@@ -407,7 +404,8 @@ const ChooseAndSync = () => {
                     indexToWrite += file;
                 }
             }
-            indexToWrite += 'export {';
+            indexToWrite += `
+        export  {`;
             for (const fileName in indexExportFileToWrite) {
                 if (Object.prototype.hasOwnProperty.call(indexExportFileToWrite, fileName)) {
                     let file = indexExportFileToWrite[fileName][0] + ',' + indexExportFileToWrite[fileName][1] + ',';

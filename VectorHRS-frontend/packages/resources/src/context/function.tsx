@@ -8,14 +8,15 @@ const {
   function_delete,
 } = Api;
 
-import { createContext, useState, FC, ReactNode } from "react";
+import { createContext, useState, FC } from "react";
+import { IcontextProvider } from "../types";
 
 interface IAction {
   verb: string;
   results: number | definitions["Function"] | definitions["Function"][];
 }
 
-interface Ifunction {
+export interface Ifunction {
   loading: boolean;
   count: number;
   next?: string;
@@ -45,10 +46,6 @@ interface Ifunction {
   ) => Promise<void>;
 
   functionDeleteFuncProp: (id: number) => Promise<void>;
-}
-interface IcontextProvider {
-  children: ReactNode;
-  headers: any;
 }
 
 interface Istate {

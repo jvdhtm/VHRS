@@ -1,3 +1,4 @@
-import * as Api from "./src/api";
+import * as ApiVerbs from "./src/api";
 import { definitions, paths, operations } from "./src/schemas";
-export { Api, definitions, paths, operations };
+export declare const Api: typeof ApiVerbs;
+export { definitions, paths, operations };

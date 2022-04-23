@@ -1,4 +1,6 @@
 from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
+from drf_yasg import openapi
 from staff_api.models import PersonStage, StaffStage, Person, PersonLog, Expertise, ExpertiseProfile, Condition, Department, Staff, StaffLog, Function, StaffFunctions, Address, Phone, Comments
 
 
@@ -38,11 +40,13 @@ class ExpertiseSerializer(ModelSerializer):
         fields = 'id',  'name',  'description',  'parentId',  'status',  'created_date_time' 
 
 
+
+
 class ExpertiseProfileSerializer(ModelSerializer):
 
     class Meta:
         model = ExpertiseProfile
-        fields = 'id',  'name',  'description',  'person',  'expertise',  'status',  'created_date_time' 
+        fields = 'id',  'name',  'description',  'person',  'expertise',  'status',  'created_date_time'
 
 
 class ConditionSerializer(ModelSerializer):

@@ -1,23 +1,22 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from identity_api.models import User, App, Role
 
 
-
-class UserSerializer(ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
         fields = 'id',  'email',  'passcode',  'first_name',  'last_name',  'is_active' 
 
 
-class AppSerializer(ModelSerializer):
+class AppSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = App
         fields = 'id',  'title',  'pathUrl' 
 
 
-class RoleSerializer(ModelSerializer):
+class RoleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Role

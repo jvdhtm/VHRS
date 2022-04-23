@@ -8,7 +8,8 @@ const {
   stafffunctions_delete,
 } = Api;
 
-import { createContext, useState, FC, ReactNode } from "react";
+import { createContext, useState, FC } from "react";
+import { IcontextProvider } from "../types";
 
 interface IAction {
   verb: string;
@@ -18,7 +19,7 @@ interface IAction {
     | definitions["StaffFunctions"][];
 }
 
-interface Istafffunctions {
+export interface Istafffunctions {
   loading: boolean;
   count: number;
   next?: string;
@@ -48,10 +49,6 @@ interface Istafffunctions {
   ) => Promise<void>;
 
   stafffunctionsDeleteFuncProp: (id: number) => Promise<void>;
-}
-interface IcontextProvider {
-  children: ReactNode;
-  headers: any;
 }
 
 interface Istate {

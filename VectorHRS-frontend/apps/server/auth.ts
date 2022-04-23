@@ -69,3 +69,29 @@ export const getToken = async (
     }
   }
 };
+
+
+export const redirectToLoginIfNotloggedIn = (req: Request, res: Response, next: NextFunction) => {
+  let token:any = req.cookies.sessionid;
+  if(req.url == res.app.get("login_url"))
+    next();
+  else if (token) {
+    let session: any = req.session;
+      if (session && session[token]) {
+          /*We do not validate the token, if we were to validate token, you can see the documents here https://github.com/AzureAD/azure-activedirectory-library-for-nodejs */
+          next();
+      } else {
+
+          if (req.session) {
+              req.session.destroy(() => {
+              });
+          }
+          res.cookie('sessionid', '', {maxAge: 0});
+          next(new HttpException(500, 'Session with this sessionId doesnt exist'));
+      }
+
+  }
+  else{
+    res.redirect(res.app.get("login_url"));
+  }
+}

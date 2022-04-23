@@ -312,150 +312,306 @@ export interface paths {
 }
 export interface definitions {
     Address: {
+        /** ID */
         id?: number;
+        /** Staff */
         staff: number;
+        /** Description */
         description?: string;
+        /** Address1 */
         address1?: string;
+        /** Address2 */
         address2?: string;
+        /** Zip */
         zip?: string;
+        /** City */
         city?: string;
+        /** Country */
         country?: string;
+        /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+        /**
+         * Created date time
+         * Format: date-time
+         */
         created_date_time?: string;
     };
     App: {
+        /** ID */
         id?: number;
+        /** Title */
         title: string;
+        /** PathUrl */
         pathUrl: string;
     };
     Comments: {
+        /** ID */
         id?: number;
+        /** Staff */
         staff: number;
+        /** Name */
         name?: string;
+        /** Description */
         description?: string;
+        /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+        /**
+         * Created date time
+         * Format: date-time
+         */
         created_date_time?: string;
     };
     Condition: {
+        /** ID */
         id?: number;
+        /** Severity */
         severity: "1" | "2" | "3";
+        /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+        /**
+         * Created date time
+         * Format: date-time
+         */
         created_date_time?: string;
     };
     Department: {
+        /** ID */
         id?: number;
+        /** Description */
         description?: string;
+        /** Shape */
         shape: "circle" | "square" | "rectangle" | "triangle";
+        /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+        /**
+         * Created date time
+         * Format: date-time
+         */
         created_date_time?: string;
     };
     Expertise: {
+        /** ID */
         id?: number;
+        /** Name */
         name?: string;
+        /** Description */
         description?: string;
+        /** ParentId */
         parentId?: number;
+        /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+        /**
+         * Created date time
+         * Format: date-time
+         */
         created_date_time?: string;
     };
     ExpertiseProfile: {
+        /** ID */
         id?: number;
+        /** Name */
         name?: string;
+        /** Description */
         description?: string;
-        person: number;
+        /** Person */
+        person: definitions["Person"] | number;
+        /** Expertise */
         expertise: number;
+        /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+        /**
+         * Created date time
+         * Format: date-time
+         */
         created_date_time?: string;
     };
     Function: {
+        /** ID */
         id?: number;
+        /** Name */
         name?: string;
+        /** Description */
         description?: string;
+        /** Shape */
         shape: "circle" | "square" | "rectangle" | "triangle";
+        /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+        /**
+         * Created date time
+         * Format: date-time
+         */
         created_date_time?: string;
     };
     Person: {
+        /** ID */
         id?: number;
+        /** Firstname */
         firstname?: string;
+        /** Lastname */
         lastname?: string;
+        /** Age */
         age: number;
+        /** NationalId */
         nationalId?: string;
+        /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+        /**
+         * Created date time
+         * Format: date-time
+         */
         created_date_time?: string;
     };
     PersonLog: {
+        /** ID */
         id?: number;
+        /** Description */
         description?: string;
+        /** Stage */
         stage: number;
+        /** Person */
         person: number;
+        /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+        /**
+         * Created date time
+         * Format: date-time
+         */
         created_date_time?: string;
     };
     PersonStage: {
+        /** ID */
         id?: number;
+        /** Name */
         name?: string;
+        /** Description */
         description?: string;
+        /** Step */
         step: "communication" | "answers" | "pending" | "interview" | "contract" | "rejection" | "refusal" | "recommendation" | "questions" | "invitations";
+        /** X */
         x: number;
+        /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+        /**
+         * Created date time
+         * Format: date-time
+         */
         created_date_time?: string;
     };
     Phone: {
+        /** ID */
         id?: number;
+        /** Staff */
         staff: number;
+        /** Description */
         description?: string;
+        /** PhoneNumber */
         phoneNumber?: string;
+        /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+        /**
+         * Created date time
+         * Format: date-time
+         */
         created_date_time?: string;
     };
     Role: {
+        /** ID */
         id?: number;
+        /** Title */
         title: string;
+        /** User */
         user: number;
+        /** Permission */
         permission?: "R" | "W" | "RW" | "RWD";
+        /** App */
         app: number;
     };
     Staff: {
+        /** ID */
         id?: number;
+        /** Department */
         department: number;
+        /** Condition */
         condition: number;
+        /** Title */
         title?: string;
+        /** BossId */
         bossId?: number;
+        /** Who */
         who: number;
+        /** X */
         x: number;
+        /** Y */
         y: number;
+        /** Level */
         level: number;
     };
     StaffFunctions: {
+        /** ID */
         id?: number;
+        /** Function */
         function: number;
+        /** Staff */
         staff: number;
+        /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+        /**
+         * Created date time
+         * Format: date-time
+         */
         created_date_time?: string;
     };
     StaffLog: {
+        /** ID */
         id?: number;
+        /** Description */
         description?: string;
+        /** Stage */
         stage: number;
+        /** With person */
         with_person?: number;
+        /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+        /**
+         * Created date time
+         * Format: date-time
+         */
         created_date_time?: string;
     };
     StaffStage: {
+        /** ID */
         id?: number;
+        /** Name */
         name?: string;
+        /** Description */
         description?: string;
+        /** Step */
         step: "communication" | "answers" | "meeting" | "surveys" | "administrative" | "complains" | "problems" | "feedBack" | "requirements" | "legal" | "questions" | "gifts" | "invitations";
+        /** X */
         x: number;
+        /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+        /**
+         * Created date time
+         * Format: date-time
+         */
         created_date_time?: string;
     };
     User: {
+        /** ID */
         id?: number;
+        /**
+         * Email address
+         * Format: email
+         */
         email: string;
+        /** Passcode */
         passcode: string;
+        /** First name */
         first_name: string;
+        /** Last name */
         last_name: string;
+        /** Is active */
         is_active?: boolean;
     };
 }
@@ -481,7 +637,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["Address"][];
                 };
@@ -570,7 +728,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["App"][];
                 };
@@ -662,7 +822,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["Comments"][];
                 };
@@ -752,7 +914,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["Condition"][];
                 };
@@ -843,7 +1007,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["Department"][];
                 };
@@ -935,7 +1101,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["Expertise"][];
                 };
@@ -1028,7 +1196,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["ExpertiseProfile"][];
                 };
@@ -1120,7 +1290,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["Function"][];
                 };
@@ -1213,7 +1385,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["Person"][];
                 };
@@ -1305,7 +1479,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["PersonLog"][];
                 };
@@ -1398,7 +1574,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["PersonStage"][];
                 };
@@ -1490,7 +1668,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["Phone"][];
                 };
@@ -1581,7 +1761,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["Role"][];
                 };
@@ -1676,7 +1858,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["Staff"][];
                 };
@@ -1767,7 +1951,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["StaffFunctions"][];
                 };
@@ -1859,7 +2045,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["StaffLog"][];
                 };
@@ -1952,7 +2140,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["StaffStage"][];
                 };
@@ -2044,7 +2234,9 @@ export interface operations {
             200: {
                 schema: {
                     count: number;
+                    /** Format: uri */
                     next?: string;
+                    /** Format: uri */
                     previous?: string;
                     results: definitions["User"][];
                 };

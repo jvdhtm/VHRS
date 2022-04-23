@@ -115,7 +115,8 @@ export const ChooseAndSync = () => {
                } = Api;
               `
               fileToWrite[fileName] += `
-                import { createContext, useState, FC, ReactNode } from "react";
+                import { createContext, useState, FC } from "react";
+                import { IcontextProvider } from "../types";
                 `;
 
               fileToWrite[fileName] += `
@@ -125,7 +126,7 @@ export const ChooseAndSync = () => {
                 }
 
 
-                interface I${fileName} {
+                export interface I${fileName} {
                   loading: boolean;
                   count: number;
                   next?: string;
@@ -164,10 +165,6 @@ export const ChooseAndSync = () => {
 
 
               fileToWrite[fileName] += `
-              }
-              interface IcontextProvider{
-                children: ReactNode,
-                headers: any
               }
 
 
@@ -478,7 +475,8 @@ export const ChooseAndSync = () => {
             indexToWrite += file;
           }
         }
-        indexToWrite += 'export {';
+        indexToWrite += `
+        export  {`;
         for (const fileName in indexExportFileToWrite) {
           if (
             Object.prototype.hasOwnProperty.call(
