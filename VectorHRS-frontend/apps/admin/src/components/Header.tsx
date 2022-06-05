@@ -14,8 +14,6 @@ const Header:FC<IHeader> = ({isMoblie, collapsed,toggleCollapse}) => {
   const { isOpen,onToggle } = useDisclosure()
   return (
     <header>
-     <Button onClick={onToggle}>Click Me</Button>
-       <Collapse in={isOpen} animateOpacity>
         <div className='logo'>
           <Logo />
         </div>
@@ -34,7 +32,6 @@ const Header:FC<IHeader> = ({isMoblie, collapsed,toggleCollapse}) => {
             </MenuItem>
           </MenuList>
         </Menu>
-      </Collapse>
     </header>
   );
 }

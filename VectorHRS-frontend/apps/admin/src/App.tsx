@@ -1,12 +1,27 @@
+import {   BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import routes from "./routes";
+import  resources from "@vhrs/resources";
+import  "./styles/site.scss";
+const { AuthProvider } = resources.authContext;
 
-
-const App = () => {
+function App() {
+  const appRoutes = routes.filter((route) => route.path);
   return (
-      <ThemeProvider>
-        <Router />
-      </ThemeProvider>
+    <AuthProvider headers={""}>
+      <Router>
+        <Routes>
+            {appRoutes.map((route) => (
+              <Route
+                key={route.id}
+                path={route.path}
+                element={<route.component />}
+              />
+            ))}
+        </Routes>
+      </Router>
+  </AuthProvider>
   );
-};
+}
 
 export default App;

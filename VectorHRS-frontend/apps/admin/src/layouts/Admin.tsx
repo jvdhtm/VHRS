@@ -1,7 +1,7 @@
 
 import { useContext, useState } from 'react'
 import useWindowSize from '../util/resize'
-import { Content, Header, Sidebar } from '../components'
+import { Content, Header, Sidebar,ThemeProvider } from '../components'
 import resources from "@vhrs/resources";
 import { FC } from "react";
 import { Icontent } from '../types';
@@ -22,14 +22,17 @@ const Admin:FC<Icontent> = ({children, ClassName}) => {
   const toggleCollapse = () => setCollapsed((prev) => !prev)
 
   return (
-    <>
-    <Header isMoblie={isMoblie} toggleCollapse={toggleCollapse} collapsed={collapsed} />
-    <main>
-      <Sidebar />
-      <Content ClassName="main">
-        {children}
-      </Content>
-    </main></>
+  <ThemeProvider>
+      <>
+        <Header isMoblie={isMoblie} toggleCollapse={toggleCollapse} collapsed={collapsed} />
+        <main>
+          <Sidebar />
+          <Content ClassName="main">
+            {children}
+          </Content>
+        </main>
+      </>
+    </ThemeProvider>
   )
 }
 

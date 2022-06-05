@@ -1,19 +1,15 @@
-.vhrs-header{
+header{
     display: flex;
     z-index: 1;
-    flex-direction: row-reverse;
     box-shadow: var(--boxShadow) 0px 8px 24px ;
     top: 0;
     width: 100vw;
     height:  var(--headerHeight);
     position: fixed;
     background: var(--quinary);
-    .ant-menu-light {
-        position: absolute;
-        z-index: 1;
-        right: 0;
-        top: -100%;
-        transition: all ease-out 60ms
+    .logo {
+        width: 3rem;
+        height: 3rem;
     }
 
     .show-menu

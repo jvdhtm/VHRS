@@ -3,7 +3,7 @@ import crypto from "crypto";
 import { HttpException } from "./errorHandeling";
 import { Api, definitions } from "@vhrs/models";
 
-export const logout = (req: Request, res: Response) => {
+export const logout = (req: any, res: Response) => {
   if (req.session) {
     req.session.destroy(() => {});
   }
@@ -14,7 +14,7 @@ export const logout = (req: Request, res: Response) => {
 };
 
 export const createSession = (
-  req: Request,
+  req: any,
   res: Response,
   result: definitions["User"]
 ) => {
@@ -71,7 +71,7 @@ export const getToken = async (
 };
 
 
-export const redirectToLoginIfNotloggedIn = (req: Request, res: Response, next: NextFunction) => {
+export const redirectToLoginIfNotloggedIn = (req: any, res: Response, next: NextFunction) => {
   let token:any = req.cookies.sessionid;
   if(req.url == res.app.get("login_url"))
     next();
