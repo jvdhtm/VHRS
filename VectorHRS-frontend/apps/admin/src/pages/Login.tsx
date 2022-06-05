@@ -1,64 +1,94 @@
-import { Form, Input, Button, Checkbox } from "antd";
-import axios from "axios";
-import Standard from "../layouts/Standard";
-//import { useContext } from "react";
-//import { UserContext } from "@vhrs/resources";
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+  VStack,
+} from '@chakra-ui/react';
+import { useFormik } from 'formik';
+import { flowResult } from 'mobx';
+import { observer } from 'mobx-react';
+import { forms } from '../constants';
+import resources from '@vhrs/resources';
+import { useContext } from 'react';
+import type { IAuth } from '@vhrs/resources/types/authContext';
+import { useNavigate } from 'react-router-dom';
 
-const Login =  () => {
-  //const user =  useContext(UserContext);
-  const onFinish = (values: any) => {
-    axios.post('/auth', values)
-  };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
+const {
+  login: { initialValues, validationSchema },
+} = forms;
+
+const Login = () => {
+  const { isAuth, AuthUser } = useContext<IAuth>(
+    resources.authContext.AuthContext,
+  );
+  let navigate = useNavigate();
+
+  if (isAuth) {
+    window.location.href = "/";
+  }
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: async (formValues) => {
+      await flowResult(
+        AuthUser({ username: formValues.email, password: formValues.password }),
+      );
+    },
+  });
 
   return (
-    <Standard>
-      <div className="login">
-        <Form
-          className="space-y-6"
-          name="basic"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
-          <Form.Item
-            label="Username"
-            name="username"
-            rules={[{ required: true, message: "Please input your username!" }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
-          >
-            <Input.Password />
-          </Form.Item>
-
-          <Form.Item
-            name="remember"
-            valuePropName="checked"
-          >
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Submit
+    <Flex bg='gray.100' align='center' justify='center' h='100vh'>
+      <Box bg='white' p={6} rounded='md'>
+        <form onSubmit={formik.handleSubmit}>
+          <VStack spacing={4} align='flex-start'>
+            <FormControl isInvalid={!!formik.errors.email}>
+              <FormLabel htmlFor='email'>E-mail</FormLabel>
+              <Input
+                id='email'
+                name='email'
+                type='email'
+                variant='filled'
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+              />
+              {!!formik.errors.email && (
+                <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
+              )}
+            </FormControl>
+            <FormControl isInvalid={!!formik.errors.password}>
+              <FormLabel htmlFor='password'>Password</FormLabel>
+              <Input
+                id='password'
+                name='password'
+                type='password'
+                variant='filled'
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+              />
+              {!!formik.errors.password && (
+                <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
+              )}
+            </FormControl>
+            <Button
+              type='submit'
+              colorScheme='purple'
+              width='full'
+              isLoading={formik.isSubmitting}
+            >
+              Login
             </Button>
-          </Form.Item>
-        </Form>
-      </div>
-    </Standard>
+          </VStack>
+        </form>
+      </Box>
+    </Flex>
   );
 };
 
-export default Login;
+export default observer(Login);

@@ -1,10 +1,19 @@
-import {  Layout } from 'antd'
-import { useState } from 'react'
+
+import { useContext, useState } from 'react'
 import useWindowSize from '../util/resize'
 import { Content, Header, Sidebar } from '../components'
+import resources from "@vhrs/resources";
 import { FC } from "react";
+import { Icontent } from '../types';
+import type { IAuth } from "@vhrs/resources/types/authContext";
 
-const Admin:FC = ({children}) => {
+const Admin:FC<Icontent> = ({children, ClassName}) => {
+  const { isAuth } = useContext<IAuth>(resources.authContext.AuthContext);
+  if(!isAuth)
+  {
+    window.location.href = "/login";
+  }
+
   const [collapsed, setCollapsed] = useState(false)
   const [screenWidth] = useWindowSize()
 
@@ -15,12 +24,12 @@ const Admin:FC = ({children}) => {
   return (
     <>
     <Header isMoblie={isMoblie} toggleCollapse={toggleCollapse} collapsed={collapsed} />
-    <Layout className="h-screen">
+    <main>
       <Sidebar />
-      <Content ClassName="overflow-auto pt-10 pb-10">
+      <Content ClassName="main">
         {children}
       </Content>
-    </Layout></>
+    </main></>
   )
 }
 

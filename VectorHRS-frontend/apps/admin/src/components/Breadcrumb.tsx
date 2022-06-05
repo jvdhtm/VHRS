@@ -1,12 +1,15 @@
-import { Breadcrumb } from "antd";
-import { Link } from "react-router-dom";
-import { Route  } from "../types";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+} from '@chakra-ui/react'
+import type { Route } from "../types";
 
 function AppBreadcrumb( paths : Route[]) {
   return (
     <Breadcrumb className="mb-4" separator=">">
       {paths.map((path, index) => (
-        <Breadcrumb.Item key={path.id}>
+        <BreadcrumbItem key={path.id}>
           {index === paths.length - 1 ? (
             <>
               {path.icon && (
@@ -17,16 +20,16 @@ function AppBreadcrumb( paths : Route[]) {
               <span>{path.name}</span>
             </>
           ) : (
-            <Link to={path.path}>
+            <BreadcrumbLink href={path.path}>
               {path.icon && (
                 <span className="mr-1">
                   <path.icon />
                 </span>
               )}
               <span>{path.name}</span>
-            </Link>
+            </BreadcrumbLink>
           )}
-        </Breadcrumb.Item>
+        </BreadcrumbItem>
       ))}
     </Breadcrumb>
   );

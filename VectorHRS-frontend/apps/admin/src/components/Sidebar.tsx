@@ -1,68 +1,54 @@
-import React, { useState } from "react";
-import Logo from "../logo.svg?component";
-import { Link } from "react-router-dom";
-import { Layout, Menu } from "antd";
-import {
-  SettingOutlined,
-  UserOutlined,
-  CustomerServiceOutlined,
-  FileTextOutlined,
-  FileSyncOutlined,
-  DashboardOutlined,
-  TeamOutlined,
-} from "@ant-design/icons";
 
-const { Sider } = Layout;
+import { Link } from 'react-router-dom';
+import { Input, useDisclosure,Button } from '@chakra-ui/react';
+import { AddIcon, HamburgerIcon} from '@chakra-ui/icons';
+import { Collapse } from '@chakra-ui/react'
 //const { SubMenu } = Menu;
 
+import {
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+} from '@chakra-ui/react'
+import React from 'react';
+
 function Navigation() {
-  const [collapsed, setCollapsed] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = React.useRef<HTMLButtonElement>()
 
-  const onCollapse = () => {
-    setCollapsed(!collapsed);
-  };
   return (
-    <>
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={onCollapse}
-
+    <nav>
+      <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
+        Open
+      </Button>
+      <Drawer
+        isOpen={isOpen}
+        placement='right'
+        onClose={onClose}
+        finalFocusRef={btnRef}
       >
-        <div className="logo" >
-            <Logo/>
-        </div>
-        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-          <Menu.Item key="1" icon={<DashboardOutlined />}>
-            <Link to="/" />
-            Home 
-          </Menu.Item>
-          <Menu.Item key="2" icon={<CustomerServiceOutlined />}>
-            <Link to="/staff">Staff</Link>
-          </Menu.Item>
-          <Menu.Item key="24" icon={<UserOutlined />}>
-            <Link to="/recruitment">recruitment</Link>
-          </Menu.Item>
-          <Menu.Item key="21" icon={<FileTextOutlined />}>
-            <Link to="/financials" />
-            Financials
-          </Menu.Item>
-          <Menu.Item key="3" icon={<FileSyncOutlined />}>
-            <Link to="/product" />
-            Strategies
-          </Menu.Item>
-          <Menu.Item key="31" icon={<TeamOutlined />}>
-            <Link to="/users" />
-            Users
-          </Menu.Item>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Create your account</DrawerHeader>
 
-          <Menu.Item key="32" icon={<SettingOutlined />}>
-            <Link to="/settings" />
-            Settings
-          </Menu.Item>
-        </Menu>
-      </Sider>
-    </>
-  );
+          <DrawerBody>
+            <Input placeholder='Type here...' />
+          </DrawerBody>
+
+          <DrawerFooter>
+            <Button variant='outline' mr={3} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button colorScheme='blue'>Save</Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    </nav>
+  )
 }
 export default Navigation;

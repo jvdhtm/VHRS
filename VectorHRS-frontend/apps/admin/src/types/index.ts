@@ -7,4 +7,11 @@ export interface Route {
     component: React.FC
     menuParentId?: string
     breadcrumbParentId?: string
-  }
+}
+
+
+  
+export interface Icontent{
+  children: React.ReactNode
+  ClassName?: string
+}

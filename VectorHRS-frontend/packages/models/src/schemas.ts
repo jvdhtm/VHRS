@@ -416,7 +416,7 @@ export interface definitions {
     /** Description */
     description?: string;
     /** Person */
-    person: definitions["Person"] | number;
+    person: number;
     /** Expertise */
     expertise: number;
     /** Status */

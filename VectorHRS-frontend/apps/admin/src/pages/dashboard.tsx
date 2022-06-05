@@ -26,7 +26,6 @@ const data = {
 const Dashboard = () => {
     return (
       <Admin>
-       <Board data={data}/>
       </Admin>
     )
 }

@@ -1,44 +1,32 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import svgr from '@honkhonk/vite-plugin-svgr'
-import vitePluginImp from 'vite-plugin-imp'
-import * as path from 'path';
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import svgr from 'vite-plugin-svgr'
+import * as path from 'path'
 
-const pathResolve = (pathStr: string) => {
-  return path.resolve(__dirname, pathStr);
-};
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    svgr(),
-    react(),
-    vitePluginImp({
-      optimize: true,
-      libList: [
-        {
-          libName: 'antd',
-          libDirectory: 'es',
-          style: (name) => `antd/es/${name}/style`
-        }
-      ]
-    })
-  ],
-  css: {
-    preprocessorOptions: {
-      less: {
-        javascriptEnabled: true, // 支持内联 JavaScript
-      }
-    }
+  plugins: [svgr(), react()],
+  optimizeDeps: {
+    include: ['react/jsx-runtime'],
   },
-  build: {
-    commonjsOptions: {
-      transformMixedEsModules: true,
+  resolve: {
+    alias: {
+      'src': path.resolve(__dirname, './src'),
     },
   },
-  resolve:{
-    alias: {
-    '@': pathResolve('./src'),
-    '~': pathResolve('./node_modules/'),
+  define: {
+    'process.env': {}
+  },
+  server: {
+    proxy: {
+        //Focus here
+        '/api': {
+            target: 'http://localhost:9000',
+            changeOrigin: true,
+        },
+        '/auth': {
+          target: 'http://localhost:9000',
+          changeOrigin: true,
+        }
     }
   }
-})
+});

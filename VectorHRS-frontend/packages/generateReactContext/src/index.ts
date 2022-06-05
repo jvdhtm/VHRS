@@ -220,11 +220,14 @@ export const ChooseAndSync = () => {
               indexImportFileToWrite[fileName] = []
               indexImportFileToWrite[fileName][0] =`${titleCaseWord(fileName)}Provider` ;
               indexImportFileToWrite[fileName][1] =`${titleCaseWord(fileName)}Context` ;
+              indexImportFileToWrite[fileName][2] =`I${fileName}` ;
+              
 
 
               indexExportFileToWrite[fileName] = []
               indexExportFileToWrite[fileName][0] =`${titleCaseWord(fileName)}Provider` ;
               indexExportFileToWrite[fileName][1] =`${titleCaseWord(fileName)}Context` ;
+              indexExportFileToWrite[fileName][2] =`I${fileName}` ;
 
               fileToWrite[fileName] += `export 
                 const ${titleCaseWord(
@@ -469,7 +472,7 @@ export const ChooseAndSync = () => {
               fileName
             )
           ) {
-            let file = 'import {' +indexImportFileToWrite[fileName][0]+ ',' +indexImportFileToWrite[fileName][1];
+            let file = 'import {' +indexImportFileToWrite[fileName][0]+ ',' +indexImportFileToWrite[fileName][1]+',' +indexImportFileToWrite[fileName][2];
             file += `} from  "./${fileName}";
             `;
             indexToWrite += file;
@@ -484,7 +487,7 @@ export const ChooseAndSync = () => {
               fileName
             )
           ) {
-            let file = indexExportFileToWrite[fileName][0]+ ',' +indexExportFileToWrite[fileName][1] + ',';
+            let file = indexExportFileToWrite[fileName][0]+ ',' +indexExportFileToWrite[fileName][1] + ','+ indexExportFileToWrite[fileName][2] + ',';
             indexToWrite += file;
           }
         }

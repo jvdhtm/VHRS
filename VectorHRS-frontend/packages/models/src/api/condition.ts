@@ -1,5 +1,6 @@
 import { operations, definitions } from "../schemas";
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
+import { instance } from "../instance";
 
 export const condition_list = async (
   data: operations["condition_list"]["parameters"],
@@ -8,10 +9,10 @@ export const condition_list = async (
   AxiosResponse<operations["condition_list"]["responses"][200]["schema"]>
 > => {
   let endpoint = "/api/condition/";
-  return await axios({
+  return await instance({
     method: "get",
     url: endpoint,
-    data,
+    params: data.query,
     headers,
   });
 };
@@ -22,7 +23,7 @@ export const condition_create = async (
   AxiosResponse<operations["condition_create"]["responses"][201]["schema"]>
 > => {
   let endpoint = "/api/condition/";
-  return await axios({
+  return await instance({
     method: "post",
     url: endpoint,
     data,
@@ -37,7 +38,7 @@ export const condition_read = async (
 > => {
   let endpoint = "/api/condition/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
-  return await axios({
+  return await instance({
     method: "get",
     url: endpoint,
 
@@ -53,7 +54,7 @@ export const condition_update = async (
 > => {
   let endpoint = "/api/condition/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
-  return await axios({
+  return await instance({
     method: "put",
     url: endpoint,
     data,
@@ -71,7 +72,7 @@ export const condition_partial_update = async (
 > => {
   let endpoint = "/api/condition/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
-  return await axios({
+  return await instance({
     method: "patch",
     url: endpoint,
     data,
@@ -84,7 +85,7 @@ export const condition_delete = async (
 ): Promise<AxiosResponse<any["schema"]>> => {
   let endpoint = "/api/condition/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
-  return await axios({
+  return await instance({
     method: "delete",
     url: endpoint,
 

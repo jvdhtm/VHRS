@@ -59,7 +59,8 @@ export const ChooseAndSync = () => {
                         FileToWrite[fileName] = '';
                         FileToWrite[fileName] += `
                         import {operations, definitions} from "../schemas";
-                        import axios,{AxiosResponse} from "axios"
+                        import {AxiosResponse} from "axios"
+                        import { instance } from "../instance";
                         `;
                       }
 
@@ -89,9 +90,21 @@ export const ChooseAndSync = () => {
                         FileToWrite[fileName] += `
                         endpoint = endpoint.replace("{id}", id.toString())`;
 
-                      if (verb === 'post') {
+                      if(verb === 'get')
+                      {
                         FileToWrite[fileName] += `
-                          return await axios({
+                          return await instance({
+                          method: "${verb}",
+                          url: endpoint,
+                          `;
+                        if (model) FileToWrite[fileName] += `params: data.query,`;
+                        FileToWrite[fileName] += `
+                            headers
+                          });`;
+                      }
+                      else if (verb === 'post') {
+                        FileToWrite[fileName] += `
+                          return await instance({
                           method: "${verb}",
                           url: endpoint,
                           `;
@@ -101,7 +114,7 @@ export const ChooseAndSync = () => {
                           });`;
                       } else {
                         FileToWrite[fileName] += `
-                          return await axios({
+                          return await instance({
                           method: "${verb}",
                           url: endpoint,
                           `;

@@ -2,9 +2,12 @@
     "name": "@vhrs/models",
     "version": "1.0.0",
     "description": "Reactive resource managment library  for VectorHRS apps",
-    "module": "lib/cjs/index.js",
-    "main": "lib/esm/index.js",
-    "types": "types/index.d.ts",
+    "main": "./lib/esm/index.js",
+    "types": "./types/index.d.ts",
+    "exports": {
+      "import": "./lib/esm/index.js",
+      "require": "./lib/cjs/index.js"
+    },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "clean": "rimraf dist",

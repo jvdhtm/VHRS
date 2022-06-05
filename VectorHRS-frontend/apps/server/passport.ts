@@ -14,7 +14,7 @@ import { NextFunction, Request, Response } from "express";
 
 
 export const  isLoggedIn = (req: IGetUserAuthInfoRequest, res: Response, next: NextFunction) => {
-    if(req.url == res.app.get("login_url"))
+    if(req.url == res.app.get("login_url") || req.url == res.app.get("login_auth") )
         next();
     else if (req.isAuthenticated())
         next();
@@ -29,11 +29,11 @@ export const  isLoggedIn = (req: IGetUserAuthInfoRequest, res: Response, next: N
     const FacebookStrategy = passportFacebook.Strategy;
     
     // passport local strategy for local-login, local refers to this app
-    passport.use('local-login', new LocalStrategy(
+    passport.use('local', new LocalStrategy(
          async (username, password, done) => {
             const token = app.get("api_token");
             const email = username;
-            const passcode = username;
+            const passcode = password;
             const data = { query: { email, passcode } };
             const headers = { Authorization: `Token ${token}` };
             const result = await Api.user_list(data, headers);
@@ -45,6 +45,17 @@ export const  isLoggedIn = (req: IGetUserAuthInfoRequest, res: Response, next: N
             }
         })
     );
+
+    passport.serializeUser((user, done) =>{
+        done(null, user);
+    });
+    
+    passport.deserializeUser(async (user:any, done) => {
+        const token = app.get("api_token");
+        const headers = { Authorization: `Token ${token}` };
+        const result = await Api.user_read(user.id,headers);
+        done(null, result.data);
+    });
 
     app.use(passport.initialize());
     app.use(passport.session());

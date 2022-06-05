@@ -22,6 +22,7 @@
     "passport-local": "^1.0.0",
     "cookie-parser": "^1.4.6",
     "express-http-proxy": "^1.6.3",
+    "dotenv": "^16.0.1",
     "@vhrs/models":"1.0.0"
   },
   "devDependencies": {

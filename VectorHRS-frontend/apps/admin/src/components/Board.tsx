@@ -1,8 +1,5 @@
 import Board from 'react-trello'
 
-
-
-
 function AppBoard({ data }:any) {
     return (
         <div>

@@ -2,17 +2,17 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.condition_delete = exports.condition_partial_update = exports.condition_update = exports.condition_read = exports.condition_create = exports.condition_list = void 0;
 var tslib_1 = require("tslib");
-var axios_1 = tslib_1.__importDefault(require("axios"));
+var instance_1 = require("../instance");
 var condition_list = function (data, headers) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
     var endpoint;
     return tslib_1.__generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 endpoint = "/api/condition/";
-                return [4 /*yield*/, (0, axios_1.default)({
+                return [4 /*yield*/, (0, instance_1.instance)({
                         method: "get",
                         url: endpoint,
-                        data: data,
+                        params: data.query,
                         headers: headers,
                     })];
             case 1: return [2 /*return*/, _a.sent()];
@@ -26,7 +26,7 @@ var condition_create = function (data, headers) { return tslib_1.__awaiter(void 
         switch (_a.label) {
             case 0:
                 endpoint = "/api/condition/";
-                return [4 /*yield*/, (0, axios_1.default)({
+                return [4 /*yield*/, (0, instance_1.instance)({
                         method: "post",
                         url: endpoint,
                         data: data,
@@ -44,7 +44,7 @@ var condition_read = function (id, headers) { return tslib_1.__awaiter(void 0, v
             case 0:
                 endpoint = "/api/condition/{id}/";
                 endpoint = endpoint.replace("{id}", id.toString());
-                return [4 /*yield*/, (0, axios_1.default)({
+                return [4 /*yield*/, (0, instance_1.instance)({
                         method: "get",
                         url: endpoint,
                         headers: headers,
@@ -61,7 +61,7 @@ var condition_update = function (id, data, headers) { return tslib_1.__awaiter(v
             case 0:
                 endpoint = "/api/condition/{id}/";
                 endpoint = endpoint.replace("{id}", id.toString());
-                return [4 /*yield*/, (0, axios_1.default)({
+                return [4 /*yield*/, (0, instance_1.instance)({
                         method: "put",
                         url: endpoint,
                         data: data,
@@ -79,7 +79,7 @@ var condition_partial_update = function (id, data, headers) { return tslib_1.__a
             case 0:
                 endpoint = "/api/condition/{id}/";
                 endpoint = endpoint.replace("{id}", id.toString());
-                return [4 /*yield*/, (0, axios_1.default)({
+                return [4 /*yield*/, (0, instance_1.instance)({
                         method: "patch",
                         url: endpoint,
                         data: data,
@@ -97,7 +97,7 @@ var condition_delete = function (id, headers) { return tslib_1.__awaiter(void 0,
             case 0:
                 endpoint = "/api/condition/{id}/";
                 endpoint = endpoint.replace("{id}", id.toString());
-                return [4 /*yield*/, (0, axios_1.default)({
+                return [4 /*yield*/, (0, instance_1.instance)({
                         method: "delete",
                         url: endpoint,
                         headers: headers,

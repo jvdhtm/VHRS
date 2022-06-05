@@ -2,12 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChooseAndSync = void 0;
 const tslib_1 = require("tslib");
-const openApi = (0, tslib_1.__importStar)(require("openapi-typescript"));
-const prettier_1 = (0, tslib_1.__importDefault)(require("prettier"));
+const openApi = tslib_1.__importStar(require("openapi-typescript"));
+const prettier_1 = tslib_1.__importDefault(require("prettier"));
 const Config_1 = require("./constants/Config");
-const fs = (0, tslib_1.__importStar)(require("fs"));
-const path = (0, tslib_1.__importStar)(require("path"));
-const axios_1 = (0, tslib_1.__importDefault)(require("axios"));
+const fs = tslib_1.__importStar(require("fs"));
+const path = tslib_1.__importStar(require("path"));
+const axios_1 = tslib_1.__importDefault(require("axios"));
 const swaggerDocUrl = `${Config_1.BASE_URL}/${Config_1.SWAGGER_ENDPOINT}`;
 const openapiTS = openApi.default;
 const GREEN = '\x1b[32m';
@@ -55,7 +55,8 @@ const ChooseAndSync = () => {
                                             FileToWrite[fileName] = '';
                                             FileToWrite[fileName] += `
                         import {operations, definitions} from "../schemas";
-                        import axios,{AxiosResponse} from "axios"
+                        import {AxiosResponse} from "axios"
+                        import { instance } from "../instance";
                         `;
                                         }
                                         if (!indexImportFileToWrite[fileName]) {
@@ -83,9 +84,21 @@ const ChooseAndSync = () => {
                                         if (path.indexOf('{id}') > -1)
                                             FileToWrite[fileName] += `
                         endpoint = endpoint.replace("{id}", id.toString())`;
-                                        if (verb === 'post') {
+                                        if (verb === 'get') {
                                             FileToWrite[fileName] += `
-                          return await axios({
+                          return await instance({
+                          method: "${verb}",
+                          url: endpoint,
+                          `;
+                                            if (model)
+                                                FileToWrite[fileName] += `params: data.query,`;
+                                            FileToWrite[fileName] += `
+                            headers
+                          });`;
+                                        }
+                                        else if (verb === 'post') {
+                                            FileToWrite[fileName] += `
+                          return await instance({
                           method: "${verb}",
                           url: endpoint,
                           `;
@@ -97,7 +110,7 @@ const ChooseAndSync = () => {
                                         }
                                         else {
                                             FileToWrite[fileName] += `
-                          return await axios({
+                          return await instance({
                           method: "${verb}",
                           url: endpoint,
                           `;

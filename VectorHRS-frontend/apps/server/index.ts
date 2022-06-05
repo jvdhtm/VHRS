@@ -31,7 +31,7 @@ app.use(
   })
 );
 
-app.set("port", process.env.PORT || 9000);
+app.set("port", process.env.PORT || 4000);
 app.set(
   "client_app_path",
   path.resolve(
@@ -39,8 +39,8 @@ app.set(
     process.env.CLIENT_APP_PATH ? process.env.CLIENT_APP_PATH : ""
   )
 );
-
 app.set("login_url", "/login");
+app.set("login_auth", "/auth");
 
 app.set(
   "client_index_path",
@@ -49,10 +49,9 @@ app.set(
     process.env.CLIENT_INDEX_PATH ? process.env.CLIENT_INDEX_PATH : ""
   )
 );
-
 app.set(
   "api_token",
-  path.resolve(__dirname, process.env.API_TOKEN ? process.env.API_TOKEN : "")
+  process.env.API_TOKEN ? process.env.API_TOKEN : ""
 );
 
 app.set(
@@ -68,18 +67,27 @@ app.get('/static/*', express.static(app.get("client_app_path")));
 
 const passport = initPassport(app);
 
-router.get("/login", function (req, res) {
-  res.sendFile(app.get("client_index_path"));
-});
-router.post(
-  "/auth",
-  passport.authenticate("local-login", { failureRedirect: "/login" }),
-  function (req, res) {
-    res.redirect("/");
-  }
-);
-
 app.use(isLoggedIn);
+app.post(app.get("login_auth"), function(req, res, next) {
+  // generate the authenticate method and pass the req/res
+  passport.authenticate("local", function(err, user, info){
+
+    if (err) { return next(err); }
+    if (!user) { return res.redirect('/'); }
+    // req / res held in closure
+    //TODO:if req8uest doesnt have the cookie also try again
+    if (req.isAuthenticated()) {
+      res.send(req.user);
+    } else {
+      req.logIn(user, function(err) {
+        if (err) { return next(err); }
+        return res.send(user);
+      });
+    }
+
+  })(req,res,next); 
+
+});
 
 const apiProxy = proxy(app.get("api_url"), {
   proxyReqOptDecorator: function (proxyReqOpts) {
@@ -93,11 +101,11 @@ const apiProxy = proxy(app.get("api_url"), {
   },
 });
 
-router.use("/api/*", apiProxy);
-
+app.use("/api/*", apiProxy);
 app.get("*", (req: any, res: any, next) => {
   res.sendFile(app.get("client_index_path"));
 });
+
 
 app.listen(app.get("port"), function () {
   console.log(`Express server start at port ${app.get("port")}`);

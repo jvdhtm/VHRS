@@ -55,5 +55,4 @@ Object.defineProperty(exports, "StaffstageContext", { enumerable: true, get: fun
 var user_1 = require("./user");
 Object.defineProperty(exports, "UserProvider", { enumerable: true, get: function () { return user_1.UserProvider; } });
 Object.defineProperty(exports, "UserContext", { enumerable: true, get: function () { return user_1.UserContext; } });
-exports.default = {};
 //# sourceMappingURL=index.js.map

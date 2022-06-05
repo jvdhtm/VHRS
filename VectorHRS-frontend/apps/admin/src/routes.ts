@@ -1,11 +1,4 @@
-import {
-    DashboardOutlined,
-    GroupOutlined,
-    UnorderedListOutlined,
-    SettingOutlined,
-    BarChartOutlined,
-    LoginOutlined
-  } from '@ant-design/icons'
+import { AddIcon, HamburgerIcon} from '@chakra-ui/icons';
 import Dashboard from './pages/Dashboard'
 import Login from './pages/Login'
 import Notfound from './pages/Notfound404'
@@ -15,14 +8,14 @@ import Notfound from './pages/Notfound404'
   const routes: Route[] = [
     {
       id: '1',
-      icon: DashboardOutlined,
+      icon: AddIcon,
       name: 'Dashboard',
       path: '/',
       component: Dashboard,
     },
     {
       id: '0',
-      icon: LoginOutlined,
+      icon: AddIcon,
       name: 'Login',
       path: '/login',
       component: Login,
@@ -33,7 +26,7 @@ import Notfound from './pages/Notfound404'
       menuParentId: '2',
       path: '/users',
       component: Dashboard,
-      icon: UnorderedListOutlined,
+      icon: AddIcon,
       name: 'User List',
     },
     {
@@ -42,7 +35,7 @@ import Notfound from './pages/Notfound404'
       breadcrumbParentId: '1',
       menuParentId: '1',
       component: Dashboard,
-      icon: BarChartOutlined,
+      icon: AddIcon,
       name: 'Statistic',
     },
   
@@ -51,7 +44,7 @@ import Notfound from './pages/Notfound404'
       path: '/settings',
       breadcrumbParentId: '1',
       component: Dashboard,
-      icon: SettingOutlined,
+      icon: AddIcon,
       name: 'Settings',
     },
     {
@@ -60,7 +53,7 @@ import Notfound from './pages/Notfound404'
       name: 'Group List',
       menuParentId: '2',
       breadcrumbParentId: '1',
-      icon: GroupOutlined,
+      icon: AddIcon,
       component: Dashboard,
     },
     {
@@ -69,14 +62,14 @@ import Notfound from './pages/Notfound404'
       name: 'Import Group',
       menuParentId: '4',
       breadcrumbParentId: '2',
-      icon: GroupOutlined,
+      icon: AddIcon,
       component: Dashboard,
     },
     {
       id: '404',
       path: '*',
       name: 'Not found',
-      icon: SettingOutlined,
+      icon: AddIcon,
       component: Notfound,
     },
   ]

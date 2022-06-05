@@ -1,56 +1,41 @@
-import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
-import {  Menu } from "antd";
-import {
-  UserAddOutlined,
-  LogoutOutlined
-} from "@ant-design/icons";
+import { ReactComponent as Logo } from '../logo.svg';
 import { Link } from 'react-router-dom';
-
-const AppHeader = ({
-    isMoblie,
-    collapsed,
-    toggleCollapse,
-  }: {
-    isMoblie: boolean
-    collapsed: boolean
-    toggleCollapse: () => void
-  }) => {
-
-  const handleClickMenu = () => {
-    console.warn('Empty handleClickMenu')
-  }
-
-  const showHideClass =  collapsed ? "show-menu" : "hide-menu"
-  const hideButtonClass =  isMoblie ? "" : "hidden"
-  return (
-    <header className="vhrs-header w-full">
-      <div
-        role="button"
-        className={`header__menu ${hideButtonClass}`}
-        onClick={toggleCollapse}
-      >
-        {collapsed ? (
-          <MenuUnfoldOutlined className="text-lg" />
-        ) : (
-          <MenuFoldOutlined className="text-lg" />
-        )}
-      </div>
-      <div className={`overflow-hidden ${showHideClass}`}>
-        <Menu key="user" mode="vertical"  onClick={handleClickMenu}>
-            <Menu.Item key="1" icon={<UserAddOutlined />}>
-              <Link to="/" >
-                Profile 
-                </Link> 
-              </Menu.Item>
-              <Menu.Item key="1" icon={<LogoutOutlined />}>
-              <Link to="/logout" >
-                Log out 
-                </Link> 
-              </Menu.Item>
-        </Menu>
-      </div>
-    </header>
-  )
+import { Menu, MenuButton, MenuList, MenuItem,IconButton, useDisclosure,Button } from '@chakra-ui/react';
+import { AddIcon, HamburgerIcon} from '@chakra-ui/icons';
+import { Collapse } from '@chakra-ui/react'
+import { FC } from "react";
+//const { SubMenu } = Menu;
+export interface IHeader {
+  isMoblie:boolean
+  collapsed:boolean
+  toggleCollapse: () => void
 }
-
-export default AppHeader
+const Header:FC<IHeader> = ({isMoblie, collapsed,toggleCollapse}) => {
+  const { isOpen,onToggle } = useDisclosure()
+  return (
+    <header>
+     <Button onClick={onToggle}>Click Me</Button>
+       <Collapse in={isOpen} animateOpacity>
+        <div className='logo'>
+          <Logo />
+        </div>
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            aria-label='Options'
+            icon={<HamburgerIcon />}
+            variant='outline'
+          />
+          <MenuList>
+            <MenuItem icon={<AddIcon />} command='⌘T'>
+                <Link to="/logout" >
+                  Log out 
+                </Link> 
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </Collapse>
+    </header>
+  );
+}
+export default Header;
