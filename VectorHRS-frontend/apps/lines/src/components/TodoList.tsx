@@ -52,64 +52,6 @@ const TodoList: React.FC<Props> = ({
           )}
         </Droppable>
       </div>
-      <div className='column'>
-        <h3>In Progress</h3>
-        <Droppable droppableId='inprogress-column'>
-          {(provided) => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
-              <ul className='todo-list -inprogress'>
-                {inProgressTodos.length === 0 ? (
-                  <p className='placeholder'>There are no tasks yet</p>
-                ) : (
-                  inProgressTodos.map((todo, index) => (
-                    <TodoItem
-                      index={index}
-                      todo={todo}
-                      key={todo.id}
-                      todos={inProgressTodos}
-                      setTodos={setInProgressTodos}
-                      inbox={todos}
-                      completed={completedTodos}
-                      setInbox={setTodos}
-                      setCompleted={setCompletedTodos}
-                    />
-                  ))
-                )}
-                {provided.placeholder}
-              </ul>
-            </div>
-          )}
-        </Droppable>
-      </div>
-      <div className='column'>
-        <h3>Completed</h3>
-        <Droppable droppableId='completed-column'>
-          {(provided) => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
-              <ul className='todo-list -completed'>
-                {completedTodos.length === 0 ? (
-                  <p className='placeholder'>There are no tasks yet</p>
-                ) : (
-                  completedTodos.map((todo, index) => (
-                    <TodoItem
-                      index={index}
-                      todo={todo}
-                      key={todo.id}
-                      todos={completedTodos}
-                      setTodos={setCompletedTodos}
-                      inbox={todos}
-                      completed={completedTodos}
-                      setInbox={setTodos}
-                      setCompleted={setCompletedTodos}
-                    />
-                  ))
-                )}
-                {provided.placeholder}
-              </ul>
-            </div>
-          )}
-        </Droppable>
-      </div>
     </div>
   );
 };

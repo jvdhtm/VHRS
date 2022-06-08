@@ -8,7 +8,9 @@
   },
   "workspaces": [
     "./packages/*",
-    "./apps/*"
+    "./apps/macaco",
+    "./apps/lines",
+    "./apps/trampoline"
   ],
   "author": "",
   "license": "ISC",

@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "@vhrs/macaco",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
