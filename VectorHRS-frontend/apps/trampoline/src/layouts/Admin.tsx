@@ -22,7 +22,6 @@ const Admin:FC<Icontent> = ({children, ClassName}) => {
   const toggleCollapse = () => setCollapsed((prev) => !prev)
 
   return (
-  <ThemeProvider>
       <>
         <Header isMoblie={isMoblie} toggleCollapse={toggleCollapse} collapsed={collapsed} />
         <main>
@@ -32,7 +31,6 @@ const Admin:FC<Icontent> = ({children, ClassName}) => {
           </Content>
         </main>
       </>
-    </ThemeProvider>
   )
 }
 

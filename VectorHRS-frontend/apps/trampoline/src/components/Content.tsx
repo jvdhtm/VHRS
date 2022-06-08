@@ -5,9 +5,9 @@ import type { Icontent } from "../types";
 const AppContent = ({children, ClassName}:Icontent) => {
 
   return (
-      <main className={classNames(ClassName, 'flex')}>
+      <div className={classNames(ClassName, 'flex')}>
           {children}
-      </main>
+      </div>
   );
 };
 

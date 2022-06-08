@@ -1,0 +1,25 @@
+
+/* SCSS HEX */
+$primary: #555555;
+$secondary: #7bb38e;
+$tertiary: #f4f1d7;
+$quaternary: #f8ab65;
+$quinary: #f15c4c;
+
+
+/* CSS HEX */
+:root {
+    --primary: #555555;
+    --secondary: #7bb38e;
+    --tertiary: #f4f1d7;
+    --quaternary:#f8ab65;
+    --quinary: #f15c4c;
+
+    --boxShadow:  #555555;
+    --white:  #fff;
+    --black:  #333;
+    --VerticalGrid: 12;
+    --horizontalGrid: 12;
+
+    --headerHeight: 3rem;
+}

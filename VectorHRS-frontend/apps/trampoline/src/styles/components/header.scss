@@ -1,0 +1,31 @@
+header{
+    display: flex;
+    z-index: 1;
+    box-shadow: var(--boxShadow) 0px 0px 12px;
+    top: 0;
+    width: 100vw;
+    height:  var(--headerHeight);
+    display: flex;
+    align-items: center;
+    position: fixed;
+    background: var(--quinary);
+    .logo {
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .show-menu
+    {
+        color: white;
+        position: absolute;
+        right: 5px;
+        &:hover{
+            color: black;
+        }
+        &:visited{
+            color: black;
+        }
+    }
+}

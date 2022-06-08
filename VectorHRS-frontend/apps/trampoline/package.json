@@ -1,5 +1,5 @@
 {
-  "name": "admin",
+  "name": "@vhrs/trampoline",
   "private": true,
   "version": "1.0.0",
   "scripts": {
@@ -12,11 +12,12 @@
   },
   "dependencies": {
     "@chakra-ui/core": "^0.8.0",
-    "@chakra-ui/icons": "^2.0.1",
     "@chakra-ui/react": "^2.1.0",
     "@fontsource/roboto": "^4.5.7",
     "@types/js-cookie": "^3.0.2",
     "axios": "^0.27.2",
+    "@vhrs/kanban":"1.0.0",
+    "@vhrs/resources":"1.0.0",
     "formik": "^2.2.9",
     "framer-motion": "^6.3.3",
     "js-cookie": "^3.0.1",
