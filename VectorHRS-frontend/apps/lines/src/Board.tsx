@@ -6,8 +6,19 @@ import { Todo, Priorities } from './types';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import InputField from './components/InputField';
 import TodoList from './components/TodoList';
+import { definitions } from '@vhrs/models';
 
-const App: React.FC = () => {
+
+interface Props {
+  column: definitions['PersonStage'][] ;
+  step: definitions['PersonLog'][] ;
+  people: definitions['Person'][] ;
+  changeStepStatus: (status: definitions['PersonStage']['status']) => void;
+  changePersonStatus: (status: definitions['Person']['status']) => void;
+  changeStep: (stage: number) => void;
+}
+
+const Board: React.FC = () => {
   const [todo, setTodo] = useState<string>('');
   const [priority, setPriority] = useState<Priorities>('low');
   const [todos, setTodos] = useLocalStorage<Todo[]>('todos', []);
@@ -90,4 +101,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Board;

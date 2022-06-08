@@ -18,6 +18,7 @@
     "axios": "^0.27.2",
     "@vhrs/lines":"1.0.0",
     "@vhrs/resources":"1.0.0",
+    "@vhrs/models":"1.0.0",
     "formik": "^2.2.9",
     "framer-motion": "^6.3.3",
     "js-cookie": "^3.0.1",

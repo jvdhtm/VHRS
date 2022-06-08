@@ -1,1 +1,1 @@
-export { default as Board } from './App';
+export { default as Board } from './Boardrd';

@@ -1,4 +1,4 @@
-import Board from '@vhrs/board'
+import Board from '@vhrs/lines'
 
 function AppBoard({ data }:any) {
     return (
