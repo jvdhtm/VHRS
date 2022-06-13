@@ -1,100 +1,71 @@
-import React, { useState } from 'react';
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { nanoid } from 'nanoid';
-import './styles/style.scss';
-import { Todo, Priorities } from './types';
-import { useLocalStorage } from './hooks/useLocalStorage';
-import InputField from './components/InputField';
-import TodoList from './components/TodoList';
-import { definitions } from '@vhrs/models';
+import React from "react";
+import { DragDropContext, DraggableLocation, DropResult } from "react-beautiful-dnd";
+import "./styles/style.scss";
+import { IColumn, ICard } from "./types";
+import { useLocalStorage } from "./hooks/useLocalStorage";
+import Columns from "./components/Columns";
 
-
-interface Props {
-  column: definitions['PersonStage'][] ;
-  step: definitions['PersonLog'][] ;
-  people: definitions['Person'][] ;
-  changeStepStatus: (status: definitions['PersonStage']['status']) => void;
-  changePersonStatus: (status: definitions['Person']['status']) => void;
-  changeStep: (stage: number) => void;
+interface Iboard {
+  columns: IColumn[];
+  changeColumn: (card: ICard, columnId: number) => void;
 }
 
-const Board: React.FC = () => {
-  const [todo, setTodo] = useState<string>('');
-  const [priority, setPriority] = useState<Priorities>('low');
-  const [todos, setTodos] = useLocalStorage<Todo[]>('todos', []);
-  const [inProgressTodos, setInProgressTodos] = useLocalStorage<Todo[]>(
-    'inprogress',
-    []
-  );
-  const [completedTodos, setCompletedTodos] = useLocalStorage<Todo[]>(
-    'completed',
-    []
+const Board: React.FC<Iboard> = ({ columns }) => {
+  const [columnsState, setColumnsState] = useLocalStorage<IColumn[]>(
+    "columns",
+    columns
   );
 
-  const handleAdd = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (todo) {
-      setTodos([...todos, { id: nanoid(), todo, isDone: false, priority }]);
-      setTodo('');
-    }
+const move = (source:IColumn, destination:IColumn, droppableSource:DraggableLocation, droppableDestination:DraggableLocation) => {
+  const sourceClone = Array.from(source.cards);
+  const destClone = Array.from(destination.cards);
+  const [removed] = sourceClone.splice(droppableSource.index, 1);
+
+  destClone.splice(droppableDestination.index, 0, removed);
+
+  const result:any = {};
+  result[droppableSource.droppableId] = sourceClone;
+  result[droppableDestination.droppableId] = destClone;
+
+  return result;
+};
+
+
+  const reorder = (list: IColumn, startIndex: number, endIndex: number) => {
+    const result = Array.from(list.cards);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
   };
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination } = result;
     if (!destination) return;
-    if (
-      source.droppableId === destination.droppableId &&
-      source.index === destination.index
-    )
-      return;
-    let add: Todo;
-    let inbox = todos;
-    let inprogress = inProgressTodos;
-    let completed = completedTodos;
+    const sInd = +source.droppableId;
+    const dInd = +destination.droppableId;
 
-    if (source.droppableId === 'inbox-column') {
-      add = inbox[source.index];
-      inbox.splice(source.index, 1);
-    } else if (source.droppableId === 'inprogress-column') {
-      add = inprogress[source.index];
-      inprogress.splice(source.index, 1);
-    } else {
-      add = completed[source.index];
-      completed.splice(source.index, 1);
+    if (sInd === dInd) {
+      const newCards = reorder(columnsState[sInd], source.index, destination.index);
+      const newState = [...columnsState];
+      newState[sInd].cards = newCards;
+      setColumnsState(newState);
     }
-
-    if (destination.droppableId === 'inbox-column') {
-      inbox.splice(destination.index, 0, { ...add, isDone: false });
-    } else if (destination.droppableId === 'inprogress-column') {
-      inprogress.splice(destination.index, 0, { ...add, isDone: false });
-    } else {
-      completed.splice(destination.index, 0, { ...add, isDone: true });
+    else{
+      const result = move(columnsState[sInd], columnsState[dInd], source, destination);
+      const newState = [...columnsState];
+      newState[sInd] = result[sInd];
+      newState[dInd] = result[dInd];
+      setColumnsState(newState);
     }
-
-    setTodos(inbox);
-    setInProgressTodos(inprogress);
-    setCompletedTodos(completed);
+    return;
   };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className='app'>
-        <div className='u-container -m0'>
-          <h1>Task Kanban</h1>
-          <InputField
-            todo={todo}
-            setTodo={setTodo}
-            setPriority={setPriority}
-            handleAdd={handleAdd}
-          />
-          <TodoList
-            todos={todos}
-            setTodos={setTodos}
-            inProgressTodos={inProgressTodos}
-            setInProgressTodos={setInProgressTodos}
-            completedTodos={completedTodos}
-            setCompletedTodos={setCompletedTodos}
-          />
+      <div className="app">
+        <div className="u-container -m0">
+          <Columns columns={columnsState}  />
         </div>
       </div>
     </DragDropContext>

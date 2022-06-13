@@ -1,8 +1,15 @@
-export interface Todo {
-  id: string;
-  todo: string;
-  isDone: boolean;
-  priority: string;
+
+export interface ICard{
+  children: React.ReactElement<HTMLElement>
+  className?: string
+  columnId: number
+  cardId: number
+  index: number
 }
 
-export type Priorities = 'low' | 'medium' | 'high';
+export interface IColumn{
+  id: number
+  name:string
+  description: string;
+  cards: ICard[];
+}
