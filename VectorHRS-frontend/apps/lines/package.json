@@ -17,9 +17,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vhrs/models": "1.0.0",
+    "flatted": "^3.2.5",
     "react": "^17.0.0",
     "react-beautiful-dnd": "^13.1.0",
-    "@vhrs/models":"1.0.0",
     "react-dom": "^17.0.0"
   },
   "devDependencies": {

@@ -25,19 +25,17 @@ const Columns: React.FC<IProps> = ({ columns }) => {
                   >
                     {column.cards &&
                       column.cards.map((card: ICard, key2) => {
-                        return card.columnId === column.id ? (
+                        return (
                           <Item
                             key={key2}
-                            cardId={card.cardId}
-                            index={card.index}
-                            columnId={card.columnId}
+                            card={card}
+                            index={key2}
                           >
                             {card.children}
                           </Item>
-                        ) : (
-                          ""
                         );
                       })}
+                        {provided.placeholder}
                   </div>
                 )}
               </Droppable>

@@ -22,35 +22,29 @@ const App = () => {
       cards: [
         {
           children: <div>{`test ${k + offset}`}</div>,
-          columnId: k,
-          cardId: rand(20,1),
-          index: rand(20,1),
+          cardId: `${k}1`,
         },
         {
             children: <div>{`test ${k + offset}`}</div>,
-            columnId: k,
-            cardId: rand(20,1),
-            index: rand(20,1),
+            cardId: `${k}2`,
           },
           {
             children: <div>{`test ${k + offset}`}</div>,
-            columnId: k,
-            cardId: rand(20,1),
-            index: rand(20,1),
+            cardId: `${k}3`,
           },
           {
             children: <div>{`test ${k + offset}`}</div>,
-            columnId: k,
-            cardId: rand(20,1),
-            index: rand(20,1),
+            cardId: `${k}4`,
           },
       ],
     };
   };
 
+  const items = getItems(3,1)
+
   return (
     <div>
-      <Board columns={getItems(3,1)} changeColumn={(card,columnId)=>{console.log(columnId)}}></Board>
+      <Board columns={items} changeColumnCallback={(card,columnId)=>{}}></Board>
     </div>
   );
 };

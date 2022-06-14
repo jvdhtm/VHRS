@@ -2,9 +2,16 @@
 export interface ICard{
   children: React.ReactElement<HTMLElement>
   className?: string
-  columnId: number
-  cardId: number
-  index: number
+  cardId: string
+}
+
+export interface ICardStored{
+  cardId: string
+}
+
+export interface IColumnStored{
+  cards: ICardStored[];
+  id: number;
 }
 
 export interface IColumn{
