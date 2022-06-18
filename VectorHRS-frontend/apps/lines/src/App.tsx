@@ -7,13 +7,6 @@ const App = () => {
     return [...new Array(count)].map((k,index)=> fake(index,offset));
 
   };
-  const rand = (min: number , max: number ) => {
-    if (max == null) {
-        max = min;
-        min = 0;
-      }
-      return min + Math.floor(Math.random() * (max - min + 1));
-  };
   const fake = (k: number, offset: number):IColumn => {
     return {
       id: k,
@@ -21,30 +14,30 @@ const App = () => {
       description: `item ${k + offset}`,
       cards: [
         {
-          children: <div>{`test ${k + offset}`}</div>,
+          children: <div className="card">{`test ${k + offset}`}</div>,
           cardId: `${k}1`,
         },
         {
-            children: <div>{`test ${k + offset}`}</div>,
+            children: <div className="card" >{`test ${k + offset}`}</div>,
             cardId: `${k}2`,
           },
           {
-            children: <div>{`test ${k + offset}`}</div>,
+            children: <div className="card">{`test ${k + offset}`}</div>,
             cardId: `${k}3`,
           },
           {
-            children: <div>{`test ${k + offset}`}</div>,
+            children: <div className="card">{`test ${k + offset}`}</div>,
             cardId: `${k}4`,
           },
       ],
     };
   };
 
-  const items = getItems(3,1)
+  const items = getItems(15,1)
 
   return (
     <div>
-      <Board columns={items} changeColumnCallback={(card,columnId)=>{}}></Board>
+      <Board columns={items} changeColumnCallback={(card,columnId)=>{}} refresh={false}></Board>
     </div>
   );
 };

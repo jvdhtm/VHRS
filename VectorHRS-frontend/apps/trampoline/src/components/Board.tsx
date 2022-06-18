@@ -1,9 +1,12 @@
-import Board from '@vhrs/lines'
+import { Board } from '@vhrs/lines'
+import { IColumn } from '@vhrs/lines/dist/types'
 
 function AppBoard({ data }:any) {
+
+    const items:IColumn[] = []
     return (
         <div>
-            { data && data.lanes.length > 0 ? <Board data={data} style={{height:'auto', backgroundColor: 'transparent', padding:'0'}} /> : "" }
+            <Board columns={items} changeColumnCallback={()=>{}} refresh={false}/>
         </div>
     )
 }

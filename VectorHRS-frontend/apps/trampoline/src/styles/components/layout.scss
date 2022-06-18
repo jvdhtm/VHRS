@@ -1,0 +1,72 @@
+.header{
+    display: flex;
+    z-index: 1;
+    box-shadow: var(--boxShadow) 0px 0px 12px;
+    top: 0;
+    width: 100vw;
+    height:  var(--headerHeight);
+    display: flex;
+    align-items: center;
+    position: fixed;
+    background: var(--quinary);
+    .logo {
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+    }
+    .profile-menu{
+        &>div{
+            @include media('<=tablet')  { 
+                width: 100%;
+                transform: none !important;
+                top: var(--headerHeight) !important;
+                height: calc(100vh - var(--headerHeight));
+                &>div{
+                    height:100%;
+                }
+            }
+        }
+    }
+    .show-menu
+    {
+        color:  var(--white);
+        position: absolute;
+        right: 5px;
+        top: 4px;
+        &:hover{
+            color: var(--black);
+        }
+        &:visited{
+            color: var(--black);
+        }
+    }
+    .navigation-container {
+        display: flex;
+        &> nav{
+            display: flex;
+            align-items: center;
+            color:  var(--white);
+            .chakra-link {
+                padding: 0.5rem;
+            }
+
+        }
+        .chakra-button {
+            fill: var(--white);
+        }
+    }
+}
+
+main {
+    padding-top: var(--headerHeight);
+}
+
+.sr-only {
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+}

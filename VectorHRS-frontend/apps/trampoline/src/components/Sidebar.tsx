@@ -1,8 +1,7 @@
-
 import { Link } from 'react-router-dom';
-import { Input, useDisclosure,Button } from '@chakra-ui/react';
-import { AddIcon, HamburgerIcon} from '@chakra-ui/icons';
-import { Collapse } from '@chakra-ui/react'
+import { Input, useDisclosure, Button } from '@chakra-ui/react';
+import { AddIcon, HamburgerIcon } from '@chakra-ui/icons';
+import { Collapse } from '@chakra-ui/react';
 //const { SubMenu } = Menu;
 
 import {
@@ -13,21 +12,29 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-} from '@chakra-ui/react'
-import React from 'react';
+} from '@chakra-ui/react';
+import React, { FC } from 'react';
 
-function Navigation() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef<HTMLButtonElement>()
+export interface INavigation {
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  placement: any;
+  btnRef: React.MutableRefObject<HTMLButtonElement | undefined>;
+}
 
+const Navigation: FC<INavigation> = ({
+  isOpen,
+  onOpen,
+  onClose,
+  btnRef,
+  placement,
+}) => {
   return (
     <nav>
-      <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
-        Open
-      </Button>
       <Drawer
+        placement={placement}
         isOpen={isOpen}
-        placement='right'
         onClose={onClose}
         finalFocusRef={btnRef}
       >
@@ -49,6 +56,6 @@ function Navigation() {
         </DrawerContent>
       </Drawer>
     </nav>
-  )
-}
+  );
+};
 export default Navigation;

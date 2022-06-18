@@ -1,0 +1,27 @@
+.chakra-button {
+    .title{
+        display: none;
+        position: absolute;
+        top:3rem;
+        padding: 0.3rem;
+        font-weight: bold;
+        font-size: xx-small;
+        text-transform: capitalize;
+        border-radius: 0.3rem;
+        background: var(--secondary);
+        box-shadow: var(--boxShadow) 0px 1px 6px;
+    }
+    &:hover {
+        svg{
+            color: var(--black) ;
+        }
+        .title{
+            display: block;
+        }
+    }
+    &:visited{
+        svg{
+            color: var(--black) ;
+        }
+    }
+}

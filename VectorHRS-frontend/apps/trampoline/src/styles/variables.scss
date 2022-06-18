@@ -1,15 +1,25 @@
 
 /* SCSS HEX */
-$primary: #555555;
+$primary: #9062a7;
 $secondary: #7bb38e;
 $tertiary: #f4f1d7;
 $quaternary: #f8ab65;
 $quinary: #f15c4c;
 
 
+$breakpoints: (
+        'phone': 320px,
+        'tablet': 768px,
+        'tablet-portrait': 992px,
+        'desktop': 1024px,
+        'desktop-big': 1086px,
+        'lgscreen': 1200px,
+        'xlscreen': 1600px
+) !default;
+
 /* CSS HEX */
 :root {
-    --primary: #555555;
+    --primary: #9062a7;
     --secondary: #7bb38e;
     --tertiary: #f4f1d7;
     --quaternary:#f8ab65;
@@ -20,6 +30,5 @@ $quinary: #f15c4c;
     --black:  #333;
     --VerticalGrid: 12;
     --horizontalGrid: 12;
-
     --headerHeight: 3rem;
 }

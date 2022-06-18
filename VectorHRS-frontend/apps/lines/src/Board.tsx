@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { DragDropContext, DraggableLocation, DropResult } from "react-beautiful-dnd";
 import "./styles/style.scss";
 import { IColumn, IColumnStored, ICardStored } from "./types";
@@ -7,26 +7,35 @@ import Columns from "./components/Columns";
 
 interface Iboard {
   columns: IColumn[];
+  refresh: boolean;
   changeColumnCallback: (card: ICardStored, columnId: number) => void;
 }
 
-const Board: React.FC<Iboard> = ({ columns, changeColumnCallback }) => {
-
+const Board: React.FC<Iboard> = ({ columns, changeColumnCallback, refresh = false }) => {
 
   const storedColumns:IColumnStored[] = [];
-  for( let x in columns){
-    const cards  = columns[x].cards;
-    storedColumns[x] = {id: columns[x].id, cards:[]};
-    for( let y in cards){
-      const card = cards[y];
-      storedColumns[x].cards[y] = { cardId: card.cardId}
-    }
-  }
 
   const [columnsState, setColumnsState] = useLocalStorage<IColumnStored[]>(
     "columns",
     storedColumns
   );
+
+
+  useEffect(() => {
+    if(refresh)
+    {
+      for( let x in columns){
+        const cards  = columns[x].cards;
+        storedColumns[x] = {id: columns[x].id, cards:[]};
+        for( let y in cards){
+          const card = cards[y];
+          storedColumns[x].cards[y] = { cardId: card.cardId}
+        }
+      }
+      setColumnsState(storedColumns);
+    }
+
+}, [refresh])
 
   const columnsSerialized:IColumn[] = []
 
@@ -105,11 +114,7 @@ const move = (source:IColumnStored, destination:IColumnStored, droppableSource:D
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="app">
-        <div className="u-container -m0">
-          <Columns columns={columnsSerialized}  />
-        </div>
-      </div>
+        <Columns columns={columnsSerialized}  />
     </DragDropContext>
   );
 };

@@ -1,7 +1,7 @@
 import { ReactComponent as Logo } from '../logo.svg';
 import { Link } from 'react-router-dom';
-import { Menu, MenuButton, MenuList, MenuItem,IconButton, useDisclosure,Button } from '@chakra-ui/react';
-import {  SettingsIcon, HamburgerIcon} from '@chakra-ui/icons';
+import { Menu, MenuButton, MenuList, MenuItem,IconButton, useDisclosure } from '@chakra-ui/react';
+import {  SettingsIcon, AtSignIcon} from '@chakra-ui/icons';
 import { Icon, createIcon } from '@chakra-ui/react'
 import { Collapse } from '@chakra-ui/react'
 import { FC } from "react";
@@ -9,7 +9,9 @@ import { FC } from "react";
 export interface IHeader {
   isMoblie:boolean
   collapsed:boolean
+  children: React.ReactElement<HTMLElement>
   toggleCollapse: () => void
+  ClassName?: string
 }
 
 const ExitICon:FC = ()=>{
@@ -18,35 +20,42 @@ const ExitICon:FC = ()=>{
         </Icon>
 }
 
-const Header:FC<IHeader> = ({isMoblie, collapsed,toggleCollapse}) => {
+
+const Header:FC<IHeader> = ({isMoblie, collapsed,toggleCollapse, children,ClassName}) => {
   const { isOpen,onToggle } = useDisclosure()
   return (
-    <header>
+    <header className={ClassName}>
         <div className='logo'>
           <Logo />
         </div>
-        <Menu>
-          <MenuButton
-            className='show-menu'
-            as={IconButton}
-            aria-label='Options'
-            icon={<HamburgerIcon />}
-            variant='outline'
-          />
-          <MenuList>
-          <MenuItem icon={<SettingsIcon />} command='⌘P'>
-                <Link to="/profile" >
-                  profile 
-                </Link> 
-            </MenuItem>
-            <MenuItem icon={<ExitICon />} command='⌘T'>
-                <Link to="/logout" >
-                  Log out 
-                </Link> 
-            </MenuItem>
+        <div className='navigation-container'>
+            {children}
+        </div>
+        <div className='profile-menu'>
 
-          </MenuList>
-        </Menu>
+          <Menu  strategy='fixed'>
+            <MenuButton
+              className='show-menu'
+              as={IconButton}
+              aria-label='Options'
+              icon={<AtSignIcon />}
+              variant='outline'
+            />
+            <MenuList>
+            <MenuItem icon={<SettingsIcon />} command='⌘P'>
+                  <Link to="/profile" >
+                    profile 
+                  </Link> 
+              </MenuItem>
+              <MenuItem icon={<ExitICon />} command='⌘T'>
+                  <Link to="/logout" >
+                    Log out 
+                  </Link> 
+              </MenuItem>
+
+            </MenuList>
+          </Menu>
+        </div>
     </header>
   );
 }
