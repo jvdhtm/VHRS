@@ -1,18 +1,19 @@
 import express from "express";
+import { NextFunction, Request, Response } from "express";
 import * as dotenv from "dotenv";
 import * as path from "path";
 import * as bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import session from "express-session";
-import proxy from "express-http-proxy";
 import { errorMiddleware } from "./errorHandeling";
 import url from "url";
 import { initPassport, isLoggedIn } from "./passport";
+import { instance } from "@vhrs/models";
 
 dotenv.config({ path: path.resolve(__dirname, "./.env") });
 
+
 const app: express.Express = express();
-const router: express.Router = express.Router();
 
 app.get("/api/health-check", (req, res) => {
   res.json({ status: "ok" });
@@ -56,17 +57,18 @@ app.set(
 
 app.set(
   "api_url",
-  path.resolve(__dirname, process.env.API_URL ? process.env.API_URL : "")
+  process.env.API_URL ? process.env.API_URL : ""
 );
+
+
+instance.defaults.baseURL =  app.get("api_url")
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(errorMiddleware);
 app.get('/static/*', express.static(app.get("client_app_path")));
 
-
 const passport = initPassport(app);
-
 app.use(isLoggedIn);
 app.post(app.get("login_auth"), function(req, res, next) {
   // generate the authenticate method and pass the req/res
@@ -89,22 +91,34 @@ app.post(app.get("login_auth"), function(req, res, next) {
 
 });
 
-const apiProxy = proxy(app.get("api_url"), {
-  proxyReqOptDecorator: function (proxyReqOpts) {
-    const token = app.get("api_token");
-    proxyReqOpts.headers = { Authorization: `Token ${token}` };
-    return proxyReqOpts;
-  },
-  proxyReqPathResolver: (req) => {
-    const path = url.parse(req.baseUrl).path;
-    return path ? path : "";
-  },
-});
+
+const apiProxy = async ( req: any,
+  res: any, next:NextFunction) =>{
+
+  const path = url.parse(req.baseUrl).path;
+  const data = req.body;
+  const headers = { Authorization: `Token ${app.get("api_token")}` };
+  const method = req.method;
+  if(path)
+  {
+    const result = await instance({
+      method: method,
+      url: path,
+      params: data,
+      headers,
+    });
+    return res.send(JSON.stringify(result.data));
+  }
+  return
+
+}
 
 app.use("/api/*", apiProxy);
-app.get("*", (req: any, res: any, next) => {
+app.get("*", (_req: any, res: any, next) => {
   res.sendFile(app.get("client_index_path"));
 });
+
+
 
 
 app.listen(app.get("port"), function () {

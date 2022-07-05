@@ -58,6 +58,9 @@ const Admin:FC<Icontent> = ({children, ClassName}) => {
               <Link as={ReachLink} to='/boards'>
                 Boards
               </Link>
+              <Link as={ReachLink} to='/boards'>
+                Graphs
+              </Link>
             </nav>
           </>
         </Header>

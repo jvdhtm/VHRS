@@ -1,7 +1,7 @@
 import passport from "passport";
 import passportLocal from "passport-local";
 import passportFacebook from "passport-facebook";
-import { Api, definitions } from "@vhrs/models";
+import { Api } from "@vhrs/models";
 import { NextFunction, Request, Response } from "express";
 /**
  * Sign in using Email and Password.
@@ -14,10 +14,10 @@ import { NextFunction, Request, Response } from "express";
 
 
 export const  isLoggedIn = (req: IGetUserAuthInfoRequest, res: Response, next: NextFunction) => {
-    if(req.url == res.app.get("login_url") || req.url == res.app.get("login_auth") )
+    if (req.isAuthenticated())
         next();
-    else if (req.isAuthenticated())
-        next();
+    else if(req.url == res.app.get("login_url") || req.url == res.app.get("login_auth") )
+        next(); 
     else
         res.redirect(res.app.get("login_url"));
 

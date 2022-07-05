@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -46,7 +47,21 @@ INSTALLED_APPS = [
     'django_seed',
     'django_extensions',
     'api_generators_vhrs',
-    'django_filters'
+    'django_filters',
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail',
+
+    'modelcluster',
+    'taggit',
 ]
 
 FAKER_LOCALE = None     # settings.LANGUAGE_CODE is loaded
@@ -60,6 +75,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'VectorHRS.urls'
@@ -89,6 +105,12 @@ REST_FRAMEWORK = {
 
 WSGI_APPLICATION = 'VectorHRS.wsgi.application'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+WAGTAIL_SITE_NAME = 'VHRS CMS'
+
+WAGTAILADMIN_BASE_URL = "http://example.com"
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

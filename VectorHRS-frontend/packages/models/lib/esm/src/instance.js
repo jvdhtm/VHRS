@@ -1,5 +1,3 @@
 import axios from "axios";
-export var instance = axios.create({
-    baseURL: "http://localhost:8080",
-});
+export var instance = axios.create();
 //# sourceMappingURL=instance.js.map

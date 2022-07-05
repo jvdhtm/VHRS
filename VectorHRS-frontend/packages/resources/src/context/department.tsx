@@ -103,12 +103,13 @@ export const DepartmentProvider: FC<IcontextProvider> = ({
   const departmentList = async (
     data: operations["department_list"]["parameters"]
   ): Promise<void> => {
+    console.log('departmentList');
     if (data) {
       setLoading(true);
       const result = await department_list(data, headers);
       let prevStateResults = DepartmentDataList.results;
       let logActions = DepartmentDataList.logActions;
-
+      console.log(result);
       logActions.push({ verb: "get", results: result.data.results });
       let found = false;
       let newCount = DepartmentDataList.count + result.data.count;

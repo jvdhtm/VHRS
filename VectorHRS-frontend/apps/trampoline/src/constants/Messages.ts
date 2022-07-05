@@ -1,6 +1,6 @@
 export const SYSTEM_INSTABILITY =
-  'Não foi possível realizar esta ação, tente novamente mais tarde.';
-export const REQUIRED_FIELD = 'Campo obrigatório';
-export const INVALID_EMAIL_OR_PASSWORD = 'E-mail ou senha inválidos.';
-export const INVALID_EMAIL = 'E-mail inválido';
-export const PASSWORD_MIN_LENGTH = 'Mínimo de 6 digitos';
+  'not stable';
+export const REQUIRED_FIELD = 'required';
+export const INVALID_EMAIL_OR_PASSWORD = 'invalid email or password';
+export const INVALID_EMAIL = 'invalid email';
+export const PASSWORD_MIN_LENGTH = 'password min length is 6';
