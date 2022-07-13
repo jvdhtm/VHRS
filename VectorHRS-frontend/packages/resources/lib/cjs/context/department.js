@@ -47,7 +47,6 @@ var DepartmentProvider = function (_a) {
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    console.log('departmentList');
                     if (!data) return [3 /*break*/, 2];
                     setLoading(true);
                     return [4 /*yield*/, department_list(data, headers)];
@@ -55,7 +54,6 @@ var DepartmentProvider = function (_a) {
                     result = _a.sent();
                     prevStateResults_1 = DepartmentDataList.results;
                     logActions = DepartmentDataList.logActions;
-                    console.log(result);
                     logActions.push({ verb: "get", results: result.data.results });
                     found_1 = false;
                     newCount = DepartmentDataList.count + result.data.count;

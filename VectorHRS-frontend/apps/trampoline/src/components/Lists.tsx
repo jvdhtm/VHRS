@@ -15,7 +15,10 @@ const VList:FC<IProp> = ({ items, curPage, itemLimit, ItemCard }) => {
   useEffect(() => {
     const offset = curPage * itemLimit;
     const getList = (curPage: number, itemLimit: number) => {
-      setCurItems(items.slice(offset, offset + itemLimit));
+      const newitems = items.slice(offset, offset + itemLimit)
+      console.log(items);
+      console.log(offset);
+      setCurItems(newitems);
     };
 
     getList(curPage, itemLimit);

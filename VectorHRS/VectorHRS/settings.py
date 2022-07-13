@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'drf_yasg',
+    'utils.apps.UtilsConfig',
     'identity_api.apps.IdentityApiConfig',
     'api_doc.apps.ApiDocConfig',
     'staff_api.apps.StaffApiConfig',
@@ -99,8 +100,8 @@ TEMPLATES = [
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.TokenAuthentication'],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'DEFAULT_PAGINATION_CLASS': 'utils.pagination.MycustomPagination',
+    'PAGE_SIZE': 5
 }
 
 WSGI_APPLICATION = 'VectorHRS.wsgi.application'

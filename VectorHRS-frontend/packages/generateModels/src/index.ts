@@ -60,7 +60,9 @@ export const ChooseAndSync = () => {
                         FileToWrite[fileName] += `
                         import {operations, definitions} from "../schemas";
                         import {AxiosResponse} from "axios"
-                        import { instance } from "../instance";
+                        import { dataLayerObj } from "../instance";
+                        import type { RequestType } from "../instance";
+                        
                         `;
                       }
 
@@ -84,44 +86,51 @@ export const ChooseAndSync = () => {
                       if (verb === 'delete') response = 'any';
 
                       FileToWrite[fileName] += `
-                       headers: any, _apiPrefix ='/api' ) : Promise<AxiosResponse<${response}["schema"]>> => {
+                       headers: any, _apiPrefix ='/api', force = false ) : Promise<AxiosResponse<${response}["schema"]>> => {
                         let endpoint = _apiPrefix + "${path}";`;
                       if (path.indexOf('{id}') > -1)
                         FileToWrite[fileName] += `
                         endpoint = endpoint.replace("{id}", id.toString())`;
 
+                        FileToWrite[fileName] += `
+                        const request:RequestType = {
+                          endpoint,
+                          name: "${fileName}",
+                          verb: "${verb}",
+                        }`;
+
                       if(verb === 'get')
                       {
                         FileToWrite[fileName] += `
-                          return await instance({
-                          method: "${verb}",
-                          url: endpoint,
+                          return await dataLayerObj.requestApi(
+                          request,
+                          headers,
+                          force,
                           `;
-                        if (model) FileToWrite[fileName] += `params: data.query,`;
+                        if (model) FileToWrite[fileName] += `data.query`;
                         FileToWrite[fileName] += `
-                            headers
-                          });`;
+                          );`;
                       }
                       else if (verb === 'post') {
                         FileToWrite[fileName] += `
-                          return await instance({
-                          method: "${verb}",
-                          url: endpoint,
+                          return await dataLayerObj.requestApi(
+                          request,
+                          headers,
+                          force,
                           `;
-                        if (model) FileToWrite[fileName] += `data,`;
+                        if (model) FileToWrite[fileName] += `data`;
                         FileToWrite[fileName] += `
-                            headers
-                          });`;
+                          );`;
                       } else {
                         FileToWrite[fileName] += `
-                          return await instance({
-                          method: "${verb}",
-                          url: endpoint,
+                          return dataLayerObj.requestApi(
+                          request,
+                          headers,
+                          force,
                           `;
-                        if (model) FileToWrite[fileName] += `data,`;
+                        if (model) FileToWrite[fileName] += `data`;
                         FileToWrite[fileName] += `
-                            headers
-                          });`;
+                          );`;
                       }
 
                       FileToWrite[fileName] += `}`;

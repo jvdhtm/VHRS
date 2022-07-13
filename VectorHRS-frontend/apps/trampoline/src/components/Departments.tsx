@@ -13,14 +13,10 @@ const Departments:FC = ()=>{
     const { departmentData, count } = useContext<Idepartment>(resources.contexts.DepartmentContext);
     const { departmentListFuncProp } = useContext<Idepartment>(resources.contexts.DepartmentContext);
     useEffect(() => {
-        console.log(departmentData,count)
-        if(departmentData?.length === 0)
-        {
             departmentListFuncProp({query:{}});
-        }
     }, []);
   
-    return  departmentData ? <VList items={departmentData} curPage={count}  itemLimit={0} ItemCard={"symbol"}/> :<></>
+    return  departmentData && departmentData.length > 0 ? <VList items={departmentData} curPage={count}  itemLimit={0} ItemCard={"symbol"}/> :<></>
 }
     
 

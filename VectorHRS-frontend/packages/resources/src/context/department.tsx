@@ -131,10 +131,10 @@ export const DepartmentProvider: FC<IcontextProvider> = ({
         }
       );
 
+
       if (!found) {
         newDepartment = prevStateResults.concat(result.data.results);
       }
-
       setDepartmentDataList({
         count: newCount,
         next: newNext,
@@ -298,6 +298,7 @@ export const DepartmentProvider: FC<IcontextProvider> = ({
       setLoading(false);
     }
   };
+
 
   return (
     <DepartmentContext.Provider

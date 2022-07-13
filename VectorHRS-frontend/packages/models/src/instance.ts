@@ -8,6 +8,7 @@ export const instance = axios.create();
 export interface RequestType {
     endpoint: string;
     name: string;
+    verb: Method | undefined,
 }
 
 
@@ -126,11 +127,10 @@ class DataLayer {
     }
 
     async requestApi(
-        method: Method | undefined,
         Request: RequestType,
-        data: any,
         headers: any,
         force: boolean,
+        data?: any,
     ): Promise<any> {
         try {
 
@@ -138,7 +138,7 @@ class DataLayer {
                 hash([Request.endpoint, headers]),
                 () =>
                     instance({
-                        method: method,
+                        method: Request.verb,
                         url: Request.endpoint,
                         params: data.query,
                         headers,
@@ -158,3 +158,6 @@ class DataLayer {
     }
 
 }
+
+
+export const dataLayerObj = new DataLayer()
