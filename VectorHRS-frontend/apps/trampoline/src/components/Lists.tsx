@@ -11,19 +11,16 @@ export interface IProp {
 
 const VList:FC<IProp> = ({ items, curPage, itemLimit, ItemCard }) => {
   const [curItems, setCurItems] = useState<any[]>([]);
-
   useEffect(() => {
     const offset = curPage * itemLimit;
-    const getList = (curPage: number, itemLimit: number) => {
-      const newitems = items.slice(offset, offset + itemLimit)
-      console.log(items);
-      console.log(offset);
+    const getList = () => {
+      const newitems = items
       setCurItems(newitems);
     };
 
-    getList(curPage, itemLimit);
+    getList();
   }, [curPage, itemLimit, items]);
-
+  console.log(curItems);
   return (
     <List>
       {curItems.map(function (data,index) {

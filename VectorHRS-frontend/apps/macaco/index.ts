@@ -1,5 +1,5 @@
 import express from "express";
-import { NextFunction, Request, Response } from "express";
+import { NextFunction,  Response } from "express";
 import * as dotenv from "dotenv";
 import * as path from "path";
 import * as bodyParser from "body-parser";
@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import { errorMiddleware } from "./errorHandeling";
 import url from "url";
-import { initPassport, isLoggedIn } from "./passport";
+import { IGetUserAuthInfoRequest, initPassport } from "./passport";
 import { instance } from "@vhrs/models";
 
 dotenv.config({ path: path.resolve(__dirname, "./.env") });
@@ -50,10 +50,22 @@ app.set(
     process.env.CLIENT_INDEX_PATH ? process.env.CLIENT_INDEX_PATH : ""
   )
 );
-app.set(
-  "api_token",
-  process.env.API_TOKEN ? process.env.API_TOKEN : ""
-);
+
+function setToken(){
+  app.set(
+    "api_token",
+    process.env.API_TOKEN ? process.env.API_TOKEN : ""
+  );
+}
+
+
+export const  isLoggedIn = (req: IGetUserAuthInfoRequest, res: Response, next: NextFunction) => {
+  if (req.isAuthenticated())
+      setToken();
+  else if(req.url == res.app.get("login_url") || req.url == res.app.get("login_auth") )
+      setToken();
+      next();
+}
 
 app.set(
   "api_url",
@@ -107,6 +119,7 @@ const apiProxy = async ( req: any,
       params: data,
       headers,
     });
+
     return res.send(JSON.stringify(result.data));
   }
   return

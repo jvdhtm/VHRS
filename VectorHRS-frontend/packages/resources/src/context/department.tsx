@@ -108,6 +108,7 @@ export const DepartmentProvider: FC<IcontextProvider> = ({
       const result = await department_list(data, headers);
       let prevStateResults = DepartmentDataList.results;
       let logActions = DepartmentDataList.logActions;
+
       logActions.push({ verb: "get", results: result.data.results });
       let found = false;
       let newCount = DepartmentDataList.count + result.data.count;
@@ -131,10 +132,10 @@ export const DepartmentProvider: FC<IcontextProvider> = ({
         }
       );
 
-
       if (!found) {
         newDepartment = prevStateResults.concat(result.data.results);
       }
+
       setDepartmentDataList({
         count: newCount,
         next: newNext,
@@ -298,7 +299,6 @@ export const DepartmentProvider: FC<IcontextProvider> = ({
       setLoading(false);
     }
   };
-
 
   return (
     <DepartmentContext.Provider
