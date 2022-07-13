@@ -23,9 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('identity_api.urls')),
     path('', include('staff_api.urls')),
-    path('', include('api_doc.urls')),
-    path('cms/', include(wagtailadmin_urls)),
-    path('documents/', include(wagtaildocs_urls)),
-    path('pages/', include(wagtail_urls)),
-    
+    path('', include('api_doc.urls'))
 ]

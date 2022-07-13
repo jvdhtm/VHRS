@@ -4,11 +4,12 @@ import { instance } from "../instance";
 
 export const staffstage_list = async (
   data: operations["staffstage_list"]["parameters"],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["staffstage_list"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/staffstage/";
+  let endpoint = _apiPrefix + "/staffstage/";
   return await instance({
     method: "get",
     url: endpoint,
@@ -18,11 +19,12 @@ export const staffstage_list = async (
 };
 export const staffstage_create = async (
   data: definitions["StaffStage"] | definitions["StaffStage"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["staffstage_create"]["responses"][201]["schema"]>
 > => {
-  let endpoint = "/api/staffstage/";
+  let endpoint = _apiPrefix + "/staffstage/";
   return await instance({
     method: "post",
     url: endpoint,
@@ -32,11 +34,12 @@ export const staffstage_create = async (
 };
 export const staffstage_read = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["staffstage_read"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/staffstage/{id}/";
+  let endpoint = _apiPrefix + "/staffstage/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "get",
@@ -48,11 +51,12 @@ export const staffstage_read = async (
 export const staffstage_update = async (
   id: string,
   data: definitions["StaffStage"] | definitions["StaffStage"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["staffstage_update"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/staffstage/{id}/";
+  let endpoint = _apiPrefix + "/staffstage/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "put",
@@ -64,13 +68,14 @@ export const staffstage_update = async (
 export const staffstage_partial_update = async (
   id: string,
   data: definitions["StaffStage"] | definitions["StaffStage"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<
     operations["staffstage_partial_update"]["responses"][200]["schema"]
   >
 > => {
-  let endpoint = "/api/staffstage/{id}/";
+  let endpoint = _apiPrefix + "/staffstage/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "patch",
@@ -81,9 +86,10 @@ export const staffstage_partial_update = async (
 };
 export const staffstage_delete = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<AxiosResponse<any["schema"]>> => {
-  let endpoint = "/api/staffstage/{id}/";
+  let endpoint = _apiPrefix + "/staffstage/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "delete",

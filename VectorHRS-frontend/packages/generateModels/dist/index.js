@@ -79,8 +79,8 @@ const ChooseAndSync = () => {
                                         if (verb === 'delete')
                                             response = 'any';
                                         FileToWrite[fileName] += `
-                       headers: any ) : Promise<AxiosResponse<${response}["schema"]>> => {
-                        let endpoint = "/api${path}";`;
+                       headers: any, _apiPrefix ='/api' ) : Promise<AxiosResponse<${response}["schema"]>> => {
+                        let endpoint = _apiPrefix + "${path}";`;
                                         if (path.indexOf('{id}') > -1)
                                             FileToWrite[fileName] += `
                         endpoint = endpoint.replace("{id}", id.toString())`;

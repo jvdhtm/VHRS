@@ -4,11 +4,12 @@ import { instance } from "../instance";
 
 export const personlog_list = async (
   data: operations["personlog_list"]["parameters"],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["personlog_list"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/personlog/";
+  let endpoint = _apiPrefix + "/personlog/";
   return await instance({
     method: "get",
     url: endpoint,
@@ -18,11 +19,12 @@ export const personlog_list = async (
 };
 export const personlog_create = async (
   data: definitions["PersonLog"] | definitions["PersonLog"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["personlog_create"]["responses"][201]["schema"]>
 > => {
-  let endpoint = "/api/personlog/";
+  let endpoint = _apiPrefix + "/personlog/";
   return await instance({
     method: "post",
     url: endpoint,
@@ -32,11 +34,12 @@ export const personlog_create = async (
 };
 export const personlog_read = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["personlog_read"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/personlog/{id}/";
+  let endpoint = _apiPrefix + "/personlog/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "get",
@@ -48,11 +51,12 @@ export const personlog_read = async (
 export const personlog_update = async (
   id: string,
   data: definitions["PersonLog"] | definitions["PersonLog"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["personlog_update"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/personlog/{id}/";
+  let endpoint = _apiPrefix + "/personlog/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "put",
@@ -64,13 +68,14 @@ export const personlog_update = async (
 export const personlog_partial_update = async (
   id: string,
   data: definitions["PersonLog"] | definitions["PersonLog"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<
     operations["personlog_partial_update"]["responses"][200]["schema"]
   >
 > => {
-  let endpoint = "/api/personlog/{id}/";
+  let endpoint = _apiPrefix + "/personlog/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "patch",
@@ -81,9 +86,10 @@ export const personlog_partial_update = async (
 };
 export const personlog_delete = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<AxiosResponse<any["schema"]>> => {
-  let endpoint = "/api/personlog/{id}/";
+  let endpoint = _apiPrefix + "/personlog/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "delete",

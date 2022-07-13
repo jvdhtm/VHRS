@@ -4,11 +4,12 @@ import { instance } from "../instance";
 
 export const condition_list = async (
   data: operations["condition_list"]["parameters"],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["condition_list"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/condition/";
+  let endpoint = _apiPrefix + "/condition/";
   return await instance({
     method: "get",
     url: endpoint,
@@ -18,11 +19,12 @@ export const condition_list = async (
 };
 export const condition_create = async (
   data: definitions["Condition"] | definitions["Condition"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["condition_create"]["responses"][201]["schema"]>
 > => {
-  let endpoint = "/api/condition/";
+  let endpoint = _apiPrefix + "/condition/";
   return await instance({
     method: "post",
     url: endpoint,
@@ -32,11 +34,12 @@ export const condition_create = async (
 };
 export const condition_read = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["condition_read"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/condition/{id}/";
+  let endpoint = _apiPrefix + "/condition/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "get",
@@ -48,11 +51,12 @@ export const condition_read = async (
 export const condition_update = async (
   id: string,
   data: definitions["Condition"] | definitions["Condition"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["condition_update"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/condition/{id}/";
+  let endpoint = _apiPrefix + "/condition/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "put",
@@ -64,13 +68,14 @@ export const condition_update = async (
 export const condition_partial_update = async (
   id: string,
   data: definitions["Condition"] | definitions["Condition"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<
     operations["condition_partial_update"]["responses"][200]["schema"]
   >
 > => {
-  let endpoint = "/api/condition/{id}/";
+  let endpoint = _apiPrefix + "/condition/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "patch",
@@ -81,9 +86,10 @@ export const condition_partial_update = async (
 };
 export const condition_delete = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<AxiosResponse<any["schema"]>> => {
-  let endpoint = "/api/condition/{id}/";
+  let endpoint = _apiPrefix + "/condition/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "delete",

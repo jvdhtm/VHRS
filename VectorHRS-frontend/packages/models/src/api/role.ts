@@ -4,11 +4,12 @@ import { instance } from "../instance";
 
 export const role_list = async (
   data: operations["role_list"]["parameters"],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["role_list"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/role/";
+  let endpoint = _apiPrefix + "/role/";
   return await instance({
     method: "get",
     url: endpoint,
@@ -18,11 +19,12 @@ export const role_list = async (
 };
 export const role_create = async (
   data: definitions["Role"] | definitions["Role"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["role_create"]["responses"][201]["schema"]>
 > => {
-  let endpoint = "/api/role/";
+  let endpoint = _apiPrefix + "/role/";
   return await instance({
     method: "post",
     url: endpoint,
@@ -32,11 +34,12 @@ export const role_create = async (
 };
 export const role_read = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["role_read"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/role/{id}/";
+  let endpoint = _apiPrefix + "/role/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "get",
@@ -48,11 +51,12 @@ export const role_read = async (
 export const role_update = async (
   id: string,
   data: definitions["Role"] | definitions["Role"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["role_update"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/role/{id}/";
+  let endpoint = _apiPrefix + "/role/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "put",
@@ -64,11 +68,12 @@ export const role_update = async (
 export const role_partial_update = async (
   id: string,
   data: definitions["Role"] | definitions["Role"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["role_partial_update"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/role/{id}/";
+  let endpoint = _apiPrefix + "/role/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "patch",
@@ -79,9 +84,10 @@ export const role_partial_update = async (
 };
 export const role_delete = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<AxiosResponse<any["schema"]>> => {
-  let endpoint = "/api/role/{id}/";
+  let endpoint = _apiPrefix + "/role/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "delete",

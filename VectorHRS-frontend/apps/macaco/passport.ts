@@ -36,7 +36,7 @@ export const  isLoggedIn = (req: IGetUserAuthInfoRequest, res: Response, next: N
             const passcode = password;
             const data = { query: { email, passcode } };
             const headers = { Authorization: `Token ${token}` };
-            const result = await Api.user_list(data, headers);
+            const result = await Api.user_list(data, headers,"");
             const users = result.data.results;
             if (username === users[0].email && password === users[0].passcode) {
                 return done(null, users[0]);
@@ -53,7 +53,7 @@ export const  isLoggedIn = (req: IGetUserAuthInfoRequest, res: Response, next: N
     passport.deserializeUser(async (user:any, done) => {
         const token = app.get("api_token");
         const headers = { Authorization: `Token ${token}` };
-        const result = await Api.user_read(user.id,headers);
+        const result = await Api.user_read(user.id,headers,"");
         done(null, result.data);
     });
 

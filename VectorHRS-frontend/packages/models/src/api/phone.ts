@@ -4,11 +4,12 @@ import { instance } from "../instance";
 
 export const phone_list = async (
   data: operations["phone_list"]["parameters"],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["phone_list"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/phone/";
+  let endpoint = _apiPrefix + "/phone/";
   return await instance({
     method: "get",
     url: endpoint,
@@ -18,11 +19,12 @@ export const phone_list = async (
 };
 export const phone_create = async (
   data: definitions["Phone"] | definitions["Phone"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["phone_create"]["responses"][201]["schema"]>
 > => {
-  let endpoint = "/api/phone/";
+  let endpoint = _apiPrefix + "/phone/";
   return await instance({
     method: "post",
     url: endpoint,
@@ -32,11 +34,12 @@ export const phone_create = async (
 };
 export const phone_read = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["phone_read"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/phone/{id}/";
+  let endpoint = _apiPrefix + "/phone/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "get",
@@ -48,11 +51,12 @@ export const phone_read = async (
 export const phone_update = async (
   id: string,
   data: definitions["Phone"] | definitions["Phone"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["phone_update"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/phone/{id}/";
+  let endpoint = _apiPrefix + "/phone/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "put",
@@ -64,11 +68,12 @@ export const phone_update = async (
 export const phone_partial_update = async (
   id: string,
   data: definitions["Phone"] | definitions["Phone"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["phone_partial_update"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/phone/{id}/";
+  let endpoint = _apiPrefix + "/phone/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "patch",
@@ -79,9 +84,10 @@ export const phone_partial_update = async (
 };
 export const phone_delete = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<AxiosResponse<any["schema"]>> => {
-  let endpoint = "/api/phone/{id}/";
+  let endpoint = _apiPrefix + "/phone/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "delete",

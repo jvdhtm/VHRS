@@ -18,7 +18,7 @@ const Departments:FC = ()=>{
         {
             departmentListFuncProp({query:{}});
         }
-    });
+    }, []);
   
     return  departmentData ? <VList items={departmentData} curPage={count}  itemLimit={0} ItemCard={"symbol"}/> :<></>
 }

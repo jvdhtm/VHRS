@@ -4,11 +4,12 @@ import { instance } from "../instance";
 
 export const expertiseprofile_list = async (
   data: operations["expertiseprofile_list"]["parameters"],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["expertiseprofile_list"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/expertiseprofile/";
+  let endpoint = _apiPrefix + "/expertiseprofile/";
   return await instance({
     method: "get",
     url: endpoint,
@@ -18,13 +19,14 @@ export const expertiseprofile_list = async (
 };
 export const expertiseprofile_create = async (
   data: definitions["ExpertiseProfile"] | definitions["ExpertiseProfile"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<
     operations["expertiseprofile_create"]["responses"][201]["schema"]
   >
 > => {
-  let endpoint = "/api/expertiseprofile/";
+  let endpoint = _apiPrefix + "/expertiseprofile/";
   return await instance({
     method: "post",
     url: endpoint,
@@ -34,11 +36,12 @@ export const expertiseprofile_create = async (
 };
 export const expertiseprofile_read = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["expertiseprofile_read"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/expertiseprofile/{id}/";
+  let endpoint = _apiPrefix + "/expertiseprofile/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "get",
@@ -50,13 +53,14 @@ export const expertiseprofile_read = async (
 export const expertiseprofile_update = async (
   id: string,
   data: definitions["ExpertiseProfile"] | definitions["ExpertiseProfile"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<
     operations["expertiseprofile_update"]["responses"][200]["schema"]
   >
 > => {
-  let endpoint = "/api/expertiseprofile/{id}/";
+  let endpoint = _apiPrefix + "/expertiseprofile/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "put",
@@ -68,13 +72,14 @@ export const expertiseprofile_update = async (
 export const expertiseprofile_partial_update = async (
   id: string,
   data: definitions["ExpertiseProfile"] | definitions["ExpertiseProfile"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<
     operations["expertiseprofile_partial_update"]["responses"][200]["schema"]
   >
 > => {
-  let endpoint = "/api/expertiseprofile/{id}/";
+  let endpoint = _apiPrefix + "/expertiseprofile/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "patch",
@@ -85,9 +90,10 @@ export const expertiseprofile_partial_update = async (
 };
 export const expertiseprofile_delete = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<AxiosResponse<any["schema"]>> => {
-  let endpoint = "/api/expertiseprofile/{id}/";
+  let endpoint = _apiPrefix + "/expertiseprofile/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "delete",

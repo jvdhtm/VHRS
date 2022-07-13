@@ -95,7 +95,7 @@ app.post(app.get("login_auth"), function(req, res, next) {
 const apiProxy = async ( req: any,
   res: any, next:NextFunction) =>{
 
-  const path = url.parse(req.baseUrl).path;
+  const path = url.parse(req.baseUrl).path?.replace('/api','');
   const data = req.body;
   const headers = { Authorization: `Token ${app.get("api_token")}` };
   const method = req.method;
@@ -117,7 +117,6 @@ app.use("/api/*", apiProxy);
 app.get("*", (_req: any, res: any, next) => {
   res.sendFile(app.get("client_index_path"));
 });
-
 
 
 

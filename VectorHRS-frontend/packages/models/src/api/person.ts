@@ -4,11 +4,12 @@ import { instance } from "../instance";
 
 export const person_list = async (
   data: operations["person_list"]["parameters"],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["person_list"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/person/";
+  let endpoint = _apiPrefix + "/person/";
   return await instance({
     method: "get",
     url: endpoint,
@@ -18,11 +19,12 @@ export const person_list = async (
 };
 export const person_create = async (
   data: definitions["Person"] | definitions["Person"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["person_create"]["responses"][201]["schema"]>
 > => {
-  let endpoint = "/api/person/";
+  let endpoint = _apiPrefix + "/person/";
   return await instance({
     method: "post",
     url: endpoint,
@@ -32,11 +34,12 @@ export const person_create = async (
 };
 export const person_read = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["person_read"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/person/{id}/";
+  let endpoint = _apiPrefix + "/person/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "get",
@@ -48,11 +51,12 @@ export const person_read = async (
 export const person_update = async (
   id: string,
   data: definitions["Person"] | definitions["Person"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["person_update"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/person/{id}/";
+  let endpoint = _apiPrefix + "/person/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "put",
@@ -64,11 +68,12 @@ export const person_update = async (
 export const person_partial_update = async (
   id: string,
   data: definitions["Person"] | definitions["Person"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["person_partial_update"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/person/{id}/";
+  let endpoint = _apiPrefix + "/person/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "patch",
@@ -79,9 +84,10 @@ export const person_partial_update = async (
 };
 export const person_delete = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<AxiosResponse<any["schema"]>> => {
-  let endpoint = "/api/person/{id}/";
+  let endpoint = _apiPrefix + "/person/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "delete",

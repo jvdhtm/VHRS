@@ -4,11 +4,12 @@ import { instance } from "../instance";
 
 export const department_list = async (
   data: operations["department_list"]["parameters"],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["department_list"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/department/";
+  let endpoint = _apiPrefix + "/department/";
   return await instance({
     method: "get",
     url: endpoint,
@@ -18,11 +19,12 @@ export const department_list = async (
 };
 export const department_create = async (
   data: definitions["Department"] | definitions["Department"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["department_create"]["responses"][201]["schema"]>
 > => {
-  let endpoint = "/api/department/";
+  let endpoint = _apiPrefix + "/department/";
   return await instance({
     method: "post",
     url: endpoint,
@@ -32,11 +34,12 @@ export const department_create = async (
 };
 export const department_read = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["department_read"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/department/{id}/";
+  let endpoint = _apiPrefix + "/department/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "get",
@@ -48,11 +51,12 @@ export const department_read = async (
 export const department_update = async (
   id: string,
   data: definitions["Department"] | definitions["Department"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["department_update"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/department/{id}/";
+  let endpoint = _apiPrefix + "/department/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "put",
@@ -64,13 +68,14 @@ export const department_update = async (
 export const department_partial_update = async (
   id: string,
   data: definitions["Department"] | definitions["Department"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<
     operations["department_partial_update"]["responses"][200]["schema"]
   >
 > => {
-  let endpoint = "/api/department/{id}/";
+  let endpoint = _apiPrefix + "/department/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "patch",
@@ -81,9 +86,10 @@ export const department_partial_update = async (
 };
 export const department_delete = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<AxiosResponse<any["schema"]>> => {
-  let endpoint = "/api/department/{id}/";
+  let endpoint = _apiPrefix + "/department/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "delete",

@@ -4,11 +4,12 @@ import { instance } from "../instance";
 
 export const comments_list = async (
   data: operations["comments_list"]["parameters"],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["comments_list"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/comments/";
+  let endpoint = _apiPrefix + "/comments/";
   return await instance({
     method: "get",
     url: endpoint,
@@ -18,11 +19,12 @@ export const comments_list = async (
 };
 export const comments_create = async (
   data: definitions["Comments"] | definitions["Comments"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["comments_create"]["responses"][201]["schema"]>
 > => {
-  let endpoint = "/api/comments/";
+  let endpoint = _apiPrefix + "/comments/";
   return await instance({
     method: "post",
     url: endpoint,
@@ -32,11 +34,12 @@ export const comments_create = async (
 };
 export const comments_read = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["comments_read"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/comments/{id}/";
+  let endpoint = _apiPrefix + "/comments/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "get",
@@ -48,11 +51,12 @@ export const comments_read = async (
 export const comments_update = async (
   id: string,
   data: definitions["Comments"] | definitions["Comments"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["comments_update"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/comments/{id}/";
+  let endpoint = _apiPrefix + "/comments/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "put",
@@ -64,13 +68,14 @@ export const comments_update = async (
 export const comments_partial_update = async (
   id: string,
   data: definitions["Comments"] | definitions["Comments"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<
     operations["comments_partial_update"]["responses"][200]["schema"]
   >
 > => {
-  let endpoint = "/api/comments/{id}/";
+  let endpoint = _apiPrefix + "/comments/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "patch",
@@ -81,9 +86,10 @@ export const comments_partial_update = async (
 };
 export const comments_delete = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<AxiosResponse<any["schema"]>> => {
-  let endpoint = "/api/comments/{id}/";
+  let endpoint = _apiPrefix + "/comments/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "delete",

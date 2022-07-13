@@ -4,11 +4,12 @@ import { instance } from "../instance";
 
 export const stafflog_list = async (
   data: operations["stafflog_list"]["parameters"],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["stafflog_list"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/stafflog/";
+  let endpoint = _apiPrefix + "/stafflog/";
   return await instance({
     method: "get",
     url: endpoint,
@@ -18,11 +19,12 @@ export const stafflog_list = async (
 };
 export const stafflog_create = async (
   data: definitions["StaffLog"] | definitions["StaffLog"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["stafflog_create"]["responses"][201]["schema"]>
 > => {
-  let endpoint = "/api/stafflog/";
+  let endpoint = _apiPrefix + "/stafflog/";
   return await instance({
     method: "post",
     url: endpoint,
@@ -32,11 +34,12 @@ export const stafflog_create = async (
 };
 export const stafflog_read = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["stafflog_read"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/stafflog/{id}/";
+  let endpoint = _apiPrefix + "/stafflog/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "get",
@@ -48,11 +51,12 @@ export const stafflog_read = async (
 export const stafflog_update = async (
   id: string,
   data: definitions["StaffLog"] | definitions["StaffLog"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<operations["stafflog_update"]["responses"][200]["schema"]>
 > => {
-  let endpoint = "/api/stafflog/{id}/";
+  let endpoint = _apiPrefix + "/stafflog/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "put",
@@ -64,13 +68,14 @@ export const stafflog_update = async (
 export const stafflog_partial_update = async (
   id: string,
   data: definitions["StaffLog"] | definitions["StaffLog"][],
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<
   AxiosResponse<
     operations["stafflog_partial_update"]["responses"][200]["schema"]
   >
 > => {
-  let endpoint = "/api/stafflog/{id}/";
+  let endpoint = _apiPrefix + "/stafflog/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "patch",
@@ -81,9 +86,10 @@ export const stafflog_partial_update = async (
 };
 export const stafflog_delete = async (
   id: string,
-  headers: any
+  headers: any,
+  _apiPrefix = "/api"
 ): Promise<AxiosResponse<any["schema"]>> => {
-  let endpoint = "/api/stafflog/{id}/";
+  let endpoint = _apiPrefix + "/stafflog/{id}/";
   endpoint = endpoint.replace("{id}", id.toString());
   return await instance({
     method: "delete",
