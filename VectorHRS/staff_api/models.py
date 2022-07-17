@@ -104,6 +104,7 @@ class Condition(models.Model):
     created_date_time = models.DateTimeField(default=now)
      
 class Department(models.Model):
+    name = models.CharField(max_length=100, null=True, blank=True)
     description = models.CharField(max_length=100, null=True, blank=True)
     shape = models.CharField(max_length=300, choices=SHAPE_CHOICES)
     status = models.CharField(max_length=300, choices=STATUS_CHOICES)

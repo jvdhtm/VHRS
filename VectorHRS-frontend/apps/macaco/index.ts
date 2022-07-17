@@ -60,11 +60,12 @@ function setToken(){
 
 
 export const  isLoggedIn = (req: IGetUserAuthInfoRequest, res: Response, next: NextFunction) => {
-  if (req.isAuthenticated())
-      setToken();
-  else if(req.url == res.app.get("login_url") || req.url == res.app.get("login_auth") )
-      setToken();
-      next();
+  if (req.isAuthenticated()){
+    setToken();
+  } else if(req.url == res.app.get("login_url") || req.url == res.app.get("login_auth") ){
+    setToken();
+  }
+  next();
 }
 
 app.set(

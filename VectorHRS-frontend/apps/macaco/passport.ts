@@ -6,22 +6,10 @@ import { NextFunction, Request, Response } from "express";
 /**
  * Sign in using Email and Password.
  */
-
-
  export interface IGetUserAuthInfoRequest extends Request {
     isAuthenticated: () => boolean // or any other type
   }
 
-
-export const  isLoggedIn = (req: IGetUserAuthInfoRequest, res: Response, next: NextFunction) => {
-    if (req.isAuthenticated())
-        next();
-    else if(req.url == res.app.get("login_url") || req.url == res.app.get("login_auth") )
-        next(); 
-    else
-        res.redirect(res.app.get("login_url"));
-
-}
 
  export const  initPassport = (app:any) =>{
 

@@ -1030,6 +1030,7 @@ export interface operations {
       query: {
         id?: number;
         description?: string;
+        name?: string;
         shape?: string;
         status?: string;
         created_date_time?: string;

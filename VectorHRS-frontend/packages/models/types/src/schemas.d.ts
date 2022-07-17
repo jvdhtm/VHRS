@@ -631,6 +631,8 @@ export interface operations {
                 created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -722,6 +724,8 @@ export interface operations {
                 pathUrl?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -816,6 +820,8 @@ export interface operations {
                 created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -908,6 +914,8 @@ export interface operations {
                 created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -1001,6 +1009,8 @@ export interface operations {
                 created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -1095,6 +1105,8 @@ export interface operations {
                 created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -1190,6 +1202,8 @@ export interface operations {
                 created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -1284,6 +1298,8 @@ export interface operations {
                 created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -1379,6 +1395,8 @@ export interface operations {
                 created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -1473,6 +1491,8 @@ export interface operations {
                 created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -1568,6 +1588,8 @@ export interface operations {
                 created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -1662,6 +1684,8 @@ export interface operations {
                 created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -1755,6 +1779,8 @@ export interface operations {
                 app?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -1852,6 +1878,8 @@ export interface operations {
                 level?: number;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -1945,6 +1973,8 @@ export interface operations {
                 created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -2039,6 +2069,8 @@ export interface operations {
                 created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -2134,6 +2166,8 @@ export interface operations {
                 created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {
@@ -2228,6 +2262,8 @@ export interface operations {
                 is_active?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
             };
         };
         responses: {

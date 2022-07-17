@@ -65,7 +65,7 @@ class DepartmentViewSet(CreateListMixin, ModelViewSet):
     queryset = Department.objects.order_by('pk')
     serializer_class = DepartmentSerializer
     permission_classes = [IsAuthenticated,]
-    filter_fields = ["id",  "description",  "shape",  "status",  "created_date_time" ]
+    filter_fields = ["id",  "description" , "name",  "shape",  "status",  "created_date_time" ]
 
 
 class StaffViewSet(CreateListMixin, ModelViewSet):
