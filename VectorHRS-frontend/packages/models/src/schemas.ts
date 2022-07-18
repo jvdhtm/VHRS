@@ -381,6 +381,8 @@ export interface definitions {
     id?: number;
     /** Description */
     description?: string;
+    /** Name */
+    name?: string;
     /** Shape */
     shape: "circle" | "square" | "rectangle" | "triangle";
     /** Status */

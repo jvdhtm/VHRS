@@ -5,14 +5,24 @@ import { definitions } from "@vhrs/models";
 import { Idepartment } from "@vhrs/resources/types/context";
 import { FC, useContext, useEffect } from "react";
 import VList from "./Lists";
-import {toNumber} from "../util/utils";
+import {toNumber, includeChildren} from "../util/utils";
+import { Link } from 'react-router-dom';
+import { List, ListItem } from "@chakra-ui/react";
 
+type Imodeldepartment = definitions["Department"];
 
-const Department: FC<definitions["Department"]> = (props:definitions["Department"]) =>{
+interface Departments extends  Imodeldepartment{
+    children: Departments[]; 
+}
 
-    return <div>
-                {props.description}
-           </div>
+const Department: FC<Departments> = (props:Departments) =>{
+    const link  = `/departments/${props.name}`
+    return <>
+                <Link to={link} >
+                   {props.name ? props.name : "Dep name"}
+                </Link>
+                {props.children ? <VList className="children" items={props.children} curPage={0}  itemLimit={1000}  ItemCard={Department}/> : <></>}
+           </>
 }
 
 
@@ -22,8 +32,10 @@ const Departments:FC = ()=>{
     useEffect(() => {
             departmentListFuncProp({query:{}});
     }, []);
+
+    const departmentDataIndexed = includeChildren(departmentData)
   
-    return  departmentData && departmentData.length > 0 ? <VList items={departmentData} curPage={next ? toNumber(next) - 1 : 0}  itemLimit={5}  ItemCard={Department}/> :<></>
+    return  departmentDataIndexed && departmentDataIndexed.length > 0 ? <VList items={departmentDataIndexed} curPage={next ? toNumber(next) - 1 : 0}  itemLimit={5}  ItemCard={Department}/> :<></>
 }
     
 

@@ -25,8 +25,10 @@ const Dashboard:FC = ()=>{
             >
               <GridItem rowSpan={2} colSpan={1}>
                   <Heading as='h1' size='4xl' noOfLines={1}>
+                    Department
+                  </Heading>
                     <Departments/>
-                </Heading>
+           
               </GridItem>
               <GridItem colSpan={2} bg='papayawhip' >
                   <Heading as='h2' size='4xl' noOfLines={1}>

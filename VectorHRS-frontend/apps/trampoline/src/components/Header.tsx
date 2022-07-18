@@ -2,7 +2,7 @@ import { ReactComponent as Logo } from '../logo.svg';
 import { Link } from 'react-router-dom';
 import { Menu, MenuButton, MenuList, MenuItem,IconButton, useDisclosure } from '@chakra-ui/react';
 import {  SettingsIcon, AtSignIcon} from '@chakra-ui/icons';
-import { Icon, createIcon } from '@chakra-ui/react'
+import { Icon } from '@chakra-ui/react'
 import { Collapse } from '@chakra-ui/react'
 import { FC } from "react";
 //const { SubMenu } = Menu;

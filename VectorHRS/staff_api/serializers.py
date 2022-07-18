@@ -60,7 +60,7 @@ class DepartmentSerializer(ModelSerializer):
 
     class Meta:
         model = Department
-        fields = 'id',  'description',  'shape',  'status',  'created_date_time' 
+        fields = 'id',  'description', 'name', 'parentId', 'shape',  'status',  'created_date_time' 
 
 
 class StaffSerializer(ModelSerializer):

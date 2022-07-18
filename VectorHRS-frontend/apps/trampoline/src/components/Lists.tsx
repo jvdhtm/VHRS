@@ -6,10 +6,11 @@ export interface IProp {
     items: any[]
     curPage: number
     itemLimit: number
+    className: string
     ItemCard: React.ElementType
 }
 
-const VList:FC<IProp> = ({ items, curPage, itemLimit, ItemCard }) => {
+const VList:FC<IProp> = ({ items, curPage, itemLimit, ItemCard, className }) => {
   const [curItems, setCurItems] = useState<any[]>([]);
   useEffect(() => {
     const offset = curPage * itemLimit;
@@ -20,9 +21,8 @@ const VList:FC<IProp> = ({ items, curPage, itemLimit, ItemCard }) => {
 
     getList();
   }, [curPage, itemLimit, items]);
-  console.log(curItems);
   return (
-    <List>
+    <List className={className}>
       {curItems.map(function (data,index) {
         return (
           <ListItem key={index}>
