@@ -140,7 +140,7 @@ class DataLayer {
                     instance({
                         method: Request.verb,
                         url: Request.endpoint,
-                        params: data.query,
+                        params: data ? data.query : {},
                         headers,
                     }),
                 force
@@ -160,4 +160,4 @@ class DataLayer {
 }
 
 
-export const dataLayerObj = new DataLayer()
+export const dataLayerObj = new DataLayer(true)

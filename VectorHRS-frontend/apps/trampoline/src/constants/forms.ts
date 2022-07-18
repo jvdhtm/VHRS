@@ -7,7 +7,7 @@ const login = {
     password: Yup.string().required(REQUIRED_FIELD).min(6, PASSWORD_MIN_LENGTH),
   },
   initialValues: {
-    email: 'test@email.com',
+    email: 'rachelsolomon@example.com',
     password: 'Admin1234@',
   },
   validationSchema: {},

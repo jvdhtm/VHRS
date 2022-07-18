@@ -2,53 +2,53 @@ from django.db import models
 from django.utils.timezone import now
 
 STATUS_CHOICES = (
-    ('activated', '1'),
-    ('deactivated', '2'),
-    ('pending', '3'),
-    ('confirmed', '4'),
-    ('archived', '5'),
+    ('activated', 'activated'),
+    ('deactivated', 'deactivated'),
+    ('pending', 'pending'),
+    ('confirmed', 'confirmed'),
+    ('archived', 'archived'),
 )
 
 SEVERITY_CHOICES = (
-    ('1', '1'),
-    ('2', '2'),
-    ('3', '3'),
+    ('small', 'small'),
+    ('mild', 'mild'),
+    ('sever', 'sever'),
 )
 
 SHAPE_CHOICES = (
-    ('circle', '1'),
-    ('square', '2'),
-    ('rectangle', '3'),
-    ('triangle', '4'),
+    ('circle', 'circle'),
+    ('square', 'square'),
+    ('rectangle', 'rectangle'),
+    ('triangle', 'triangle'),
 )
 
 PERSON_STEP_CHOICES = (
-    ('communication', '1'),
-    ('answers', '2'),
-    ('pending', '3'),
-    ('interview', '4'),
-    ('contract', '5'),
-    ('rejection', '6'),
-    ('refusal', '7'),
-    ('recommendation', '8'),
-    ('questions', '9'),
-    ('invitations', '10'),
+    ('communication', 'communication'),
+    ('answers', 'answers'),
+    ('pending', 'pending'),
+    ('interview', 'interview'),
+    ('contract', 'contract'),
+    ('rejection', 'rejection'),
+    ('refusal', 'refusal'),
+    ('recommendation', 'recommendation'),
+    ('questions', 'questions'),
+    ('invitations', 'invitations'),
 )
 
 STAFF_STEP_CHOICES = (
-    ('communication', '1'),
-    ('answers', '2'),
-    ('meeting', '3'),
-    ('surveys', '4'),
-    ('administrative', '5'),
-    ('complains', '6'),
-    ('problems', '7'),
-    ('feedBack', '8'),
-    ('requirements', '9'),
-    ('legal', '10'),
-    ('questions', '11'),
-    ('gifts', '12'),
-    ('invitations', '13'),
+    ('communication', 'communication'),
+    ('answers', 'answers'),
+    ('meeting', 'meeting'),
+    ('surveys', 'surveys'),
+    ('administrative', 'administrative'),
+    ('complains', 'complains'),
+    ('problems', 'problems'),
+    ('feedBack', 'feedBack'),
+    ('requirements', 'requirements'),
+    ('legal', 'legal'),
+    ('questions', 'questions'),
+    ('gifts', 'gifts'),
+    ('invitations', 'invitations'),
 )
 
 class PersonStage(models.Model):

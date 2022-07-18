@@ -115,7 +115,7 @@ var DataLayer = /** @class */ (function () {
                                 return (0, exports.instance)({
                                     method: Request.verb,
                                     url: Request.endpoint,
-                                    params: data.query,
+                                    params: data ? data.query : {},
                                     headers: headers,
                                 });
                             }, force)];
@@ -137,5 +137,5 @@ var DataLayer = /** @class */ (function () {
     };
     return DataLayer;
 }());
-exports.dataLayerObj = new DataLayer();
+exports.dataLayerObj = new DataLayer(true);
 //# sourceMappingURL=instance.js.map
