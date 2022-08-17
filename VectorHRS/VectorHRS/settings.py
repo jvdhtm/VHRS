@@ -34,6 +34,9 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'drf_yasg',
     'utils.apps.UtilsConfig',
+    'base.apps.BaseConfig',
+    'people.apps.PeopleConfig',
+    'news.apps.NewsConfig',
     'identity_api.apps.IdentityApiConfig',
     'api_doc.apps.ApiDocConfig',
     'staff_api.apps.StaffApiConfig',
@@ -47,20 +50,10 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_seed',
     'django_extensions',
+    'ckeditor',
+    'bleach',
     'api_generators_vhrs',
     'django_filters',
-    'wagtail.contrib.forms',
-    'wagtail.contrib.redirects',
-    'wagtail.embeds',
-    'wagtail.sites',
-    'wagtail.users',
-    'wagtail.snippets',
-    'wagtail.documents',
-    'wagtail.images',
-    'wagtail.search',
-    'wagtail.admin',
-    'wagtail',
-
     'modelcluster',
     'taggit',
 ]
@@ -76,7 +69,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'VectorHRS.urls'

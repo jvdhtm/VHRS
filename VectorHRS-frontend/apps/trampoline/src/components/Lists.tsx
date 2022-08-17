@@ -25,7 +25,7 @@ const VList:FC<IProp> = ({ items, curPage, itemLimit, ItemCard, className }) => 
     <List className={className}>
       {curItems.map(function (data,index) {
         return (
-          <ListItem key={index}>
+          <ListItem key={index} className="item">
                 <ItemCard  {...data}/>
           </ListItem>
         );

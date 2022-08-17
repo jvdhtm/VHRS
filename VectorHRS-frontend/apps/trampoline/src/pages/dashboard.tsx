@@ -8,7 +8,7 @@ import {
   Heading,
   GridItem
 } from '@chakra-ui/react';
-
+import DepartmentICon from "../components/DepartmentICon";
 const DepartmentProvider = resources.contexts.DepartmentProvider;
 
 
@@ -23,24 +23,15 @@ const Dashboard:FC = ()=>{
               templateColumns='repeat(5, 1fr)'
               gap={4}
             >
-              <GridItem rowSpan={2} colSpan={1}>
-                  <Heading as='h1' size='4xl' noOfLines={1}>
-                    Department
+              <GridItem rowSpan={2} colSpan={1}  bg={'var(--tertiary)'}>
+                  <Heading className='departments__heading' as='h1' size='sm' noOfLines={1} >
+                    Departments
+                    <DepartmentICon/>
                   </Heading>
                     <Departments/>
            
               </GridItem>
-              <GridItem colSpan={2} bg='papayawhip' >
-                  <Heading as='h2' size='4xl' noOfLines={1}>
-                    ShortCuts
-                </Heading>
-              </GridItem>
-              <GridItem colSpan={2} bg='papayawhip' >
-                  <Heading as='h2' size='4xl' noOfLines={1}>
-                    ShortCuts
-                </Heading>
-              </GridItem>
-              <GridItem colSpan={4} bg='papayawhip' >
+              <GridItem colSpan={4}  >
                   <Heading as='h2' size='4xl' noOfLines={1}>
                     News
                 </Heading>

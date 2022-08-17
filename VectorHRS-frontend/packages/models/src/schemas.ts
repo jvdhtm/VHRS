@@ -367,7 +367,7 @@ export interface definitions {
     /** ID */
     id?: number;
     /** Severity */
-    severity: "1" | "2" | "3";
+    severity: "small" | "mild" | "sever";
     /** Status */
     status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
@@ -383,6 +383,8 @@ export interface definitions {
     description?: string;
     /** Name */
     name?: string;
+    /** ParentId */
+    parentId?: number;
     /** Shape */
     shape: "circle" | "square" | "rectangle" | "triangle";
     /** Status */
@@ -1034,6 +1036,7 @@ export interface operations {
         description?: string;
         name?: string;
         shape?: string;
+        parentId?: string;
         status?: string;
         created_date_time?: string;
         /** A page number within the paginated result set. */

@@ -4,10 +4,11 @@ import resources from "@vhrs/resources";
 import { definitions } from "@vhrs/models";
 import { Idepartment } from "@vhrs/resources/types/context";
 import { FC, useContext, useEffect } from "react";
+import ResourceICon from "./ResourceICon";
 import VList from "./Lists";
 import {toNumber, includeChildren} from "../util/utils";
 import { Link } from 'react-router-dom';
-import { List, ListItem } from "@chakra-ui/react";
+import { ListIcon } from "@chakra-ui/react";
 
 type Imodeldepartment = definitions["Department"];
 
@@ -18,10 +19,14 @@ interface Departments extends  Imodeldepartment{
 const Department: FC<Departments> = (props:Departments) =>{
     const link  = `/departments/${props.name}`
     return <>
-                <Link to={link} >
+               
+                <Link to={link}  >
+                    {}
+                    <ListIcon as={ResourceICon}  />
                    {props.name ? props.name : "Dep name"}
+               
                 </Link>
-                {props.children ? <VList className="children" items={props.children} curPage={0}  itemLimit={1000}  ItemCard={Department}/> : <></>}
+                {props.children ? <VList className="departments__children" items={props.children} curPage={0}  itemLimit={1000}  ItemCard={Department}/> : <></>}
            </>
 }
 
@@ -35,7 +40,9 @@ const Departments:FC = ()=>{
 
     const departmentDataIndexed = includeChildren(departmentData)
   
-    return  departmentDataIndexed && departmentDataIndexed.length > 0 ? <VList items={departmentDataIndexed} curPage={next ? toNumber(next) - 1 : 0}  itemLimit={5}  ItemCard={Department}/> :<></>
+    return  <div className="departments">
+                {departmentDataIndexed && departmentDataIndexed.length > 0 ? <VList className="departments__list" items={departmentDataIndexed} curPage={next ? toNumber(next) - 1 : 0}  itemLimit={5}  ItemCard={Department}/> :<></> }
+            </div>
 }
     
 
