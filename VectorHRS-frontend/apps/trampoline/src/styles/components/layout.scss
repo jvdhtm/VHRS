@@ -1,6 +1,5 @@
 .header{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    display: flex;
     z-index: 1;
     box-shadow: var(--boxShadow) 0px 0px 12px;
     top: 0;
@@ -16,7 +15,8 @@
         position: relative;
         svg{
             position: absolute;
-            width: 4rem
+            width: 6rem;
+            top: 0;
         }
     }
     .profile-menu{
@@ -36,8 +36,8 @@
     {
         color:  var(--white);
         position: absolute;
-        right: 5px;
-        top: 4px;
+        right: 2rem;
+        top: 0.2rem;
         &:hover{
             color: var(--black);
         }
@@ -66,7 +66,27 @@
 main {
     padding-top: var(--headerHeight);
 }
+.sidebar{
+    grid-column: span 1/span 1;
+    height: 100vh;
+    @include media('>=tablet')  { 
+        grid-column: span 4/span 4;
+    }   
+    
+}
+.content{
+    grid-column: span 11/span 11;
+    @include media('>=tablet')  { 
+        grid-column: span 8/span 8;
+    }   
 
+}
+.container{
+    max-width:120rem ;
+    margin: auto;
+    width: 100%;
+    position: relative;
+}
 .sr-only {
     position:absolute;
     left:-10000px;
@@ -75,9 +95,9 @@ main {
     height:1px;
     overflow:hidden;
 }
-.chakra-heading{
+h1{
 
-    padding: 10%;
+    padding: 2rem;
     border-bottom: thin solid var(--black);
     position: relative;
 

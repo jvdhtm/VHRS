@@ -20,7 +20,7 @@ class Condition(models.Model):
      
 class Department(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
-    parentId = models.ForeignKey('self', null=True, blank=True, on_delete=models.PROTECT)
+    parentId = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
     description = models.CharField(max_length=100, null=True, blank=True)
     shape = models.CharField(max_length=1000, choices=SHAPE_CHOICES)
     status = models.CharField(max_length=1000, choices=STATUS_CHOICES)
@@ -30,7 +30,7 @@ class Staff(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     condition = models.ForeignKey(Condition, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, null=True, blank=True)
-    bossId = models.ForeignKey('self', null=True, blank=True , on_delete=models.PROTECT)
+    bossId = models.ForeignKey('self', null=True, blank=True , on_delete=models.CASCADE)
     who = models.ForeignKey(Person, on_delete=models.CASCADE)
     x = models.FloatField()
     y = models.FloatField()

@@ -1,6 +1,6 @@
 import { AddressProvider, AddressContext, Iaddress } from "./address";
 import { AppProvider, AppContext, Iapp } from "./app";
-import { CommentsProvider, CommentsContext, Icomments } from "./comments";
+import { CommentProvider, CommentContext, Icomment } from "./comment";
 import { ConditionProvider, ConditionContext, Icondition } from "./condition";
 import {
   DepartmentProvider,
@@ -14,6 +14,11 @@ import {
   Iexpertiseprofile,
 } from "./expertiseprofile";
 import { FunctionProvider, FunctionContext, Ifunction } from "./function";
+import {
+  NewsletterProvider,
+  NewsletterContext,
+  Inewsletter,
+} from "./newsletter";
 import { PersonProvider, PersonContext, Iperson } from "./person";
 import { PersonlogProvider, PersonlogContext, Ipersonlog } from "./personlog";
 import {
@@ -24,6 +29,11 @@ import {
 import { PhoneProvider, PhoneContext, Iphone } from "./phone";
 import { RoleProvider, RoleContext, Irole } from "./role";
 import { StaffProvider, StaffContext, Istaff } from "./staff";
+import {
+  StaffcommentProvider,
+  StaffcommentContext,
+  Istaffcomment,
+} from "./staffcomment";
 import {
   StafffunctionsProvider,
   StafffunctionsContext,
@@ -44,9 +54,9 @@ export {
   AppProvider,
   AppContext,
   Iapp,
-  CommentsProvider,
-  CommentsContext,
-  Icomments,
+  CommentProvider,
+  CommentContext,
+  Icomment,
   ConditionProvider,
   ConditionContext,
   Icondition,
@@ -62,6 +72,9 @@ export {
   FunctionProvider,
   FunctionContext,
   Ifunction,
+  NewsletterProvider,
+  NewsletterContext,
+  Inewsletter,
   PersonProvider,
   PersonContext,
   Iperson,
@@ -80,6 +93,9 @@ export {
   StaffProvider,
   StaffContext,
   Istaff,
+  StaffcommentProvider,
+  StaffcommentContext,
+  Istaffcomment,
   StafffunctionsProvider,
   StafffunctionsContext,
   Istafffunctions,

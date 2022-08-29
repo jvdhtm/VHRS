@@ -15,13 +15,13 @@ import {
   app_delete,
 } from "./app";
 import {
-  comments_list,
-  comments_create,
-  comments_read,
-  comments_update,
-  comments_partial_update,
-  comments_delete,
-} from "./comments";
+  comment_list,
+  comment_create,
+  comment_read,
+  comment_update,
+  comment_partial_update,
+  comment_delete,
+} from "./comment";
 import {
   condition_list,
   condition_create,
@@ -62,6 +62,14 @@ import {
   function_partial_update,
   function_delete,
 } from "./function";
+import {
+  newsletter_list,
+  newsletter_create,
+  newsletter_read,
+  newsletter_update,
+  newsletter_partial_update,
+  newsletter_delete,
+} from "./newsletter";
 import {
   person_list,
   person_create,
@@ -111,6 +119,14 @@ import {
   staff_delete,
 } from "./staff";
 import {
+  staffcomment_list,
+  staffcomment_create,
+  staffcomment_read,
+  staffcomment_update,
+  staffcomment_partial_update,
+  staffcomment_delete,
+} from "./staffcomment";
+import {
   stafffunctions_list,
   stafffunctions_create,
   stafffunctions_read,
@@ -155,12 +171,12 @@ export {
   app_update,
   app_partial_update,
   app_delete,
-  comments_list,
-  comments_create,
-  comments_read,
-  comments_update,
-  comments_partial_update,
-  comments_delete,
+  comment_list,
+  comment_create,
+  comment_read,
+  comment_update,
+  comment_partial_update,
+  comment_delete,
   condition_list,
   condition_create,
   condition_read,
@@ -191,6 +207,12 @@ export {
   function_update,
   function_partial_update,
   function_delete,
+  newsletter_list,
+  newsletter_create,
+  newsletter_read,
+  newsletter_update,
+  newsletter_partial_update,
+  newsletter_delete,
   person_list,
   person_create,
   person_read,
@@ -227,6 +249,12 @@ export {
   staff_update,
   staff_partial_update,
   staff_delete,
+  staffcomment_list,
+  staffcomment_create,
+  staffcomment_read,
+  staffcomment_update,
+  staffcomment_partial_update,
+  staffcomment_delete,
   stafffunctions_list,
   stafffunctions_create,
   stafffunctions_read,

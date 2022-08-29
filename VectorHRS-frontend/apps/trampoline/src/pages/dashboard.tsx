@@ -1,8 +1,7 @@
-import { Departments } from '../components'
+import { NewsLetter } from '../components'
 import  Admin from '../layouts/Admin'
 import resources from "@vhrs/resources";
-import { Idepartment } from "@vhrs/resources/types/context";
-import { FC, useContext, useEffect } from "react";
+import { FC } from "react";
 import {
   Grid,
   Heading,
@@ -10,34 +9,35 @@ import {
 } from '@chakra-ui/react';
 import DepartmentICon from "../components/DepartmentICon";
 const DepartmentProvider = resources.contexts.DepartmentProvider;
-
+const NewsletterProvider = resources.contexts.NewsletterProvider;
 
 const Dashboard:FC = ()=>{
 
     return (
       <DepartmentProvider headers={""}>
+        <NewsletterProvider headers={""}>
         <Admin>
+        <div className="container">
             <Grid
-              w='100vw' h="calc(100vh - var(--headerHeight))"
+              w='100%' h="calc(100vh - var(--headerHeight))"
               templateRows='repeat(2, 1fr)'
-              templateColumns='repeat(5, 1fr)'
+              templateColumns='repeat(12, 1fr)'
               gap={4}
             >
-              <GridItem rowSpan={2} colSpan={1}  bg={'var(--tertiary)'}>
-                  <Heading className='departments__heading' as='h1' size='sm' noOfLines={1} >
-                    Departments
-                    <DepartmentICon/>
-                  </Heading>
-                    <Departments/>
-           
-              </GridItem>
-              <GridItem colSpan={4}  >
-                  <Heading as='h2' size='4xl' noOfLines={1}>
+              <GridItem className="sidebar" />
+              <GridItem className="content"  >
+                <Heading as='h1' size='4xl' noOfLines={1}>
+                    Overview
+                </Heading>
+                  <Heading as='h2' size='lg' noOfLines={1}>
                     News
                 </Heading>
+                <NewsLetter/>
               </GridItem>
             </Grid>
+            </div>
         </Admin>
+        </NewsletterProvider>
       </DepartmentProvider>
     )
 }

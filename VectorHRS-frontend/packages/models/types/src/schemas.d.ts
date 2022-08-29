@@ -37,19 +37,19 @@ export interface paths {
             };
         };
     };
-    "/comments/": {
-        get: operations["comments_list"];
-        post: operations["comments_create"];
+    "/comment/": {
+        get: operations["comment_list"];
+        post: operations["comment_create"];
         parameters: {};
     };
-    "/comments/{id}/": {
-        get: operations["comments_read"];
-        put: operations["comments_update"];
-        delete: operations["comments_delete"];
-        patch: operations["comments_partial_update"];
+    "/comment/{id}/": {
+        get: operations["comment_read"];
+        put: operations["comment_update"];
+        delete: operations["comment_delete"];
+        patch: operations["comment_partial_update"];
         parameters: {
             path: {
-                /** A unique integer value identifying this comments. */
+                /** A unique integer value identifying this comment. */
                 id: number;
             };
         };
@@ -135,6 +135,23 @@ export interface paths {
         parameters: {
             path: {
                 /** A unique integer value identifying this function. */
+                id: number;
+            };
+        };
+    };
+    "/newsletter/": {
+        get: operations["newsletter_list"];
+        post: operations["newsletter_create"];
+        parameters: {};
+    };
+    "/newsletter/{id}/": {
+        get: operations["newsletter_read"];
+        put: operations["newsletter_update"];
+        delete: operations["newsletter_delete"];
+        patch: operations["newsletter_partial_update"];
+        parameters: {
+            path: {
+                /** A unique integer value identifying this news letter. */
                 id: number;
             };
         };
@@ -241,6 +258,23 @@ export interface paths {
             };
         };
     };
+    "/staffcomment/": {
+        get: operations["staffcomment_list"];
+        post: operations["staffcomment_create"];
+        parameters: {};
+    };
+    "/staffcomment/{id}/": {
+        get: operations["staffcomment_read"];
+        put: operations["staffcomment_update"];
+        delete: operations["staffcomment_delete"];
+        patch: operations["staffcomment_partial_update"];
+        parameters: {
+            path: {
+                /** A unique integer value identifying this staff comment. */
+                id: number;
+            };
+        };
+    };
     "/stafffunctions/": {
         get: operations["stafffunctions_list"];
         post: operations["stafffunctions_create"];
@@ -314,8 +348,8 @@ export interface definitions {
     Address: {
         /** ID */
         id?: number;
-        /** Staff */
-        staff: number;
+        /** Person */
+        person: number;
         /** Description */
         description?: string;
         /** Address1 */
@@ -344,15 +378,15 @@ export interface definitions {
         /** PathUrl */
         pathUrl: string;
     };
-    Comments: {
+    Comment: {
         /** ID */
         id?: number;
-        /** Staff */
-        staff: number;
         /** Name */
         name?: string;
-        /** Description */
-        description?: string;
+        /** Html */
+        html?: string;
+        /** Autor */
+        autor: number;
         /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
         /**
@@ -360,12 +394,14 @@ export interface definitions {
          * Format: date-time
          */
         created_date_time?: string;
+        /** News */
+        news: number;
     };
     Condition: {
         /** ID */
         id?: number;
         /** Severity */
-        severity: "1" | "2" | "3";
+        severity: "small" | "mild" | "sever";
         /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
         /**
@@ -377,10 +413,12 @@ export interface definitions {
     Department: {
         /** ID */
         id?: number;
-        /** Description */
-        description?: string;
         /** Name */
         name?: string;
+        /** ParentId */
+        parentId?: number;
+        /** Description */
+        description?: string;
         /** Shape */
         shape: "circle" | "square" | "rectangle" | "triangle";
         /** Status */
@@ -436,6 +474,23 @@ export interface definitions {
         description?: string;
         /** Shape */
         shape: "circle" | "square" | "rectangle" | "triangle";
+        /** Status */
+        status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+        /**
+         * Created date time
+         * Format: date-time
+         */
+        created_date_time?: string;
+    };
+    NewsLetter: {
+        /** ID */
+        id?: number;
+        /** Name */
+        name?: string;
+        /** Html */
+        html?: string;
+        /** Autor */
+        autor: number;
         /** Status */
         status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
         /**
@@ -502,8 +557,8 @@ export interface definitions {
     Phone: {
         /** ID */
         id?: number;
-        /** Staff */
-        staff: number;
+        /** Person */
+        person: number;
         /** Description */
         description?: string;
         /** PhoneNumber */
@@ -547,6 +602,23 @@ export interface definitions {
         y: number;
         /** Level */
         level: number;
+    };
+    StaffComment: {
+        /** ID */
+        id?: number;
+        /** Staff */
+        staff: number;
+        /** Name */
+        name?: string;
+        /** Description */
+        description?: string;
+        /** Status */
+        status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+        /**
+         * Created date time
+         * Format: date-time
+         */
+        created_date_time?: string;
     };
     StaffFunctions: {
         /** ID */
@@ -621,16 +693,6 @@ export interface operations {
     address_list: {
         parameters: {
             query: {
-                id?: number;
-                staff?: string;
-                description?: string;
-                address1?: string;
-                address2?: string;
-                zip?: string;
-                city?: string;
-                country?: string;
-                status?: string;
-                created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
                 /** Number of results to return per page. */
@@ -811,15 +873,9 @@ export interface operations {
             };
         };
     };
-    comments_list: {
+    comment_list: {
         parameters: {
             query: {
-                id?: number;
-                staff?: string;
-                name?: string;
-                description?: string;
-                status?: string;
-                created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
                 /** Number of results to return per page. */
@@ -834,56 +890,56 @@ export interface operations {
                     next?: string;
                     /** Format: uri */
                     previous?: string;
-                    results: definitions["Comments"][];
+                    results: definitions["Comment"][];
                 };
             };
         };
     };
-    comments_create: {
+    comment_create: {
         parameters: {
             body: {
-                data: definitions["Comments"];
+                data: definitions["Comment"];
             };
         };
         responses: {
             201: {
-                schema: definitions["Comments"];
+                schema: definitions["Comment"];
             };
         };
     };
-    comments_read: {
+    comment_read: {
         parameters: {
             path: {
-                /** A unique integer value identifying this comments. */
+                /** A unique integer value identifying this comment. */
                 id: number;
             };
         };
         responses: {
             200: {
-                schema: definitions["Comments"];
+                schema: definitions["Comment"];
             };
         };
     };
-    comments_update: {
+    comment_update: {
         parameters: {
             path: {
-                /** A unique integer value identifying this comments. */
+                /** A unique integer value identifying this comment. */
                 id: number;
             };
             body: {
-                data: definitions["Comments"];
+                data: definitions["Comment"];
             };
         };
         responses: {
             200: {
-                schema: definitions["Comments"];
+                schema: definitions["Comment"];
             };
         };
     };
-    comments_delete: {
+    comment_delete: {
         parameters: {
             path: {
-                /** A unique integer value identifying this comments. */
+                /** A unique integer value identifying this comment. */
                 id: number;
             };
         };
@@ -891,29 +947,25 @@ export interface operations {
             204: never;
         };
     };
-    comments_partial_update: {
+    comment_partial_update: {
         parameters: {
             path: {
-                /** A unique integer value identifying this comments. */
+                /** A unique integer value identifying this comment. */
                 id: number;
             };
             body: {
-                data: definitions["Comments"];
+                data: definitions["Comment"];
             };
         };
         responses: {
             200: {
-                schema: definitions["Comments"];
+                schema: definitions["Comment"];
             };
         };
     };
     condition_list: {
         parameters: {
             query: {
-                id?: number;
-                severity?: string;
-                status?: string;
-                created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
                 /** Number of results to return per page. */
@@ -1004,12 +1056,6 @@ export interface operations {
     department_list: {
         parameters: {
             query: {
-                id?: number;
-                description?: string;
-                name?: string;
-                shape?: string;
-                status?: string;
-                created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
                 /** Number of results to return per page. */
@@ -1100,12 +1146,6 @@ export interface operations {
     expertise_list: {
         parameters: {
             query: {
-                id?: number;
-                name?: string;
-                description?: string;
-                parentId?: string;
-                status?: string;
-                created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
                 /** Number of results to return per page. */
@@ -1196,13 +1236,6 @@ export interface operations {
     expertiseprofile_list: {
         parameters: {
             query: {
-                id?: number;
-                name?: string;
-                description?: string;
-                person?: string;
-                expertise?: string;
-                status?: string;
-                created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
                 /** Number of results to return per page. */
@@ -1293,12 +1326,6 @@ export interface operations {
     function_list: {
         parameters: {
             query: {
-                id?: number;
-                name?: string;
-                description?: string;
-                shape?: string;
-                status?: string;
-                created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
                 /** Number of results to return per page. */
@@ -1386,16 +1413,99 @@ export interface operations {
             };
         };
     };
+    newsletter_list: {
+        parameters: {
+            query: {
+                /** A page number within the paginated result set. */
+                page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
+            };
+        };
+        responses: {
+            200: {
+                schema: {
+                    count: number;
+                    /** Format: uri */
+                    next?: string;
+                    /** Format: uri */
+                    previous?: string;
+                    results: definitions["NewsLetter"][];
+                };
+            };
+        };
+    };
+    newsletter_create: {
+        parameters: {
+            body: {
+                data: definitions["NewsLetter"];
+            };
+        };
+        responses: {
+            201: {
+                schema: definitions["NewsLetter"];
+            };
+        };
+    };
+    newsletter_read: {
+        parameters: {
+            path: {
+                /** A unique integer value identifying this news letter. */
+                id: number;
+            };
+        };
+        responses: {
+            200: {
+                schema: definitions["NewsLetter"];
+            };
+        };
+    };
+    newsletter_update: {
+        parameters: {
+            path: {
+                /** A unique integer value identifying this news letter. */
+                id: number;
+            };
+            body: {
+                data: definitions["NewsLetter"];
+            };
+        };
+        responses: {
+            200: {
+                schema: definitions["NewsLetter"];
+            };
+        };
+    };
+    newsletter_delete: {
+        parameters: {
+            path: {
+                /** A unique integer value identifying this news letter. */
+                id: number;
+            };
+        };
+        responses: {
+            204: never;
+        };
+    };
+    newsletter_partial_update: {
+        parameters: {
+            path: {
+                /** A unique integer value identifying this news letter. */
+                id: number;
+            };
+            body: {
+                data: definitions["NewsLetter"];
+            };
+        };
+        responses: {
+            200: {
+                schema: definitions["NewsLetter"];
+            };
+        };
+    };
     person_list: {
         parameters: {
             query: {
-                id?: number;
-                firstname?: string;
-                lastname?: string;
-                age?: number;
-                nationalId?: string;
-                status?: string;
-                created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
                 /** Number of results to return per page. */
@@ -1486,12 +1596,6 @@ export interface operations {
     personlog_list: {
         parameters: {
             query: {
-                id?: number;
-                description?: string;
-                stage?: string;
-                person?: string;
-                status?: string;
-                created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
                 /** Number of results to return per page. */
@@ -1582,13 +1686,6 @@ export interface operations {
     personstage_list: {
         parameters: {
             query: {
-                id?: number;
-                name?: string;
-                description?: string;
-                step?: string;
-                x?: number;
-                status?: string;
-                created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
                 /** Number of results to return per page. */
@@ -1679,12 +1776,6 @@ export interface operations {
     phone_list: {
         parameters: {
             query: {
-                id?: number;
-                staff?: string;
-                description?: string;
-                phoneNumber?: string;
-                status?: string;
-                created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
                 /** Number of results to return per page. */
@@ -1870,15 +1961,6 @@ export interface operations {
     staff_list: {
         parameters: {
             query: {
-                id?: number;
-                department?: string;
-                condition?: string;
-                title?: string;
-                bossId?: string;
-                who?: string;
-                x?: number;
-                y?: number;
-                level?: number;
                 /** A page number within the paginated result set. */
                 page?: number;
                 /** Number of results to return per page. */
@@ -1966,14 +2048,99 @@ export interface operations {
             };
         };
     };
+    staffcomment_list: {
+        parameters: {
+            query: {
+                /** A page number within the paginated result set. */
+                page?: number;
+                /** Number of results to return per page. */
+                page_size?: number;
+            };
+        };
+        responses: {
+            200: {
+                schema: {
+                    count: number;
+                    /** Format: uri */
+                    next?: string;
+                    /** Format: uri */
+                    previous?: string;
+                    results: definitions["StaffComment"][];
+                };
+            };
+        };
+    };
+    staffcomment_create: {
+        parameters: {
+            body: {
+                data: definitions["StaffComment"];
+            };
+        };
+        responses: {
+            201: {
+                schema: definitions["StaffComment"];
+            };
+        };
+    };
+    staffcomment_read: {
+        parameters: {
+            path: {
+                /** A unique integer value identifying this staff comment. */
+                id: number;
+            };
+        };
+        responses: {
+            200: {
+                schema: definitions["StaffComment"];
+            };
+        };
+    };
+    staffcomment_update: {
+        parameters: {
+            path: {
+                /** A unique integer value identifying this staff comment. */
+                id: number;
+            };
+            body: {
+                data: definitions["StaffComment"];
+            };
+        };
+        responses: {
+            200: {
+                schema: definitions["StaffComment"];
+            };
+        };
+    };
+    staffcomment_delete: {
+        parameters: {
+            path: {
+                /** A unique integer value identifying this staff comment. */
+                id: number;
+            };
+        };
+        responses: {
+            204: never;
+        };
+    };
+    staffcomment_partial_update: {
+        parameters: {
+            path: {
+                /** A unique integer value identifying this staff comment. */
+                id: number;
+            };
+            body: {
+                data: definitions["StaffComment"];
+            };
+        };
+        responses: {
+            200: {
+                schema: definitions["StaffComment"];
+            };
+        };
+    };
     stafffunctions_list: {
         parameters: {
             query: {
-                id?: number;
-                function?: string;
-                staff?: string;
-                status?: string;
-                created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
                 /** Number of results to return per page. */
@@ -2064,12 +2231,6 @@ export interface operations {
     stafflog_list: {
         parameters: {
             query: {
-                id?: number;
-                description?: string;
-                stage?: string;
-                with_person?: string;
-                status?: string;
-                created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
                 /** Number of results to return per page. */
@@ -2160,13 +2321,6 @@ export interface operations {
     staffstage_list: {
         parameters: {
             query: {
-                id?: number;
-                name?: string;
-                description?: string;
-                step?: string;
-                x?: number;
-                status?: string;
-                created_date_time?: string;
                 /** A page number within the paginated result set. */
                 page?: number;
                 /** Number of results to return per page. */

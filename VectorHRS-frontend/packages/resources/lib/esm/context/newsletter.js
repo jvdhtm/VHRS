@@ -1,7 +1,7 @@
 import { __assign, __awaiter, __generator } from "tslib";
 import { jsx as _jsx } from "react/jsx-runtime";
 import { Api } from "@vhrs/models";
-var comments_list = Api.comments_list, comments_create = Api.comments_create, comments_read = Api.comments_read, comments_update = Api.comments_update, comments_partial_update = Api.comments_partial_update, comments_delete = Api.comments_delete;
+var newsletter_list = Api.newsletter_list, newsletter_create = Api.newsletter_create, newsletter_read = Api.newsletter_read, newsletter_update = Api.newsletter_update, newsletter_partial_update = Api.newsletter_partial_update, newsletter_delete = Api.newsletter_delete;
 import { createContext, useState } from "react";
 var initialState = {
     count: 0,
@@ -12,51 +12,51 @@ var defaultContextState = {
     count: 0,
     loading: false,
     logActions: [],
-    commentsListFuncProp: function (data) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+    newsletterListFuncProp: function (data) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
         return [2 /*return*/];
     }); }); },
-    commentsCreateFuncProp: function (data) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+    newsletterCreateFuncProp: function (data) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
         return [2 /*return*/];
     }); }); },
-    commentsReadFuncProp: function (id) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+    newsletterReadFuncProp: function (id) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
         return [2 /*return*/];
     }); }); },
-    commentsUpdateFuncProp: function (id, data) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+    newsletterUpdateFuncProp: function (id, data) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
         return [2 /*return*/];
     }); }); },
-    commentsPartialFuncProp: function (id, data) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+    newsletterPartialFuncProp: function (id, data) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
         return [2 /*return*/];
     }); }); },
-    commentsDeleteFuncProp: function (id) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+    newsletterDeleteFuncProp: function (id) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
         return [2 /*return*/];
     }); }); },
 };
 /* prettier-ignore */
-export var CommentsContext = createContext(defaultContextState);
-export var CommentsProvider = function (_a) {
+export var NewsletterContext = createContext(defaultContextState);
+export var NewsletterProvider = function (_a) {
     var children = _a.children, headers = _a.headers;
     /* prettier-ignore */
-    var _b = useState(initialState), CommentsDataList = _b[0], setCommentsDataList = _b[1];
+    var _b = useState(initialState), NewsLetterDataList = _b[0], setNewsLetterDataList = _b[1];
     /* prettier-ignore */
     var _c = useState(false), loading = _c[0], setLoading = _c[1];
-    var commentsList = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newComments;
+    var newsletterList = function (data) { return __awaiter(void 0, void 0, void 0, function () {
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newNewsLetter;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (!data) return [3 /*break*/, 2];
                     setLoading(true);
-                    return [4 /*yield*/, comments_list(data, headers)];
+                    return [4 /*yield*/, newsletter_list(data, headers)];
                 case 1:
                     result = _a.sent();
-                    prevStateResults_1 = CommentsDataList.results;
-                    logActions = CommentsDataList.logActions;
+                    prevStateResults_1 = NewsLetterDataList.results;
+                    logActions = NewsLetterDataList.logActions;
                     logActions.push({ verb: "get", results: result.data.results });
                     found_1 = false;
-                    newCount = CommentsDataList.count + result.data.count;
+                    newCount = NewsLetterDataList.count + result.data.count;
                     newNext = result.data.next;
                     newPrevious = result.data.previous;
-                    newComments = prevStateResults_1.map(function (el) {
+                    newNewsLetter = prevStateResults_1.map(function (el) {
                         var preEl = prevStateResults_1.filter(function (resultEl) {
                             return el.id === resultEl.id;
                         });
@@ -69,14 +69,14 @@ export var CommentsProvider = function (_a) {
                         }
                     });
                     if (!found_1) {
-                        newComments = prevStateResults_1.concat(result.data.results);
+                        newNewsLetter = prevStateResults_1.concat(result.data.results);
                     }
-                    setCommentsDataList({
+                    setNewsLetterDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newComments,
+                        results: newNewsLetter,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -84,19 +84,19 @@ export var CommentsProvider = function (_a) {
             }
         });
     }); };
-    var commentsCreate = function (data) { return __awaiter(void 0, void 0, void 0, function () {
+    var newsletterCreate = function (data) { return __awaiter(void 0, void 0, void 0, function () {
         var result, prevStateResults, logActions, newCount;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (!data) return [3 /*break*/, 2];
                     setLoading(true);
-                    return [4 /*yield*/, comments_create(data, headers)];
+                    return [4 /*yield*/, newsletter_create(data, headers)];
                 case 1:
                     result = _a.sent();
-                    prevStateResults = CommentsDataList.results;
-                    logActions = CommentsDataList.logActions;
-                    newCount = CommentsDataList.count;
+                    prevStateResults = NewsLetterDataList.results;
+                    logActions = NewsLetterDataList.logActions;
+                    newCount = NewsLetterDataList.count;
                     logActions.push({ verb: "post", results: result.data });
                     if (!Array.isArray(result.data)) {
                         newCount = prevStateResults.push(result.data);
@@ -105,28 +105,28 @@ export var CommentsProvider = function (_a) {
                         prevStateResults = prevStateResults.concat(result.data);
                         newCount = prevStateResults.length;
                     }
-                    setCommentsDataList(__assign(__assign({}, CommentsDataList), { count: newCount, results: prevStateResults }));
+                    setNewsLetterDataList(__assign(__assign({}, NewsLetterDataList), { count: newCount, results: prevStateResults }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
             }
         });
     }); };
-    var commentsRead = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newComments;
+    var newsletterRead = function (id) { return __awaiter(void 0, void 0, void 0, function () {
+        var result_1, prevStateResults, logActions, found_2, newNewsLetter;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (!id) return [3 /*break*/, 2];
                     setLoading(true);
-                    return [4 /*yield*/, comments_read(id.toString(), headers)];
+                    return [4 /*yield*/, newsletter_read(id.toString(), headers)];
                 case 1:
                     result_1 = _a.sent();
-                    prevStateResults = CommentsDataList.results;
-                    logActions = CommentsDataList.logActions;
+                    prevStateResults = NewsLetterDataList.results;
+                    logActions = NewsLetterDataList.logActions;
                     logActions.push({ verb: "get", results: result_1.data });
                     found_2 = false;
-                    newComments = prevStateResults.map(function (el) {
+                    newNewsLetter = prevStateResults.map(function (el) {
                         if (el.id === result_1.data.id) {
                             found_2 = true;
                             return __assign(__assign({}, el), result_1.data);
@@ -136,111 +136,111 @@ export var CommentsProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newComments = prevStateResults.concat(result_1.data);
+                        newNewsLetter = prevStateResults.concat(result_1.data);
                     }
-                    setCommentsDataList(__assign(__assign({}, CommentsDataList), { results: newComments }));
+                    setNewsLetterDataList(__assign(__assign({}, NewsLetterDataList), { results: newNewsLetter }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
             }
         });
     }); };
-    var commentsUpdate = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newComments;
+    var newsletterUpdate = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
+        var result_2, prevStateResults, logActions, newNewsLetter;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (!(id && data)) return [3 /*break*/, 2];
                     setLoading(true);
-                    return [4 /*yield*/, comments_update(id.toString(), data, headers)];
+                    return [4 /*yield*/, newsletter_update(id.toString(), data, headers)];
                 case 1:
                     result_2 = _a.sent();
-                    prevStateResults = CommentsDataList.results;
-                    logActions = CommentsDataList.logActions;
+                    prevStateResults = NewsLetterDataList.results;
+                    logActions = NewsLetterDataList.logActions;
                     //update
                     logActions.push({ verb: "put", results: result_2.data });
-                    newComments = void 0;
+                    newNewsLetter = void 0;
                     if (!Array.isArray(result_2.data))
-                        newComments = prevStateResults.map(function (el) {
+                        newNewsLetter = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? __assign(__assign({}, el), result_2.data) : el;
                         });
                     //update bulk
                     else
-                        newComments = prevStateResults.map(function (el) {
+                        newNewsLetter = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? __assign(__assign({}, el), result_2.data) : el;
                         });
-                    setCommentsDataList(__assign(__assign({}, CommentsDataList), { results: newComments }));
+                    setNewsLetterDataList(__assign(__assign({}, NewsLetterDataList), { results: newNewsLetter }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
             }
         });
     }); };
-    var commentsPartial = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newComments;
+    var newsletterPartial = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
+        var result_3, prevStateResults, logActions, newNewsLetter;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (!(id && data)) return [3 /*break*/, 2];
                     setLoading(true);
-                    return [4 /*yield*/, comments_partial_update(id.toString(), data, headers)];
+                    return [4 /*yield*/, newsletter_partial_update(id.toString(), data, headers)];
                 case 1:
                     result_3 = _a.sent();
-                    prevStateResults = CommentsDataList.results;
-                    logActions = CommentsDataList.logActions;
+                    prevStateResults = NewsLetterDataList.results;
+                    logActions = NewsLetterDataList.logActions;
                     //update
                     logActions.push({ verb: "patch", results: result_3.data });
-                    newComments = void 0;
+                    newNewsLetter = void 0;
                     if (!Array.isArray(result_3.data))
-                        newComments = prevStateResults.map(function (el) {
+                        newNewsLetter = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? __assign(__assign({}, el), result_3.data) : el;
                         });
                     //update bulk
                     else
-                        newComments = prevStateResults.map(function (el) {
+                        newNewsLetter = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? __assign(__assign({}, el), result_3.data) : el;
                         });
-                    setCommentsDataList(__assign(__assign({}, CommentsDataList), { results: newComments }));
+                    setNewsLetterDataList(__assign(__assign({}, NewsLetterDataList), { results: newNewsLetter }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
             }
         });
     }); };
-    var commentsDelete = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newComments;
+    var newsletterDelete = function (id) { return __awaiter(void 0, void 0, void 0, function () {
+        var result, prevStateResults, logActions, newNewsLetter;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (!id) return [3 /*break*/, 2];
                     setLoading(true);
-                    return [4 /*yield*/, comments_delete(id.toString(), headers)];
+                    return [4 /*yield*/, newsletter_delete(id.toString(), headers)];
                 case 1:
                     result = _a.sent();
-                    prevStateResults = CommentsDataList.results;
-                    logActions = CommentsDataList.logActions;
+                    prevStateResults = NewsLetterDataList.results;
+                    logActions = NewsLetterDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
-                    newComments = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setCommentsDataList(__assign(__assign({}, CommentsDataList), { results: newComments }));
+                    newNewsLetter = prevStateResults.filter(function (el) { return el.id !== id; });
+                    setNewsLetterDataList(__assign(__assign({}, NewsLetterDataList), { results: newNewsLetter }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
             }
         });
     }); };
-    return (_jsx(CommentsContext.Provider, __assign({ value: {
-            count: CommentsDataList.count,
-            next: CommentsDataList.next,
-            previous: CommentsDataList.previous,
-            logActions: CommentsDataList.logActions,
+    return (_jsx(NewsletterContext.Provider, __assign({ value: {
+            count: NewsLetterDataList.count,
+            next: NewsLetterDataList.next,
+            previous: NewsLetterDataList.previous,
+            logActions: NewsLetterDataList.logActions,
             loading: loading,
-            commentsData: CommentsDataList.results,
-            commentsListFuncProp: commentsList,
-            commentsCreateFuncProp: commentsCreate,
-            commentsReadFuncProp: commentsRead,
-            commentsUpdateFuncProp: commentsUpdate,
-            commentsPartialFuncProp: commentsPartial,
-            commentsDeleteFuncProp: commentsDelete,
+            newsletterData: NewsLetterDataList.results,
+            newsletterListFuncProp: newsletterList,
+            newsletterCreateFuncProp: newsletterCreate,
+            newsletterReadFuncProp: newsletterRead,
+            newsletterUpdateFuncProp: newsletterUpdate,
+            newsletterPartialFuncProp: newsletterPartial,
+            newsletterDeleteFuncProp: newsletterDelete,
         } }, { children: children })));
 };
-//# sourceMappingURL=comments.js.map
+//# sourceMappingURL=newsletter.js.map
