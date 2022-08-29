@@ -65,6 +65,9 @@ export const  isLoggedIn = (req: IGetUserAuthInfoRequest, res: Response, next: N
   } else if(req.url == res.app.get("login_url") || req.url == res.app.get("login_auth") ){
     setToken();
   }
+  else{
+    if(req.logout)  req.logout()
+  }
   next();
 }
 

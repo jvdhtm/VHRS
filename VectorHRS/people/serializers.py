@@ -21,14 +21,14 @@ class AddressSerializer(ModelSerializer):
 
     class Meta:
         model = Address
-        fields = 'id',  'staff',  'description',  'address1',  'address2',  'zip',  'city',  'country',  'status',  'created_date_time' 
+        fields = 'id',  'person',  'description',  'address1',  'address2',  'zip',  'city',  'country',  'status',  'created_date_time' 
 
 
 class PhoneSerializer(ModelSerializer):
 
     class Meta:
         model = Phone
-        fields = 'id',  'staff',  'description',  'phoneNumber',  'status',  'created_date_time' 
+        fields = 'id',  'person',  'description',  'phoneNumber',  'status',  'created_date_time' 
 
 
 class PersonLogSerializer(ModelSerializer):

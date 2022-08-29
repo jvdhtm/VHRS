@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from staff_api.models import StaffStage, Condition, Department, Staff, StaffLog, Function, StaffFunctions, Comments
+from staff_api.models import StaffStage, Condition, Department, Staff, StaffLog, Function, StaffFunctions, StaffComment
 
 
 
@@ -52,8 +52,8 @@ class StaffFunctionsSerializer(ModelSerializer):
         fields = 'id',  'function',  'staff',  'status',  'created_date_time' 
 
 
-class CommentsSerializer(ModelSerializer):
+class StaffCommentSerializer(ModelSerializer):
 
     class Meta:
-        model = Comments
+        model = StaffComment
         fields = 'id',  'staff',  'name',  'description',  'status',  'created_date_time' 
