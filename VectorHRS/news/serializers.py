@@ -7,7 +7,7 @@ class NewsLetterSerializer(ModelSerializer):
 
     class Meta:
         model = NewsLetter
-        fields = 'id',  'name',  'html',  'autor',  'status',  'created_date_time' 
+        fields = 'id',  'name',  'description',  'html',  'autor',  'status',  'created_date_time' 
 
 
 class NewsRelatedLinkSerializer(ModelSerializer):

@@ -1,4 +1,5 @@
 import { AddressProvider, AddressContext, Iaddress } from "./address";
+import { AnswersProvider, AnswersContext, Ianswers } from "./answers";
 import { AppProvider, AppContext, Iapp } from "./app";
 import { CommentProvider, CommentContext, Icomment } from "./comment";
 import { ConditionProvider, ConditionContext, Icondition } from "./condition";
@@ -32,6 +33,12 @@ import {
   Ipersonstage,
 } from "./personstage";
 import { PhoneProvider, PhoneContext, Iphone } from "./phone";
+import { QuestionProvider, QuestionContext, Iquestion } from "./question";
+import {
+  QuestionsrelatedlinkProvider,
+  QuestionsrelatedlinkContext,
+  Iquestionsrelatedlink,
+} from "./questionsrelatedlink";
 import { RoleProvider, RoleContext, Irole } from "./role";
 import { StaffProvider, StaffContext, Istaff } from "./staff";
 import {
@@ -56,6 +63,9 @@ export {
   AddressProvider,
   AddressContext,
   Iaddress,
+  AnswersProvider,
+  AnswersContext,
+  Ianswers,
   AppProvider,
   AppContext,
   Iapp,
@@ -95,6 +105,12 @@ export {
   PhoneProvider,
   PhoneContext,
   Iphone,
+  QuestionProvider,
+  QuestionContext,
+  Iquestion,
+  QuestionsrelatedlinkProvider,
+  QuestionsrelatedlinkContext,
+  Iquestionsrelatedlink,
   RoleProvider,
   RoleContext,
   Irole,

@@ -21,6 +21,23 @@ export interface paths {
       };
     };
   };
+  "/answers/": {
+    get: operations["answers_list"];
+    post: operations["answers_create"];
+    parameters: {};
+  };
+  "/answers/{id}/": {
+    get: operations["answers_read"];
+    put: operations["answers_update"];
+    delete: operations["answers_delete"];
+    patch: operations["answers_partial_update"];
+    parameters: {
+      path: {
+        /** A unique integer value identifying this answers. */
+        id: number;
+      };
+    };
+  };
   "/app/": {
     get: operations["app_list"];
     post: operations["app_create"];
@@ -242,6 +259,40 @@ export interface paths {
       };
     };
   };
+  "/question/": {
+    get: operations["question_list"];
+    post: operations["question_create"];
+    parameters: {};
+  };
+  "/question/{id}/": {
+    get: operations["question_read"];
+    put: operations["question_update"];
+    delete: operations["question_delete"];
+    patch: operations["question_partial_update"];
+    parameters: {
+      path: {
+        /** A unique integer value identifying this question. */
+        id: number;
+      };
+    };
+  };
+  "/questionsrelatedlink/": {
+    get: operations["questionsrelatedlink_list"];
+    post: operations["questionsrelatedlink_create"];
+    parameters: {};
+  };
+  "/questionsrelatedlink/{id}/": {
+    get: operations["questionsrelatedlink_read"];
+    put: operations["questionsrelatedlink_update"];
+    delete: operations["questionsrelatedlink_delete"];
+    patch: operations["questionsrelatedlink_partial_update"];
+    parameters: {
+      path: {
+        /** A unique integer value identifying this questions related link. */
+        id: number;
+      };
+    };
+  };
   "/role/": {
     get: operations["role_list"];
     post: operations["role_create"];
@@ -389,6 +440,25 @@ export interface definitions {
      */
     created_date_time?: string;
   };
+  answers: {
+    /** ID */
+    id?: number;
+    /** Name */
+    name?: string;
+    /** Html */
+    html?: string;
+    /** Autor */
+    autor: number;
+    /** Status */
+    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    /**
+     * Created date time
+     * Format: date-time
+     */
+    created_date_time?: string;
+    /** Question */
+    question: number;
+  };
   App: {
     /** ID */
     id?: number;
@@ -506,6 +576,8 @@ export interface definitions {
     id?: number;
     /** Name */
     name?: string;
+    /** Description */
+    description?: string;
     /** Html */
     html?: string;
     /** Autor */
@@ -607,6 +679,38 @@ export interface definitions {
     phoneNumber?: string;
     /** Status */
     status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    /**
+     * Created date time
+     * Format: date-time
+     */
+    created_date_time?: string;
+  };
+  Question: {
+    /** ID */
+    id?: number;
+    /** Name */
+    name?: string;
+    /** Html */
+    html?: string;
+    /** Description */
+    description?: string;
+    /** Autor */
+    autor: number;
+    /** Status */
+    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    /**
+     * Created date time
+     * Format: date-time
+     */
+    created_date_time?: string;
+  };
+  QuestionsRelatedLink: {
+    /** ID */
+    id?: number;
+    /** Question */
+    question: number;
+    /** Name */
+    name?: string;
     /**
      * Created date time
      * Format: date-time
@@ -833,6 +937,96 @@ export interface operations {
     responses: {
       200: {
         schema: definitions["Address"];
+      };
+    };
+  };
+  answers_list: {
+    parameters: {
+      query: {
+        /** A page number within the paginated result set. */
+        page?: number;
+        /** Number of results to return per page. */
+        page_size?: number;
+      };
+    };
+    responses: {
+      200: {
+        schema: {
+          count: number;
+          /** Format: uri */
+          next?: string;
+          /** Format: uri */
+          previous?: string;
+          results: definitions["answers"][];
+        };
+      };
+    };
+  };
+  answers_create: {
+    parameters: {
+      body: {
+        data: definitions["answers"];
+      };
+    };
+    responses: {
+      201: {
+        schema: definitions["answers"];
+      };
+    };
+  };
+  answers_read: {
+    parameters: {
+      path: {
+        /** A unique integer value identifying this answers. */
+        id: number;
+      };
+    };
+    responses: {
+      200: {
+        schema: definitions["answers"];
+      };
+    };
+  };
+  answers_update: {
+    parameters: {
+      path: {
+        /** A unique integer value identifying this answers. */
+        id: number;
+      };
+      body: {
+        data: definitions["answers"];
+      };
+    };
+    responses: {
+      200: {
+        schema: definitions["answers"];
+      };
+    };
+  };
+  answers_delete: {
+    parameters: {
+      path: {
+        /** A unique integer value identifying this answers. */
+        id: number;
+      };
+    };
+    responses: {
+      204: never;
+    };
+  };
+  answers_partial_update: {
+    parameters: {
+      path: {
+        /** A unique integer value identifying this answers. */
+        id: number;
+      };
+      body: {
+        data: definitions["answers"];
+      };
+    };
+    responses: {
+      200: {
+        schema: definitions["answers"];
       };
     };
   };
@@ -2006,6 +2200,186 @@ export interface operations {
     responses: {
       200: {
         schema: definitions["Phone"];
+      };
+    };
+  };
+  question_list: {
+    parameters: {
+      query: {
+        /** A page number within the paginated result set. */
+        page?: number;
+        /** Number of results to return per page. */
+        page_size?: number;
+      };
+    };
+    responses: {
+      200: {
+        schema: {
+          count: number;
+          /** Format: uri */
+          next?: string;
+          /** Format: uri */
+          previous?: string;
+          results: definitions["Question"][];
+        };
+      };
+    };
+  };
+  question_create: {
+    parameters: {
+      body: {
+        data: definitions["Question"];
+      };
+    };
+    responses: {
+      201: {
+        schema: definitions["Question"];
+      };
+    };
+  };
+  question_read: {
+    parameters: {
+      path: {
+        /** A unique integer value identifying this question. */
+        id: number;
+      };
+    };
+    responses: {
+      200: {
+        schema: definitions["Question"];
+      };
+    };
+  };
+  question_update: {
+    parameters: {
+      path: {
+        /** A unique integer value identifying this question. */
+        id: number;
+      };
+      body: {
+        data: definitions["Question"];
+      };
+    };
+    responses: {
+      200: {
+        schema: definitions["Question"];
+      };
+    };
+  };
+  question_delete: {
+    parameters: {
+      path: {
+        /** A unique integer value identifying this question. */
+        id: number;
+      };
+    };
+    responses: {
+      204: never;
+    };
+  };
+  question_partial_update: {
+    parameters: {
+      path: {
+        /** A unique integer value identifying this question. */
+        id: number;
+      };
+      body: {
+        data: definitions["Question"];
+      };
+    };
+    responses: {
+      200: {
+        schema: definitions["Question"];
+      };
+    };
+  };
+  questionsrelatedlink_list: {
+    parameters: {
+      query: {
+        /** A page number within the paginated result set. */
+        page?: number;
+        /** Number of results to return per page. */
+        page_size?: number;
+      };
+    };
+    responses: {
+      200: {
+        schema: {
+          count: number;
+          /** Format: uri */
+          next?: string;
+          /** Format: uri */
+          previous?: string;
+          results: definitions["QuestionsRelatedLink"][];
+        };
+      };
+    };
+  };
+  questionsrelatedlink_create: {
+    parameters: {
+      body: {
+        data: definitions["QuestionsRelatedLink"];
+      };
+    };
+    responses: {
+      201: {
+        schema: definitions["QuestionsRelatedLink"];
+      };
+    };
+  };
+  questionsrelatedlink_read: {
+    parameters: {
+      path: {
+        /** A unique integer value identifying this questions related link. */
+        id: number;
+      };
+    };
+    responses: {
+      200: {
+        schema: definitions["QuestionsRelatedLink"];
+      };
+    };
+  };
+  questionsrelatedlink_update: {
+    parameters: {
+      path: {
+        /** A unique integer value identifying this questions related link. */
+        id: number;
+      };
+      body: {
+        data: definitions["QuestionsRelatedLink"];
+      };
+    };
+    responses: {
+      200: {
+        schema: definitions["QuestionsRelatedLink"];
+      };
+    };
+  };
+  questionsrelatedlink_delete: {
+    parameters: {
+      path: {
+        /** A unique integer value identifying this questions related link. */
+        id: number;
+      };
+    };
+    responses: {
+      204: never;
+    };
+  };
+  questionsrelatedlink_partial_update: {
+    parameters: {
+      path: {
+        /** A unique integer value identifying this questions related link. */
+        id: number;
+      };
+      body: {
+        data: definitions["QuestionsRelatedLink"];
+      };
+    };
+    responses: {
+      200: {
+        schema: definitions["QuestionsRelatedLink"];
       };
     };
   };

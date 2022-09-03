@@ -1,0 +1,8 @@
+import { operations, definitions } from "../schemas";
+import { AxiosResponse } from "axios";
+export declare const questionsrelatedlink_list: (data: operations["questionsrelatedlink_list"]["parameters"], headers: any, _apiPrefix?: string, force?: boolean) => Promise<AxiosResponse<operations["questionsrelatedlink_list"]["responses"][200]["schema"]>>;
+export declare const questionsrelatedlink_create: (data: definitions["QuestionsRelatedLink"] | definitions["QuestionsRelatedLink"][], headers: any, _apiPrefix?: string, force?: boolean) => Promise<AxiosResponse<operations["questionsrelatedlink_create"]["responses"][201]["schema"]>>;
+export declare const questionsrelatedlink_read: (id: string, headers: any, _apiPrefix?: string, force?: boolean) => Promise<AxiosResponse<operations["questionsrelatedlink_read"]["responses"][200]["schema"]>>;
+export declare const questionsrelatedlink_update: (id: string, data: definitions["QuestionsRelatedLink"] | definitions["QuestionsRelatedLink"][], headers: any, _apiPrefix?: string, force?: boolean) => Promise<AxiosResponse<operations["questionsrelatedlink_update"]["responses"][200]["schema"]>>;
+export declare const questionsrelatedlink_partial_update: (id: string, data: definitions["QuestionsRelatedLink"] | definitions["QuestionsRelatedLink"][], headers: any, _apiPrefix?: string, force?: boolean) => Promise<AxiosResponse<operations["questionsrelatedlink_partial_update"]["responses"][200]["schema"]>>;
+export declare const questionsrelatedlink_delete: (id: string, headers: any, _apiPrefix?: string, force?: boolean) => Promise<AxiosResponse<any["schema"]>>;

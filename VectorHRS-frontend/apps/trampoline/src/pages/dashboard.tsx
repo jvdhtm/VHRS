@@ -1,4 +1,4 @@
-import { NewsLetter ,RelatedLink } from '../components';
+import { NewsLetter, Questions } from '../components';
 import Admin from '../layouts/Admin';
 import resources from '@vhrs/resources';
 import { FC } from 'react';
@@ -6,10 +6,14 @@ import { Heading } from '@chakra-ui/react';
 
 const DepartmentProvider = resources.contexts.DepartmentProvider;
 const NewsletterProvider = resources.contexts.NewsletterProvider;
+const NewsrelatedlinkProvider = resources.contexts.NewsrelatedlinkProvider;
+const QuestionsProvider = resources.contexts.QuestionProvider;
 
 const Dashboard: FC = () => {
   return (
     <DepartmentProvider headers={''}>
+      <NewsrelatedlinkProvider headers={''}>
+      <QuestionsProvider headers={''}>
       <NewsletterProvider headers={''}>
         <Admin>
           <Heading as='h1' size='lg' noOfLines={1}>
@@ -19,11 +23,14 @@ const Dashboard: FC = () => {
           <div className='grid'>
             <NewsLetter />
             <div className='sidebox' >
-              <RelatedLink />
+              <Questions />
             </div>
           </div>
         </Admin>
-      </NewsletterProvider>
+   
+        </NewsletterProvider>
+        </QuestionsProvider>
+        </NewsrelatedlinkProvider>
     </DepartmentProvider>
   );
 };

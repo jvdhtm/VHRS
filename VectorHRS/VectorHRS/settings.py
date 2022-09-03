@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'people.apps.PeopleConfig',
     'news.apps.NewsConfig',
     'identity_api.apps.IdentityApiConfig',
+    'questions.apps.QuestionsConfig',
     'api_doc.apps.ApiDocConfig',
     'staff_api.apps.StaffApiConfig',
     'django.contrib.admin',

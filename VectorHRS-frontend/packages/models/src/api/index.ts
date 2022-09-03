@@ -7,6 +7,14 @@ import {
   address_delete,
 } from "./address";
 import {
+  answers_list,
+  answers_create,
+  answers_read,
+  answers_update,
+  answers_partial_update,
+  answers_delete,
+} from "./answers";
+import {
   app_list,
   app_create,
   app_read,
@@ -111,6 +119,22 @@ import {
   phone_delete,
 } from "./phone";
 import {
+  question_list,
+  question_create,
+  question_read,
+  question_update,
+  question_partial_update,
+  question_delete,
+} from "./question";
+import {
+  questionsrelatedlink_list,
+  questionsrelatedlink_create,
+  questionsrelatedlink_read,
+  questionsrelatedlink_update,
+  questionsrelatedlink_partial_update,
+  questionsrelatedlink_delete,
+} from "./questionsrelatedlink";
+import {
   role_list,
   role_create,
   role_read,
@@ -173,6 +197,12 @@ export {
   address_update,
   address_partial_update,
   address_delete,
+  answers_list,
+  answers_create,
+  answers_read,
+  answers_update,
+  answers_partial_update,
+  answers_delete,
   app_list,
   app_create,
   app_read,
@@ -251,6 +281,18 @@ export {
   phone_update,
   phone_partial_update,
   phone_delete,
+  question_list,
+  question_create,
+  question_read,
+  question_update,
+  question_partial_update,
+  question_delete,
+  questionsrelatedlink_list,
+  questionsrelatedlink_create,
+  questionsrelatedlink_read,
+  questionsrelatedlink_update,
+  questionsrelatedlink_partial_update,
+  questionsrelatedlink_delete,
   role_list,
   role_create,
   role_read,
