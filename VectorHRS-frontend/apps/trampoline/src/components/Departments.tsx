@@ -1,15 +1,12 @@
-import { Box,Image,Badge } from "@chakra-ui/react"
-import { StarIcon} from '@chakra-ui/icons';
+
 import resources from "@vhrs/resources";
 import { definitions } from "@vhrs/models";
 import { Idepartment } from "@vhrs/resources/types/context";
 import { FC, useContext, useEffect } from "react";
-import ResourceICon from "./ResourceICon";
 import VList from "./Lists";
 import {toNumber, includeChildren} from "../util/utils";
 import { Link } from 'react-router-dom';
-import { ListIcon } from "@chakra-ui/react";
-
+import VIcon from "./VIcon";
 type Imodeldepartment = definitions["Department"];
 
 interface Departments extends  Imodeldepartment{
@@ -21,8 +18,7 @@ const Department: FC<Departments> = (props:Departments) =>{
     return <>
                
                 <Link to={link}  >
-                    {}
-                    <ListIcon as={ResourceICon}  />
+                    <VIcon color="var(--secondary)" fontSize="1rem" icon="ri-newspaper-fill" ></VIcon>
                    {props.name ? props.name : "Dep name"}
                
                 </Link>

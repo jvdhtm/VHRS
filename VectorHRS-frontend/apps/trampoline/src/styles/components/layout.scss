@@ -3,20 +3,24 @@
     z-index: 1;
     box-shadow: var(--boxShadow) 0px 0px 12px;
     top: 0;
-    width: 100vw;
+    width: 100%;
     height:  var(--headerHeight);
     align-items: center;
     position: fixed;
-    background: var(--quinary);
+
     .logo {
-        grid-column: span 1/span 1;
+        grid-column: span 3/span 3;
         display: flex;
         align-items: center;
         position: relative;
         svg{
             position: absolute;
-            width: 6rem;
-            top: 0;
+            width: 10rem;
+            left: 0rem;
+            fill:var(--primary);
+        }
+        img{
+            width: 10rem;
         }
     }
     .profile-menu{
@@ -34,10 +38,10 @@
     }
     .show-menu
     {
-        color:  var(--white);
+        
         position: absolute;
         right: 2rem;
-        top: 0.2rem;
+        top: 1.2rem;
         &:hover{
             color: var(--black);
         }
@@ -47,19 +51,18 @@
     }
     .navigation-container {
         display: flex;
-        grid-column: span 2/span 2;
+        grid-column: span 21/span 21;
+        align-items: center;
         &> nav{
             display: flex;
             align-items: center;
-            color:  var(--white);
+      
             .chakra-link {
                 padding: 0.5rem;
             }
 
         }
-        .chakra-button {
-            fill: var(--white);
-        }
+
     }
 }
 
@@ -67,22 +70,36 @@ main {
     padding-top: var(--headerHeight);
 }
 .sidebar{
-    grid-column: span 1/span 1;
+    grid-column: span 2/span 2;
     height: 100vh;
     @include media('>=tablet')  { 
-        grid-column: span 4/span 4;
+        grid-column: span 3/span 3;
     }   
     
 }
+.grid{
+    grid-template-columns: repeat(var(--grid), 1fr);
+    display: grid;
+    grid-gap:2rem;
+
+}
 .content{
-    grid-column: span 11/span 11;
+    grid-column: span 22/span 22;
     @include media('>=tablet')  { 
-        grid-column: span 8/span 8;
+        grid-column: span 21/span 21;
     }   
 
 }
+.sidebox{
+    grid-column: span 24/span 24;
+    height: 100vh;
+    padding-top: 4rem;
+    @include media('>=tablet')  { 
+        grid-column: span 6/span 6;
+    }   
+}
 .container{
-    max-width:120rem ;
+    max-width:84rem ;
     margin: auto;
     width: 100%;
     position: relative;
@@ -94,11 +111,4 @@ main {
     width:1px;
     height:1px;
     overflow:hidden;
-}
-h1{
-
-    padding: 2rem;
-    border-bottom: thin solid var(--black);
-    position: relative;
-
 }

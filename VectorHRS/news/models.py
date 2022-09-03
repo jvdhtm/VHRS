@@ -13,6 +13,10 @@ class NewsLetter(models.Model):
     status = models.CharField(max_length=1000, choices=STATUS_CHOICES)
     created_date_time = models.DateTimeField(default=now)
 
+class NewsRelatedLink(models.Model):
+    news =  models.ForeignKey(NewsLetter, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, null=True, blank=True)
+    created_date_time = models.DateTimeField(default=now)
     
 class Comment(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)

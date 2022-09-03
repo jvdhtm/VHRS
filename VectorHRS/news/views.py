@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import mixins
-from news.serializers import NewsLetterSerializer, CommentSerializer
-from news.models import NewsLetter, Comment
+from news.serializers import NewsLetterSerializer, NewsRelatedLinkSerializer, CommentSerializer
+from news.models import NewsLetter, NewsRelatedLink, Comment
 from rest_framework.permissions import IsAuthenticated
 from django_filters import rest_framework as filters
 
@@ -16,6 +16,12 @@ class CreateListMixin:
 class NewsLetterViewSet(CreateListMixin, ModelViewSet):
     queryset = NewsLetter.objects.order_by('pk')
     serializer_class = NewsLetterSerializer
+    permission_classes = [IsAuthenticated,]
+
+
+class NewsRelatedLinkViewSet(CreateListMixin, ModelViewSet):
+    queryset = NewsRelatedLink.objects.order_by('pk')
+    serializer_class = NewsRelatedLinkSerializer
     permission_classes = [IsAuthenticated,]
 
 

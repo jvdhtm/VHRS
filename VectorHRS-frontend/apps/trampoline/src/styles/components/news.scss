@@ -1,0 +1,7 @@
+.news {
+    width: 100%;
+    grid-column: span 24/span 24;
+    @include media('>=tablet')  { 
+        grid-column: span 18/span 18;
+    }   
+}

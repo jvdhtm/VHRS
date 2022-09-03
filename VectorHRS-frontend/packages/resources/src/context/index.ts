@@ -19,6 +19,11 @@ import {
   NewsletterContext,
   Inewsletter,
 } from "./newsletter";
+import {
+  NewsrelatedlinkProvider,
+  NewsrelatedlinkContext,
+  Inewsrelatedlink,
+} from "./newsrelatedlink";
 import { PersonProvider, PersonContext, Iperson } from "./person";
 import { PersonlogProvider, PersonlogContext, Ipersonlog } from "./personlog";
 import {
@@ -75,6 +80,9 @@ export {
   NewsletterProvider,
   NewsletterContext,
   Inewsletter,
+  NewsrelatedlinkProvider,
+  NewsrelatedlinkContext,
+  Inewsrelatedlink,
   PersonProvider,
   PersonContext,
   Iperson,

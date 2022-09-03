@@ -157,6 +157,23 @@ export interface paths {
       };
     };
   };
+  "/newsrelatedlink/": {
+    get: operations["newsrelatedlink_list"];
+    post: operations["newsrelatedlink_create"];
+    parameters: {};
+  };
+  "/newsrelatedlink/{id}/": {
+    get: operations["newsrelatedlink_read"];
+    put: operations["newsrelatedlink_update"];
+    delete: operations["newsrelatedlink_delete"];
+    patch: operations["newsrelatedlink_partial_update"];
+    parameters: {
+      path: {
+        /** A unique integer value identifying this news related link. */
+        id: number;
+      };
+    };
+  };
   "/person/": {
     get: operations["person_list"];
     post: operations["person_create"];
@@ -495,6 +512,19 @@ export interface definitions {
     autor: number;
     /** Status */
     status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    /**
+     * Created date time
+     * Format: date-time
+     */
+    created_date_time?: string;
+  };
+  NewsRelatedLink: {
+    /** ID */
+    id?: number;
+    /** News */
+    news: number;
+    /** Name */
+    name?: string;
     /**
      * Created date time
      * Format: date-time
@@ -1526,6 +1556,96 @@ export interface operations {
     responses: {
       200: {
         schema: definitions["NewsLetter"];
+      };
+    };
+  };
+  newsrelatedlink_list: {
+    parameters: {
+      query: {
+        /** A page number within the paginated result set. */
+        page?: number;
+        /** Number of results to return per page. */
+        page_size?: number;
+      };
+    };
+    responses: {
+      200: {
+        schema: {
+          count: number;
+          /** Format: uri */
+          next?: string;
+          /** Format: uri */
+          previous?: string;
+          results: definitions["NewsRelatedLink"][];
+        };
+      };
+    };
+  };
+  newsrelatedlink_create: {
+    parameters: {
+      body: {
+        data: definitions["NewsRelatedLink"];
+      };
+    };
+    responses: {
+      201: {
+        schema: definitions["NewsRelatedLink"];
+      };
+    };
+  };
+  newsrelatedlink_read: {
+    parameters: {
+      path: {
+        /** A unique integer value identifying this news related link. */
+        id: number;
+      };
+    };
+    responses: {
+      200: {
+        schema: definitions["NewsRelatedLink"];
+      };
+    };
+  };
+  newsrelatedlink_update: {
+    parameters: {
+      path: {
+        /** A unique integer value identifying this news related link. */
+        id: number;
+      };
+      body: {
+        data: definitions["NewsRelatedLink"];
+      };
+    };
+    responses: {
+      200: {
+        schema: definitions["NewsRelatedLink"];
+      };
+    };
+  };
+  newsrelatedlink_delete: {
+    parameters: {
+      path: {
+        /** A unique integer value identifying this news related link. */
+        id: number;
+      };
+    };
+    responses: {
+      204: never;
+    };
+  };
+  newsrelatedlink_partial_update: {
+    parameters: {
+      path: {
+        /** A unique integer value identifying this news related link. */
+        id: number;
+      };
+      body: {
+        data: definitions["NewsRelatedLink"];
+      };
+    };
+    responses: {
+      200: {
+        schema: definitions["NewsRelatedLink"];
       };
     };
   };

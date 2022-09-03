@@ -35,52 +35,57 @@ const ExitICon: FC = () => {
 };
 
 const Header: FC<IHeader> = ({
-  isMoblie,
-  collapsed,
-  toggleCollapse,
   children,
   ClassName,
 }) => {
   const { isOpen, onToggle } = useDisclosure();
   return (
     <header className={ClassName}>
-      <div className="container">
-      <Grid
-        w='100%'
-        h='var(--headerHeight)'
-        templateColumns='repeat(12, 1fr)'
-        templateRows='repeat(1, 1fr)'
-        gap={0}
-      >
-        <GridItem  colSpan={12} h='var(--headerHeight)'>
-          <div className='navigation-container'>{children}</div>
-          <div className='profile-menu'>
-            <Menu strategy='fixed'>
-              <MenuButton
-                className='show-menu'
-                as={IconButton}
-                aria-label='Options'
-                icon={<AtSignIcon />}
-                variant='outline'
-              />
-              <MenuList>
-                <MenuItem icon={<SettingsIcon />} command='⌘P'>
-                  <Link to='/profile'>profile</Link>
-                </MenuItem>
-                <MenuItem icon={<ExitICon />} command='⌘T'>
-                  <Link to='/logout'>Log out</Link>
-                </MenuItem>
-              </MenuList>
-            </Menu>
-          </div>
-        </GridItem>
-        <GridItem className="sidebar" bg={'var(--tertiary)'}>
-          <div className='logo'>
-            <Logo />
-          </div>
-          <Departments />
-        </GridItem>
-      </Grid>
+      <div className='container'>
+        <Grid
+          w='100%'
+          h='var(--headerHeight)'
+          templateColumns='repeat(var(--grid), 1fr)'
+          templateRows='repeat(1, 1fr)'
+          gap={0}
+        >
+          <GridItem colSpan={24} h='var(--headerHeight)'>
+            <Grid
+              w='100%'
+              h='var(--headerHeight)'
+              templateColumns='repeat(var(--grid), 1fr)'
+              templateRows='repeat(1, 1fr)'
+              gap={0}
+            >
+              <div className='logo'>
+                <Logo />
+              </div>
+              <div className='navigation-container'>{children}</div>
+              <div className='profile-menu'>
+                <Menu strategy='fixed'>
+                  <MenuButton
+                    className='show-menu'
+                    as={IconButton}
+                    aria-label='Options'
+                    icon={<AtSignIcon />}
+                    variant='outline'
+                  />
+                  <MenuList>
+                    <MenuItem icon={<SettingsIcon />} command='⌘P'>
+                      <Link to='/profile'>profile</Link>
+                    </MenuItem>
+                    <MenuItem icon={<ExitICon />} command='⌘T'>
+                      <Link to='/logout'>Log out</Link>
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              </div>
+            </Grid>
+          </GridItem>
+          <GridItem className='sidebar' borderRight={'thin solid var(--borderColor)'}>
+            <Departments />
+          </GridItem>
+        </Grid>
       </div>
     </header>
   );

@@ -71,6 +71,14 @@ import {
   newsletter_delete,
 } from "./newsletter";
 import {
+  newsrelatedlink_list,
+  newsrelatedlink_create,
+  newsrelatedlink_read,
+  newsrelatedlink_update,
+  newsrelatedlink_partial_update,
+  newsrelatedlink_delete,
+} from "./newsrelatedlink";
+import {
   person_list,
   person_create,
   person_read,
@@ -213,6 +221,12 @@ export {
   newsletter_update,
   newsletter_partial_update,
   newsletter_delete,
+  newsrelatedlink_list,
+  newsrelatedlink_create,
+  newsrelatedlink_read,
+  newsrelatedlink_update,
+  newsrelatedlink_partial_update,
+  newsrelatedlink_delete,
   person_list,
   person_create,
   person_read,

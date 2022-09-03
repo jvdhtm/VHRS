@@ -1,7 +1,7 @@
 
 import { useContext, useState } from 'react'
 import useWindowSize from '../util/resize'
-import { Header, Sidebar } from '../components'
+import { Header, SidebarDrawer } from '../components'
 import resources from "@vhrs/resources";
 import { FC } from "react";
 import { Icontent } from '../types';
@@ -9,7 +9,11 @@ import type { IAuth } from "@vhrs/resources/types/authContext";
 import { Button, Icon, useDisclosure,Link  } from '@chakra-ui/react';
 import { Link as ReachLink } from "react-router-dom"
 import React from 'react';
-
+import {
+  Grid,
+  Heading,
+  GridItem
+} from '@chakra-ui/react';
 
 const MoreOptions:FC = ()=>{
   return <Icon viewBox="0 0 60 60" enableBackground="new 0 0 1000 1000">
@@ -65,9 +69,21 @@ const Admin:FC<Icontent> = ({children, ClassName}) => {
         </Header>
         <main>
           <>
-          <Sidebar isOpen={isOpen}  onOpen={onOpen} onClose={onClose}  btnRef={btnRef} placement="left"/>
+          <SidebarDrawer isOpen={isOpen}  onOpen={onOpen} onClose={onClose}  btnRef={btnRef} placement="left"/>
           <div className="main">
-            {children}
+            <div className="container">
+            <Grid
+              w='100%' h="calc(100vh - var(--headerHeight))"
+              templateRows='repeat(1, 1fr)'
+              templateColumns='repeat(var(--grid), 1fr)'
+              gap={0}
+            >
+              <GridItem className="sidebar" />
+              <GridItem className="content"  >
+                {children}
+              </GridItem>
+            </Grid>
+            </div>
           </div>
           </>
         </main>

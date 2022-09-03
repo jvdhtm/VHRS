@@ -1,0 +1,6 @@
+.relatedlinks {
+
+    @include media('>=tablet')  { 
+        grid-column: span 18/span 18;
+    }   
+}
