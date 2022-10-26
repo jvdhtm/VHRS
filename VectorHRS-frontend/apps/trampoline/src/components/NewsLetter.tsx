@@ -1,53 +1,72 @@
-import { Flex,Image,Badge, Heading } from "@chakra-ui/react"
-import { StarIcon} from '@chakra-ui/icons';
-import resources from "@vhrs/resources";
-import { definitions } from "@vhrs/models";
-import { Inewsletter } from "@vhrs/resources/types/context";
-import { FC, useContext, useEffect } from "react";
-import VIcon from "./VIcon";
-import VList from "./Lists";
-import {toNumber} from "../util/utils";
-import { Link } from 'react-router-dom';
+import { Flex, Heading, Box } from '@chakra-ui/react';
+import resources from '@vhrs/resources';
+import { Inewsletter } from '@vhrs/resources/types/context';
+import { FC, useContext, useEffect } from 'react';
 
-const News: FC<definitions["NewsLetter"]> = (props:definitions["NewsLetter"]) =>{
-    const link  = `/news/${props.id}`
-    const fallbackSrc  = `https://picsum.photos/seed/${props.id}/150/150`
-    return <>
-               
-                <Link to={link} >
-                    {}
-                    <Flex w='100%' p={4} color='white' alignItems='center' position={"relative"} borderBottom={"thin solid var(--borderColor)"}>
-                        <Badge ml='1' width={"2rem"} display={"flex"} alignItems={"center"} justifyContent={"center"} height={"2rem"} background={'var(--secondary)'} position={"absolute"} top={"1rem"} left={"0.75rem"}>
-                         <VIcon color="white" fontSize="1rem" icon="ri-newspaper-fill"></VIcon>
-                        </Badge>50
-                        <Image  src={fallbackSrc} />
-                        <Heading as='h3' size='sm' noOfLines={1}>
-                            {props.name ? props.name : ""}
-                    </Heading>
-                   </Flex>
-                </Link>
-           </>
-}
+import ReactQuill from "react-quill"
+import "react-quill/dist/quill.snow.css"
 
+const NewsLetter: FC<{id: string}> = (props : {id: string}) => {
+  const { newsletterData, next } = useContext<Inewsletter>(
+    resources.contexts.NewsletterContext,
+  );
+  const { newsletterReadFuncProp } = useContext<Inewsletter>(
+    resources.contexts.NewsletterContext,
+  );
 
-const NewsList:FC = ()=>{
-    const { newsletterData, next } = useContext<Inewsletter>(resources.contexts.NewsletterContext);
-    const {  newsletterListFuncProp } = useContext<Inewsletter>(resources.contexts.NewsletterContext);
-    useEffect(() => {
-        newsletterListFuncProp({query:{}});
-    }, []);
-
+  const newsId = parseInt(props.id)
+  useEffect(() => {
+    newsletterReadFuncProp(newsId);
+  }, []);
   
-    return  <div className="news">
-                <Heading as='h2' size='md' noOfLines={1}>
-                News
-                </Heading>
-                <div className="news__container">
-                {newsletterData && newsletterData.length > 0 ? <VList className="news__list" items={newsletterData} curPage={next ? toNumber(next) - 1 : 0}  itemLimit={5}  ItemCard={News}/> :<></> }
-                </div>
-            </div>
-}
-    
+  return (
+    <>
+      {newsletterData && newsletterData[newsId] ? (
+        <Box>
+          <Flex
+            w='100%'
+            p={4}
+            color='white'
+            alignItems='center'
+            position={'relative'}
+            borderBottom={'thin solid var(--borderColor)'}
+          >
+            <Flex w='100%' flexWrap={'wrap'}>
+              <Heading
+                as='h3'
+                size='sm'
+                noOfLines={1}
+                display='block'
+                width={'100%'}
+              >
+                { newsletterData[newsId] .name ?  newsletterData[newsId] .name : ''}
+              </Heading>
+              <Box
+                color={'var( --black)'}
+                paddingLeft='2rem'
+                paddingRight='2rem'
+              >
+
+                <div class="text area" dangerouslySetInnerHTML={{
+                  __html:  newsletterData[newsId].html ?  newsletterData[newsId].html : '',
+                }}></div>
+              </Box>
+            </Flex>
 
 
-export default NewsList;
+            <ReactQuill
+        theme='snow'
+        value={newsletterData[newsId].html}
+        onChange={setConvertedText}
+        style={{minHeight: '300px'}}
+      />
+          </Flex>
+        </Box>
+      ) : (
+        ''
+      )}
+    </>
+  );
+};
+
+export default NewsLetter;

@@ -136,12 +136,19 @@ export const StaffstageProvider: FC<IcontextProvider> = ({
         newStaffStage = prevStateResults.concat(result.data.results);
       }
 
+      const newStaffStageserializedById: definitions["StaffStage"][] = [];
+      newStaffStage.map((el: definitions["StaffStage"]) => {
+        if (el.id) {
+          newStaffStageserializedById[el.id] = el;
+        }
+      });
+
       setStaffStageDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newStaffStage,
+        results: newStaffStageserializedById,
       });
 
       setLoading(false);
@@ -198,12 +205,19 @@ export const StaffstageProvider: FC<IcontextProvider> = ({
         }
       );
       if (!found) {
-        newStaffStage = prevStateResults.concat(result.data);
+        newStaffStage.push(result.data);
       }
+
+      const newStaffStageserializedById: definitions["StaffStage"][] = [];
+      newStaffStage.map((el: definitions["StaffStage"]) => {
+        if (el.id) {
+          newStaffStageserializedById[el.id] = el;
+        }
+      });
 
       setStaffStageDataList({
         ...StaffStageDataList,
-        results: newStaffStage,
+        results: newStaffStageserializedById,
       });
 
       setLoading(false);
@@ -233,9 +247,16 @@ export const StaffstageProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newStaffStageserializedById: definitions["StaffStage"][] = [];
+      newStaffStage.map((el: definitions["StaffStage"]) => {
+        if (el.id) {
+          newStaffStageserializedById[el.id] = el;
+        }
+      });
+
       setStaffStageDataList({
         ...StaffStageDataList,
-        results: newStaffStage,
+        results: newStaffStageserializedById,
       });
 
       setLoading(false);
@@ -269,9 +290,16 @@ export const StaffstageProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newStaffStageserializedById: definitions["StaffStage"][] = [];
+      newStaffStage.map((el: definitions["StaffStage"]) => {
+        if (el.id) {
+          newStaffStageserializedById[el.id] = el;
+        }
+      });
+
       setStaffStageDataList({
         ...StaffStageDataList,
-        results: newStaffStage,
+        results: newStaffStageserializedById,
       });
 
       setLoading(false);
@@ -291,9 +319,16 @@ export const StaffstageProvider: FC<IcontextProvider> = ({
         (el: definitions["StaffStage"]) => el.id !== id
       );
 
+      const newStaffStageserializedById: definitions["StaffStage"][] = [];
+      newStaffStage.map((el: definitions["StaffStage"]) => {
+        if (el.id) {
+          newStaffStageserializedById[el.id] = el;
+        }
+      });
+
       setStaffStageDataList({
         ...StaffStageDataList,
-        results: newStaffStage,
+        results: newStaffStageserializedById,
       });
 
       setLoading(false);

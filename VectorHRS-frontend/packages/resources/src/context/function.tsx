@@ -134,12 +134,19 @@ export const FunctionProvider: FC<IcontextProvider> = ({
         newFunction = prevStateResults.concat(result.data.results);
       }
 
+      const newFunctionserializedById: definitions["Function"][] = [];
+      newFunction.map((el: definitions["Function"]) => {
+        if (el.id) {
+          newFunctionserializedById[el.id] = el;
+        }
+      });
+
       setFunctionDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newFunction,
+        results: newFunctionserializedById,
       });
 
       setLoading(false);
@@ -194,12 +201,19 @@ export const FunctionProvider: FC<IcontextProvider> = ({
         }
       });
       if (!found) {
-        newFunction = prevStateResults.concat(result.data);
+        newFunction.push(result.data);
       }
+
+      const newFunctionserializedById: definitions["Function"][] = [];
+      newFunction.map((el: definitions["Function"]) => {
+        if (el.id) {
+          newFunctionserializedById[el.id] = el;
+        }
+      });
 
       setFunctionDataList({
         ...FunctionDataList,
-        results: newFunction,
+        results: newFunctionserializedById,
       });
 
       setLoading(false);
@@ -229,9 +243,16 @@ export const FunctionProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newFunctionserializedById: definitions["Function"][] = [];
+      newFunction.map((el: definitions["Function"]) => {
+        if (el.id) {
+          newFunctionserializedById[el.id] = el;
+        }
+      });
+
       setFunctionDataList({
         ...FunctionDataList,
-        results: newFunction,
+        results: newFunctionserializedById,
       });
 
       setLoading(false);
@@ -265,9 +286,16 @@ export const FunctionProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newFunctionserializedById: definitions["Function"][] = [];
+      newFunction.map((el: definitions["Function"]) => {
+        if (el.id) {
+          newFunctionserializedById[el.id] = el;
+        }
+      });
+
       setFunctionDataList({
         ...FunctionDataList,
-        results: newFunction,
+        results: newFunctionserializedById,
       });
 
       setLoading(false);
@@ -287,9 +315,16 @@ export const FunctionProvider: FC<IcontextProvider> = ({
         (el: definitions["Function"]) => el.id !== id
       );
 
+      const newFunctionserializedById: definitions["Function"][] = [];
+      newFunction.map((el: definitions["Function"]) => {
+        if (el.id) {
+          newFunctionserializedById[el.id] = el;
+        }
+      });
+
       setFunctionDataList({
         ...FunctionDataList,
-        results: newFunction,
+        results: newFunctionserializedById,
       });
 
       setLoading(false);

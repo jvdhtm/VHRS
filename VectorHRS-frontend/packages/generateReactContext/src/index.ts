@@ -298,14 +298,24 @@ export const ChooseAndSync = () => {
                       })
                       if(!found)
                       {
-                        new${modelsToParse} = prevStateResults.concat(result.data);
+                        new${modelsToParse}.push(result.data);
                       }
+
+                      const new${modelsToParse}serializedById:definitions["${modelsToParse}"][] = []
+                      new${modelsToParse}.map((el:definitions["${modelsToParse}"]) => {
+                        if(el.id)
+                        {
+                          new${modelsToParse}serializedById[el.id] = el;
+                        }
+                       
+                      })
+
 
 
                       set${modelsToParse}DataList(
                         {
                           ...${modelsToParse}DataList,
-                          results : new${modelsToParse}
+                          results : new${modelsToParse}serializedById
                         }
                       )
                       `
@@ -342,13 +352,22 @@ export const ChooseAndSync = () => {
                       }
 
 
+                      const new${modelsToParse}serializedById:definitions["${modelsToParse}"][] = []
+                      new${modelsToParse}.map((el:definitions["${modelsToParse}"]) => {
+                        if(el.id)
+                        {
+                          new${modelsToParse}serializedById[el.id] = el;
+                        }
+                       
+                      })
+
                       set${modelsToParse}DataList(
                           {
                             count: newCount,
                             next: newNext,
                             previous: newPrevious,
                             logActions: logActions,
-                            results : new${modelsToParse}
+                            results : new${modelsToParse}serializedById
                           }
                       )
 
@@ -395,10 +414,19 @@ export const ChooseAndSync = () => {
                         el.id === result.data.id ? {...el, ...result.data }: el
                       ))
 
+                      const new${modelsToParse}serializedById:definitions["${modelsToParse}"][] = []
+                      new${modelsToParse}.map((el:definitions["${modelsToParse}"]) => {
+                        if(el.id)
+                        {
+                          new${modelsToParse}serializedById[el.id] = el;
+                        }
+                       
+                      })
+
                       set${modelsToParse}DataList(
                         {
                           ...${modelsToParse}DataList,
-                          results : new${modelsToParse}
+                          results : new${modelsToParse}serializedById
                         }
                       )
 
@@ -409,10 +437,20 @@ export const ChooseAndSync = () => {
                       //delete
                       const new${modelsToParse} = prevStateResults.filter( (el:definitions["${modelsToParse}"]) => (el.id !== id ))
 
+
+                      const new${modelsToParse}serializedById:definitions["${modelsToParse}"][] = []
+                      new${modelsToParse}.map((el:definitions["${modelsToParse}"]) => {
+                        if(el.id)
+                        {
+                          new${modelsToParse}serializedById[el.id] = el;
+                        }
+                       
+                      })
+
                       set${modelsToParse}DataList(
                         {
                           ...${modelsToParse}DataList,
-                          results : new${modelsToParse}
+                          results : new${modelsToParse}serializedById
                         }
                       )
 

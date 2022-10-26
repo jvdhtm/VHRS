@@ -131,12 +131,19 @@ export const StaffProvider: FC<IcontextProvider> = ({ children, headers }) => {
         newStaff = prevStateResults.concat(result.data.results);
       }
 
+      const newStaffserializedById: definitions["Staff"][] = [];
+      newStaff.map((el: definitions["Staff"]) => {
+        if (el.id) {
+          newStaffserializedById[el.id] = el;
+        }
+      });
+
       setStaffDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newStaff,
+        results: newStaffserializedById,
       });
 
       setLoading(false);
@@ -191,12 +198,19 @@ export const StaffProvider: FC<IcontextProvider> = ({ children, headers }) => {
         }
       });
       if (!found) {
-        newStaff = prevStateResults.concat(result.data);
+        newStaff.push(result.data);
       }
+
+      const newStaffserializedById: definitions["Staff"][] = [];
+      newStaff.map((el: definitions["Staff"]) => {
+        if (el.id) {
+          newStaffserializedById[el.id] = el;
+        }
+      });
 
       setStaffDataList({
         ...StaffDataList,
-        results: newStaff,
+        results: newStaffserializedById,
       });
 
       setLoading(false);
@@ -226,9 +240,16 @@ export const StaffProvider: FC<IcontextProvider> = ({ children, headers }) => {
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newStaffserializedById: definitions["Staff"][] = [];
+      newStaff.map((el: definitions["Staff"]) => {
+        if (el.id) {
+          newStaffserializedById[el.id] = el;
+        }
+      });
+
       setStaffDataList({
         ...StaffDataList,
-        results: newStaff,
+        results: newStaffserializedById,
       });
 
       setLoading(false);
@@ -258,9 +279,16 @@ export const StaffProvider: FC<IcontextProvider> = ({ children, headers }) => {
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newStaffserializedById: definitions["Staff"][] = [];
+      newStaff.map((el: definitions["Staff"]) => {
+        if (el.id) {
+          newStaffserializedById[el.id] = el;
+        }
+      });
+
       setStaffDataList({
         ...StaffDataList,
-        results: newStaff,
+        results: newStaffserializedById,
       });
 
       setLoading(false);
@@ -280,9 +308,16 @@ export const StaffProvider: FC<IcontextProvider> = ({ children, headers }) => {
         (el: definitions["Staff"]) => el.id !== id
       );
 
+      const newStaffserializedById: definitions["Staff"][] = [];
+      newStaff.map((el: definitions["Staff"]) => {
+        if (el.id) {
+          newStaffserializedById[el.id] = el;
+        }
+      });
+
       setStaffDataList({
         ...StaffDataList,
-        results: newStaff,
+        results: newStaffserializedById,
       });
 
       setLoading(false);

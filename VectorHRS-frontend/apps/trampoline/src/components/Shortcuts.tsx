@@ -21,6 +21,7 @@ const Question: FC<definitions["Question"]> = (props:definitions["Question"]) =>
            </>
 }
 
+
 const Questions:FC = ()=>{
     const { questionData, next , questionListFuncProp } = useContext<Iquestion>(resources.contexts.QuestionContext);
     useEffect(() => {
@@ -28,11 +29,11 @@ const Questions:FC = ()=>{
     }, []);
 
   
-    return <Box background={"var(--yellow-050)"} border={'thin solid var(--yellow-200);'} borderRadius="lg"  marginBottom={"2rem"} >
-                    <Heading as='h3' size="xs" noOfLines={1} borderBottom={"thin solid var(--yellow-200)"}>
-                           Common questions
+    return <Box  background={"var(--green)"} border={'thin solid var(--green-200);'} borderRadius="lg" marginBottom={"2rem"} >
+                    <Heading as='h3' size="xs" noOfLines={1} borderBottom={"thin solid var(--green-200)"}>
+                           ShortCuts
                     </Heading>
-                <div className="questions">
+                <div className="shortCuts">
                         {questionData && questionData.length > 0 ? <VList className="news__list" items={questionData} curPage={next ? toNumber(next) - 1 : 0}  itemLimit={5}  ItemCard={Question}/> :<></> }
                 </div>
             </Box>

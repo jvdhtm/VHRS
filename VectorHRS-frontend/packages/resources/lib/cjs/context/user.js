@@ -43,7 +43,7 @@ var UserProvider = function (_a) {
     /* prettier-ignore */
     var _c = (0, react_1.useState)(false), loading = _c[0], setLoading = _c[1];
     var userList = function (data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newUser;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newUser, newUserserializedById_1;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -74,12 +74,18 @@ var UserProvider = function (_a) {
                     if (!found_1) {
                         newUser = prevStateResults_1.concat(result.data.results);
                     }
+                    newUserserializedById_1 = [];
+                    newUser.map(function (el) {
+                        if (el.id) {
+                            newUserserializedById_1[el.id] = el;
+                        }
+                    });
                     setUserDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newUser,
+                        results: newUserserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -116,7 +122,7 @@ var UserProvider = function (_a) {
         });
     }); };
     var userRead = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newUser;
+        var result_1, prevStateResults, logActions, found_2, newUser, newUserserializedById_2;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -139,9 +145,15 @@ var UserProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newUser = prevStateResults.concat(result_1.data);
+                        newUser.push(result_1.data);
                     }
-                    setUserDataList(tslib_1.__assign(tslib_1.__assign({}, UserDataList), { results: newUser }));
+                    newUserserializedById_2 = [];
+                    newUser.map(function (el) {
+                        if (el.id) {
+                            newUserserializedById_2[el.id] = el;
+                        }
+                    });
+                    setUserDataList(tslib_1.__assign(tslib_1.__assign({}, UserDataList), { results: newUserserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -149,7 +161,7 @@ var UserProvider = function (_a) {
         });
     }); };
     var userUpdate = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newUser;
+        var result_2, prevStateResults, logActions, newUser, newUserserializedById_3;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -172,7 +184,13 @@ var UserProvider = function (_a) {
                         newUser = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_2.data) : el;
                         });
-                    setUserDataList(tslib_1.__assign(tslib_1.__assign({}, UserDataList), { results: newUser }));
+                    newUserserializedById_3 = [];
+                    newUser.map(function (el) {
+                        if (el.id) {
+                            newUserserializedById_3[el.id] = el;
+                        }
+                    });
+                    setUserDataList(tslib_1.__assign(tslib_1.__assign({}, UserDataList), { results: newUserserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -180,7 +198,7 @@ var UserProvider = function (_a) {
         });
     }); };
     var userPartial = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newUser;
+        var result_3, prevStateResults, logActions, newUser, newUserserializedById_4;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -203,7 +221,13 @@ var UserProvider = function (_a) {
                         newUser = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_3.data) : el;
                         });
-                    setUserDataList(tslib_1.__assign(tslib_1.__assign({}, UserDataList), { results: newUser }));
+                    newUserserializedById_4 = [];
+                    newUser.map(function (el) {
+                        if (el.id) {
+                            newUserserializedById_4[el.id] = el;
+                        }
+                    });
+                    setUserDataList(tslib_1.__assign(tslib_1.__assign({}, UserDataList), { results: newUserserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -211,7 +235,7 @@ var UserProvider = function (_a) {
         });
     }); };
     var userDelete = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newUser;
+        var result, prevStateResults, logActions, newUser, newUserserializedById_5;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -224,7 +248,13 @@ var UserProvider = function (_a) {
                     logActions = UserDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newUser = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setUserDataList(tslib_1.__assign(tslib_1.__assign({}, UserDataList), { results: newUser }));
+                    newUserserializedById_5 = [];
+                    newUser.map(function (el) {
+                        if (el.id) {
+                            newUserserializedById_5[el.id] = el;
+                        }
+                    });
+                    setUserDataList(tslib_1.__assign(tslib_1.__assign({}, UserDataList), { results: newUserserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

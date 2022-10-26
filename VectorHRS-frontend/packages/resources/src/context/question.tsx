@@ -134,12 +134,19 @@ export const QuestionProvider: FC<IcontextProvider> = ({
         newQuestion = prevStateResults.concat(result.data.results);
       }
 
+      const newQuestionserializedById: definitions["Question"][] = [];
+      newQuestion.map((el: definitions["Question"]) => {
+        if (el.id) {
+          newQuestionserializedById[el.id] = el;
+        }
+      });
+
       setQuestionDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newQuestion,
+        results: newQuestionserializedById,
       });
 
       setLoading(false);
@@ -194,12 +201,19 @@ export const QuestionProvider: FC<IcontextProvider> = ({
         }
       });
       if (!found) {
-        newQuestion = prevStateResults.concat(result.data);
+        newQuestion.push(result.data);
       }
+
+      const newQuestionserializedById: definitions["Question"][] = [];
+      newQuestion.map((el: definitions["Question"]) => {
+        if (el.id) {
+          newQuestionserializedById[el.id] = el;
+        }
+      });
 
       setQuestionDataList({
         ...QuestionDataList,
-        results: newQuestion,
+        results: newQuestionserializedById,
       });
 
       setLoading(false);
@@ -229,9 +243,16 @@ export const QuestionProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newQuestionserializedById: definitions["Question"][] = [];
+      newQuestion.map((el: definitions["Question"]) => {
+        if (el.id) {
+          newQuestionserializedById[el.id] = el;
+        }
+      });
+
       setQuestionDataList({
         ...QuestionDataList,
-        results: newQuestion,
+        results: newQuestionserializedById,
       });
 
       setLoading(false);
@@ -265,9 +286,16 @@ export const QuestionProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newQuestionserializedById: definitions["Question"][] = [];
+      newQuestion.map((el: definitions["Question"]) => {
+        if (el.id) {
+          newQuestionserializedById[el.id] = el;
+        }
+      });
+
       setQuestionDataList({
         ...QuestionDataList,
-        results: newQuestion,
+        results: newQuestionserializedById,
       });
 
       setLoading(false);
@@ -287,9 +315,16 @@ export const QuestionProvider: FC<IcontextProvider> = ({
         (el: definitions["Question"]) => el.id !== id
       );
 
+      const newQuestionserializedById: definitions["Question"][] = [];
+      newQuestion.map((el: definitions["Question"]) => {
+        if (el.id) {
+          newQuestionserializedById[el.id] = el;
+        }
+      });
+
       setQuestionDataList({
         ...QuestionDataList,
-        results: newQuestion,
+        results: newQuestionserializedById,
       });
 
       setLoading(false);

@@ -43,7 +43,7 @@ var AppProvider = function (_a) {
     /* prettier-ignore */
     var _c = (0, react_1.useState)(false), loading = _c[0], setLoading = _c[1];
     var appList = function (data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newApp;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newApp, newAppserializedById_1;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -74,12 +74,18 @@ var AppProvider = function (_a) {
                     if (!found_1) {
                         newApp = prevStateResults_1.concat(result.data.results);
                     }
+                    newAppserializedById_1 = [];
+                    newApp.map(function (el) {
+                        if (el.id) {
+                            newAppserializedById_1[el.id] = el;
+                        }
+                    });
                     setAppDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newApp,
+                        results: newAppserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -116,7 +122,7 @@ var AppProvider = function (_a) {
         });
     }); };
     var appRead = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newApp;
+        var result_1, prevStateResults, logActions, found_2, newApp, newAppserializedById_2;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -139,9 +145,15 @@ var AppProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newApp = prevStateResults.concat(result_1.data);
+                        newApp.push(result_1.data);
                     }
-                    setAppDataList(tslib_1.__assign(tslib_1.__assign({}, AppDataList), { results: newApp }));
+                    newAppserializedById_2 = [];
+                    newApp.map(function (el) {
+                        if (el.id) {
+                            newAppserializedById_2[el.id] = el;
+                        }
+                    });
+                    setAppDataList(tslib_1.__assign(tslib_1.__assign({}, AppDataList), { results: newAppserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -149,7 +161,7 @@ var AppProvider = function (_a) {
         });
     }); };
     var appUpdate = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newApp;
+        var result_2, prevStateResults, logActions, newApp, newAppserializedById_3;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -172,7 +184,13 @@ var AppProvider = function (_a) {
                         newApp = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_2.data) : el;
                         });
-                    setAppDataList(tslib_1.__assign(tslib_1.__assign({}, AppDataList), { results: newApp }));
+                    newAppserializedById_3 = [];
+                    newApp.map(function (el) {
+                        if (el.id) {
+                            newAppserializedById_3[el.id] = el;
+                        }
+                    });
+                    setAppDataList(tslib_1.__assign(tslib_1.__assign({}, AppDataList), { results: newAppserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -180,7 +198,7 @@ var AppProvider = function (_a) {
         });
     }); };
     var appPartial = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newApp;
+        var result_3, prevStateResults, logActions, newApp, newAppserializedById_4;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -203,7 +221,13 @@ var AppProvider = function (_a) {
                         newApp = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_3.data) : el;
                         });
-                    setAppDataList(tslib_1.__assign(tslib_1.__assign({}, AppDataList), { results: newApp }));
+                    newAppserializedById_4 = [];
+                    newApp.map(function (el) {
+                        if (el.id) {
+                            newAppserializedById_4[el.id] = el;
+                        }
+                    });
+                    setAppDataList(tslib_1.__assign(tslib_1.__assign({}, AppDataList), { results: newAppserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -211,7 +235,7 @@ var AppProvider = function (_a) {
         });
     }); };
     var appDelete = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newApp;
+        var result, prevStateResults, logActions, newApp, newAppserializedById_5;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -224,7 +248,13 @@ var AppProvider = function (_a) {
                     logActions = AppDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newApp = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setAppDataList(tslib_1.__assign(tslib_1.__assign({}, AppDataList), { results: newApp }));
+                    newAppserializedById_5 = [];
+                    newApp.map(function (el) {
+                        if (el.id) {
+                            newAppserializedById_5[el.id] = el;
+                        }
+                    });
+                    setAppDataList(tslib_1.__assign(tslib_1.__assign({}, AppDataList), { results: newAppserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

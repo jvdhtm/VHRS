@@ -134,12 +134,19 @@ export const AnswersProvider: FC<IcontextProvider> = ({
         newanswers = prevStateResults.concat(result.data.results);
       }
 
+      const newanswersserializedById: definitions["answers"][] = [];
+      newanswers.map((el: definitions["answers"]) => {
+        if (el.id) {
+          newanswersserializedById[el.id] = el;
+        }
+      });
+
       setanswersDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newanswers,
+        results: newanswersserializedById,
       });
 
       setLoading(false);
@@ -194,12 +201,19 @@ export const AnswersProvider: FC<IcontextProvider> = ({
         }
       });
       if (!found) {
-        newanswers = prevStateResults.concat(result.data);
+        newanswers.push(result.data);
       }
+
+      const newanswersserializedById: definitions["answers"][] = [];
+      newanswers.map((el: definitions["answers"]) => {
+        if (el.id) {
+          newanswersserializedById[el.id] = el;
+        }
+      });
 
       setanswersDataList({
         ...answersDataList,
-        results: newanswers,
+        results: newanswersserializedById,
       });
 
       setLoading(false);
@@ -229,9 +243,16 @@ export const AnswersProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newanswersserializedById: definitions["answers"][] = [];
+      newanswers.map((el: definitions["answers"]) => {
+        if (el.id) {
+          newanswersserializedById[el.id] = el;
+        }
+      });
+
       setanswersDataList({
         ...answersDataList,
-        results: newanswers,
+        results: newanswersserializedById,
       });
 
       setLoading(false);
@@ -261,9 +282,16 @@ export const AnswersProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newanswersserializedById: definitions["answers"][] = [];
+      newanswers.map((el: definitions["answers"]) => {
+        if (el.id) {
+          newanswersserializedById[el.id] = el;
+        }
+      });
+
       setanswersDataList({
         ...answersDataList,
-        results: newanswers,
+        results: newanswersserializedById,
       });
 
       setLoading(false);
@@ -283,9 +311,16 @@ export const AnswersProvider: FC<IcontextProvider> = ({
         (el: definitions["answers"]) => el.id !== id
       );
 
+      const newanswersserializedById: definitions["answers"][] = [];
+      newanswers.map((el: definitions["answers"]) => {
+        if (el.id) {
+          newanswersserializedById[el.id] = el;
+        }
+      });
+
       setanswersDataList({
         ...answersDataList,
-        results: newanswers,
+        results: newanswersserializedById,
       });
 
       setLoading(false);

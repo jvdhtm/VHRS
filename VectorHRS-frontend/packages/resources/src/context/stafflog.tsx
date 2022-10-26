@@ -134,12 +134,19 @@ export const StafflogProvider: FC<IcontextProvider> = ({
         newStaffLog = prevStateResults.concat(result.data.results);
       }
 
+      const newStaffLogserializedById: definitions["StaffLog"][] = [];
+      newStaffLog.map((el: definitions["StaffLog"]) => {
+        if (el.id) {
+          newStaffLogserializedById[el.id] = el;
+        }
+      });
+
       setStaffLogDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newStaffLog,
+        results: newStaffLogserializedById,
       });
 
       setLoading(false);
@@ -194,12 +201,19 @@ export const StafflogProvider: FC<IcontextProvider> = ({
         }
       });
       if (!found) {
-        newStaffLog = prevStateResults.concat(result.data);
+        newStaffLog.push(result.data);
       }
+
+      const newStaffLogserializedById: definitions["StaffLog"][] = [];
+      newStaffLog.map((el: definitions["StaffLog"]) => {
+        if (el.id) {
+          newStaffLogserializedById[el.id] = el;
+        }
+      });
 
       setStaffLogDataList({
         ...StaffLogDataList,
-        results: newStaffLog,
+        results: newStaffLogserializedById,
       });
 
       setLoading(false);
@@ -229,9 +243,16 @@ export const StafflogProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newStaffLogserializedById: definitions["StaffLog"][] = [];
+      newStaffLog.map((el: definitions["StaffLog"]) => {
+        if (el.id) {
+          newStaffLogserializedById[el.id] = el;
+        }
+      });
+
       setStaffLogDataList({
         ...StaffLogDataList,
-        results: newStaffLog,
+        results: newStaffLogserializedById,
       });
 
       setLoading(false);
@@ -265,9 +286,16 @@ export const StafflogProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newStaffLogserializedById: definitions["StaffLog"][] = [];
+      newStaffLog.map((el: definitions["StaffLog"]) => {
+        if (el.id) {
+          newStaffLogserializedById[el.id] = el;
+        }
+      });
+
       setStaffLogDataList({
         ...StaffLogDataList,
-        results: newStaffLog,
+        results: newStaffLogserializedById,
       });
 
       setLoading(false);
@@ -287,9 +315,16 @@ export const StafflogProvider: FC<IcontextProvider> = ({
         (el: definitions["StaffLog"]) => el.id !== id
       );
 
+      const newStaffLogserializedById: definitions["StaffLog"][] = [];
+      newStaffLog.map((el: definitions["StaffLog"]) => {
+        if (el.id) {
+          newStaffLogserializedById[el.id] = el;
+        }
+      });
+
       setStaffLogDataList({
         ...StaffLogDataList,
-        results: newStaffLog,
+        results: newStaffLogserializedById,
       });
 
       setLoading(false);

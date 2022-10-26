@@ -43,7 +43,7 @@ var AnswersProvider = function (_a) {
     /* prettier-ignore */
     var _c = (0, react_1.useState)(false), loading = _c[0], setLoading = _c[1];
     var answersList = function (data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newanswers;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newanswers, newanswersserializedById_1;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -74,12 +74,18 @@ var AnswersProvider = function (_a) {
                     if (!found_1) {
                         newanswers = prevStateResults_1.concat(result.data.results);
                     }
+                    newanswersserializedById_1 = [];
+                    newanswers.map(function (el) {
+                        if (el.id) {
+                            newanswersserializedById_1[el.id] = el;
+                        }
+                    });
                     setanswersDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newanswers,
+                        results: newanswersserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -116,7 +122,7 @@ var AnswersProvider = function (_a) {
         });
     }); };
     var answersRead = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newanswers;
+        var result_1, prevStateResults, logActions, found_2, newanswers, newanswersserializedById_2;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -139,9 +145,15 @@ var AnswersProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newanswers = prevStateResults.concat(result_1.data);
+                        newanswers.push(result_1.data);
                     }
-                    setanswersDataList(tslib_1.__assign(tslib_1.__assign({}, answersDataList), { results: newanswers }));
+                    newanswersserializedById_2 = [];
+                    newanswers.map(function (el) {
+                        if (el.id) {
+                            newanswersserializedById_2[el.id] = el;
+                        }
+                    });
+                    setanswersDataList(tslib_1.__assign(tslib_1.__assign({}, answersDataList), { results: newanswersserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -149,7 +161,7 @@ var AnswersProvider = function (_a) {
         });
     }); };
     var answersUpdate = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newanswers;
+        var result_2, prevStateResults, logActions, newanswers, newanswersserializedById_3;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -172,7 +184,13 @@ var AnswersProvider = function (_a) {
                         newanswers = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_2.data) : el;
                         });
-                    setanswersDataList(tslib_1.__assign(tslib_1.__assign({}, answersDataList), { results: newanswers }));
+                    newanswersserializedById_3 = [];
+                    newanswers.map(function (el) {
+                        if (el.id) {
+                            newanswersserializedById_3[el.id] = el;
+                        }
+                    });
+                    setanswersDataList(tslib_1.__assign(tslib_1.__assign({}, answersDataList), { results: newanswersserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -180,7 +198,7 @@ var AnswersProvider = function (_a) {
         });
     }); };
     var answersPartial = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newanswers;
+        var result_3, prevStateResults, logActions, newanswers, newanswersserializedById_4;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -203,7 +221,13 @@ var AnswersProvider = function (_a) {
                         newanswers = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_3.data) : el;
                         });
-                    setanswersDataList(tslib_1.__assign(tslib_1.__assign({}, answersDataList), { results: newanswers }));
+                    newanswersserializedById_4 = [];
+                    newanswers.map(function (el) {
+                        if (el.id) {
+                            newanswersserializedById_4[el.id] = el;
+                        }
+                    });
+                    setanswersDataList(tslib_1.__assign(tslib_1.__assign({}, answersDataList), { results: newanswersserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -211,7 +235,7 @@ var AnswersProvider = function (_a) {
         });
     }); };
     var answersDelete = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newanswers;
+        var result, prevStateResults, logActions, newanswers, newanswersserializedById_5;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -224,7 +248,13 @@ var AnswersProvider = function (_a) {
                     logActions = answersDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newanswers = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setanswersDataList(tslib_1.__assign(tslib_1.__assign({}, answersDataList), { results: newanswers }));
+                    newanswersserializedById_5 = [];
+                    newanswers.map(function (el) {
+                        if (el.id) {
+                            newanswersserializedById_5[el.id] = el;
+                        }
+                    });
+                    setanswersDataList(tslib_1.__assign(tslib_1.__assign({}, answersDataList), { results: newanswersserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

@@ -40,7 +40,7 @@ export var FunctionProvider = function (_a) {
     /* prettier-ignore */
     var _c = useState(false), loading = _c[0], setLoading = _c[1];
     var functionList = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newFunction;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newFunction, newFunctionserializedById_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -71,12 +71,18 @@ export var FunctionProvider = function (_a) {
                     if (!found_1) {
                         newFunction = prevStateResults_1.concat(result.data.results);
                     }
+                    newFunctionserializedById_1 = [];
+                    newFunction.map(function (el) {
+                        if (el.id) {
+                            newFunctionserializedById_1[el.id] = el;
+                        }
+                    });
                     setFunctionDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newFunction,
+                        results: newFunctionserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -113,7 +119,7 @@ export var FunctionProvider = function (_a) {
         });
     }); };
     var functionRead = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newFunction;
+        var result_1, prevStateResults, logActions, found_2, newFunction, newFunctionserializedById_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -136,9 +142,15 @@ export var FunctionProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newFunction = prevStateResults.concat(result_1.data);
+                        newFunction.push(result_1.data);
                     }
-                    setFunctionDataList(__assign(__assign({}, FunctionDataList), { results: newFunction }));
+                    newFunctionserializedById_2 = [];
+                    newFunction.map(function (el) {
+                        if (el.id) {
+                            newFunctionserializedById_2[el.id] = el;
+                        }
+                    });
+                    setFunctionDataList(__assign(__assign({}, FunctionDataList), { results: newFunctionserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -146,7 +158,7 @@ export var FunctionProvider = function (_a) {
         });
     }); };
     var functionUpdate = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newFunction;
+        var result_2, prevStateResults, logActions, newFunction, newFunctionserializedById_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -169,7 +181,13 @@ export var FunctionProvider = function (_a) {
                         newFunction = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? __assign(__assign({}, el), result_2.data) : el;
                         });
-                    setFunctionDataList(__assign(__assign({}, FunctionDataList), { results: newFunction }));
+                    newFunctionserializedById_3 = [];
+                    newFunction.map(function (el) {
+                        if (el.id) {
+                            newFunctionserializedById_3[el.id] = el;
+                        }
+                    });
+                    setFunctionDataList(__assign(__assign({}, FunctionDataList), { results: newFunctionserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -177,7 +195,7 @@ export var FunctionProvider = function (_a) {
         });
     }); };
     var functionPartial = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newFunction;
+        var result_3, prevStateResults, logActions, newFunction, newFunctionserializedById_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -200,7 +218,13 @@ export var FunctionProvider = function (_a) {
                         newFunction = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? __assign(__assign({}, el), result_3.data) : el;
                         });
-                    setFunctionDataList(__assign(__assign({}, FunctionDataList), { results: newFunction }));
+                    newFunctionserializedById_4 = [];
+                    newFunction.map(function (el) {
+                        if (el.id) {
+                            newFunctionserializedById_4[el.id] = el;
+                        }
+                    });
+                    setFunctionDataList(__assign(__assign({}, FunctionDataList), { results: newFunctionserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -208,7 +232,7 @@ export var FunctionProvider = function (_a) {
         });
     }); };
     var functionDelete = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newFunction;
+        var result, prevStateResults, logActions, newFunction, newFunctionserializedById_5;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -221,7 +245,13 @@ export var FunctionProvider = function (_a) {
                     logActions = FunctionDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newFunction = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setFunctionDataList(__assign(__assign({}, FunctionDataList), { results: newFunction }));
+                    newFunctionserializedById_5 = [];
+                    newFunction.map(function (el) {
+                        if (el.id) {
+                            newFunctionserializedById_5[el.id] = el;
+                        }
+                    });
+                    setFunctionDataList(__assign(__assign({}, FunctionDataList), { results: newFunctionserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

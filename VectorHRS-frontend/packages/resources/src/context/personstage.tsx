@@ -136,12 +136,19 @@ export const PersonstageProvider: FC<IcontextProvider> = ({
         newPersonStage = prevStateResults.concat(result.data.results);
       }
 
+      const newPersonStageserializedById: definitions["PersonStage"][] = [];
+      newPersonStage.map((el: definitions["PersonStage"]) => {
+        if (el.id) {
+          newPersonStageserializedById[el.id] = el;
+        }
+      });
+
       setPersonStageDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newPersonStage,
+        results: newPersonStageserializedById,
       });
 
       setLoading(false);
@@ -198,12 +205,19 @@ export const PersonstageProvider: FC<IcontextProvider> = ({
         }
       );
       if (!found) {
-        newPersonStage = prevStateResults.concat(result.data);
+        newPersonStage.push(result.data);
       }
+
+      const newPersonStageserializedById: definitions["PersonStage"][] = [];
+      newPersonStage.map((el: definitions["PersonStage"]) => {
+        if (el.id) {
+          newPersonStageserializedById[el.id] = el;
+        }
+      });
 
       setPersonStageDataList({
         ...PersonStageDataList,
-        results: newPersonStage,
+        results: newPersonStageserializedById,
       });
 
       setLoading(false);
@@ -235,9 +249,16 @@ export const PersonstageProvider: FC<IcontextProvider> = ({
             el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newPersonStageserializedById: definitions["PersonStage"][] = [];
+      newPersonStage.map((el: definitions["PersonStage"]) => {
+        if (el.id) {
+          newPersonStageserializedById[el.id] = el;
+        }
+      });
+
       setPersonStageDataList({
         ...PersonStageDataList,
-        results: newPersonStage,
+        results: newPersonStageserializedById,
       });
 
       setLoading(false);
@@ -273,9 +294,16 @@ export const PersonstageProvider: FC<IcontextProvider> = ({
             el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newPersonStageserializedById: definitions["PersonStage"][] = [];
+      newPersonStage.map((el: definitions["PersonStage"]) => {
+        if (el.id) {
+          newPersonStageserializedById[el.id] = el;
+        }
+      });
+
       setPersonStageDataList({
         ...PersonStageDataList,
-        results: newPersonStage,
+        results: newPersonStageserializedById,
       });
 
       setLoading(false);
@@ -295,9 +323,16 @@ export const PersonstageProvider: FC<IcontextProvider> = ({
         (el: definitions["PersonStage"]) => el.id !== id
       );
 
+      const newPersonStageserializedById: definitions["PersonStage"][] = [];
+      newPersonStage.map((el: definitions["PersonStage"]) => {
+        if (el.id) {
+          newPersonStageserializedById[el.id] = el;
+        }
+      });
+
       setPersonStageDataList({
         ...PersonStageDataList,
-        results: newPersonStage,
+        results: newPersonStageserializedById,
       });
 
       setLoading(false);

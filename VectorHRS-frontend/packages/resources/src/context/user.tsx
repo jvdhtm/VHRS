@@ -131,12 +131,19 @@ export const UserProvider: FC<IcontextProvider> = ({ children, headers }) => {
         newUser = prevStateResults.concat(result.data.results);
       }
 
+      const newUserserializedById: definitions["User"][] = [];
+      newUser.map((el: definitions["User"]) => {
+        if (el.id) {
+          newUserserializedById[el.id] = el;
+        }
+      });
+
       setUserDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newUser,
+        results: newUserserializedById,
       });
 
       setLoading(false);
@@ -191,12 +198,19 @@ export const UserProvider: FC<IcontextProvider> = ({ children, headers }) => {
         }
       });
       if (!found) {
-        newUser = prevStateResults.concat(result.data);
+        newUser.push(result.data);
       }
+
+      const newUserserializedById: definitions["User"][] = [];
+      newUser.map((el: definitions["User"]) => {
+        if (el.id) {
+          newUserserializedById[el.id] = el;
+        }
+      });
 
       setUserDataList({
         ...UserDataList,
-        results: newUser,
+        results: newUserserializedById,
       });
 
       setLoading(false);
@@ -226,9 +240,16 @@ export const UserProvider: FC<IcontextProvider> = ({ children, headers }) => {
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newUserserializedById: definitions["User"][] = [];
+      newUser.map((el: definitions["User"]) => {
+        if (el.id) {
+          newUserserializedById[el.id] = el;
+        }
+      });
+
       setUserDataList({
         ...UserDataList,
-        results: newUser,
+        results: newUserserializedById,
       });
 
       setLoading(false);
@@ -258,9 +279,16 @@ export const UserProvider: FC<IcontextProvider> = ({ children, headers }) => {
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newUserserializedById: definitions["User"][] = [];
+      newUser.map((el: definitions["User"]) => {
+        if (el.id) {
+          newUserserializedById[el.id] = el;
+        }
+      });
+
       setUserDataList({
         ...UserDataList,
-        results: newUser,
+        results: newUserserializedById,
       });
 
       setLoading(false);
@@ -280,9 +308,16 @@ export const UserProvider: FC<IcontextProvider> = ({ children, headers }) => {
         (el: definitions["User"]) => el.id !== id
       );
 
+      const newUserserializedById: definitions["User"][] = [];
+      newUser.map((el: definitions["User"]) => {
+        if (el.id) {
+          newUserserializedById[el.id] = el;
+        }
+      });
+
       setUserDataList({
         ...UserDataList,
-        results: newUser,
+        results: newUserserializedById,
       });
 
       setLoading(false);

@@ -90,7 +90,7 @@ app.post(app.get("login_auth"), function(req, res, next) {
   // generate the authenticate method and pass the req/res
   passport.authenticate("local", function(err, user, info){
 
-    if (err) { return next(err); }
+    if (err) { return next(err); console.log(err) }
     if (!user) { return res.redirect('/'); }
     // req / res held in closure
     //TODO:if req8uest doesnt have the cookie also try again

@@ -40,7 +40,7 @@ export var DepartmentProvider = function (_a) {
     /* prettier-ignore */
     var _c = useState(false), loading = _c[0], setLoading = _c[1];
     var departmentList = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newDepartment;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newDepartment, newDepartmentserializedById_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -71,12 +71,18 @@ export var DepartmentProvider = function (_a) {
                     if (!found_1) {
                         newDepartment = prevStateResults_1.concat(result.data.results);
                     }
+                    newDepartmentserializedById_1 = [];
+                    newDepartment.map(function (el) {
+                        if (el.id) {
+                            newDepartmentserializedById_1[el.id] = el;
+                        }
+                    });
                     setDepartmentDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newDepartment,
+                        results: newDepartmentserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -113,7 +119,7 @@ export var DepartmentProvider = function (_a) {
         });
     }); };
     var departmentRead = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newDepartment;
+        var result_1, prevStateResults, logActions, found_2, newDepartment, newDepartmentserializedById_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -136,9 +142,15 @@ export var DepartmentProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newDepartment = prevStateResults.concat(result_1.data);
+                        newDepartment.push(result_1.data);
                     }
-                    setDepartmentDataList(__assign(__assign({}, DepartmentDataList), { results: newDepartment }));
+                    newDepartmentserializedById_2 = [];
+                    newDepartment.map(function (el) {
+                        if (el.id) {
+                            newDepartmentserializedById_2[el.id] = el;
+                        }
+                    });
+                    setDepartmentDataList(__assign(__assign({}, DepartmentDataList), { results: newDepartmentserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -146,7 +158,7 @@ export var DepartmentProvider = function (_a) {
         });
     }); };
     var departmentUpdate = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newDepartment;
+        var result_2, prevStateResults, logActions, newDepartment, newDepartmentserializedById_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -169,7 +181,13 @@ export var DepartmentProvider = function (_a) {
                         newDepartment = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? __assign(__assign({}, el), result_2.data) : el;
                         });
-                    setDepartmentDataList(__assign(__assign({}, DepartmentDataList), { results: newDepartment }));
+                    newDepartmentserializedById_3 = [];
+                    newDepartment.map(function (el) {
+                        if (el.id) {
+                            newDepartmentserializedById_3[el.id] = el;
+                        }
+                    });
+                    setDepartmentDataList(__assign(__assign({}, DepartmentDataList), { results: newDepartmentserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -177,7 +195,7 @@ export var DepartmentProvider = function (_a) {
         });
     }); };
     var departmentPartial = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newDepartment;
+        var result_3, prevStateResults, logActions, newDepartment, newDepartmentserializedById_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -200,7 +218,13 @@ export var DepartmentProvider = function (_a) {
                         newDepartment = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? __assign(__assign({}, el), result_3.data) : el;
                         });
-                    setDepartmentDataList(__assign(__assign({}, DepartmentDataList), { results: newDepartment }));
+                    newDepartmentserializedById_4 = [];
+                    newDepartment.map(function (el) {
+                        if (el.id) {
+                            newDepartmentserializedById_4[el.id] = el;
+                        }
+                    });
+                    setDepartmentDataList(__assign(__assign({}, DepartmentDataList), { results: newDepartmentserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -208,7 +232,7 @@ export var DepartmentProvider = function (_a) {
         });
     }); };
     var departmentDelete = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newDepartment;
+        var result, prevStateResults, logActions, newDepartment, newDepartmentserializedById_5;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -221,7 +245,13 @@ export var DepartmentProvider = function (_a) {
                     logActions = DepartmentDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newDepartment = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setDepartmentDataList(__assign(__assign({}, DepartmentDataList), { results: newDepartment }));
+                    newDepartmentserializedById_5 = [];
+                    newDepartment.map(function (el) {
+                        if (el.id) {
+                            newDepartmentserializedById_5[el.id] = el;
+                        }
+                    });
+                    setDepartmentDataList(__assign(__assign({}, DepartmentDataList), { results: newDepartmentserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

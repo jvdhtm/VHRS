@@ -43,7 +43,7 @@ var StafffunctionsProvider = function (_a) {
     /* prettier-ignore */
     var _c = (0, react_1.useState)(false), loading = _c[0], setLoading = _c[1];
     var stafffunctionsList = function (data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newStaffFunctions;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newStaffFunctions, newStaffFunctionsserializedById_1;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -74,12 +74,18 @@ var StafffunctionsProvider = function (_a) {
                     if (!found_1) {
                         newStaffFunctions = prevStateResults_1.concat(result.data.results);
                     }
+                    newStaffFunctionsserializedById_1 = [];
+                    newStaffFunctions.map(function (el) {
+                        if (el.id) {
+                            newStaffFunctionsserializedById_1[el.id] = el;
+                        }
+                    });
                     setStaffFunctionsDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newStaffFunctions,
+                        results: newStaffFunctionsserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -116,7 +122,7 @@ var StafffunctionsProvider = function (_a) {
         });
     }); };
     var stafffunctionsRead = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newStaffFunctions;
+        var result_1, prevStateResults, logActions, found_2, newStaffFunctions, newStaffFunctionsserializedById_2;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -139,9 +145,15 @@ var StafffunctionsProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newStaffFunctions = prevStateResults.concat(result_1.data);
+                        newStaffFunctions.push(result_1.data);
                     }
-                    setStaffFunctionsDataList(tslib_1.__assign(tslib_1.__assign({}, StaffFunctionsDataList), { results: newStaffFunctions }));
+                    newStaffFunctionsserializedById_2 = [];
+                    newStaffFunctions.map(function (el) {
+                        if (el.id) {
+                            newStaffFunctionsserializedById_2[el.id] = el;
+                        }
+                    });
+                    setStaffFunctionsDataList(tslib_1.__assign(tslib_1.__assign({}, StaffFunctionsDataList), { results: newStaffFunctionsserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -149,7 +161,7 @@ var StafffunctionsProvider = function (_a) {
         });
     }); };
     var stafffunctionsUpdate = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newStaffFunctions;
+        var result_2, prevStateResults, logActions, newStaffFunctions, newStaffFunctionsserializedById_3;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -172,7 +184,13 @@ var StafffunctionsProvider = function (_a) {
                         newStaffFunctions = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_2.data) : el;
                         });
-                    setStaffFunctionsDataList(tslib_1.__assign(tslib_1.__assign({}, StaffFunctionsDataList), { results: newStaffFunctions }));
+                    newStaffFunctionsserializedById_3 = [];
+                    newStaffFunctions.map(function (el) {
+                        if (el.id) {
+                            newStaffFunctionsserializedById_3[el.id] = el;
+                        }
+                    });
+                    setStaffFunctionsDataList(tslib_1.__assign(tslib_1.__assign({}, StaffFunctionsDataList), { results: newStaffFunctionsserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -180,7 +198,7 @@ var StafffunctionsProvider = function (_a) {
         });
     }); };
     var stafffunctionsPartial = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newStaffFunctions;
+        var result_3, prevStateResults, logActions, newStaffFunctions, newStaffFunctionsserializedById_4;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -203,7 +221,13 @@ var StafffunctionsProvider = function (_a) {
                         newStaffFunctions = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_3.data) : el;
                         });
-                    setStaffFunctionsDataList(tslib_1.__assign(tslib_1.__assign({}, StaffFunctionsDataList), { results: newStaffFunctions }));
+                    newStaffFunctionsserializedById_4 = [];
+                    newStaffFunctions.map(function (el) {
+                        if (el.id) {
+                            newStaffFunctionsserializedById_4[el.id] = el;
+                        }
+                    });
+                    setStaffFunctionsDataList(tslib_1.__assign(tslib_1.__assign({}, StaffFunctionsDataList), { results: newStaffFunctionsserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -211,7 +235,7 @@ var StafffunctionsProvider = function (_a) {
         });
     }); };
     var stafffunctionsDelete = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newStaffFunctions;
+        var result, prevStateResults, logActions, newStaffFunctions, newStaffFunctionsserializedById_5;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -224,7 +248,13 @@ var StafffunctionsProvider = function (_a) {
                     logActions = StaffFunctionsDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newStaffFunctions = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setStaffFunctionsDataList(tslib_1.__assign(tslib_1.__assign({}, StaffFunctionsDataList), { results: newStaffFunctions }));
+                    newStaffFunctionsserializedById_5 = [];
+                    newStaffFunctions.map(function (el) {
+                        if (el.id) {
+                            newStaffFunctionsserializedById_5[el.id] = el;
+                        }
+                    });
+                    setStaffFunctionsDataList(tslib_1.__assign(tslib_1.__assign({}, StaffFunctionsDataList), { results: newStaffFunctionsserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

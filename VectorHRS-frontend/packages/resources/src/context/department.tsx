@@ -136,12 +136,19 @@ export const DepartmentProvider: FC<IcontextProvider> = ({
         newDepartment = prevStateResults.concat(result.data.results);
       }
 
+      const newDepartmentserializedById: definitions["Department"][] = [];
+      newDepartment.map((el: definitions["Department"]) => {
+        if (el.id) {
+          newDepartmentserializedById[el.id] = el;
+        }
+      });
+
       setDepartmentDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newDepartment,
+        results: newDepartmentserializedById,
       });
 
       setLoading(false);
@@ -198,12 +205,19 @@ export const DepartmentProvider: FC<IcontextProvider> = ({
         }
       );
       if (!found) {
-        newDepartment = prevStateResults.concat(result.data);
+        newDepartment.push(result.data);
       }
+
+      const newDepartmentserializedById: definitions["Department"][] = [];
+      newDepartment.map((el: definitions["Department"]) => {
+        if (el.id) {
+          newDepartmentserializedById[el.id] = el;
+        }
+      });
 
       setDepartmentDataList({
         ...DepartmentDataList,
-        results: newDepartment,
+        results: newDepartmentserializedById,
       });
 
       setLoading(false);
@@ -233,9 +247,16 @@ export const DepartmentProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newDepartmentserializedById: definitions["Department"][] = [];
+      newDepartment.map((el: definitions["Department"]) => {
+        if (el.id) {
+          newDepartmentserializedById[el.id] = el;
+        }
+      });
+
       setDepartmentDataList({
         ...DepartmentDataList,
-        results: newDepartment,
+        results: newDepartmentserializedById,
       });
 
       setLoading(false);
@@ -269,9 +290,16 @@ export const DepartmentProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newDepartmentserializedById: definitions["Department"][] = [];
+      newDepartment.map((el: definitions["Department"]) => {
+        if (el.id) {
+          newDepartmentserializedById[el.id] = el;
+        }
+      });
+
       setDepartmentDataList({
         ...DepartmentDataList,
-        results: newDepartment,
+        results: newDepartmentserializedById,
       });
 
       setLoading(false);
@@ -291,9 +319,16 @@ export const DepartmentProvider: FC<IcontextProvider> = ({
         (el: definitions["Department"]) => el.id !== id
       );
 
+      const newDepartmentserializedById: definitions["Department"][] = [];
+      newDepartment.map((el: definitions["Department"]) => {
+        if (el.id) {
+          newDepartmentserializedById[el.id] = el;
+        }
+      });
+
       setDepartmentDataList({
         ...DepartmentDataList,
-        results: newDepartment,
+        results: newDepartmentserializedById,
       });
 
       setLoading(false);

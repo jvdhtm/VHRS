@@ -131,12 +131,19 @@ export const RoleProvider: FC<IcontextProvider> = ({ children, headers }) => {
         newRole = prevStateResults.concat(result.data.results);
       }
 
+      const newRoleserializedById: definitions["Role"][] = [];
+      newRole.map((el: definitions["Role"]) => {
+        if (el.id) {
+          newRoleserializedById[el.id] = el;
+        }
+      });
+
       setRoleDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newRole,
+        results: newRoleserializedById,
       });
 
       setLoading(false);
@@ -191,12 +198,19 @@ export const RoleProvider: FC<IcontextProvider> = ({ children, headers }) => {
         }
       });
       if (!found) {
-        newRole = prevStateResults.concat(result.data);
+        newRole.push(result.data);
       }
+
+      const newRoleserializedById: definitions["Role"][] = [];
+      newRole.map((el: definitions["Role"]) => {
+        if (el.id) {
+          newRoleserializedById[el.id] = el;
+        }
+      });
 
       setRoleDataList({
         ...RoleDataList,
-        results: newRole,
+        results: newRoleserializedById,
       });
 
       setLoading(false);
@@ -226,9 +240,16 @@ export const RoleProvider: FC<IcontextProvider> = ({ children, headers }) => {
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newRoleserializedById: definitions["Role"][] = [];
+      newRole.map((el: definitions["Role"]) => {
+        if (el.id) {
+          newRoleserializedById[el.id] = el;
+        }
+      });
+
       setRoleDataList({
         ...RoleDataList,
-        results: newRole,
+        results: newRoleserializedById,
       });
 
       setLoading(false);
@@ -258,9 +279,16 @@ export const RoleProvider: FC<IcontextProvider> = ({ children, headers }) => {
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newRoleserializedById: definitions["Role"][] = [];
+      newRole.map((el: definitions["Role"]) => {
+        if (el.id) {
+          newRoleserializedById[el.id] = el;
+        }
+      });
+
       setRoleDataList({
         ...RoleDataList,
-        results: newRole,
+        results: newRoleserializedById,
       });
 
       setLoading(false);
@@ -280,9 +308,16 @@ export const RoleProvider: FC<IcontextProvider> = ({ children, headers }) => {
         (el: definitions["Role"]) => el.id !== id
       );
 
+      const newRoleserializedById: definitions["Role"][] = [];
+      newRole.map((el: definitions["Role"]) => {
+        if (el.id) {
+          newRoleserializedById[el.id] = el;
+        }
+      });
+
       setRoleDataList({
         ...RoleDataList,
-        results: newRole,
+        results: newRoleserializedById,
       });
 
       setLoading(false);

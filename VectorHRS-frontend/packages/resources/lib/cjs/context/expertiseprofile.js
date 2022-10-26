@@ -43,7 +43,7 @@ var ExpertiseprofileProvider = function (_a) {
     /* prettier-ignore */
     var _c = (0, react_1.useState)(false), loading = _c[0], setLoading = _c[1];
     var expertiseprofileList = function (data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newExpertiseProfile;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newExpertiseProfile, newExpertiseProfileserializedById_1;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -74,12 +74,18 @@ var ExpertiseprofileProvider = function (_a) {
                     if (!found_1) {
                         newExpertiseProfile = prevStateResults_1.concat(result.data.results);
                     }
+                    newExpertiseProfileserializedById_1 = [];
+                    newExpertiseProfile.map(function (el) {
+                        if (el.id) {
+                            newExpertiseProfileserializedById_1[el.id] = el;
+                        }
+                    });
                     setExpertiseProfileDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newExpertiseProfile,
+                        results: newExpertiseProfileserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -116,7 +122,7 @@ var ExpertiseprofileProvider = function (_a) {
         });
     }); };
     var expertiseprofileRead = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newExpertiseProfile;
+        var result_1, prevStateResults, logActions, found_2, newExpertiseProfile, newExpertiseProfileserializedById_2;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -139,9 +145,15 @@ var ExpertiseprofileProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newExpertiseProfile = prevStateResults.concat(result_1.data);
+                        newExpertiseProfile.push(result_1.data);
                     }
-                    setExpertiseProfileDataList(tslib_1.__assign(tslib_1.__assign({}, ExpertiseProfileDataList), { results: newExpertiseProfile }));
+                    newExpertiseProfileserializedById_2 = [];
+                    newExpertiseProfile.map(function (el) {
+                        if (el.id) {
+                            newExpertiseProfileserializedById_2[el.id] = el;
+                        }
+                    });
+                    setExpertiseProfileDataList(tslib_1.__assign(tslib_1.__assign({}, ExpertiseProfileDataList), { results: newExpertiseProfileserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -149,7 +161,7 @@ var ExpertiseprofileProvider = function (_a) {
         });
     }); };
     var expertiseprofileUpdate = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newExpertiseProfile;
+        var result_2, prevStateResults, logActions, newExpertiseProfile, newExpertiseProfileserializedById_3;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -172,7 +184,13 @@ var ExpertiseprofileProvider = function (_a) {
                         newExpertiseProfile = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_2.data) : el;
                         });
-                    setExpertiseProfileDataList(tslib_1.__assign(tslib_1.__assign({}, ExpertiseProfileDataList), { results: newExpertiseProfile }));
+                    newExpertiseProfileserializedById_3 = [];
+                    newExpertiseProfile.map(function (el) {
+                        if (el.id) {
+                            newExpertiseProfileserializedById_3[el.id] = el;
+                        }
+                    });
+                    setExpertiseProfileDataList(tslib_1.__assign(tslib_1.__assign({}, ExpertiseProfileDataList), { results: newExpertiseProfileserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -180,7 +198,7 @@ var ExpertiseprofileProvider = function (_a) {
         });
     }); };
     var expertiseprofilePartial = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newExpertiseProfile;
+        var result_3, prevStateResults, logActions, newExpertiseProfile, newExpertiseProfileserializedById_4;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -203,7 +221,13 @@ var ExpertiseprofileProvider = function (_a) {
                         newExpertiseProfile = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_3.data) : el;
                         });
-                    setExpertiseProfileDataList(tslib_1.__assign(tslib_1.__assign({}, ExpertiseProfileDataList), { results: newExpertiseProfile }));
+                    newExpertiseProfileserializedById_4 = [];
+                    newExpertiseProfile.map(function (el) {
+                        if (el.id) {
+                            newExpertiseProfileserializedById_4[el.id] = el;
+                        }
+                    });
+                    setExpertiseProfileDataList(tslib_1.__assign(tslib_1.__assign({}, ExpertiseProfileDataList), { results: newExpertiseProfileserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -211,7 +235,7 @@ var ExpertiseprofileProvider = function (_a) {
         });
     }); };
     var expertiseprofileDelete = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newExpertiseProfile;
+        var result, prevStateResults, logActions, newExpertiseProfile, newExpertiseProfileserializedById_5;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -224,7 +248,13 @@ var ExpertiseprofileProvider = function (_a) {
                     logActions = ExpertiseProfileDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newExpertiseProfile = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setExpertiseProfileDataList(tslib_1.__assign(tslib_1.__assign({}, ExpertiseProfileDataList), { results: newExpertiseProfile }));
+                    newExpertiseProfileserializedById_5 = [];
+                    newExpertiseProfile.map(function (el) {
+                        if (el.id) {
+                            newExpertiseProfileserializedById_5[el.id] = el;
+                        }
+                    });
+                    setExpertiseProfileDataList(tslib_1.__assign(tslib_1.__assign({}, ExpertiseProfileDataList), { results: newExpertiseProfileserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

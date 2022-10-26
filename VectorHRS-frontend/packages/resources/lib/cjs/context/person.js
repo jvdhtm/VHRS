@@ -43,7 +43,7 @@ var PersonProvider = function (_a) {
     /* prettier-ignore */
     var _c = (0, react_1.useState)(false), loading = _c[0], setLoading = _c[1];
     var personList = function (data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newPerson;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newPerson, newPersonserializedById_1;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -74,12 +74,18 @@ var PersonProvider = function (_a) {
                     if (!found_1) {
                         newPerson = prevStateResults_1.concat(result.data.results);
                     }
+                    newPersonserializedById_1 = [];
+                    newPerson.map(function (el) {
+                        if (el.id) {
+                            newPersonserializedById_1[el.id] = el;
+                        }
+                    });
                     setPersonDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newPerson,
+                        results: newPersonserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -116,7 +122,7 @@ var PersonProvider = function (_a) {
         });
     }); };
     var personRead = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newPerson;
+        var result_1, prevStateResults, logActions, found_2, newPerson, newPersonserializedById_2;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -139,9 +145,15 @@ var PersonProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newPerson = prevStateResults.concat(result_1.data);
+                        newPerson.push(result_1.data);
                     }
-                    setPersonDataList(tslib_1.__assign(tslib_1.__assign({}, PersonDataList), { results: newPerson }));
+                    newPersonserializedById_2 = [];
+                    newPerson.map(function (el) {
+                        if (el.id) {
+                            newPersonserializedById_2[el.id] = el;
+                        }
+                    });
+                    setPersonDataList(tslib_1.__assign(tslib_1.__assign({}, PersonDataList), { results: newPersonserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -149,7 +161,7 @@ var PersonProvider = function (_a) {
         });
     }); };
     var personUpdate = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newPerson;
+        var result_2, prevStateResults, logActions, newPerson, newPersonserializedById_3;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -172,7 +184,13 @@ var PersonProvider = function (_a) {
                         newPerson = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_2.data) : el;
                         });
-                    setPersonDataList(tslib_1.__assign(tslib_1.__assign({}, PersonDataList), { results: newPerson }));
+                    newPersonserializedById_3 = [];
+                    newPerson.map(function (el) {
+                        if (el.id) {
+                            newPersonserializedById_3[el.id] = el;
+                        }
+                    });
+                    setPersonDataList(tslib_1.__assign(tslib_1.__assign({}, PersonDataList), { results: newPersonserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -180,7 +198,7 @@ var PersonProvider = function (_a) {
         });
     }); };
     var personPartial = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newPerson;
+        var result_3, prevStateResults, logActions, newPerson, newPersonserializedById_4;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -203,7 +221,13 @@ var PersonProvider = function (_a) {
                         newPerson = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_3.data) : el;
                         });
-                    setPersonDataList(tslib_1.__assign(tslib_1.__assign({}, PersonDataList), { results: newPerson }));
+                    newPersonserializedById_4 = [];
+                    newPerson.map(function (el) {
+                        if (el.id) {
+                            newPersonserializedById_4[el.id] = el;
+                        }
+                    });
+                    setPersonDataList(tslib_1.__assign(tslib_1.__assign({}, PersonDataList), { results: newPersonserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -211,7 +235,7 @@ var PersonProvider = function (_a) {
         });
     }); };
     var personDelete = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newPerson;
+        var result, prevStateResults, logActions, newPerson, newPersonserializedById_5;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -224,7 +248,13 @@ var PersonProvider = function (_a) {
                     logActions = PersonDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newPerson = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setPersonDataList(tslib_1.__assign(tslib_1.__assign({}, PersonDataList), { results: newPerson }));
+                    newPersonserializedById_5 = [];
+                    newPerson.map(function (el) {
+                        if (el.id) {
+                            newPersonserializedById_5[el.id] = el;
+                        }
+                    });
+                    setPersonDataList(tslib_1.__assign(tslib_1.__assign({}, PersonDataList), { results: newPersonserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

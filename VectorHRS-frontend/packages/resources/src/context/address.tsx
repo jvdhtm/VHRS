@@ -134,12 +134,19 @@ export const AddressProvider: FC<IcontextProvider> = ({
         newAddress = prevStateResults.concat(result.data.results);
       }
 
+      const newAddressserializedById: definitions["Address"][] = [];
+      newAddress.map((el: definitions["Address"]) => {
+        if (el.id) {
+          newAddressserializedById[el.id] = el;
+        }
+      });
+
       setAddressDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newAddress,
+        results: newAddressserializedById,
       });
 
       setLoading(false);
@@ -194,12 +201,19 @@ export const AddressProvider: FC<IcontextProvider> = ({
         }
       });
       if (!found) {
-        newAddress = prevStateResults.concat(result.data);
+        newAddress.push(result.data);
       }
+
+      const newAddressserializedById: definitions["Address"][] = [];
+      newAddress.map((el: definitions["Address"]) => {
+        if (el.id) {
+          newAddressserializedById[el.id] = el;
+        }
+      });
 
       setAddressDataList({
         ...AddressDataList,
-        results: newAddress,
+        results: newAddressserializedById,
       });
 
       setLoading(false);
@@ -229,9 +243,16 @@ export const AddressProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newAddressserializedById: definitions["Address"][] = [];
+      newAddress.map((el: definitions["Address"]) => {
+        if (el.id) {
+          newAddressserializedById[el.id] = el;
+        }
+      });
+
       setAddressDataList({
         ...AddressDataList,
-        results: newAddress,
+        results: newAddressserializedById,
       });
 
       setLoading(false);
@@ -261,9 +282,16 @@ export const AddressProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newAddressserializedById: definitions["Address"][] = [];
+      newAddress.map((el: definitions["Address"]) => {
+        if (el.id) {
+          newAddressserializedById[el.id] = el;
+        }
+      });
+
       setAddressDataList({
         ...AddressDataList,
-        results: newAddress,
+        results: newAddressserializedById,
       });
 
       setLoading(false);
@@ -283,9 +311,16 @@ export const AddressProvider: FC<IcontextProvider> = ({
         (el: definitions["Address"]) => el.id !== id
       );
 
+      const newAddressserializedById: definitions["Address"][] = [];
+      newAddress.map((el: definitions["Address"]) => {
+        if (el.id) {
+          newAddressserializedById[el.id] = el;
+        }
+      });
+
       setAddressDataList({
         ...AddressDataList,
-        results: newAddress,
+        results: newAddressserializedById,
       });
 
       setLoading(false);

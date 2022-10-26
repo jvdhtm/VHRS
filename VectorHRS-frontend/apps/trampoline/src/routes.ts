@@ -1,5 +1,6 @@
-import { AddIcon, HamburgerIcon} from '@chakra-ui/icons';
+import { AddIcon} from '@chakra-ui/icons';
 import Dashboard from './pages/Dashboard'
+import News from './pages/News'
 import Login from './pages/Login'
 import Notfound from './pages/Notfound404'
   
@@ -12,6 +13,13 @@ import Notfound from './pages/Notfound404'
       name: 'Dashboard',
       path: '/',
       component: Dashboard,
+    },
+    {
+      id: '2',
+      icon: AddIcon,
+      name: 'News',
+      path: 'news/:id',
+      component: News,
     },
     {
       id: '0',

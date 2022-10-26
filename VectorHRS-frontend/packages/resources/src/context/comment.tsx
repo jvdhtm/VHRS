@@ -134,12 +134,19 @@ export const CommentProvider: FC<IcontextProvider> = ({
         newComment = prevStateResults.concat(result.data.results);
       }
 
+      const newCommentserializedById: definitions["Comment"][] = [];
+      newComment.map((el: definitions["Comment"]) => {
+        if (el.id) {
+          newCommentserializedById[el.id] = el;
+        }
+      });
+
       setCommentDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newComment,
+        results: newCommentserializedById,
       });
 
       setLoading(false);
@@ -194,12 +201,19 @@ export const CommentProvider: FC<IcontextProvider> = ({
         }
       });
       if (!found) {
-        newComment = prevStateResults.concat(result.data);
+        newComment.push(result.data);
       }
+
+      const newCommentserializedById: definitions["Comment"][] = [];
+      newComment.map((el: definitions["Comment"]) => {
+        if (el.id) {
+          newCommentserializedById[el.id] = el;
+        }
+      });
 
       setCommentDataList({
         ...CommentDataList,
-        results: newComment,
+        results: newCommentserializedById,
       });
 
       setLoading(false);
@@ -229,9 +243,16 @@ export const CommentProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newCommentserializedById: definitions["Comment"][] = [];
+      newComment.map((el: definitions["Comment"]) => {
+        if (el.id) {
+          newCommentserializedById[el.id] = el;
+        }
+      });
+
       setCommentDataList({
         ...CommentDataList,
-        results: newComment,
+        results: newCommentserializedById,
       });
 
       setLoading(false);
@@ -261,9 +282,16 @@ export const CommentProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newCommentserializedById: definitions["Comment"][] = [];
+      newComment.map((el: definitions["Comment"]) => {
+        if (el.id) {
+          newCommentserializedById[el.id] = el;
+        }
+      });
+
       setCommentDataList({
         ...CommentDataList,
-        results: newComment,
+        results: newCommentserializedById,
       });
 
       setLoading(false);
@@ -283,9 +311,16 @@ export const CommentProvider: FC<IcontextProvider> = ({
         (el: definitions["Comment"]) => el.id !== id
       );
 
+      const newCommentserializedById: definitions["Comment"][] = [];
+      newComment.map((el: definitions["Comment"]) => {
+        if (el.id) {
+          newCommentserializedById[el.id] = el;
+        }
+      });
+
       setCommentDataList({
         ...CommentDataList,
-        results: newComment,
+        results: newCommentserializedById,
       });
 
       setLoading(false);

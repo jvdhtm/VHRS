@@ -40,7 +40,7 @@ export var AddressProvider = function (_a) {
     /* prettier-ignore */
     var _c = useState(false), loading = _c[0], setLoading = _c[1];
     var addressList = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newAddress;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newAddress, newAddressserializedById_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -71,12 +71,18 @@ export var AddressProvider = function (_a) {
                     if (!found_1) {
                         newAddress = prevStateResults_1.concat(result.data.results);
                     }
+                    newAddressserializedById_1 = [];
+                    newAddress.map(function (el) {
+                        if (el.id) {
+                            newAddressserializedById_1[el.id] = el;
+                        }
+                    });
                     setAddressDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newAddress,
+                        results: newAddressserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -113,7 +119,7 @@ export var AddressProvider = function (_a) {
         });
     }); };
     var addressRead = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newAddress;
+        var result_1, prevStateResults, logActions, found_2, newAddress, newAddressserializedById_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -136,9 +142,15 @@ export var AddressProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newAddress = prevStateResults.concat(result_1.data);
+                        newAddress.push(result_1.data);
                     }
-                    setAddressDataList(__assign(__assign({}, AddressDataList), { results: newAddress }));
+                    newAddressserializedById_2 = [];
+                    newAddress.map(function (el) {
+                        if (el.id) {
+                            newAddressserializedById_2[el.id] = el;
+                        }
+                    });
+                    setAddressDataList(__assign(__assign({}, AddressDataList), { results: newAddressserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -146,7 +158,7 @@ export var AddressProvider = function (_a) {
         });
     }); };
     var addressUpdate = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newAddress;
+        var result_2, prevStateResults, logActions, newAddress, newAddressserializedById_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -169,7 +181,13 @@ export var AddressProvider = function (_a) {
                         newAddress = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? __assign(__assign({}, el), result_2.data) : el;
                         });
-                    setAddressDataList(__assign(__assign({}, AddressDataList), { results: newAddress }));
+                    newAddressserializedById_3 = [];
+                    newAddress.map(function (el) {
+                        if (el.id) {
+                            newAddressserializedById_3[el.id] = el;
+                        }
+                    });
+                    setAddressDataList(__assign(__assign({}, AddressDataList), { results: newAddressserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -177,7 +195,7 @@ export var AddressProvider = function (_a) {
         });
     }); };
     var addressPartial = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newAddress;
+        var result_3, prevStateResults, logActions, newAddress, newAddressserializedById_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -200,7 +218,13 @@ export var AddressProvider = function (_a) {
                         newAddress = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? __assign(__assign({}, el), result_3.data) : el;
                         });
-                    setAddressDataList(__assign(__assign({}, AddressDataList), { results: newAddress }));
+                    newAddressserializedById_4 = [];
+                    newAddress.map(function (el) {
+                        if (el.id) {
+                            newAddressserializedById_4[el.id] = el;
+                        }
+                    });
+                    setAddressDataList(__assign(__assign({}, AddressDataList), { results: newAddressserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -208,7 +232,7 @@ export var AddressProvider = function (_a) {
         });
     }); };
     var addressDelete = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newAddress;
+        var result, prevStateResults, logActions, newAddress, newAddressserializedById_5;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -221,7 +245,13 @@ export var AddressProvider = function (_a) {
                     logActions = AddressDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newAddress = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setAddressDataList(__assign(__assign({}, AddressDataList), { results: newAddress }));
+                    newAddressserializedById_5 = [];
+                    newAddress.map(function (el) {
+                        if (el.id) {
+                            newAddressserializedById_5[el.id] = el;
+                        }
+                    });
+                    setAddressDataList(__assign(__assign({}, AddressDataList), { results: newAddressserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

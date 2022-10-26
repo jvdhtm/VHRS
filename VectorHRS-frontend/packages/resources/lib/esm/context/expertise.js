@@ -40,7 +40,7 @@ export var ExpertiseProvider = function (_a) {
     /* prettier-ignore */
     var _c = useState(false), loading = _c[0], setLoading = _c[1];
     var expertiseList = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newExpertise;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newExpertise, newExpertiseserializedById_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -71,12 +71,18 @@ export var ExpertiseProvider = function (_a) {
                     if (!found_1) {
                         newExpertise = prevStateResults_1.concat(result.data.results);
                     }
+                    newExpertiseserializedById_1 = [];
+                    newExpertise.map(function (el) {
+                        if (el.id) {
+                            newExpertiseserializedById_1[el.id] = el;
+                        }
+                    });
                     setExpertiseDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newExpertise,
+                        results: newExpertiseserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -113,7 +119,7 @@ export var ExpertiseProvider = function (_a) {
         });
     }); };
     var expertiseRead = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newExpertise;
+        var result_1, prevStateResults, logActions, found_2, newExpertise, newExpertiseserializedById_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -136,9 +142,15 @@ export var ExpertiseProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newExpertise = prevStateResults.concat(result_1.data);
+                        newExpertise.push(result_1.data);
                     }
-                    setExpertiseDataList(__assign(__assign({}, ExpertiseDataList), { results: newExpertise }));
+                    newExpertiseserializedById_2 = [];
+                    newExpertise.map(function (el) {
+                        if (el.id) {
+                            newExpertiseserializedById_2[el.id] = el;
+                        }
+                    });
+                    setExpertiseDataList(__assign(__assign({}, ExpertiseDataList), { results: newExpertiseserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -146,7 +158,7 @@ export var ExpertiseProvider = function (_a) {
         });
     }); };
     var expertiseUpdate = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newExpertise;
+        var result_2, prevStateResults, logActions, newExpertise, newExpertiseserializedById_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -169,7 +181,13 @@ export var ExpertiseProvider = function (_a) {
                         newExpertise = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? __assign(__assign({}, el), result_2.data) : el;
                         });
-                    setExpertiseDataList(__assign(__assign({}, ExpertiseDataList), { results: newExpertise }));
+                    newExpertiseserializedById_3 = [];
+                    newExpertise.map(function (el) {
+                        if (el.id) {
+                            newExpertiseserializedById_3[el.id] = el;
+                        }
+                    });
+                    setExpertiseDataList(__assign(__assign({}, ExpertiseDataList), { results: newExpertiseserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -177,7 +195,7 @@ export var ExpertiseProvider = function (_a) {
         });
     }); };
     var expertisePartial = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newExpertise;
+        var result_3, prevStateResults, logActions, newExpertise, newExpertiseserializedById_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -200,7 +218,13 @@ export var ExpertiseProvider = function (_a) {
                         newExpertise = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? __assign(__assign({}, el), result_3.data) : el;
                         });
-                    setExpertiseDataList(__assign(__assign({}, ExpertiseDataList), { results: newExpertise }));
+                    newExpertiseserializedById_4 = [];
+                    newExpertise.map(function (el) {
+                        if (el.id) {
+                            newExpertiseserializedById_4[el.id] = el;
+                        }
+                    });
+                    setExpertiseDataList(__assign(__assign({}, ExpertiseDataList), { results: newExpertiseserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -208,7 +232,7 @@ export var ExpertiseProvider = function (_a) {
         });
     }); };
     var expertiseDelete = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newExpertise;
+        var result, prevStateResults, logActions, newExpertise, newExpertiseserializedById_5;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -221,7 +245,13 @@ export var ExpertiseProvider = function (_a) {
                     logActions = ExpertiseDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newExpertise = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setExpertiseDataList(__assign(__assign({}, ExpertiseDataList), { results: newExpertise }));
+                    newExpertiseserializedById_5 = [];
+                    newExpertise.map(function (el) {
+                        if (el.id) {
+                            newExpertiseserializedById_5[el.id] = el;
+                        }
+                    });
+                    setExpertiseDataList(__assign(__assign({}, ExpertiseDataList), { results: newExpertiseserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

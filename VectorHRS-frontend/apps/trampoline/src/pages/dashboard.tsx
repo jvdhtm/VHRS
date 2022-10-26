@@ -1,4 +1,4 @@
-import { NewsLetter, Questions } from '../components';
+import { NewsList, Questions, Shortcuts } from '../components';
 import Admin from '../layouts/Admin';
 import resources from '@vhrs/resources';
 import { FC } from 'react';
@@ -21,9 +21,13 @@ const Dashboard: FC = () => {
           </Heading>
 
           <div className='grid'>
-            <NewsLetter />
+            <div className='main-content'>
+              <NewsList />
+            </div>
             <div className='sidebox' >
+              <Shortcuts/>
               <Questions />
+              <Shortcuts/>
             </div>
           </div>
         </Admin>

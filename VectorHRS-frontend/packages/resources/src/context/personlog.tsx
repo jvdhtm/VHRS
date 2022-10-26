@@ -136,12 +136,19 @@ export const PersonlogProvider: FC<IcontextProvider> = ({
         newPersonLog = prevStateResults.concat(result.data.results);
       }
 
+      const newPersonLogserializedById: definitions["PersonLog"][] = [];
+      newPersonLog.map((el: definitions["PersonLog"]) => {
+        if (el.id) {
+          newPersonLogserializedById[el.id] = el;
+        }
+      });
+
       setPersonLogDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newPersonLog,
+        results: newPersonLogserializedById,
       });
 
       setLoading(false);
@@ -198,12 +205,19 @@ export const PersonlogProvider: FC<IcontextProvider> = ({
         }
       );
       if (!found) {
-        newPersonLog = prevStateResults.concat(result.data);
+        newPersonLog.push(result.data);
       }
+
+      const newPersonLogserializedById: definitions["PersonLog"][] = [];
+      newPersonLog.map((el: definitions["PersonLog"]) => {
+        if (el.id) {
+          newPersonLogserializedById[el.id] = el;
+        }
+      });
 
       setPersonLogDataList({
         ...PersonLogDataList,
-        results: newPersonLog,
+        results: newPersonLogserializedById,
       });
 
       setLoading(false);
@@ -233,9 +247,16 @@ export const PersonlogProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newPersonLogserializedById: definitions["PersonLog"][] = [];
+      newPersonLog.map((el: definitions["PersonLog"]) => {
+        if (el.id) {
+          newPersonLogserializedById[el.id] = el;
+        }
+      });
+
       setPersonLogDataList({
         ...PersonLogDataList,
-        results: newPersonLog,
+        results: newPersonLogserializedById,
       });
 
       setLoading(false);
@@ -269,9 +290,16 @@ export const PersonlogProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newPersonLogserializedById: definitions["PersonLog"][] = [];
+      newPersonLog.map((el: definitions["PersonLog"]) => {
+        if (el.id) {
+          newPersonLogserializedById[el.id] = el;
+        }
+      });
+
       setPersonLogDataList({
         ...PersonLogDataList,
-        results: newPersonLog,
+        results: newPersonLogserializedById,
       });
 
       setLoading(false);
@@ -291,9 +319,16 @@ export const PersonlogProvider: FC<IcontextProvider> = ({
         (el: definitions["PersonLog"]) => el.id !== id
       );
 
+      const newPersonLogserializedById: definitions["PersonLog"][] = [];
+      newPersonLog.map((el: definitions["PersonLog"]) => {
+        if (el.id) {
+          newPersonLogserializedById[el.id] = el;
+        }
+      });
+
       setPersonLogDataList({
         ...PersonLogDataList,
-        results: newPersonLog,
+        results: newPersonLogserializedById,
       });
 
       setLoading(false);

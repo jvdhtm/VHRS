@@ -139,12 +139,20 @@ export const NewsrelatedlinkProvider: FC<IcontextProvider> = ({
         newNewsRelatedLink = prevStateResults.concat(result.data.results);
       }
 
+      const newNewsRelatedLinkserializedById: definitions["NewsRelatedLink"][] =
+        [];
+      newNewsRelatedLink.map((el: definitions["NewsRelatedLink"]) => {
+        if (el.id) {
+          newNewsRelatedLinkserializedById[el.id] = el;
+        }
+      });
+
       setNewsRelatedLinkDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newNewsRelatedLink,
+        results: newNewsRelatedLinkserializedById,
       });
 
       setLoading(false);
@@ -201,12 +209,20 @@ export const NewsrelatedlinkProvider: FC<IcontextProvider> = ({
         }
       );
       if (!found) {
-        newNewsRelatedLink = prevStateResults.concat(result.data);
+        newNewsRelatedLink.push(result.data);
       }
+
+      const newNewsRelatedLinkserializedById: definitions["NewsRelatedLink"][] =
+        [];
+      newNewsRelatedLink.map((el: definitions["NewsRelatedLink"]) => {
+        if (el.id) {
+          newNewsRelatedLinkserializedById[el.id] = el;
+        }
+      });
 
       setNewsRelatedLinkDataList({
         ...NewsRelatedLinkDataList,
-        results: newNewsRelatedLink,
+        results: newNewsRelatedLinkserializedById,
       });
 
       setLoading(false);
@@ -238,9 +254,17 @@ export const NewsrelatedlinkProvider: FC<IcontextProvider> = ({
             el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newNewsRelatedLinkserializedById: definitions["NewsRelatedLink"][] =
+        [];
+      newNewsRelatedLink.map((el: definitions["NewsRelatedLink"]) => {
+        if (el.id) {
+          newNewsRelatedLinkserializedById[el.id] = el;
+        }
+      });
+
       setNewsRelatedLinkDataList({
         ...NewsRelatedLinkDataList,
-        results: newNewsRelatedLink,
+        results: newNewsRelatedLinkserializedById,
       });
 
       setLoading(false);
@@ -276,9 +300,17 @@ export const NewsrelatedlinkProvider: FC<IcontextProvider> = ({
             el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newNewsRelatedLinkserializedById: definitions["NewsRelatedLink"][] =
+        [];
+      newNewsRelatedLink.map((el: definitions["NewsRelatedLink"]) => {
+        if (el.id) {
+          newNewsRelatedLinkserializedById[el.id] = el;
+        }
+      });
+
       setNewsRelatedLinkDataList({
         ...NewsRelatedLinkDataList,
-        results: newNewsRelatedLink,
+        results: newNewsRelatedLinkserializedById,
       });
 
       setLoading(false);
@@ -298,9 +330,17 @@ export const NewsrelatedlinkProvider: FC<IcontextProvider> = ({
         (el: definitions["NewsRelatedLink"]) => el.id !== id
       );
 
+      const newNewsRelatedLinkserializedById: definitions["NewsRelatedLink"][] =
+        [];
+      newNewsRelatedLink.map((el: definitions["NewsRelatedLink"]) => {
+        if (el.id) {
+          newNewsRelatedLinkserializedById[el.id] = el;
+        }
+      });
+
       setNewsRelatedLinkDataList({
         ...NewsRelatedLinkDataList,
-        results: newNewsRelatedLink,
+        results: newNewsRelatedLinkserializedById,
       });
 
       setLoading(false);

@@ -136,12 +136,19 @@ export const ConditionProvider: FC<IcontextProvider> = ({
         newCondition = prevStateResults.concat(result.data.results);
       }
 
+      const newConditionserializedById: definitions["Condition"][] = [];
+      newCondition.map((el: definitions["Condition"]) => {
+        if (el.id) {
+          newConditionserializedById[el.id] = el;
+        }
+      });
+
       setConditionDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newCondition,
+        results: newConditionserializedById,
       });
 
       setLoading(false);
@@ -198,12 +205,19 @@ export const ConditionProvider: FC<IcontextProvider> = ({
         }
       );
       if (!found) {
-        newCondition = prevStateResults.concat(result.data);
+        newCondition.push(result.data);
       }
+
+      const newConditionserializedById: definitions["Condition"][] = [];
+      newCondition.map((el: definitions["Condition"]) => {
+        if (el.id) {
+          newConditionserializedById[el.id] = el;
+        }
+      });
 
       setConditionDataList({
         ...ConditionDataList,
-        results: newCondition,
+        results: newConditionserializedById,
       });
 
       setLoading(false);
@@ -233,9 +247,16 @@ export const ConditionProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newConditionserializedById: definitions["Condition"][] = [];
+      newCondition.map((el: definitions["Condition"]) => {
+        if (el.id) {
+          newConditionserializedById[el.id] = el;
+        }
+      });
+
       setConditionDataList({
         ...ConditionDataList,
-        results: newCondition,
+        results: newConditionserializedById,
       });
 
       setLoading(false);
@@ -269,9 +290,16 @@ export const ConditionProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newConditionserializedById: definitions["Condition"][] = [];
+      newCondition.map((el: definitions["Condition"]) => {
+        if (el.id) {
+          newConditionserializedById[el.id] = el;
+        }
+      });
+
       setConditionDataList({
         ...ConditionDataList,
-        results: newCondition,
+        results: newConditionserializedById,
       });
 
       setLoading(false);
@@ -291,9 +319,16 @@ export const ConditionProvider: FC<IcontextProvider> = ({
         (el: definitions["Condition"]) => el.id !== id
       );
 
+      const newConditionserializedById: definitions["Condition"][] = [];
+      newCondition.map((el: definitions["Condition"]) => {
+        if (el.id) {
+          newConditionserializedById[el.id] = el;
+        }
+      });
+
       setConditionDataList({
         ...ConditionDataList,
-        results: newCondition,
+        results: newConditionserializedById,
       });
 
       setLoading(false);

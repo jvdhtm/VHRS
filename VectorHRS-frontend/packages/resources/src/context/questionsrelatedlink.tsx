@@ -151,12 +151,20 @@ export const QuestionsrelatedlinkProvider: FC<IcontextProvider> = ({
         newQuestionsRelatedLink = prevStateResults.concat(result.data.results);
       }
 
+      const newQuestionsRelatedLinkserializedById: definitions["QuestionsRelatedLink"][] =
+        [];
+      newQuestionsRelatedLink.map((el: definitions["QuestionsRelatedLink"]) => {
+        if (el.id) {
+          newQuestionsRelatedLinkserializedById[el.id] = el;
+        }
+      });
+
       setQuestionsRelatedLinkDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newQuestionsRelatedLink,
+        results: newQuestionsRelatedLinkserializedById,
       });
 
       setLoading(false);
@@ -215,12 +223,20 @@ export const QuestionsrelatedlinkProvider: FC<IcontextProvider> = ({
         }
       );
       if (!found) {
-        newQuestionsRelatedLink = prevStateResults.concat(result.data);
+        newQuestionsRelatedLink.push(result.data);
       }
+
+      const newQuestionsRelatedLinkserializedById: definitions["QuestionsRelatedLink"][] =
+        [];
+      newQuestionsRelatedLink.map((el: definitions["QuestionsRelatedLink"]) => {
+        if (el.id) {
+          newQuestionsRelatedLinkserializedById[el.id] = el;
+        }
+      });
 
       setQuestionsRelatedLinkDataList({
         ...QuestionsRelatedLinkDataList,
-        results: newQuestionsRelatedLink,
+        results: newQuestionsRelatedLinkserializedById,
       });
 
       setLoading(false);
@@ -258,9 +274,17 @@ export const QuestionsrelatedlinkProvider: FC<IcontextProvider> = ({
             el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newQuestionsRelatedLinkserializedById: definitions["QuestionsRelatedLink"][] =
+        [];
+      newQuestionsRelatedLink.map((el: definitions["QuestionsRelatedLink"]) => {
+        if (el.id) {
+          newQuestionsRelatedLinkserializedById[el.id] = el;
+        }
+      });
+
       setQuestionsRelatedLinkDataList({
         ...QuestionsRelatedLinkDataList,
-        results: newQuestionsRelatedLink,
+        results: newQuestionsRelatedLinkserializedById,
       });
 
       setLoading(false);
@@ -298,9 +322,17 @@ export const QuestionsrelatedlinkProvider: FC<IcontextProvider> = ({
             el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newQuestionsRelatedLinkserializedById: definitions["QuestionsRelatedLink"][] =
+        [];
+      newQuestionsRelatedLink.map((el: definitions["QuestionsRelatedLink"]) => {
+        if (el.id) {
+          newQuestionsRelatedLinkserializedById[el.id] = el;
+        }
+      });
+
       setQuestionsRelatedLinkDataList({
         ...QuestionsRelatedLinkDataList,
-        results: newQuestionsRelatedLink,
+        results: newQuestionsRelatedLinkserializedById,
       });
 
       setLoading(false);
@@ -320,9 +352,17 @@ export const QuestionsrelatedlinkProvider: FC<IcontextProvider> = ({
         (el: definitions["QuestionsRelatedLink"]) => el.id !== id
       );
 
+      const newQuestionsRelatedLinkserializedById: definitions["QuestionsRelatedLink"][] =
+        [];
+      newQuestionsRelatedLink.map((el: definitions["QuestionsRelatedLink"]) => {
+        if (el.id) {
+          newQuestionsRelatedLinkserializedById[el.id] = el;
+        }
+      });
+
       setQuestionsRelatedLinkDataList({
         ...QuestionsRelatedLinkDataList,
-        results: newQuestionsRelatedLink,
+        results: newQuestionsRelatedLinkserializedById,
       });
 
       setLoading(false);

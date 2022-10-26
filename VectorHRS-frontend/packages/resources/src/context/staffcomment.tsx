@@ -136,12 +136,19 @@ export const StaffcommentProvider: FC<IcontextProvider> = ({
         newStaffComment = prevStateResults.concat(result.data.results);
       }
 
+      const newStaffCommentserializedById: definitions["StaffComment"][] = [];
+      newStaffComment.map((el: definitions["StaffComment"]) => {
+        if (el.id) {
+          newStaffCommentserializedById[el.id] = el;
+        }
+      });
+
       setStaffCommentDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newStaffComment,
+        results: newStaffCommentserializedById,
       });
 
       setLoading(false);
@@ -198,12 +205,19 @@ export const StaffcommentProvider: FC<IcontextProvider> = ({
         }
       );
       if (!found) {
-        newStaffComment = prevStateResults.concat(result.data);
+        newStaffComment.push(result.data);
       }
+
+      const newStaffCommentserializedById: definitions["StaffComment"][] = [];
+      newStaffComment.map((el: definitions["StaffComment"]) => {
+        if (el.id) {
+          newStaffCommentserializedById[el.id] = el;
+        }
+      });
 
       setStaffCommentDataList({
         ...StaffCommentDataList,
-        results: newStaffComment,
+        results: newStaffCommentserializedById,
       });
 
       setLoading(false);
@@ -235,9 +249,16 @@ export const StaffcommentProvider: FC<IcontextProvider> = ({
             el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newStaffCommentserializedById: definitions["StaffComment"][] = [];
+      newStaffComment.map((el: definitions["StaffComment"]) => {
+        if (el.id) {
+          newStaffCommentserializedById[el.id] = el;
+        }
+      });
+
       setStaffCommentDataList({
         ...StaffCommentDataList,
-        results: newStaffComment,
+        results: newStaffCommentserializedById,
       });
 
       setLoading(false);
@@ -273,9 +294,16 @@ export const StaffcommentProvider: FC<IcontextProvider> = ({
             el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newStaffCommentserializedById: definitions["StaffComment"][] = [];
+      newStaffComment.map((el: definitions["StaffComment"]) => {
+        if (el.id) {
+          newStaffCommentserializedById[el.id] = el;
+        }
+      });
+
       setStaffCommentDataList({
         ...StaffCommentDataList,
-        results: newStaffComment,
+        results: newStaffCommentserializedById,
       });
 
       setLoading(false);
@@ -295,9 +323,16 @@ export const StaffcommentProvider: FC<IcontextProvider> = ({
         (el: definitions["StaffComment"]) => el.id !== id
       );
 
+      const newStaffCommentserializedById: definitions["StaffComment"][] = [];
+      newStaffComment.map((el: definitions["StaffComment"]) => {
+        if (el.id) {
+          newStaffCommentserializedById[el.id] = el;
+        }
+      });
+
       setStaffCommentDataList({
         ...StaffCommentDataList,
-        results: newStaffComment,
+        results: newStaffCommentserializedById,
       });
 
       setLoading(false);

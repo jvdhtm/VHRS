@@ -136,12 +136,19 @@ export const NewsletterProvider: FC<IcontextProvider> = ({
         newNewsLetter = prevStateResults.concat(result.data.results);
       }
 
+      const newNewsLetterserializedById: definitions["NewsLetter"][] = [];
+      newNewsLetter.map((el: definitions["NewsLetter"]) => {
+        if (el.id) {
+          newNewsLetterserializedById[el.id] = el;
+        }
+      });
+
       setNewsLetterDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newNewsLetter,
+        results: newNewsLetterserializedById,
       });
 
       setLoading(false);
@@ -198,12 +205,19 @@ export const NewsletterProvider: FC<IcontextProvider> = ({
         }
       );
       if (!found) {
-        newNewsLetter = prevStateResults.concat(result.data);
+        newNewsLetter.push(result.data);
       }
+
+      const newNewsLetterserializedById: definitions["NewsLetter"][] = [];
+      newNewsLetter.map((el: definitions["NewsLetter"]) => {
+        if (el.id) {
+          newNewsLetterserializedById[el.id] = el;
+        }
+      });
 
       setNewsLetterDataList({
         ...NewsLetterDataList,
-        results: newNewsLetter,
+        results: newNewsLetterserializedById,
       });
 
       setLoading(false);
@@ -233,9 +247,16 @@ export const NewsletterProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newNewsLetterserializedById: definitions["NewsLetter"][] = [];
+      newNewsLetter.map((el: definitions["NewsLetter"]) => {
+        if (el.id) {
+          newNewsLetterserializedById[el.id] = el;
+        }
+      });
+
       setNewsLetterDataList({
         ...NewsLetterDataList,
-        results: newNewsLetter,
+        results: newNewsLetterserializedById,
       });
 
       setLoading(false);
@@ -269,9 +290,16 @@ export const NewsletterProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newNewsLetterserializedById: definitions["NewsLetter"][] = [];
+      newNewsLetter.map((el: definitions["NewsLetter"]) => {
+        if (el.id) {
+          newNewsLetterserializedById[el.id] = el;
+        }
+      });
+
       setNewsLetterDataList({
         ...NewsLetterDataList,
-        results: newNewsLetter,
+        results: newNewsLetterserializedById,
       });
 
       setLoading(false);
@@ -291,9 +319,16 @@ export const NewsletterProvider: FC<IcontextProvider> = ({
         (el: definitions["NewsLetter"]) => el.id !== id
       );
 
+      const newNewsLetterserializedById: definitions["NewsLetter"][] = [];
+      newNewsLetter.map((el: definitions["NewsLetter"]) => {
+        if (el.id) {
+          newNewsLetterserializedById[el.id] = el;
+        }
+      });
+
       setNewsLetterDataList({
         ...NewsLetterDataList,
-        results: newNewsLetter,
+        results: newNewsLetterserializedById,
       });
 
       setLoading(false);

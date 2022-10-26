@@ -40,7 +40,7 @@ export var CommentProvider = function (_a) {
     /* prettier-ignore */
     var _c = useState(false), loading = _c[0], setLoading = _c[1];
     var commentList = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newComment;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newComment, newCommentserializedById_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -71,12 +71,18 @@ export var CommentProvider = function (_a) {
                     if (!found_1) {
                         newComment = prevStateResults_1.concat(result.data.results);
                     }
+                    newCommentserializedById_1 = [];
+                    newComment.map(function (el) {
+                        if (el.id) {
+                            newCommentserializedById_1[el.id] = el;
+                        }
+                    });
                     setCommentDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newComment,
+                        results: newCommentserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -113,7 +119,7 @@ export var CommentProvider = function (_a) {
         });
     }); };
     var commentRead = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newComment;
+        var result_1, prevStateResults, logActions, found_2, newComment, newCommentserializedById_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -136,9 +142,15 @@ export var CommentProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newComment = prevStateResults.concat(result_1.data);
+                        newComment.push(result_1.data);
                     }
-                    setCommentDataList(__assign(__assign({}, CommentDataList), { results: newComment }));
+                    newCommentserializedById_2 = [];
+                    newComment.map(function (el) {
+                        if (el.id) {
+                            newCommentserializedById_2[el.id] = el;
+                        }
+                    });
+                    setCommentDataList(__assign(__assign({}, CommentDataList), { results: newCommentserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -146,7 +158,7 @@ export var CommentProvider = function (_a) {
         });
     }); };
     var commentUpdate = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newComment;
+        var result_2, prevStateResults, logActions, newComment, newCommentserializedById_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -169,7 +181,13 @@ export var CommentProvider = function (_a) {
                         newComment = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? __assign(__assign({}, el), result_2.data) : el;
                         });
-                    setCommentDataList(__assign(__assign({}, CommentDataList), { results: newComment }));
+                    newCommentserializedById_3 = [];
+                    newComment.map(function (el) {
+                        if (el.id) {
+                            newCommentserializedById_3[el.id] = el;
+                        }
+                    });
+                    setCommentDataList(__assign(__assign({}, CommentDataList), { results: newCommentserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -177,7 +195,7 @@ export var CommentProvider = function (_a) {
         });
     }); };
     var commentPartial = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newComment;
+        var result_3, prevStateResults, logActions, newComment, newCommentserializedById_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -200,7 +218,13 @@ export var CommentProvider = function (_a) {
                         newComment = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? __assign(__assign({}, el), result_3.data) : el;
                         });
-                    setCommentDataList(__assign(__assign({}, CommentDataList), { results: newComment }));
+                    newCommentserializedById_4 = [];
+                    newComment.map(function (el) {
+                        if (el.id) {
+                            newCommentserializedById_4[el.id] = el;
+                        }
+                    });
+                    setCommentDataList(__assign(__assign({}, CommentDataList), { results: newCommentserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -208,7 +232,7 @@ export var CommentProvider = function (_a) {
         });
     }); };
     var commentDelete = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newComment;
+        var result, prevStateResults, logActions, newComment, newCommentserializedById_5;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -221,7 +245,13 @@ export var CommentProvider = function (_a) {
                     logActions = CommentDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newComment = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setCommentDataList(__assign(__assign({}, CommentDataList), { results: newComment }));
+                    newCommentserializedById_5 = [];
+                    newComment.map(function (el) {
+                        if (el.id) {
+                            newCommentserializedById_5[el.id] = el;
+                        }
+                    });
+                    setCommentDataList(__assign(__assign({}, CommentDataList), { results: newCommentserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

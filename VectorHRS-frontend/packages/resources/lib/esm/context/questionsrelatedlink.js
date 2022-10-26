@@ -40,7 +40,7 @@ export var QuestionsrelatedlinkProvider = function (_a) {
     /* prettier-ignore */
     var _c = useState(false), loading = _c[0], setLoading = _c[1];
     var questionsrelatedlinkList = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newQuestionsRelatedLink;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newQuestionsRelatedLink, newQuestionsRelatedLinkserializedById_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -71,12 +71,18 @@ export var QuestionsrelatedlinkProvider = function (_a) {
                     if (!found_1) {
                         newQuestionsRelatedLink = prevStateResults_1.concat(result.data.results);
                     }
+                    newQuestionsRelatedLinkserializedById_1 = [];
+                    newQuestionsRelatedLink.map(function (el) {
+                        if (el.id) {
+                            newQuestionsRelatedLinkserializedById_1[el.id] = el;
+                        }
+                    });
                     setQuestionsRelatedLinkDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newQuestionsRelatedLink,
+                        results: newQuestionsRelatedLinkserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -113,7 +119,7 @@ export var QuestionsrelatedlinkProvider = function (_a) {
         });
     }); };
     var questionsrelatedlinkRead = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newQuestionsRelatedLink;
+        var result_1, prevStateResults, logActions, found_2, newQuestionsRelatedLink, newQuestionsRelatedLinkserializedById_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -136,9 +142,15 @@ export var QuestionsrelatedlinkProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newQuestionsRelatedLink = prevStateResults.concat(result_1.data);
+                        newQuestionsRelatedLink.push(result_1.data);
                     }
-                    setQuestionsRelatedLinkDataList(__assign(__assign({}, QuestionsRelatedLinkDataList), { results: newQuestionsRelatedLink }));
+                    newQuestionsRelatedLinkserializedById_2 = [];
+                    newQuestionsRelatedLink.map(function (el) {
+                        if (el.id) {
+                            newQuestionsRelatedLinkserializedById_2[el.id] = el;
+                        }
+                    });
+                    setQuestionsRelatedLinkDataList(__assign(__assign({}, QuestionsRelatedLinkDataList), { results: newQuestionsRelatedLinkserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -146,7 +158,7 @@ export var QuestionsrelatedlinkProvider = function (_a) {
         });
     }); };
     var questionsrelatedlinkUpdate = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newQuestionsRelatedLink;
+        var result_2, prevStateResults, logActions, newQuestionsRelatedLink, newQuestionsRelatedLinkserializedById_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -169,7 +181,13 @@ export var QuestionsrelatedlinkProvider = function (_a) {
                         newQuestionsRelatedLink = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? __assign(__assign({}, el), result_2.data) : el;
                         });
-                    setQuestionsRelatedLinkDataList(__assign(__assign({}, QuestionsRelatedLinkDataList), { results: newQuestionsRelatedLink }));
+                    newQuestionsRelatedLinkserializedById_3 = [];
+                    newQuestionsRelatedLink.map(function (el) {
+                        if (el.id) {
+                            newQuestionsRelatedLinkserializedById_3[el.id] = el;
+                        }
+                    });
+                    setQuestionsRelatedLinkDataList(__assign(__assign({}, QuestionsRelatedLinkDataList), { results: newQuestionsRelatedLinkserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -177,7 +195,7 @@ export var QuestionsrelatedlinkProvider = function (_a) {
         });
     }); };
     var questionsrelatedlinkPartial = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newQuestionsRelatedLink;
+        var result_3, prevStateResults, logActions, newQuestionsRelatedLink, newQuestionsRelatedLinkserializedById_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -200,7 +218,13 @@ export var QuestionsrelatedlinkProvider = function (_a) {
                         newQuestionsRelatedLink = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? __assign(__assign({}, el), result_3.data) : el;
                         });
-                    setQuestionsRelatedLinkDataList(__assign(__assign({}, QuestionsRelatedLinkDataList), { results: newQuestionsRelatedLink }));
+                    newQuestionsRelatedLinkserializedById_4 = [];
+                    newQuestionsRelatedLink.map(function (el) {
+                        if (el.id) {
+                            newQuestionsRelatedLinkserializedById_4[el.id] = el;
+                        }
+                    });
+                    setQuestionsRelatedLinkDataList(__assign(__assign({}, QuestionsRelatedLinkDataList), { results: newQuestionsRelatedLinkserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -208,7 +232,7 @@ export var QuestionsrelatedlinkProvider = function (_a) {
         });
     }); };
     var questionsrelatedlinkDelete = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newQuestionsRelatedLink;
+        var result, prevStateResults, logActions, newQuestionsRelatedLink, newQuestionsRelatedLinkserializedById_5;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -221,7 +245,13 @@ export var QuestionsrelatedlinkProvider = function (_a) {
                     logActions = QuestionsRelatedLinkDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newQuestionsRelatedLink = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setQuestionsRelatedLinkDataList(__assign(__assign({}, QuestionsRelatedLinkDataList), { results: newQuestionsRelatedLink }));
+                    newQuestionsRelatedLinkserializedById_5 = [];
+                    newQuestionsRelatedLink.map(function (el) {
+                        if (el.id) {
+                            newQuestionsRelatedLinkserializedById_5[el.id] = el;
+                        }
+                    });
+                    setQuestionsRelatedLinkDataList(__assign(__assign({}, QuestionsRelatedLinkDataList), { results: newQuestionsRelatedLinkserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

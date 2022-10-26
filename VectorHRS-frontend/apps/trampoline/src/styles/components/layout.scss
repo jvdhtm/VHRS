@@ -81,6 +81,7 @@ main {
     grid-template-columns: repeat(var(--grid), 1fr);
     display: grid;
     grid-gap:2rem;
+    padding-top: 2rem;
 
 }
 .content{
@@ -90,10 +91,15 @@ main {
     }   
 
 }
+.main-content{
+
+    grid-column: span 24/span 24;
+    @include media('>=tablet')  { 
+        grid-column: span 18/span 18;
+    }   
+}
 .sidebox{
     grid-column: span 24/span 24;
-    height: 100vh;
-    padding-top: 4rem;
     @include media('>=tablet')  { 
         grid-column: span 6/span 6;
     }   

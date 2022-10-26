@@ -136,12 +136,19 @@ export const ExpertiseProvider: FC<IcontextProvider> = ({
         newExpertise = prevStateResults.concat(result.data.results);
       }
 
+      const newExpertiseserializedById: definitions["Expertise"][] = [];
+      newExpertise.map((el: definitions["Expertise"]) => {
+        if (el.id) {
+          newExpertiseserializedById[el.id] = el;
+        }
+      });
+
       setExpertiseDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newExpertise,
+        results: newExpertiseserializedById,
       });
 
       setLoading(false);
@@ -198,12 +205,19 @@ export const ExpertiseProvider: FC<IcontextProvider> = ({
         }
       );
       if (!found) {
-        newExpertise = prevStateResults.concat(result.data);
+        newExpertise.push(result.data);
       }
+
+      const newExpertiseserializedById: definitions["Expertise"][] = [];
+      newExpertise.map((el: definitions["Expertise"]) => {
+        if (el.id) {
+          newExpertiseserializedById[el.id] = el;
+        }
+      });
 
       setExpertiseDataList({
         ...ExpertiseDataList,
-        results: newExpertise,
+        results: newExpertiseserializedById,
       });
 
       setLoading(false);
@@ -233,9 +247,16 @@ export const ExpertiseProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newExpertiseserializedById: definitions["Expertise"][] = [];
+      newExpertise.map((el: definitions["Expertise"]) => {
+        if (el.id) {
+          newExpertiseserializedById[el.id] = el;
+        }
+      });
+
       setExpertiseDataList({
         ...ExpertiseDataList,
-        results: newExpertise,
+        results: newExpertiseserializedById,
       });
 
       setLoading(false);
@@ -269,9 +290,16 @@ export const ExpertiseProvider: FC<IcontextProvider> = ({
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newExpertiseserializedById: definitions["Expertise"][] = [];
+      newExpertise.map((el: definitions["Expertise"]) => {
+        if (el.id) {
+          newExpertiseserializedById[el.id] = el;
+        }
+      });
+
       setExpertiseDataList({
         ...ExpertiseDataList,
-        results: newExpertise,
+        results: newExpertiseserializedById,
       });
 
       setLoading(false);
@@ -291,9 +319,16 @@ export const ExpertiseProvider: FC<IcontextProvider> = ({
         (el: definitions["Expertise"]) => el.id !== id
       );
 
+      const newExpertiseserializedById: definitions["Expertise"][] = [];
+      newExpertise.map((el: definitions["Expertise"]) => {
+        if (el.id) {
+          newExpertiseserializedById[el.id] = el;
+        }
+      });
+
       setExpertiseDataList({
         ...ExpertiseDataList,
-        results: newExpertise,
+        results: newExpertiseserializedById,
       });
 
       setLoading(false);

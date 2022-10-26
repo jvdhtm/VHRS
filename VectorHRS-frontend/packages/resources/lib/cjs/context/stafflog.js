@@ -43,7 +43,7 @@ var StafflogProvider = function (_a) {
     /* prettier-ignore */
     var _c = (0, react_1.useState)(false), loading = _c[0], setLoading = _c[1];
     var stafflogList = function (data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newStaffLog;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newStaffLog, newStaffLogserializedById_1;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -74,12 +74,18 @@ var StafflogProvider = function (_a) {
                     if (!found_1) {
                         newStaffLog = prevStateResults_1.concat(result.data.results);
                     }
+                    newStaffLogserializedById_1 = [];
+                    newStaffLog.map(function (el) {
+                        if (el.id) {
+                            newStaffLogserializedById_1[el.id] = el;
+                        }
+                    });
                     setStaffLogDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newStaffLog,
+                        results: newStaffLogserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -116,7 +122,7 @@ var StafflogProvider = function (_a) {
         });
     }); };
     var stafflogRead = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newStaffLog;
+        var result_1, prevStateResults, logActions, found_2, newStaffLog, newStaffLogserializedById_2;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -139,9 +145,15 @@ var StafflogProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newStaffLog = prevStateResults.concat(result_1.data);
+                        newStaffLog.push(result_1.data);
                     }
-                    setStaffLogDataList(tslib_1.__assign(tslib_1.__assign({}, StaffLogDataList), { results: newStaffLog }));
+                    newStaffLogserializedById_2 = [];
+                    newStaffLog.map(function (el) {
+                        if (el.id) {
+                            newStaffLogserializedById_2[el.id] = el;
+                        }
+                    });
+                    setStaffLogDataList(tslib_1.__assign(tslib_1.__assign({}, StaffLogDataList), { results: newStaffLogserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -149,7 +161,7 @@ var StafflogProvider = function (_a) {
         });
     }); };
     var stafflogUpdate = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newStaffLog;
+        var result_2, prevStateResults, logActions, newStaffLog, newStaffLogserializedById_3;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -172,7 +184,13 @@ var StafflogProvider = function (_a) {
                         newStaffLog = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_2.data) : el;
                         });
-                    setStaffLogDataList(tslib_1.__assign(tslib_1.__assign({}, StaffLogDataList), { results: newStaffLog }));
+                    newStaffLogserializedById_3 = [];
+                    newStaffLog.map(function (el) {
+                        if (el.id) {
+                            newStaffLogserializedById_3[el.id] = el;
+                        }
+                    });
+                    setStaffLogDataList(tslib_1.__assign(tslib_1.__assign({}, StaffLogDataList), { results: newStaffLogserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -180,7 +198,7 @@ var StafflogProvider = function (_a) {
         });
     }); };
     var stafflogPartial = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newStaffLog;
+        var result_3, prevStateResults, logActions, newStaffLog, newStaffLogserializedById_4;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -203,7 +221,13 @@ var StafflogProvider = function (_a) {
                         newStaffLog = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_3.data) : el;
                         });
-                    setStaffLogDataList(tslib_1.__assign(tslib_1.__assign({}, StaffLogDataList), { results: newStaffLog }));
+                    newStaffLogserializedById_4 = [];
+                    newStaffLog.map(function (el) {
+                        if (el.id) {
+                            newStaffLogserializedById_4[el.id] = el;
+                        }
+                    });
+                    setStaffLogDataList(tslib_1.__assign(tslib_1.__assign({}, StaffLogDataList), { results: newStaffLogserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -211,7 +235,7 @@ var StafflogProvider = function (_a) {
         });
     }); };
     var stafflogDelete = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newStaffLog;
+        var result, prevStateResults, logActions, newStaffLog, newStaffLogserializedById_5;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -224,7 +248,13 @@ var StafflogProvider = function (_a) {
                     logActions = StaffLogDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newStaffLog = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setStaffLogDataList(tslib_1.__assign(tslib_1.__assign({}, StaffLogDataList), { results: newStaffLog }));
+                    newStaffLogserializedById_5 = [];
+                    newStaffLog.map(function (el) {
+                        if (el.id) {
+                            newStaffLogserializedById_5[el.id] = el;
+                        }
+                    });
+                    setStaffLogDataList(tslib_1.__assign(tslib_1.__assign({}, StaffLogDataList), { results: newStaffLogserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

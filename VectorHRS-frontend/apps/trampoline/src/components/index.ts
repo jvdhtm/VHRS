@@ -5,7 +5,9 @@ export { default as Breadcrumb } from './Breadcrumb'
 export { default as SidebarDrawer } from './SidebarDrawer'
 export { default as ThemeProvider }  from './ThemeProvider';
 export { default as Departments }  from './Departments';
+export { default as NewsList }  from './NewsList';
 export { default as NewsLetter }  from './NewsLetter';
 export { default as VIcon }  from './VIcon';
 export { default as NewsRelatedLink }  from './NewsRelatedLink';
 export { default as Questions }  from './Questions';
+export { default as Shortcuts }  from './Shortcuts';

@@ -131,12 +131,19 @@ export const PersonProvider: FC<IcontextProvider> = ({ children, headers }) => {
         newPerson = prevStateResults.concat(result.data.results);
       }
 
+      const newPersonserializedById: definitions["Person"][] = [];
+      newPerson.map((el: definitions["Person"]) => {
+        if (el.id) {
+          newPersonserializedById[el.id] = el;
+        }
+      });
+
       setPersonDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newPerson,
+        results: newPersonserializedById,
       });
 
       setLoading(false);
@@ -191,12 +198,19 @@ export const PersonProvider: FC<IcontextProvider> = ({ children, headers }) => {
         }
       });
       if (!found) {
-        newPerson = prevStateResults.concat(result.data);
+        newPerson.push(result.data);
       }
+
+      const newPersonserializedById: definitions["Person"][] = [];
+      newPerson.map((el: definitions["Person"]) => {
+        if (el.id) {
+          newPersonserializedById[el.id] = el;
+        }
+      });
 
       setPersonDataList({
         ...PersonDataList,
-        results: newPerson,
+        results: newPersonserializedById,
       });
 
       setLoading(false);
@@ -226,9 +240,16 @@ export const PersonProvider: FC<IcontextProvider> = ({ children, headers }) => {
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newPersonserializedById: definitions["Person"][] = [];
+      newPerson.map((el: definitions["Person"]) => {
+        if (el.id) {
+          newPersonserializedById[el.id] = el;
+        }
+      });
+
       setPersonDataList({
         ...PersonDataList,
-        results: newPerson,
+        results: newPersonserializedById,
       });
 
       setLoading(false);
@@ -258,9 +279,16 @@ export const PersonProvider: FC<IcontextProvider> = ({ children, headers }) => {
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newPersonserializedById: definitions["Person"][] = [];
+      newPerson.map((el: definitions["Person"]) => {
+        if (el.id) {
+          newPersonserializedById[el.id] = el;
+        }
+      });
+
       setPersonDataList({
         ...PersonDataList,
-        results: newPerson,
+        results: newPersonserializedById,
       });
 
       setLoading(false);
@@ -280,9 +308,16 @@ export const PersonProvider: FC<IcontextProvider> = ({ children, headers }) => {
         (el: definitions["Person"]) => el.id !== id
       );
 
+      const newPersonserializedById: definitions["Person"][] = [];
+      newPerson.map((el: definitions["Person"]) => {
+        if (el.id) {
+          newPersonserializedById[el.id] = el;
+        }
+      });
+
       setPersonDataList({
         ...PersonDataList,
-        results: newPerson,
+        results: newPersonserializedById,
       });
 
       setLoading(false);

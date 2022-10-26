@@ -10,6 +10,7 @@ from base.constants import STATUS_CHOICES
 class NewsLetter(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
     description = models.CharField(max_length=500, null=True, blank=True)
+    imageUrl = models.ImageField(upload_to='blah', null=True)
     html = SanitizedHTMLField(blank=True, null=True, help_text="")
     autor = models.ForeignKey(Person, on_delete=models.CASCADE)
     status = models.CharField(max_length=1000, choices=STATUS_CHOICES)

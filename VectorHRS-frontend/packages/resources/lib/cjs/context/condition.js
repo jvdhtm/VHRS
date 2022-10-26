@@ -43,7 +43,7 @@ var ConditionProvider = function (_a) {
     /* prettier-ignore */
     var _c = (0, react_1.useState)(false), loading = _c[0], setLoading = _c[1];
     var conditionList = function (data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newCondition;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newCondition, newConditionserializedById_1;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -74,12 +74,18 @@ var ConditionProvider = function (_a) {
                     if (!found_1) {
                         newCondition = prevStateResults_1.concat(result.data.results);
                     }
+                    newConditionserializedById_1 = [];
+                    newCondition.map(function (el) {
+                        if (el.id) {
+                            newConditionserializedById_1[el.id] = el;
+                        }
+                    });
                     setConditionDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newCondition,
+                        results: newConditionserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -116,7 +122,7 @@ var ConditionProvider = function (_a) {
         });
     }); };
     var conditionRead = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newCondition;
+        var result_1, prevStateResults, logActions, found_2, newCondition, newConditionserializedById_2;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -139,9 +145,15 @@ var ConditionProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newCondition = prevStateResults.concat(result_1.data);
+                        newCondition.push(result_1.data);
                     }
-                    setConditionDataList(tslib_1.__assign(tslib_1.__assign({}, ConditionDataList), { results: newCondition }));
+                    newConditionserializedById_2 = [];
+                    newCondition.map(function (el) {
+                        if (el.id) {
+                            newConditionserializedById_2[el.id] = el;
+                        }
+                    });
+                    setConditionDataList(tslib_1.__assign(tslib_1.__assign({}, ConditionDataList), { results: newConditionserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -149,7 +161,7 @@ var ConditionProvider = function (_a) {
         });
     }); };
     var conditionUpdate = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newCondition;
+        var result_2, prevStateResults, logActions, newCondition, newConditionserializedById_3;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -172,7 +184,13 @@ var ConditionProvider = function (_a) {
                         newCondition = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_2.data) : el;
                         });
-                    setConditionDataList(tslib_1.__assign(tslib_1.__assign({}, ConditionDataList), { results: newCondition }));
+                    newConditionserializedById_3 = [];
+                    newCondition.map(function (el) {
+                        if (el.id) {
+                            newConditionserializedById_3[el.id] = el;
+                        }
+                    });
+                    setConditionDataList(tslib_1.__assign(tslib_1.__assign({}, ConditionDataList), { results: newConditionserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -180,7 +198,7 @@ var ConditionProvider = function (_a) {
         });
     }); };
     var conditionPartial = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newCondition;
+        var result_3, prevStateResults, logActions, newCondition, newConditionserializedById_4;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -203,7 +221,13 @@ var ConditionProvider = function (_a) {
                         newCondition = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_3.data) : el;
                         });
-                    setConditionDataList(tslib_1.__assign(tslib_1.__assign({}, ConditionDataList), { results: newCondition }));
+                    newConditionserializedById_4 = [];
+                    newCondition.map(function (el) {
+                        if (el.id) {
+                            newConditionserializedById_4[el.id] = el;
+                        }
+                    });
+                    setConditionDataList(tslib_1.__assign(tslib_1.__assign({}, ConditionDataList), { results: newConditionserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -211,7 +235,7 @@ var ConditionProvider = function (_a) {
         });
     }); };
     var conditionDelete = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newCondition;
+        var result, prevStateResults, logActions, newCondition, newConditionserializedById_5;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -224,7 +248,13 @@ var ConditionProvider = function (_a) {
                     logActions = ConditionDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newCondition = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setConditionDataList(tslib_1.__assign(tslib_1.__assign({}, ConditionDataList), { results: newCondition }));
+                    newConditionserializedById_5 = [];
+                    newCondition.map(function (el) {
+                        if (el.id) {
+                            newConditionserializedById_5[el.id] = el;
+                        }
+                    });
+                    setConditionDataList(tslib_1.__assign(tslib_1.__assign({}, ConditionDataList), { results: newConditionserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

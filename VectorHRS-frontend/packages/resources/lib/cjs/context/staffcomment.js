@@ -43,7 +43,7 @@ var StaffcommentProvider = function (_a) {
     /* prettier-ignore */
     var _c = (0, react_1.useState)(false), loading = _c[0], setLoading = _c[1];
     var staffcommentList = function (data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newStaffComment;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newStaffComment, newStaffCommentserializedById_1;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -74,12 +74,18 @@ var StaffcommentProvider = function (_a) {
                     if (!found_1) {
                         newStaffComment = prevStateResults_1.concat(result.data.results);
                     }
+                    newStaffCommentserializedById_1 = [];
+                    newStaffComment.map(function (el) {
+                        if (el.id) {
+                            newStaffCommentserializedById_1[el.id] = el;
+                        }
+                    });
                     setStaffCommentDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newStaffComment,
+                        results: newStaffCommentserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -116,7 +122,7 @@ var StaffcommentProvider = function (_a) {
         });
     }); };
     var staffcommentRead = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newStaffComment;
+        var result_1, prevStateResults, logActions, found_2, newStaffComment, newStaffCommentserializedById_2;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -139,9 +145,15 @@ var StaffcommentProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newStaffComment = prevStateResults.concat(result_1.data);
+                        newStaffComment.push(result_1.data);
                     }
-                    setStaffCommentDataList(tslib_1.__assign(tslib_1.__assign({}, StaffCommentDataList), { results: newStaffComment }));
+                    newStaffCommentserializedById_2 = [];
+                    newStaffComment.map(function (el) {
+                        if (el.id) {
+                            newStaffCommentserializedById_2[el.id] = el;
+                        }
+                    });
+                    setStaffCommentDataList(tslib_1.__assign(tslib_1.__assign({}, StaffCommentDataList), { results: newStaffCommentserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -149,7 +161,7 @@ var StaffcommentProvider = function (_a) {
         });
     }); };
     var staffcommentUpdate = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newStaffComment;
+        var result_2, prevStateResults, logActions, newStaffComment, newStaffCommentserializedById_3;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -172,7 +184,13 @@ var StaffcommentProvider = function (_a) {
                         newStaffComment = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_2.data) : el;
                         });
-                    setStaffCommentDataList(tslib_1.__assign(tslib_1.__assign({}, StaffCommentDataList), { results: newStaffComment }));
+                    newStaffCommentserializedById_3 = [];
+                    newStaffComment.map(function (el) {
+                        if (el.id) {
+                            newStaffCommentserializedById_3[el.id] = el;
+                        }
+                    });
+                    setStaffCommentDataList(tslib_1.__assign(tslib_1.__assign({}, StaffCommentDataList), { results: newStaffCommentserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -180,7 +198,7 @@ var StaffcommentProvider = function (_a) {
         });
     }); };
     var staffcommentPartial = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newStaffComment;
+        var result_3, prevStateResults, logActions, newStaffComment, newStaffCommentserializedById_4;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -203,7 +221,13 @@ var StaffcommentProvider = function (_a) {
                         newStaffComment = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_3.data) : el;
                         });
-                    setStaffCommentDataList(tslib_1.__assign(tslib_1.__assign({}, StaffCommentDataList), { results: newStaffComment }));
+                    newStaffCommentserializedById_4 = [];
+                    newStaffComment.map(function (el) {
+                        if (el.id) {
+                            newStaffCommentserializedById_4[el.id] = el;
+                        }
+                    });
+                    setStaffCommentDataList(tslib_1.__assign(tslib_1.__assign({}, StaffCommentDataList), { results: newStaffCommentserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -211,7 +235,7 @@ var StaffcommentProvider = function (_a) {
         });
     }); };
     var staffcommentDelete = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newStaffComment;
+        var result, prevStateResults, logActions, newStaffComment, newStaffCommentserializedById_5;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -224,7 +248,13 @@ var StaffcommentProvider = function (_a) {
                     logActions = StaffCommentDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newStaffComment = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setStaffCommentDataList(tslib_1.__assign(tslib_1.__assign({}, StaffCommentDataList), { results: newStaffComment }));
+                    newStaffCommentserializedById_5 = [];
+                    newStaffComment.map(function (el) {
+                        if (el.id) {
+                            newStaffCommentserializedById_5[el.id] = el;
+                        }
+                    });
+                    setStaffCommentDataList(tslib_1.__assign(tslib_1.__assign({}, StaffCommentDataList), { results: newStaffCommentserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

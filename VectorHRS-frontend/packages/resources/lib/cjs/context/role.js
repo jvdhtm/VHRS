@@ -43,7 +43,7 @@ var RoleProvider = function (_a) {
     /* prettier-ignore */
     var _c = (0, react_1.useState)(false), loading = _c[0], setLoading = _c[1];
     var roleList = function (data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newRole;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newRole, newRoleserializedById_1;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -74,12 +74,18 @@ var RoleProvider = function (_a) {
                     if (!found_1) {
                         newRole = prevStateResults_1.concat(result.data.results);
                     }
+                    newRoleserializedById_1 = [];
+                    newRole.map(function (el) {
+                        if (el.id) {
+                            newRoleserializedById_1[el.id] = el;
+                        }
+                    });
                     setRoleDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newRole,
+                        results: newRoleserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -116,7 +122,7 @@ var RoleProvider = function (_a) {
         });
     }); };
     var roleRead = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newRole;
+        var result_1, prevStateResults, logActions, found_2, newRole, newRoleserializedById_2;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -139,9 +145,15 @@ var RoleProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newRole = prevStateResults.concat(result_1.data);
+                        newRole.push(result_1.data);
                     }
-                    setRoleDataList(tslib_1.__assign(tslib_1.__assign({}, RoleDataList), { results: newRole }));
+                    newRoleserializedById_2 = [];
+                    newRole.map(function (el) {
+                        if (el.id) {
+                            newRoleserializedById_2[el.id] = el;
+                        }
+                    });
+                    setRoleDataList(tslib_1.__assign(tslib_1.__assign({}, RoleDataList), { results: newRoleserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -149,7 +161,7 @@ var RoleProvider = function (_a) {
         });
     }); };
     var roleUpdate = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newRole;
+        var result_2, prevStateResults, logActions, newRole, newRoleserializedById_3;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -172,7 +184,13 @@ var RoleProvider = function (_a) {
                         newRole = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_2.data) : el;
                         });
-                    setRoleDataList(tslib_1.__assign(tslib_1.__assign({}, RoleDataList), { results: newRole }));
+                    newRoleserializedById_3 = [];
+                    newRole.map(function (el) {
+                        if (el.id) {
+                            newRoleserializedById_3[el.id] = el;
+                        }
+                    });
+                    setRoleDataList(tslib_1.__assign(tslib_1.__assign({}, RoleDataList), { results: newRoleserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -180,7 +198,7 @@ var RoleProvider = function (_a) {
         });
     }); };
     var rolePartial = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newRole;
+        var result_3, prevStateResults, logActions, newRole, newRoleserializedById_4;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -203,7 +221,13 @@ var RoleProvider = function (_a) {
                         newRole = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_3.data) : el;
                         });
-                    setRoleDataList(tslib_1.__assign(tslib_1.__assign({}, RoleDataList), { results: newRole }));
+                    newRoleserializedById_4 = [];
+                    newRole.map(function (el) {
+                        if (el.id) {
+                            newRoleserializedById_4[el.id] = el;
+                        }
+                    });
+                    setRoleDataList(tslib_1.__assign(tslib_1.__assign({}, RoleDataList), { results: newRoleserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -211,7 +235,7 @@ var RoleProvider = function (_a) {
         });
     }); };
     var roleDelete = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newRole;
+        var result, prevStateResults, logActions, newRole, newRoleserializedById_5;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -224,7 +248,13 @@ var RoleProvider = function (_a) {
                     logActions = RoleDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newRole = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setRoleDataList(tslib_1.__assign(tslib_1.__assign({}, RoleDataList), { results: newRole }));
+                    newRoleserializedById_5 = [];
+                    newRole.map(function (el) {
+                        if (el.id) {
+                            newRoleserializedById_5[el.id] = el;
+                        }
+                    });
+                    setRoleDataList(tslib_1.__assign(tslib_1.__assign({}, RoleDataList), { results: newRoleserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

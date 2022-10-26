@@ -131,12 +131,19 @@ export const PhoneProvider: FC<IcontextProvider> = ({ children, headers }) => {
         newPhone = prevStateResults.concat(result.data.results);
       }
 
+      const newPhoneserializedById: definitions["Phone"][] = [];
+      newPhone.map((el: definitions["Phone"]) => {
+        if (el.id) {
+          newPhoneserializedById[el.id] = el;
+        }
+      });
+
       setPhoneDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newPhone,
+        results: newPhoneserializedById,
       });
 
       setLoading(false);
@@ -191,12 +198,19 @@ export const PhoneProvider: FC<IcontextProvider> = ({ children, headers }) => {
         }
       });
       if (!found) {
-        newPhone = prevStateResults.concat(result.data);
+        newPhone.push(result.data);
       }
+
+      const newPhoneserializedById: definitions["Phone"][] = [];
+      newPhone.map((el: definitions["Phone"]) => {
+        if (el.id) {
+          newPhoneserializedById[el.id] = el;
+        }
+      });
 
       setPhoneDataList({
         ...PhoneDataList,
-        results: newPhone,
+        results: newPhoneserializedById,
       });
 
       setLoading(false);
@@ -226,9 +240,16 @@ export const PhoneProvider: FC<IcontextProvider> = ({ children, headers }) => {
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newPhoneserializedById: definitions["Phone"][] = [];
+      newPhone.map((el: definitions["Phone"]) => {
+        if (el.id) {
+          newPhoneserializedById[el.id] = el;
+        }
+      });
+
       setPhoneDataList({
         ...PhoneDataList,
-        results: newPhone,
+        results: newPhoneserializedById,
       });
 
       setLoading(false);
@@ -258,9 +279,16 @@ export const PhoneProvider: FC<IcontextProvider> = ({ children, headers }) => {
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newPhoneserializedById: definitions["Phone"][] = [];
+      newPhone.map((el: definitions["Phone"]) => {
+        if (el.id) {
+          newPhoneserializedById[el.id] = el;
+        }
+      });
+
       setPhoneDataList({
         ...PhoneDataList,
-        results: newPhone,
+        results: newPhoneserializedById,
       });
 
       setLoading(false);
@@ -280,9 +308,16 @@ export const PhoneProvider: FC<IcontextProvider> = ({ children, headers }) => {
         (el: definitions["Phone"]) => el.id !== id
       );
 
+      const newPhoneserializedById: definitions["Phone"][] = [];
+      newPhone.map((el: definitions["Phone"]) => {
+        if (el.id) {
+          newPhoneserializedById[el.id] = el;
+        }
+      });
+
       setPhoneDataList({
         ...PhoneDataList,
-        results: newPhone,
+        results: newPhoneserializedById,
       });
 
       setLoading(false);

@@ -131,12 +131,19 @@ export const AppProvider: FC<IcontextProvider> = ({ children, headers }) => {
         newApp = prevStateResults.concat(result.data.results);
       }
 
+      const newAppserializedById: definitions["App"][] = [];
+      newApp.map((el: definitions["App"]) => {
+        if (el.id) {
+          newAppserializedById[el.id] = el;
+        }
+      });
+
       setAppDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newApp,
+        results: newAppserializedById,
       });
 
       setLoading(false);
@@ -191,12 +198,19 @@ export const AppProvider: FC<IcontextProvider> = ({ children, headers }) => {
         }
       });
       if (!found) {
-        newApp = prevStateResults.concat(result.data);
+        newApp.push(result.data);
       }
+
+      const newAppserializedById: definitions["App"][] = [];
+      newApp.map((el: definitions["App"]) => {
+        if (el.id) {
+          newAppserializedById[el.id] = el;
+        }
+      });
 
       setAppDataList({
         ...AppDataList,
-        results: newApp,
+        results: newAppserializedById,
       });
 
       setLoading(false);
@@ -226,9 +240,16 @@ export const AppProvider: FC<IcontextProvider> = ({ children, headers }) => {
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newAppserializedById: definitions["App"][] = [];
+      newApp.map((el: definitions["App"]) => {
+        if (el.id) {
+          newAppserializedById[el.id] = el;
+        }
+      });
+
       setAppDataList({
         ...AppDataList,
-        results: newApp,
+        results: newAppserializedById,
       });
 
       setLoading(false);
@@ -258,9 +279,16 @@ export const AppProvider: FC<IcontextProvider> = ({ children, headers }) => {
           el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newAppserializedById: definitions["App"][] = [];
+      newApp.map((el: definitions["App"]) => {
+        if (el.id) {
+          newAppserializedById[el.id] = el;
+        }
+      });
+
       setAppDataList({
         ...AppDataList,
-        results: newApp,
+        results: newAppserializedById,
       });
 
       setLoading(false);
@@ -280,9 +308,16 @@ export const AppProvider: FC<IcontextProvider> = ({ children, headers }) => {
         (el: definitions["App"]) => el.id !== id
       );
 
+      const newAppserializedById: definitions["App"][] = [];
+      newApp.map((el: definitions["App"]) => {
+        if (el.id) {
+          newAppserializedById[el.id] = el;
+        }
+      });
+
       setAppDataList({
         ...AppDataList,
-        results: newApp,
+        results: newAppserializedById,
       });
 
       setLoading(false);

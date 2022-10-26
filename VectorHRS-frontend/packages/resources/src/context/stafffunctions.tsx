@@ -139,12 +139,20 @@ export const StafffunctionsProvider: FC<IcontextProvider> = ({
         newStaffFunctions = prevStateResults.concat(result.data.results);
       }
 
+      const newStaffFunctionsserializedById: definitions["StaffFunctions"][] =
+        [];
+      newStaffFunctions.map((el: definitions["StaffFunctions"]) => {
+        if (el.id) {
+          newStaffFunctionsserializedById[el.id] = el;
+        }
+      });
+
       setStaffFunctionsDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newStaffFunctions,
+        results: newStaffFunctionsserializedById,
       });
 
       setLoading(false);
@@ -201,12 +209,20 @@ export const StafffunctionsProvider: FC<IcontextProvider> = ({
         }
       );
       if (!found) {
-        newStaffFunctions = prevStateResults.concat(result.data);
+        newStaffFunctions.push(result.data);
       }
+
+      const newStaffFunctionsserializedById: definitions["StaffFunctions"][] =
+        [];
+      newStaffFunctions.map((el: definitions["StaffFunctions"]) => {
+        if (el.id) {
+          newStaffFunctionsserializedById[el.id] = el;
+        }
+      });
 
       setStaffFunctionsDataList({
         ...StaffFunctionsDataList,
-        results: newStaffFunctions,
+        results: newStaffFunctionsserializedById,
       });
 
       setLoading(false);
@@ -238,9 +254,17 @@ export const StafffunctionsProvider: FC<IcontextProvider> = ({
             el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newStaffFunctionsserializedById: definitions["StaffFunctions"][] =
+        [];
+      newStaffFunctions.map((el: definitions["StaffFunctions"]) => {
+        if (el.id) {
+          newStaffFunctionsserializedById[el.id] = el;
+        }
+      });
+
       setStaffFunctionsDataList({
         ...StaffFunctionsDataList,
-        results: newStaffFunctions,
+        results: newStaffFunctionsserializedById,
       });
 
       setLoading(false);
@@ -276,9 +300,17 @@ export const StafffunctionsProvider: FC<IcontextProvider> = ({
             el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newStaffFunctionsserializedById: definitions["StaffFunctions"][] =
+        [];
+      newStaffFunctions.map((el: definitions["StaffFunctions"]) => {
+        if (el.id) {
+          newStaffFunctionsserializedById[el.id] = el;
+        }
+      });
+
       setStaffFunctionsDataList({
         ...StaffFunctionsDataList,
-        results: newStaffFunctions,
+        results: newStaffFunctionsserializedById,
       });
 
       setLoading(false);
@@ -298,9 +330,17 @@ export const StafffunctionsProvider: FC<IcontextProvider> = ({
         (el: definitions["StaffFunctions"]) => el.id !== id
       );
 
+      const newStaffFunctionsserializedById: definitions["StaffFunctions"][] =
+        [];
+      newStaffFunctions.map((el: definitions["StaffFunctions"]) => {
+        if (el.id) {
+          newStaffFunctionsserializedById[el.id] = el;
+        }
+      });
+
       setStaffFunctionsDataList({
         ...StaffFunctionsDataList,
-        results: newStaffFunctions,
+        results: newStaffFunctionsserializedById,
       });
 
       setLoading(false);

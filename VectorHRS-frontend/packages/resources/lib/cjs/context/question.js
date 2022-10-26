@@ -43,7 +43,7 @@ var QuestionProvider = function (_a) {
     /* prettier-ignore */
     var _c = (0, react_1.useState)(false), loading = _c[0], setLoading = _c[1];
     var questionList = function (data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newQuestion;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newQuestion, newQuestionserializedById_1;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -74,12 +74,18 @@ var QuestionProvider = function (_a) {
                     if (!found_1) {
                         newQuestion = prevStateResults_1.concat(result.data.results);
                     }
+                    newQuestionserializedById_1 = [];
+                    newQuestion.map(function (el) {
+                        if (el.id) {
+                            newQuestionserializedById_1[el.id] = el;
+                        }
+                    });
                     setQuestionDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newQuestion,
+                        results: newQuestionserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -116,7 +122,7 @@ var QuestionProvider = function (_a) {
         });
     }); };
     var questionRead = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newQuestion;
+        var result_1, prevStateResults, logActions, found_2, newQuestion, newQuestionserializedById_2;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -139,9 +145,15 @@ var QuestionProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newQuestion = prevStateResults.concat(result_1.data);
+                        newQuestion.push(result_1.data);
                     }
-                    setQuestionDataList(tslib_1.__assign(tslib_1.__assign({}, QuestionDataList), { results: newQuestion }));
+                    newQuestionserializedById_2 = [];
+                    newQuestion.map(function (el) {
+                        if (el.id) {
+                            newQuestionserializedById_2[el.id] = el;
+                        }
+                    });
+                    setQuestionDataList(tslib_1.__assign(tslib_1.__assign({}, QuestionDataList), { results: newQuestionserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -149,7 +161,7 @@ var QuestionProvider = function (_a) {
         });
     }); };
     var questionUpdate = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newQuestion;
+        var result_2, prevStateResults, logActions, newQuestion, newQuestionserializedById_3;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -172,7 +184,13 @@ var QuestionProvider = function (_a) {
                         newQuestion = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_2.data) : el;
                         });
-                    setQuestionDataList(tslib_1.__assign(tslib_1.__assign({}, QuestionDataList), { results: newQuestion }));
+                    newQuestionserializedById_3 = [];
+                    newQuestion.map(function (el) {
+                        if (el.id) {
+                            newQuestionserializedById_3[el.id] = el;
+                        }
+                    });
+                    setQuestionDataList(tslib_1.__assign(tslib_1.__assign({}, QuestionDataList), { results: newQuestionserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -180,7 +198,7 @@ var QuestionProvider = function (_a) {
         });
     }); };
     var questionPartial = function (id, data) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newQuestion;
+        var result_3, prevStateResults, logActions, newQuestion, newQuestionserializedById_4;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -203,7 +221,13 @@ var QuestionProvider = function (_a) {
                         newQuestion = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? tslib_1.__assign(tslib_1.__assign({}, el), result_3.data) : el;
                         });
-                    setQuestionDataList(tslib_1.__assign(tslib_1.__assign({}, QuestionDataList), { results: newQuestion }));
+                    newQuestionserializedById_4 = [];
+                    newQuestion.map(function (el) {
+                        if (el.id) {
+                            newQuestionserializedById_4[el.id] = el;
+                        }
+                    });
+                    setQuestionDataList(tslib_1.__assign(tslib_1.__assign({}, QuestionDataList), { results: newQuestionserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -211,7 +235,7 @@ var QuestionProvider = function (_a) {
         });
     }); };
     var questionDelete = function (id) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newQuestion;
+        var result, prevStateResults, logActions, newQuestion, newQuestionserializedById_5;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -224,7 +248,13 @@ var QuestionProvider = function (_a) {
                     logActions = QuestionDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newQuestion = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setQuestionDataList(tslib_1.__assign(tslib_1.__assign({}, QuestionDataList), { results: newQuestion }));
+                    newQuestionserializedById_5 = [];
+                    newQuestion.map(function (el) {
+                        if (el.id) {
+                            newQuestionserializedById_5[el.id] = el;
+                        }
+                    });
+                    setQuestionDataList(tslib_1.__assign(tslib_1.__assign({}, QuestionDataList), { results: newQuestionserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

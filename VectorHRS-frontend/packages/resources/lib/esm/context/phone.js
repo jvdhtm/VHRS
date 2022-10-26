@@ -40,7 +40,7 @@ export var PhoneProvider = function (_a) {
     /* prettier-ignore */
     var _c = useState(false), loading = _c[0], setLoading = _c[1];
     var phoneList = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newPhone;
+        var result, prevStateResults_1, logActions, found_1, newCount, newNext, newPrevious, newPhone, newPhoneserializedById_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -71,12 +71,18 @@ export var PhoneProvider = function (_a) {
                     if (!found_1) {
                         newPhone = prevStateResults_1.concat(result.data.results);
                     }
+                    newPhoneserializedById_1 = [];
+                    newPhone.map(function (el) {
+                        if (el.id) {
+                            newPhoneserializedById_1[el.id] = el;
+                        }
+                    });
                     setPhoneDataList({
                         count: newCount,
                         next: newNext,
                         previous: newPrevious,
                         logActions: logActions,
-                        results: newPhone,
+                        results: newPhoneserializedById_1,
                     });
                     setLoading(false);
                     _a.label = 2;
@@ -113,7 +119,7 @@ export var PhoneProvider = function (_a) {
         });
     }); };
     var phoneRead = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_1, prevStateResults, logActions, found_2, newPhone;
+        var result_1, prevStateResults, logActions, found_2, newPhone, newPhoneserializedById_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -136,9 +142,15 @@ export var PhoneProvider = function (_a) {
                         }
                     });
                     if (!found_2) {
-                        newPhone = prevStateResults.concat(result_1.data);
+                        newPhone.push(result_1.data);
                     }
-                    setPhoneDataList(__assign(__assign({}, PhoneDataList), { results: newPhone }));
+                    newPhoneserializedById_2 = [];
+                    newPhone.map(function (el) {
+                        if (el.id) {
+                            newPhoneserializedById_2[el.id] = el;
+                        }
+                    });
+                    setPhoneDataList(__assign(__assign({}, PhoneDataList), { results: newPhoneserializedById_2 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -146,7 +158,7 @@ export var PhoneProvider = function (_a) {
         });
     }); };
     var phoneUpdate = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_2, prevStateResults, logActions, newPhone;
+        var result_2, prevStateResults, logActions, newPhone, newPhoneserializedById_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -169,7 +181,13 @@ export var PhoneProvider = function (_a) {
                         newPhone = prevStateResults.map(function (el) {
                             return el.id === result_2.data.id ? __assign(__assign({}, el), result_2.data) : el;
                         });
-                    setPhoneDataList(__assign(__assign({}, PhoneDataList), { results: newPhone }));
+                    newPhoneserializedById_3 = [];
+                    newPhone.map(function (el) {
+                        if (el.id) {
+                            newPhoneserializedById_3[el.id] = el;
+                        }
+                    });
+                    setPhoneDataList(__assign(__assign({}, PhoneDataList), { results: newPhoneserializedById_3 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -177,7 +195,7 @@ export var PhoneProvider = function (_a) {
         });
     }); };
     var phonePartial = function (id, data) { return __awaiter(void 0, void 0, void 0, function () {
-        var result_3, prevStateResults, logActions, newPhone;
+        var result_3, prevStateResults, logActions, newPhone, newPhoneserializedById_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -200,7 +218,13 @@ export var PhoneProvider = function (_a) {
                         newPhone = prevStateResults.map(function (el) {
                             return el.id === result_3.data.id ? __assign(__assign({}, el), result_3.data) : el;
                         });
-                    setPhoneDataList(__assign(__assign({}, PhoneDataList), { results: newPhone }));
+                    newPhoneserializedById_4 = [];
+                    newPhone.map(function (el) {
+                        if (el.id) {
+                            newPhoneserializedById_4[el.id] = el;
+                        }
+                    });
+                    setPhoneDataList(__assign(__assign({}, PhoneDataList), { results: newPhoneserializedById_4 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];
@@ -208,7 +232,7 @@ export var PhoneProvider = function (_a) {
         });
     }); };
     var phoneDelete = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-        var result, prevStateResults, logActions, newPhone;
+        var result, prevStateResults, logActions, newPhone, newPhoneserializedById_5;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -221,7 +245,13 @@ export var PhoneProvider = function (_a) {
                     logActions = PhoneDataList.logActions;
                     logActions.push({ verb: "delete", results: id });
                     newPhone = prevStateResults.filter(function (el) { return el.id !== id; });
-                    setPhoneDataList(__assign(__assign({}, PhoneDataList), { results: newPhone }));
+                    newPhoneserializedById_5 = [];
+                    newPhone.map(function (el) {
+                        if (el.id) {
+                            newPhoneserializedById_5[el.id] = el;
+                        }
+                    });
+                    setPhoneDataList(__assign(__assign({}, PhoneDataList), { results: newPhoneserializedById_5 }));
                     setLoading(false);
                     _a.label = 2;
                 case 2: return [2 /*return*/];

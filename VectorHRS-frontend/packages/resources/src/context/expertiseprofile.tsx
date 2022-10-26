@@ -139,12 +139,20 @@ export const ExpertiseprofileProvider: FC<IcontextProvider> = ({
         newExpertiseProfile = prevStateResults.concat(result.data.results);
       }
 
+      const newExpertiseProfileserializedById: definitions["ExpertiseProfile"][] =
+        [];
+      newExpertiseProfile.map((el: definitions["ExpertiseProfile"]) => {
+        if (el.id) {
+          newExpertiseProfileserializedById[el.id] = el;
+        }
+      });
+
       setExpertiseProfileDataList({
         count: newCount,
         next: newNext,
         previous: newPrevious,
         logActions: logActions,
-        results: newExpertiseProfile,
+        results: newExpertiseProfileserializedById,
       });
 
       setLoading(false);
@@ -201,12 +209,20 @@ export const ExpertiseprofileProvider: FC<IcontextProvider> = ({
         }
       );
       if (!found) {
-        newExpertiseProfile = prevStateResults.concat(result.data);
+        newExpertiseProfile.push(result.data);
       }
+
+      const newExpertiseProfileserializedById: definitions["ExpertiseProfile"][] =
+        [];
+      newExpertiseProfile.map((el: definitions["ExpertiseProfile"]) => {
+        if (el.id) {
+          newExpertiseProfileserializedById[el.id] = el;
+        }
+      });
 
       setExpertiseProfileDataList({
         ...ExpertiseProfileDataList,
-        results: newExpertiseProfile,
+        results: newExpertiseProfileserializedById,
       });
 
       setLoading(false);
@@ -242,9 +258,17 @@ export const ExpertiseprofileProvider: FC<IcontextProvider> = ({
             el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newExpertiseProfileserializedById: definitions["ExpertiseProfile"][] =
+        [];
+      newExpertiseProfile.map((el: definitions["ExpertiseProfile"]) => {
+        if (el.id) {
+          newExpertiseProfileserializedById[el.id] = el;
+        }
+      });
+
       setExpertiseProfileDataList({
         ...ExpertiseProfileDataList,
-        results: newExpertiseProfile,
+        results: newExpertiseProfileserializedById,
       });
 
       setLoading(false);
@@ -280,9 +304,17 @@ export const ExpertiseprofileProvider: FC<IcontextProvider> = ({
             el.id === result.data.id ? { ...el, ...result.data } : el
         );
 
+      const newExpertiseProfileserializedById: definitions["ExpertiseProfile"][] =
+        [];
+      newExpertiseProfile.map((el: definitions["ExpertiseProfile"]) => {
+        if (el.id) {
+          newExpertiseProfileserializedById[el.id] = el;
+        }
+      });
+
       setExpertiseProfileDataList({
         ...ExpertiseProfileDataList,
-        results: newExpertiseProfile,
+        results: newExpertiseProfileserializedById,
       });
 
       setLoading(false);
@@ -302,9 +334,17 @@ export const ExpertiseprofileProvider: FC<IcontextProvider> = ({
         (el: definitions["ExpertiseProfile"]) => el.id !== id
       );
 
+      const newExpertiseProfileserializedById: definitions["ExpertiseProfile"][] =
+        [];
+      newExpertiseProfile.map((el: definitions["ExpertiseProfile"]) => {
+        if (el.id) {
+          newExpertiseProfileserializedById[el.id] = el;
+        }
+      });
+
       setExpertiseProfileDataList({
         ...ExpertiseProfileDataList,
-        results: newExpertiseProfile,
+        results: newExpertiseProfileserializedById,
       });
 
       setLoading(false);
