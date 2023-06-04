@@ -1,5 +1,36 @@
 import { __awaiter, __generator } from "tslib";
 import { dataLayerObj } from "../instance";
+export var app_listFields = [
+    { name: "id", in: "query", description: "", required: false, type: "number" },
+    {
+        name: "title",
+        in: "query",
+        description: "",
+        required: false,
+        type: "string",
+    },
+    {
+        name: "pathUrl",
+        in: "query",
+        description: "",
+        required: false,
+        type: "string",
+    },
+    {
+        name: "page",
+        in: "query",
+        description: "A page number within the paginated result set.",
+        required: false,
+        type: "integer",
+    },
+    {
+        name: "page_size",
+        in: "query",
+        description: "Number of results to return per page.",
+        required: false,
+        type: "integer",
+    },
+];
 export var app_list = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -19,6 +50,15 @@ export var app_list = function (data, headers, _apiPrefix, force) {
             }
         });
     });
+};
+export var app_createFields = {
+    required: ["title", "pathUrl"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        title: { title: "Title", type: "string", maxLength: 30, minLength: 1 },
+        pathUrl: { title: "PathUrl", type: "string", maxLength: 30, minLength: 1 },
+    },
 };
 export var app_create = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
@@ -61,6 +101,15 @@ export var app_read = function (id, headers, _apiPrefix, force) {
         });
     });
 };
+export var app_updateFields = {
+    required: ["title", "pathUrl"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        title: { title: "Title", type: "string", maxLength: 30, minLength: 1 },
+        pathUrl: { title: "PathUrl", type: "string", maxLength: 30, minLength: 1 },
+    },
+};
 export var app_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -77,6 +126,15 @@ export var app_update = function (id, data, headers, _apiPrefix, force) {
             return [2 /*return*/, dataLayerObj.requestApi(request, headers, force, data)];
         });
     });
+};
+export var app_partial_updateFields = {
+    required: ["title", "pathUrl"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        title: { title: "Title", type: "string", maxLength: 30, minLength: 1 },
+        pathUrl: { title: "PathUrl", type: "string", maxLength: 30, minLength: 1 },
+    },
 };
 export var app_partial_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }

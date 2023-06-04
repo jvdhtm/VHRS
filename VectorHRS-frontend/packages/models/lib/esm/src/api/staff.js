@@ -1,5 +1,21 @@
 import { __awaiter, __generator } from "tslib";
 import { dataLayerObj } from "../instance";
+export var staff_listFields = [
+    {
+        name: "page",
+        in: "query",
+        description: "A page number within the paginated result set.",
+        required: false,
+        type: "integer",
+    },
+    {
+        name: "page_size",
+        in: "query",
+        description: "Number of results to return per page.",
+        required: false,
+        type: "integer",
+    },
+];
 export var staff_list = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -19,6 +35,26 @@ export var staff_list = function (data, headers, _apiPrefix, force) {
             }
         });
     });
+};
+export var staff_createFields = {
+    required: ["department", "condition", "who", "x", "y", "level"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        department: { title: "Department", type: "integer" },
+        condition: { title: "Condition", type: "integer" },
+        title: {
+            title: "Title",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        bossId: { title: "BossId", type: "integer", "x-nullable": true },
+        who: { title: "Who", type: "integer" },
+        x: { title: "X", type: "number" },
+        y: { title: "Y", type: "number" },
+        level: { title: "Level", type: "integer" },
+    },
 };
 export var staff_create = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
@@ -61,6 +97,26 @@ export var staff_read = function (id, headers, _apiPrefix, force) {
         });
     });
 };
+export var staff_updateFields = {
+    required: ["department", "condition", "who", "x", "y", "level"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        department: { title: "Department", type: "integer" },
+        condition: { title: "Condition", type: "integer" },
+        title: {
+            title: "Title",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        bossId: { title: "BossId", type: "integer", "x-nullable": true },
+        who: { title: "Who", type: "integer" },
+        x: { title: "X", type: "number" },
+        y: { title: "Y", type: "number" },
+        level: { title: "Level", type: "integer" },
+    },
+};
 export var staff_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -77,6 +133,26 @@ export var staff_update = function (id, data, headers, _apiPrefix, force) {
             return [2 /*return*/, dataLayerObj.requestApi(request, headers, force, data)];
         });
     });
+};
+export var staff_partial_updateFields = {
+    required: ["department", "condition", "who", "x", "y", "level"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        department: { title: "Department", type: "integer" },
+        condition: { title: "Condition", type: "integer" },
+        title: {
+            title: "Title",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        bossId: { title: "BossId", type: "integer", "x-nullable": true },
+        who: { title: "Who", type: "integer" },
+        x: { title: "X", type: "number" },
+        y: { title: "Y", type: "number" },
+        level: { title: "Level", type: "integer" },
+    },
 };
 export var staff_partial_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }

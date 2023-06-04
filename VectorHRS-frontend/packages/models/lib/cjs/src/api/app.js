@@ -1,8 +1,39 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.app_delete = exports.app_partial_update = exports.app_update = exports.app_read = exports.app_create = exports.app_list = void 0;
+exports.app_delete = exports.app_partial_update = exports.app_partial_updateFields = exports.app_update = exports.app_updateFields = exports.app_read = exports.app_create = exports.app_createFields = exports.app_list = exports.app_listFields = void 0;
 var tslib_1 = require("tslib");
 var instance_1 = require("../instance");
+exports.app_listFields = [
+    { name: "id", in: "query", description: "", required: false, type: "number" },
+    {
+        name: "title",
+        in: "query",
+        description: "",
+        required: false,
+        type: "string",
+    },
+    {
+        name: "pathUrl",
+        in: "query",
+        description: "",
+        required: false,
+        type: "string",
+    },
+    {
+        name: "page",
+        in: "query",
+        description: "A page number within the paginated result set.",
+        required: false,
+        type: "integer",
+    },
+    {
+        name: "page_size",
+        in: "query",
+        description: "Number of results to return per page.",
+        required: false,
+        type: "integer",
+    },
+];
 var app_list = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -24,6 +55,15 @@ var app_list = function (data, headers, _apiPrefix, force) {
     });
 };
 exports.app_list = app_list;
+exports.app_createFields = {
+    required: ["title", "pathUrl"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        title: { title: "Title", type: "string", maxLength: 30, minLength: 1 },
+        pathUrl: { title: "PathUrl", type: "string", maxLength: 30, minLength: 1 },
+    },
+};
 var app_create = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -67,6 +107,15 @@ var app_read = function (id, headers, _apiPrefix, force) {
     });
 };
 exports.app_read = app_read;
+exports.app_updateFields = {
+    required: ["title", "pathUrl"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        title: { title: "Title", type: "string", maxLength: 30, minLength: 1 },
+        pathUrl: { title: "PathUrl", type: "string", maxLength: 30, minLength: 1 },
+    },
+};
 var app_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -85,6 +134,15 @@ var app_update = function (id, data, headers, _apiPrefix, force) {
     });
 };
 exports.app_update = app_update;
+exports.app_partial_updateFields = {
+    required: ["title", "pathUrl"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        title: { title: "Title", type: "string", maxLength: 30, minLength: 1 },
+        pathUrl: { title: "PathUrl", type: "string", maxLength: 30, minLength: 1 },
+    },
+};
 var app_partial_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }

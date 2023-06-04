@@ -1,5 +1,21 @@
 import { __awaiter, __generator } from "tslib";
 import { dataLayerObj } from "../instance";
+export var newsrelatedlink_listFields = [
+    {
+        name: "page",
+        in: "query",
+        description: "A page number within the paginated result set.",
+        required: false,
+        type: "integer",
+    },
+    {
+        name: "page_size",
+        in: "query",
+        description: "Number of results to return per page.",
+        required: false,
+        type: "integer",
+    },
+];
 export var newsrelatedlink_list = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -19,6 +35,20 @@ export var newsrelatedlink_list = function (data, headers, _apiPrefix, force) {
             }
         });
     });
+};
+export var newsrelatedlink_createFields = {
+    required: ["news"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        news: { title: "News", type: "integer" },
+        name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+    },
 };
 export var newsrelatedlink_create = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
@@ -61,6 +91,20 @@ export var newsrelatedlink_read = function (id, headers, _apiPrefix, force) {
         });
     });
 };
+export var newsrelatedlink_updateFields = {
+    required: ["news"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        news: { title: "News", type: "integer" },
+        name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+    },
+};
 export var newsrelatedlink_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -77,6 +121,20 @@ export var newsrelatedlink_update = function (id, data, headers, _apiPrefix, for
             return [2 /*return*/, dataLayerObj.requestApi(request, headers, force, data)];
         });
     });
+};
+export var newsrelatedlink_partial_updateFields = {
+    required: ["news"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        news: { title: "News", type: "integer" },
+        name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+    },
 };
 export var newsrelatedlink_partial_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }

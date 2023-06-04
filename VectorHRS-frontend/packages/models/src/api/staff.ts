@@ -3,6 +3,23 @@ import { AxiosResponse } from "axios";
 import { dataLayerObj } from "../instance";
 import type { RequestType } from "../instance";
 
+export const staff_listFields = [
+  {
+    name: "page",
+    in: "query",
+    description: "A page number within the paginated result set.",
+    required: false,
+    type: "integer",
+  },
+  {
+    name: "page_size",
+    in: "query",
+    description: "Number of results to return per page.",
+    required: false,
+    type: "integer",
+  },
+];
+
 export const staff_list = async (
   data: operations["staff_list"]["parameters"],
   headers: any,
@@ -19,6 +36,27 @@ export const staff_list = async (
   };
   return await dataLayerObj.requestApi(request, headers, force, data.query);
 };
+export const staff_createFields = {
+  required: ["department", "condition", "who", "x", "y", "level"],
+  type: "object",
+  properties: {
+    id: { title: "ID", type: "integer", readOnly: true },
+    department: { title: "Department", type: "integer" },
+    condition: { title: "Condition", type: "integer" },
+    title: {
+      title: "Title",
+      type: "string",
+      maxLength: 100,
+      "x-nullable": true,
+    },
+    bossId: { title: "BossId", type: "integer", "x-nullable": true },
+    who: { title: "Who", type: "integer" },
+    x: { title: "X", type: "number" },
+    y: { title: "Y", type: "number" },
+    level: { title: "Level", type: "integer" },
+  },
+};
+
 export const staff_create = async (
   data: definitions["Staff"] | definitions["Staff"][],
   headers: any,
@@ -52,6 +90,27 @@ export const staff_read = async (
   };
   return await dataLayerObj.requestApi(request, headers, force);
 };
+export const staff_updateFields = {
+  required: ["department", "condition", "who", "x", "y", "level"],
+  type: "object",
+  properties: {
+    id: { title: "ID", type: "integer", readOnly: true },
+    department: { title: "Department", type: "integer" },
+    condition: { title: "Condition", type: "integer" },
+    title: {
+      title: "Title",
+      type: "string",
+      maxLength: 100,
+      "x-nullable": true,
+    },
+    bossId: { title: "BossId", type: "integer", "x-nullable": true },
+    who: { title: "Who", type: "integer" },
+    x: { title: "X", type: "number" },
+    y: { title: "Y", type: "number" },
+    level: { title: "Level", type: "integer" },
+  },
+};
+
 export const staff_update = async (
   id: string,
   data: definitions["Staff"] | definitions["Staff"][],
@@ -70,6 +129,27 @@ export const staff_update = async (
   };
   return dataLayerObj.requestApi(request, headers, force, data);
 };
+export const staff_partial_updateFields = {
+  required: ["department", "condition", "who", "x", "y", "level"],
+  type: "object",
+  properties: {
+    id: { title: "ID", type: "integer", readOnly: true },
+    department: { title: "Department", type: "integer" },
+    condition: { title: "Condition", type: "integer" },
+    title: {
+      title: "Title",
+      type: "string",
+      maxLength: 100,
+      "x-nullable": true,
+    },
+    bossId: { title: "BossId", type: "integer", "x-nullable": true },
+    who: { title: "Who", type: "integer" },
+    x: { title: "X", type: "number" },
+    y: { title: "Y", type: "number" },
+    level: { title: "Level", type: "integer" },
+  },
+};
+
 export const staff_partial_update = async (
   id: string,
   data: definitions["Staff"] | definitions["Staff"][],

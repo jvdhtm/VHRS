@@ -1,5 +1,21 @@
 import { __awaiter, __generator } from "tslib";
 import { dataLayerObj } from "../instance";
+export var person_listFields = [
+    {
+        name: "page",
+        in: "query",
+        description: "A page number within the paginated result set.",
+        required: false,
+        type: "integer",
+    },
+    {
+        name: "page_size",
+        in: "query",
+        description: "Number of results to return per page.",
+        required: false,
+        type: "integer",
+    },
+];
 export var person_list = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -19,6 +35,42 @@ export var person_list = function (data, headers, _apiPrefix, force) {
             }
         });
     });
+};
+export var person_createFields = {
+    required: ["age", "status"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        firstname: {
+            title: "Firstname",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        lastname: {
+            title: "Lastname",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        age: { title: "Age", type: "integer" },
+        nationalId: {
+            title: "NationalId",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        status: {
+            title: "Status",
+            type: "string",
+            enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+        },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+    },
 };
 export var person_create = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
@@ -61,6 +113,42 @@ export var person_read = function (id, headers, _apiPrefix, force) {
         });
     });
 };
+export var person_updateFields = {
+    required: ["age", "status"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        firstname: {
+            title: "Firstname",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        lastname: {
+            title: "Lastname",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        age: { title: "Age", type: "integer" },
+        nationalId: {
+            title: "NationalId",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        status: {
+            title: "Status",
+            type: "string",
+            enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+        },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+    },
+};
 export var person_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -77,6 +165,42 @@ export var person_update = function (id, data, headers, _apiPrefix, force) {
             return [2 /*return*/, dataLayerObj.requestApi(request, headers, force, data)];
         });
     });
+};
+export var person_partial_updateFields = {
+    required: ["age", "status"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        firstname: {
+            title: "Firstname",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        lastname: {
+            title: "Lastname",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        age: { title: "Age", type: "integer" },
+        nationalId: {
+            title: "NationalId",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        status: {
+            title: "Status",
+            type: "string",
+            enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+        },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+    },
 };
 export var person_partial_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }

@@ -1,8 +1,24 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.personlog_delete = exports.personlog_partial_update = exports.personlog_update = exports.personlog_read = exports.personlog_create = exports.personlog_list = void 0;
+exports.personlog_delete = exports.personlog_partial_update = exports.personlog_partial_updateFields = exports.personlog_update = exports.personlog_updateFields = exports.personlog_read = exports.personlog_create = exports.personlog_createFields = exports.personlog_list = exports.personlog_listFields = void 0;
 var tslib_1 = require("tslib");
 var instance_1 = require("../instance");
+exports.personlog_listFields = [
+    {
+        name: "page",
+        in: "query",
+        description: "A page number within the paginated result set.",
+        required: false,
+        type: "integer",
+    },
+    {
+        name: "page_size",
+        in: "query",
+        description: "Number of results to return per page.",
+        required: false,
+        type: "integer",
+    },
+];
 var personlog_list = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -24,6 +40,31 @@ var personlog_list = function (data, headers, _apiPrefix, force) {
     });
 };
 exports.personlog_list = personlog_list;
+exports.personlog_createFields = {
+    required: ["stage", "person", "status"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        description: {
+            title: "Description",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        stage: { title: "Stage", type: "integer" },
+        person: { title: "Person", type: "integer" },
+        status: {
+            title: "Status",
+            type: "string",
+            enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+        },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+    },
+};
 var personlog_create = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -67,6 +108,31 @@ var personlog_read = function (id, headers, _apiPrefix, force) {
     });
 };
 exports.personlog_read = personlog_read;
+exports.personlog_updateFields = {
+    required: ["stage", "person", "status"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        description: {
+            title: "Description",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        stage: { title: "Stage", type: "integer" },
+        person: { title: "Person", type: "integer" },
+        status: {
+            title: "Status",
+            type: "string",
+            enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+        },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+    },
+};
 var personlog_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -85,6 +151,31 @@ var personlog_update = function (id, data, headers, _apiPrefix, force) {
     });
 };
 exports.personlog_update = personlog_update;
+exports.personlog_partial_updateFields = {
+    required: ["stage", "person", "status"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        description: {
+            title: "Description",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        stage: { title: "Stage", type: "integer" },
+        person: { title: "Person", type: "integer" },
+        status: {
+            title: "Status",
+            type: "string",
+            enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+        },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+    },
+};
 var personlog_partial_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }

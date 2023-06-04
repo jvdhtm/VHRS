@@ -3,6 +3,23 @@ import { AxiosResponse } from "axios";
 import { dataLayerObj } from "../instance";
 import type { RequestType } from "../instance";
 
+export const stafflog_listFields = [
+  {
+    name: "page",
+    in: "query",
+    description: "A page number within the paginated result set.",
+    required: false,
+    type: "integer",
+  },
+  {
+    name: "page_size",
+    in: "query",
+    description: "Number of results to return per page.",
+    required: false,
+    type: "integer",
+  },
+];
+
 export const stafflog_list = async (
   data: operations["stafflog_list"]["parameters"],
   headers: any,
@@ -19,6 +36,32 @@ export const stafflog_list = async (
   };
   return await dataLayerObj.requestApi(request, headers, force, data.query);
 };
+export const stafflog_createFields = {
+  required: ["stage", "status"],
+  type: "object",
+  properties: {
+    id: { title: "ID", type: "integer", readOnly: true },
+    description: {
+      title: "Description",
+      type: "string",
+      maxLength: 100,
+      "x-nullable": true,
+    },
+    stage: { title: "Stage", type: "integer" },
+    with_person: { title: "With person", type: "integer", "x-nullable": true },
+    status: {
+      title: "Status",
+      type: "string",
+      enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+    },
+    created_date_time: {
+      title: "Created date time",
+      type: "string",
+      format: "date-time",
+    },
+  },
+};
+
 export const stafflog_create = async (
   data: definitions["StaffLog"] | definitions["StaffLog"][],
   headers: any,
@@ -52,6 +95,32 @@ export const stafflog_read = async (
   };
   return await dataLayerObj.requestApi(request, headers, force);
 };
+export const stafflog_updateFields = {
+  required: ["stage", "status"],
+  type: "object",
+  properties: {
+    id: { title: "ID", type: "integer", readOnly: true },
+    description: {
+      title: "Description",
+      type: "string",
+      maxLength: 100,
+      "x-nullable": true,
+    },
+    stage: { title: "Stage", type: "integer" },
+    with_person: { title: "With person", type: "integer", "x-nullable": true },
+    status: {
+      title: "Status",
+      type: "string",
+      enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+    },
+    created_date_time: {
+      title: "Created date time",
+      type: "string",
+      format: "date-time",
+    },
+  },
+};
+
 export const stafflog_update = async (
   id: string,
   data: definitions["StaffLog"] | definitions["StaffLog"][],
@@ -70,6 +139,32 @@ export const stafflog_update = async (
   };
   return dataLayerObj.requestApi(request, headers, force, data);
 };
+export const stafflog_partial_updateFields = {
+  required: ["stage", "status"],
+  type: "object",
+  properties: {
+    id: { title: "ID", type: "integer", readOnly: true },
+    description: {
+      title: "Description",
+      type: "string",
+      maxLength: 100,
+      "x-nullable": true,
+    },
+    stage: { title: "Stage", type: "integer" },
+    with_person: { title: "With person", type: "integer", "x-nullable": true },
+    status: {
+      title: "Status",
+      type: "string",
+      enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+    },
+    created_date_time: {
+      title: "Created date time",
+      type: "string",
+      format: "date-time",
+    },
+  },
+};
+
 export const stafflog_partial_update = async (
   id: string,
   data: definitions["StaffLog"] | definitions["StaffLog"][],

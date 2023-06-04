@@ -1,8 +1,24 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.personstage_delete = exports.personstage_partial_update = exports.personstage_update = exports.personstage_read = exports.personstage_create = exports.personstage_list = void 0;
+exports.personstage_delete = exports.personstage_partial_update = exports.personstage_partial_updateFields = exports.personstage_update = exports.personstage_updateFields = exports.personstage_read = exports.personstage_create = exports.personstage_createFields = exports.personstage_list = exports.personstage_listFields = void 0;
 var tslib_1 = require("tslib");
 var instance_1 = require("../instance");
+exports.personstage_listFields = [
+    {
+        name: "page",
+        in: "query",
+        description: "A page number within the paginated result set.",
+        required: false,
+        type: "integer",
+    },
+    {
+        name: "page_size",
+        in: "query",
+        description: "Number of results to return per page.",
+        required: false,
+        type: "integer",
+    },
+];
 var personstage_list = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -24,6 +40,47 @@ var personstage_list = function (data, headers, _apiPrefix, force) {
     });
 };
 exports.personstage_list = personstage_list;
+exports.personstage_createFields = {
+    required: ["step", "x", "status"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
+        description: {
+            title: "Description",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        step: {
+            title: "Step",
+            type: "string",
+            enum: [
+                "communication",
+                "answers",
+                "pending",
+                "interview",
+                "contract",
+                "rejection",
+                "refusal",
+                "recommendation",
+                "questions",
+                "invitations",
+            ],
+        },
+        x: { title: "X", type: "number" },
+        status: {
+            title: "Status",
+            type: "string",
+            enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+        },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+    },
+};
 var personstage_create = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -67,6 +124,47 @@ var personstage_read = function (id, headers, _apiPrefix, force) {
     });
 };
 exports.personstage_read = personstage_read;
+exports.personstage_updateFields = {
+    required: ["step", "x", "status"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
+        description: {
+            title: "Description",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        step: {
+            title: "Step",
+            type: "string",
+            enum: [
+                "communication",
+                "answers",
+                "pending",
+                "interview",
+                "contract",
+                "rejection",
+                "refusal",
+                "recommendation",
+                "questions",
+                "invitations",
+            ],
+        },
+        x: { title: "X", type: "number" },
+        status: {
+            title: "Status",
+            type: "string",
+            enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+        },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+    },
+};
 var personstage_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -85,6 +183,47 @@ var personstage_update = function (id, data, headers, _apiPrefix, force) {
     });
 };
 exports.personstage_update = personstage_update;
+exports.personstage_partial_updateFields = {
+    required: ["step", "x", "status"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
+        description: {
+            title: "Description",
+            type: "string",
+            maxLength: 100,
+            "x-nullable": true,
+        },
+        step: {
+            title: "Step",
+            type: "string",
+            enum: [
+                "communication",
+                "answers",
+                "pending",
+                "interview",
+                "contract",
+                "rejection",
+                "refusal",
+                "recommendation",
+                "questions",
+                "invitations",
+            ],
+        },
+        x: { title: "X", type: "number" },
+        status: {
+            title: "Status",
+            type: "string",
+            enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+        },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+    },
+};
 var personstage_partial_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }

@@ -1,8 +1,24 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.comment_delete = exports.comment_partial_update = exports.comment_update = exports.comment_read = exports.comment_create = exports.comment_list = void 0;
+exports.comment_delete = exports.comment_partial_update = exports.comment_partial_updateFields = exports.comment_update = exports.comment_updateFields = exports.comment_read = exports.comment_create = exports.comment_createFields = exports.comment_list = exports.comment_listFields = void 0;
 var tslib_1 = require("tslib");
 var instance_1 = require("../instance");
+exports.comment_listFields = [
+    {
+        name: "page",
+        in: "query",
+        description: "A page number within the paginated result set.",
+        required: false,
+        type: "integer",
+    },
+    {
+        name: "page_size",
+        in: "query",
+        description: "Number of results to return per page.",
+        required: false,
+        type: "integer",
+    },
+];
 var comment_list = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -24,6 +40,27 @@ var comment_list = function (data, headers, _apiPrefix, force) {
     });
 };
 exports.comment_list = comment_list;
+exports.comment_createFields = {
+    required: ["autor", "status", "news"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
+        html: { title: "Html", type: "string", "x-nullable": true },
+        autor: { title: "Autor", type: "integer" },
+        status: {
+            title: "Status",
+            type: "string",
+            enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+        },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+        news: { title: "News", type: "integer" },
+    },
+};
 var comment_create = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -67,6 +104,27 @@ var comment_read = function (id, headers, _apiPrefix, force) {
     });
 };
 exports.comment_read = comment_read;
+exports.comment_updateFields = {
+    required: ["autor", "status", "news"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
+        html: { title: "Html", type: "string", "x-nullable": true },
+        autor: { title: "Autor", type: "integer" },
+        status: {
+            title: "Status",
+            type: "string",
+            enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+        },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+        news: { title: "News", type: "integer" },
+    },
+};
 var comment_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -85,6 +143,27 @@ var comment_update = function (id, data, headers, _apiPrefix, force) {
     });
 };
 exports.comment_update = comment_update;
+exports.comment_partial_updateFields = {
+    required: ["autor", "status", "news"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
+        html: { title: "Html", type: "string", "x-nullable": true },
+        autor: { title: "Autor", type: "integer" },
+        status: {
+            title: "Status",
+            type: "string",
+            enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+        },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+        news: { title: "News", type: "integer" },
+    },
+};
 var comment_partial_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }

@@ -26,6 +26,7 @@ export const ChooseAndSync = () => {
           }
           fs.writeFile(dirPath + '/schemas.ts', output, 'utf8', async () => {
             const pathsObj: any = swaggerDoc.data.paths;
+            const definitions: any = swaggerDoc.data.definitions;
 
             let FileToWrite: any = {};
             let indexImportFileToWrite: any = {};
@@ -41,7 +42,7 @@ export const ChooseAndSync = () => {
                     const parameters = element[verb].parameters;
                     let definition = '';
                     let model = '';
-
+                    let fields = '' ;
                     if (parameters && parameters.length > 0) {
                       if (parameters[0].in === 'body') {
                         definition = parameters[0].schema.$ref.replace(
@@ -49,10 +50,16 @@ export const ChooseAndSync = () => {
                           ''
                         );
                         model = `definitions["${definition}"] | definitions["${definition}"][]`;
+                        fields = JSON.stringify(definitions[definition]); 
                       } else {
                         model = `operations["${functionName}"]["parameters"]`;
+                        fields =  JSON.stringify(parameters); 
                       }
                     }
+
+
+
+               
 
                     if (functionName) {
                       if (!FileToWrite[fileName]) {
@@ -62,7 +69,7 @@ export const ChooseAndSync = () => {
                         import {AxiosResponse} from "axios"
                         import { dataLayerObj } from "../instance";
                         import type { RequestType } from "../instance";
-                        
+
                         `;
                       }
 
@@ -70,9 +77,21 @@ export const ChooseAndSync = () => {
                         indexImportFileToWrite[fileName] = `import {`;
                         indexExportFileToWrite[fileName] = '';
                       }
-                      indexImportFileToWrite[fileName] += functionName + ',';
-                      indexExportFileToWrite[fileName] += functionName + ',';
 
+
+                      if(fields !==''){
+
+                        indexImportFileToWrite[fileName] += functionName + `,${functionName}Fields,`;
+                        indexExportFileToWrite[fileName] += functionName + `,${functionName}Fields,`
+                        FileToWrite[fileName] += `
+                        export const ${functionName}Fields = ${fields};
+                        `
+                      }
+                      else{
+                        indexImportFileToWrite[fileName] += functionName + `,`;
+                        indexExportFileToWrite[fileName] += functionName + `,`
+                      }
+                      
                       FileToWrite[fileName] += `
                     export const ${functionName} = async ( `;
                       if (path.indexOf('{id}') > -1)

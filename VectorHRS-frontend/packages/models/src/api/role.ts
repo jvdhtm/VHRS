@@ -3,6 +3,52 @@ import { AxiosResponse } from "axios";
 import { dataLayerObj } from "../instance";
 import type { RequestType } from "../instance";
 
+export const role_listFields = [
+  { name: "id", in: "query", description: "", required: false, type: "number" },
+  {
+    name: "title",
+    in: "query",
+    description: "",
+    required: false,
+    type: "string",
+  },
+  {
+    name: "user",
+    in: "query",
+    description: "",
+    required: false,
+    type: "string",
+  },
+  {
+    name: "permission",
+    in: "query",
+    description: "",
+    required: false,
+    type: "string",
+  },
+  {
+    name: "app",
+    in: "query",
+    description: "",
+    required: false,
+    type: "string",
+  },
+  {
+    name: "page",
+    in: "query",
+    description: "A page number within the paginated result set.",
+    required: false,
+    type: "integer",
+  },
+  {
+    name: "page_size",
+    in: "query",
+    description: "Number of results to return per page.",
+    required: false,
+    type: "integer",
+  },
+];
+
 export const role_list = async (
   data: operations["role_list"]["parameters"],
   headers: any,
@@ -19,6 +65,22 @@ export const role_list = async (
   };
   return await dataLayerObj.requestApi(request, headers, force, data.query);
 };
+export const role_createFields = {
+  required: ["title", "user", "app"],
+  type: "object",
+  properties: {
+    id: { title: "ID", type: "integer", readOnly: true },
+    title: { title: "Title", type: "string", maxLength: 30, minLength: 1 },
+    user: { title: "User", type: "integer" },
+    permission: {
+      title: "Permission",
+      type: "string",
+      enum: ["R", "W", "RW", "RWD"],
+    },
+    app: { title: "App", type: "integer" },
+  },
+};
+
 export const role_create = async (
   data: definitions["Role"] | definitions["Role"][],
   headers: any,
@@ -52,6 +114,22 @@ export const role_read = async (
   };
   return await dataLayerObj.requestApi(request, headers, force);
 };
+export const role_updateFields = {
+  required: ["title", "user", "app"],
+  type: "object",
+  properties: {
+    id: { title: "ID", type: "integer", readOnly: true },
+    title: { title: "Title", type: "string", maxLength: 30, minLength: 1 },
+    user: { title: "User", type: "integer" },
+    permission: {
+      title: "Permission",
+      type: "string",
+      enum: ["R", "W", "RW", "RWD"],
+    },
+    app: { title: "App", type: "integer" },
+  },
+};
+
 export const role_update = async (
   id: string,
   data: definitions["Role"] | definitions["Role"][],
@@ -70,6 +148,22 @@ export const role_update = async (
   };
   return dataLayerObj.requestApi(request, headers, force, data);
 };
+export const role_partial_updateFields = {
+  required: ["title", "user", "app"],
+  type: "object",
+  properties: {
+    id: { title: "ID", type: "integer", readOnly: true },
+    title: { title: "Title", type: "string", maxLength: 30, minLength: 1 },
+    user: { title: "User", type: "integer" },
+    permission: {
+      title: "Permission",
+      type: "string",
+      enum: ["R", "W", "RW", "RWD"],
+    },
+    app: { title: "App", type: "integer" },
+  },
+};
+
 export const role_partial_update = async (
   id: string,
   data: definitions["Role"] | definitions["Role"][],

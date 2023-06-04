@@ -1,5 +1,21 @@
 import { __awaiter, __generator } from "tslib";
 import { dataLayerObj } from "../instance";
+export var condition_listFields = [
+    {
+        name: "page",
+        in: "query",
+        description: "A page number within the paginated result set.",
+        required: false,
+        type: "integer",
+    },
+    {
+        name: "page_size",
+        in: "query",
+        description: "Number of results to return per page.",
+        required: false,
+        type: "integer",
+    },
+];
 export var condition_list = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -19,6 +35,28 @@ export var condition_list = function (data, headers, _apiPrefix, force) {
             }
         });
     });
+};
+export var condition_createFields = {
+    required: ["severity", "status"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        severity: {
+            title: "Severity",
+            type: "string",
+            enum: ["small", "mild", "sever"],
+        },
+        status: {
+            title: "Status",
+            type: "string",
+            enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+        },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+    },
 };
 export var condition_create = function (data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
@@ -61,6 +99,28 @@ export var condition_read = function (id, headers, _apiPrefix, force) {
         });
     });
 };
+export var condition_updateFields = {
+    required: ["severity", "status"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        severity: {
+            title: "Severity",
+            type: "string",
+            enum: ["small", "mild", "sever"],
+        },
+        status: {
+            title: "Status",
+            type: "string",
+            enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+        },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+    },
+};
 export var condition_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
     if (force === void 0) { force = false; }
@@ -77,6 +137,28 @@ export var condition_update = function (id, data, headers, _apiPrefix, force) {
             return [2 /*return*/, dataLayerObj.requestApi(request, headers, force, data)];
         });
     });
+};
+export var condition_partial_updateFields = {
+    required: ["severity", "status"],
+    type: "object",
+    properties: {
+        id: { title: "ID", type: "integer", readOnly: true },
+        severity: {
+            title: "Severity",
+            type: "string",
+            enum: ["small", "mild", "sever"],
+        },
+        status: {
+            title: "Status",
+            type: "string",
+            enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+        },
+        created_date_time: {
+            title: "Created date time",
+            type: "string",
+            format: "date-time",
+        },
+    },
 };
 export var condition_partial_update = function (id, data, headers, _apiPrefix, force) {
     if (_apiPrefix === void 0) { _apiPrefix = "/api"; }
