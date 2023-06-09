@@ -29,6 +29,25 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# SWAGGER (Openapi 2.0)
+SWAGGER_SETTINGS = {
+    "DEFAULT_FIELD_INSPECTORS": [
+        "drf_yasg.inspectors.CamelCaseJSONFilter",
+        "drf_yasg.inspectors.ReferencingSerializerInspector",
+        "api_doc.inspectors.relatedResourceFieldInspector",
+        "drf_yasg.inspectors.ChoiceFieldInspector",
+        "drf_yasg.inspectors.FileFieldInspector",
+        "drf_yasg.inspectors.DictFieldInspector",
+        "drf_yasg.inspectors.JSONFieldInspector",
+        "drf_yasg.inspectors.HiddenFieldInspector",
+        "drf_yasg.inspectors.RecursiveFieldInspector",
+        "drf_yasg.inspectors.SerializerMethodFieldInspector",
+        "drf_yasg.inspectors.SimpleFieldInspector",
+        "drf_yasg.inspectors.StringDefaultFieldInspector",
+    ]
+}
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +59,7 @@ INSTALLED_APPS = [
     'identity_api.apps.IdentityApiConfig',
     'questions.apps.QuestionsConfig',
     'api_doc.apps.ApiDocConfig',
+    
     'staff_api.apps.StaffApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -71,6 +91,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'VectorHRS.urls'
 
