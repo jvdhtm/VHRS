@@ -41,8 +41,16 @@ export const stafffunctions_createFields = {
   type: "object",
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
-    function: { title: "Function", type: "integer" },
-    staff: { title: "Staff", type: "integer" },
+    function: {
+      title: "Function",
+      type: "integer",
+      "x-vhrs-relatedResource": "staff_api.Function",
+    },
+    staff: {
+      title: "Staff",
+      type: "integer",
+      "x-vhrs-relatedResource": "staff_api.Staff",
+    },
     status: {
       title: "Status",
       type: "string",
@@ -94,8 +102,16 @@ export const stafffunctions_updateFields = {
   type: "object",
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
-    function: { title: "Function", type: "integer" },
-    staff: { title: "Staff", type: "integer" },
+    function: {
+      title: "Function",
+      type: "integer",
+      "x-vhrs-relatedResource": "staff_api.Function",
+    },
+    staff: {
+      title: "Staff",
+      type: "integer",
+      "x-vhrs-relatedResource": "staff_api.Staff",
+    },
     status: {
       title: "Status",
       type: "string",
@@ -132,8 +148,16 @@ export const stafffunctions_partial_updateFields = {
   type: "object",
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
-    function: { title: "Function", type: "integer" },
-    staff: { title: "Staff", type: "integer" },
+    function: {
+      title: "Function",
+      type: "integer",
+      "x-vhrs-relatedResource": "staff_api.Function",
+    },
+    staff: {
+      title: "Staff",
+      type: "integer",
+      "x-vhrs-relatedResource": "staff_api.Staff",
+    },
     status: {
       title: "Status",
       type: "string",

@@ -48,8 +48,16 @@ export const expertiseprofile_createFields = {
       maxLength: 100,
       "x-nullable": true,
     },
-    person: { title: "Person", type: "integer" },
-    expertise: { title: "Expertise", type: "integer" },
+    person: {
+      title: "Person",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
+    expertise: {
+      title: "Expertise",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Expertise",
+    },
     status: {
       title: "Status",
       type: "string",
@@ -110,8 +118,16 @@ export const expertiseprofile_updateFields = {
       maxLength: 100,
       "x-nullable": true,
     },
-    person: { title: "Person", type: "integer" },
-    expertise: { title: "Expertise", type: "integer" },
+    person: {
+      title: "Person",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
+    expertise: {
+      title: "Expertise",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Expertise",
+    },
     status: {
       title: "Status",
       type: "string",
@@ -157,8 +173,16 @@ export const expertiseprofile_partial_updateFields = {
       maxLength: 100,
       "x-nullable": true,
     },
-    person: { title: "Person", type: "integer" },
-    expertise: { title: "Expertise", type: "integer" },
+    person: {
+      title: "Person",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
+    expertise: {
+      title: "Expertise",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Expertise",
+    },
     status: {
       title: "Status",
       type: "string",

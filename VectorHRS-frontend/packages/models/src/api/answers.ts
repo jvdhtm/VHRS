@@ -43,7 +43,11 @@ export const answers_createFields = {
     id: { title: "ID", type: "integer", readOnly: true },
     name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
     html: { title: "Html", type: "string", "x-nullable": true },
-    autor: { title: "Autor", type: "integer" },
+    autor: {
+      title: "Autor",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
     status: {
       title: "Status",
       type: "string",
@@ -54,7 +58,11 @@ export const answers_createFields = {
       type: "string",
       format: "date-time",
     },
-    question: { title: "Question", type: "integer" },
+    question: {
+      title: "Question",
+      type: "integer",
+      "x-vhrs-relatedResource": "questions.Question",
+    },
   },
 };
 
@@ -98,7 +106,11 @@ export const answers_updateFields = {
     id: { title: "ID", type: "integer", readOnly: true },
     name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
     html: { title: "Html", type: "string", "x-nullable": true },
-    autor: { title: "Autor", type: "integer" },
+    autor: {
+      title: "Autor",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
     status: {
       title: "Status",
       type: "string",
@@ -109,7 +121,11 @@ export const answers_updateFields = {
       type: "string",
       format: "date-time",
     },
-    question: { title: "Question", type: "integer" },
+    question: {
+      title: "Question",
+      type: "integer",
+      "x-vhrs-relatedResource": "questions.Question",
+    },
   },
 };
 
@@ -138,7 +154,11 @@ export const answers_partial_updateFields = {
     id: { title: "ID", type: "integer", readOnly: true },
     name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
     html: { title: "Html", type: "string", "x-nullable": true },
-    autor: { title: "Autor", type: "integer" },
+    autor: {
+      title: "Autor",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
     status: {
       title: "Status",
       type: "string",
@@ -149,7 +169,11 @@ export const answers_partial_updateFields = {
       type: "string",
       format: "date-time",
     },
-    question: { title: "Question", type: "integer" },
+    question: {
+      title: "Question",
+      type: "integer",
+      "x-vhrs-relatedResource": "questions.Question",
+    },
   },
 };
 

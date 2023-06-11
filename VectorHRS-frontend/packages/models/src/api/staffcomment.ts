@@ -41,7 +41,11 @@ export const staffcomment_createFields = {
   type: "object",
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
-    staff: { title: "Staff", type: "integer" },
+    staff: {
+      title: "Staff",
+      type: "integer",
+      "x-vhrs-relatedResource": "staff_api.Staff",
+    },
     name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
     description: {
       title: "Description",
@@ -100,7 +104,11 @@ export const staffcomment_updateFields = {
   type: "object",
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
-    staff: { title: "Staff", type: "integer" },
+    staff: {
+      title: "Staff",
+      type: "integer",
+      "x-vhrs-relatedResource": "staff_api.Staff",
+    },
     name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
     description: {
       title: "Description",
@@ -144,7 +152,11 @@ export const staffcomment_partial_updateFields = {
   type: "object",
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
-    staff: { title: "Staff", type: "integer" },
+    staff: {
+      title: "Staff",
+      type: "integer",
+      "x-vhrs-relatedResource": "staff_api.Staff",
+    },
     name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
     description: {
       title: "Description",

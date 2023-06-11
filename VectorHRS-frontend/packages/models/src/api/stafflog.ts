@@ -47,8 +47,17 @@ export const stafflog_createFields = {
       maxLength: 100,
       "x-nullable": true,
     },
-    stage: { title: "Stage", type: "integer" },
-    with_person: { title: "With person", type: "integer", "x-nullable": true },
+    stage: {
+      title: "Stage",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.PersonStage",
+    },
+    with_person: {
+      title: "With person",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+      "x-nullable": true,
+    },
     status: {
       title: "Status",
       type: "string",
@@ -106,8 +115,17 @@ export const stafflog_updateFields = {
       maxLength: 100,
       "x-nullable": true,
     },
-    stage: { title: "Stage", type: "integer" },
-    with_person: { title: "With person", type: "integer", "x-nullable": true },
+    stage: {
+      title: "Stage",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.PersonStage",
+    },
+    with_person: {
+      title: "With person",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+      "x-nullable": true,
+    },
     status: {
       title: "Status",
       type: "string",
@@ -150,8 +168,17 @@ export const stafflog_partial_updateFields = {
       maxLength: 100,
       "x-nullable": true,
     },
-    stage: { title: "Stage", type: "integer" },
-    with_person: { title: "With person", type: "integer", "x-nullable": true },
+    stage: {
+      title: "Stage",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.PersonStage",
+    },
+    with_person: {
+      title: "With person",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+      "x-nullable": true,
+    },
     status: {
       title: "Status",
       type: "string",

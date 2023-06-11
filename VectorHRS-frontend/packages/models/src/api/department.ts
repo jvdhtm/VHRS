@@ -42,7 +42,12 @@ export const department_createFields = {
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
     name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
-    parentId: { title: "ParentId", type: "integer", "x-nullable": true },
+    parentId: {
+      title: "ParentId",
+      type: "integer",
+      "x-vhrs-relatedResource": "staff_api.Department",
+      "x-nullable": true,
+    },
     description: {
       title: "Description",
       type: "string",
@@ -106,7 +111,12 @@ export const department_updateFields = {
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
     name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
-    parentId: { title: "ParentId", type: "integer", "x-nullable": true },
+    parentId: {
+      title: "ParentId",
+      type: "integer",
+      "x-vhrs-relatedResource": "staff_api.Department",
+      "x-nullable": true,
+    },
     description: {
       title: "Description",
       type: "string",
@@ -155,7 +165,12 @@ export const department_partial_updateFields = {
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
     name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
-    parentId: { title: "ParentId", type: "integer", "x-nullable": true },
+    parentId: {
+      title: "ParentId",
+      type: "integer",
+      "x-vhrs-relatedResource": "staff_api.Department",
+      "x-nullable": true,
+    },
     description: {
       title: "Description",
       type: "string",

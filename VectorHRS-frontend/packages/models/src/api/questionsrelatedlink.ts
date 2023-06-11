@@ -43,7 +43,11 @@ export const questionsrelatedlink_createFields = {
   type: "object",
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
-    question: { title: "Question", type: "integer" },
+    question: {
+      title: "Question",
+      type: "integer",
+      "x-vhrs-relatedResource": "questions.Question",
+    },
     name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
     created_date_time: {
       title: "Created date time",
@@ -97,7 +101,11 @@ export const questionsrelatedlink_updateFields = {
   type: "object",
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
-    question: { title: "Question", type: "integer" },
+    question: {
+      title: "Question",
+      type: "integer",
+      "x-vhrs-relatedResource": "questions.Question",
+    },
     name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
     created_date_time: {
       title: "Created date time",
@@ -134,7 +142,11 @@ export const questionsrelatedlink_partial_updateFields = {
   type: "object",
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
-    question: { title: "Question", type: "integer" },
+    question: {
+      title: "Question",
+      type: "integer",
+      "x-vhrs-relatedResource": "questions.Question",
+    },
     name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
     created_date_time: {
       title: "Created date time",

@@ -48,7 +48,12 @@ export const expertise_createFields = {
       maxLength: 100,
       "x-nullable": true,
     },
-    parentId: { title: "ParentId", type: "integer", "x-nullable": true },
+    parentId: {
+      title: "ParentId",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Expertise",
+      "x-nullable": true,
+    },
     status: {
       title: "Status",
       type: "string",
@@ -107,7 +112,12 @@ export const expertise_updateFields = {
       maxLength: 100,
       "x-nullable": true,
     },
-    parentId: { title: "ParentId", type: "integer", "x-nullable": true },
+    parentId: {
+      title: "ParentId",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Expertise",
+      "x-nullable": true,
+    },
     status: {
       title: "Status",
       type: "string",
@@ -151,7 +161,12 @@ export const expertise_partial_updateFields = {
       maxLength: 100,
       "x-nullable": true,
     },
-    parentId: { title: "ParentId", type: "integer", "x-nullable": true },
+    parentId: {
+      title: "ParentId",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Expertise",
+      "x-nullable": true,
+    },
     status: {
       title: "Status",
       type: "string",

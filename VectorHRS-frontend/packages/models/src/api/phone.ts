@@ -41,7 +41,11 @@ export const phone_createFields = {
   type: "object",
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
-    person: { title: "Person", type: "integer" },
+    person: {
+      title: "Person",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
     description: {
       title: "Description",
       type: "string",
@@ -105,7 +109,11 @@ export const phone_updateFields = {
   type: "object",
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
-    person: { title: "Person", type: "integer" },
+    person: {
+      title: "Person",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
     description: {
       title: "Description",
       type: "string",
@@ -154,7 +162,11 @@ export const phone_partial_updateFields = {
   type: "object",
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
-    person: { title: "Person", type: "integer" },
+    person: {
+      title: "Person",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
     description: {
       title: "Description",
       type: "string",

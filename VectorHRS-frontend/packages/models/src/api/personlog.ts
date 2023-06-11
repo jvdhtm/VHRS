@@ -47,8 +47,16 @@ export const personlog_createFields = {
       maxLength: 100,
       "x-nullable": true,
     },
-    stage: { title: "Stage", type: "integer" },
-    person: { title: "Person", type: "integer" },
+    stage: {
+      title: "Stage",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.PersonStage",
+    },
+    person: {
+      title: "Person",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
     status: {
       title: "Status",
       type: "string",
@@ -106,8 +114,16 @@ export const personlog_updateFields = {
       maxLength: 100,
       "x-nullable": true,
     },
-    stage: { title: "Stage", type: "integer" },
-    person: { title: "Person", type: "integer" },
+    stage: {
+      title: "Stage",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.PersonStage",
+    },
+    person: {
+      title: "Person",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
     status: {
       title: "Status",
       type: "string",
@@ -150,8 +166,16 @@ export const personlog_partial_updateFields = {
       maxLength: 100,
       "x-nullable": true,
     },
-    stage: { title: "Stage", type: "integer" },
-    person: { title: "Person", type: "integer" },
+    stage: {
+      title: "Stage",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.PersonStage",
+    },
+    person: {
+      title: "Person",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
     status: {
       title: "Status",
       type: "string",

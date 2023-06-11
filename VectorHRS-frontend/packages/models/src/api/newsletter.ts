@@ -49,7 +49,11 @@ export const newsletter_createFields = {
       "x-nullable": true,
     },
     html: { title: "Html", type: "string", "x-nullable": true },
-    autor: { title: "Autor", type: "integer" },
+    autor: {
+      title: "Autor",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
     status: {
       title: "Status",
       type: "string",
@@ -109,7 +113,11 @@ export const newsletter_updateFields = {
       "x-nullable": true,
     },
     html: { title: "Html", type: "string", "x-nullable": true },
-    autor: { title: "Autor", type: "integer" },
+    autor: {
+      title: "Autor",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
     status: {
       title: "Status",
       type: "string",
@@ -154,7 +162,11 @@ export const newsletter_partial_updateFields = {
       "x-nullable": true,
     },
     html: { title: "Html", type: "string", "x-nullable": true },
-    autor: { title: "Autor", type: "integer" },
+    autor: {
+      title: "Autor",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
     status: {
       title: "Status",
       type: "string",

@@ -49,7 +49,11 @@ export const question_createFields = {
       maxLength: 500,
       "x-nullable": true,
     },
-    autor: { title: "Autor", type: "integer" },
+    autor: {
+      title: "Autor",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
     status: {
       title: "Status",
       type: "string",
@@ -109,7 +113,11 @@ export const question_updateFields = {
       maxLength: 500,
       "x-nullable": true,
     },
-    autor: { title: "Autor", type: "integer" },
+    autor: {
+      title: "Autor",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
     status: {
       title: "Status",
       type: "string",
@@ -154,7 +162,11 @@ export const question_partial_updateFields = {
       maxLength: 500,
       "x-nullable": true,
     },
-    autor: { title: "Autor", type: "integer" },
+    autor: {
+      title: "Autor",
+      type: "integer",
+      "x-vhrs-relatedResource": "people.Person",
+    },
     status: {
       title: "Status",
       type: "string",

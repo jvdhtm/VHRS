@@ -41,7 +41,11 @@ export const newsrelatedlink_createFields = {
   type: "object",
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
-    news: { title: "News", type: "integer" },
+    news: {
+      title: "News",
+      type: "integer",
+      "x-vhrs-relatedResource": "news.NewsLetter",
+    },
     name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
     created_date_time: {
       title: "Created date time",
@@ -91,7 +95,11 @@ export const newsrelatedlink_updateFields = {
   type: "object",
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
-    news: { title: "News", type: "integer" },
+    news: {
+      title: "News",
+      type: "integer",
+      "x-vhrs-relatedResource": "news.NewsLetter",
+    },
     name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
     created_date_time: {
       title: "Created date time",
@@ -126,7 +134,11 @@ export const newsrelatedlink_partial_updateFields = {
   type: "object",
   properties: {
     id: { title: "ID", type: "integer", readOnly: true },
-    news: { title: "News", type: "integer" },
+    news: {
+      title: "News",
+      type: "integer",
+      "x-vhrs-relatedResource": "news.NewsLetter",
+    },
     name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
     created_date_time: {
       title: "Created date time",
