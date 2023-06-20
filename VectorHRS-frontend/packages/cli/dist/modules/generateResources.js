@@ -101,12 +101,15 @@ async function generateResources(dest) {
             }
             indexToWrite = indexToWrite.slice(0, -1) + "};";
             const index = prettier_1.default.format(indexToWrite, Config_1.PRETTIER_CONFG);
-            fs.writeFile(dirPath + "/server/index.ts", index, "utf8", async () => { });
+            if (!fs.existsSync(dirPath)) {
+                fs.mkdirSync(dirPath, { recursive: true });
+            }
+            fs.writeFile(dirPath + "/index.ts", index, "utf8", async () => { });
             for (const fileName in FileToWrite) {
                 if (Object.prototype.hasOwnProperty.call(FileToWrite, fileName)) {
                     let file = prettier_1.default.format(FileToWrite[fileName], Config_1.PRETTIER_CONFG);
                     file = file.replaceAll("// prettier-ignore", "");
-                    fs.writeFile(dirPath + "/server/" + fileName + ".ts", file, "utf8", async () => { });
+                    fs.writeFile(dirPath + "/" + fileName + ".ts", file, "utf8", async () => { });
                 }
             }
         }

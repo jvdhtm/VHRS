@@ -16,8 +16,8 @@ function findResourceModel(resource, pathVerbs, modelDefinitions, fileName) {
         const responses = pathVerbs[verb].responses;
         let modelFound = false;
         if (parameters && parameters.length > 0) {
-            if (parameters[0].in === "body") {
-                resourceDefinition = parameters[0].schema.$ref.replace("#/definitions/", "");
+            if (parameters[0].in === 'body') {
+                resourceDefinition = parameters[0].schema.$ref.replace('#/definitions/', '');
             }
             if (resourceDefinition) {
                 modelFound = true;
@@ -28,11 +28,11 @@ function findResourceModel(resource, pathVerbs, modelDefinitions, fileName) {
                 if (Object.prototype.hasOwnProperty.call(responses, response)) {
                     const schema = responses[response].schema;
                     if (schema) {
-                        if (schema.type == "array") {
-                            resourceDefinition = schema.items.$ref.replace("#/definitions/", "");
+                        if (schema.properties) {
+                            resourceDefinition = schema.properties.results.items.$ref.replace('#/definitions/', '');
                         }
                         else {
-                            resourceDefinition = schema.$ref.replace("#/definitions/", "");
+                            resourceDefinition = schema.$ref.replace('#/definitions/', '');
                         }
                     }
                 }
@@ -46,7 +46,7 @@ function findResourceModel(resource, pathVerbs, modelDefinitions, fileName) {
     return {
         resource,
         fileName,
-        resourceDefinition,
+        resourceDefinition
     };
 }
 exports.findResourceModel = findResourceModel;

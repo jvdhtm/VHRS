@@ -15,12 +15,14 @@ function generateResourceFile(resource, model, choosenPath, relatedPath, fileNam
     let name = `${fileName}Resource`;
     file = "";
     if (model) {
-        file += ` import type { Models, RequestType } from "@prorenata/models"`;
+        file += ` import type { Models } from "../../types"
+                import { ResourceObject } from "../../manage/resource";
+      `;
         name = `${model}Resource`;
         definitionsTowrite = `Models["${model}"]`;
     }
     else {
-        file += ` import type { RequestType } from "@prorenata/models"`;
+        file += `import { ResourceObject } from "../../manage/resource"`;
     }
     file += `
     const mockType = (): ${definitionsTowrite} | undefined => {
@@ -28,8 +30,8 @@ function generateResourceFile(resource, model, choosenPath, relatedPath, fileNam
     };
     `;
     file += `
-    export const ${fileName}Resource:RequestType = {
-      url: "${choosenPath}",
+    export const ${fileName}Resource:ResourceObject = new ResourceObject({
+      baseUrl: "${choosenPath}",
       relatedurls: ${JSON.stringify(relatedPath)},
       name: "${name}",
       type: mockType,
@@ -40,7 +42,7 @@ function generateResourceFile(resource, model, choosenPath, relatedPath, fileNam
       required: ${JSON.stringify(resource.required)} ,`;
     }
     file += `
-    }`;
+    })`;
     return file;
 }
 exports.generateResourceFile = generateResourceFile;

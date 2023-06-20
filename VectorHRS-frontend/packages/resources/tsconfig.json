@@ -22,7 +22,7 @@
     ]
   },
   "include": [
-    "src/index.ts",
+    "src/servers/types/index.ts",
   ],
   "exclude": [
     "node_modules"

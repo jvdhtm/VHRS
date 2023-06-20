@@ -133,8 +133,14 @@ export default async function generateResources(dest?: string): Promise<void> {
       indexToWrite = indexToWrite.slice(0, -1) + "};";
       const index = prettier.format(indexToWrite, PRETTIER_CONFG);
 
+
+      if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true });
+      }
+
+      
       fs.writeFile(
-        dirPath + "/server/index.ts",
+        dirPath + "/index.ts",
         index,
         "utf8",
         async () => {}
@@ -146,7 +152,7 @@ export default async function generateResources(dest?: string): Promise<void> {
           file = file.replaceAll("// prettier-ignore", "");
 
           fs.writeFile(
-            dirPath + "/server/" + fileName + ".ts",
+            dirPath + "/" + fileName + ".ts",
             file,
             "utf8",
             async () => {}

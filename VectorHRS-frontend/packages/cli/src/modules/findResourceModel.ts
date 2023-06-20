@@ -10,7 +10,7 @@ export function findResourceModel(
   resource: any,
   pathVerbs: any,
   modelDefinitions: any,
-  fileName:string,
+  fileName: string
 ) {
   let resourceDefinition;
   for (const verb in pathVerbs) {
@@ -19,8 +19,11 @@ export function findResourceModel(
 
     let modelFound = false;
     if (parameters && parameters.length > 0) {
-      if (parameters[0].in === "body") {
-        resourceDefinition = parameters[0].schema.$ref.replace("#/definitions/", "");
+      if (parameters[0].in === 'body') {
+        resourceDefinition = parameters[0].schema.$ref.replace(
+          '#/definitions/',
+          ''
+        );
       }
       if (resourceDefinition) {
         modelFound = true;
@@ -32,10 +35,13 @@ export function findResourceModel(
         if (Object.prototype.hasOwnProperty.call(responses, response)) {
           const schema = responses[response].schema;
           if (schema) {
-            if (schema.type == "array") {
-              resourceDefinition = schema.items.$ref.replace("#/definitions/", "");
+            if (schema.properties) {
+              resourceDefinition = schema.properties.results.items.$ref.replace(
+                '#/definitions/',
+                ''
+              );
             } else {
-              resourceDefinition = schema.$ref.replace("#/definitions/", "");
+              resourceDefinition = schema.$ref.replace('#/definitions/', '');
             }
           }
         }
@@ -50,6 +56,6 @@ export function findResourceModel(
   return {
     resource,
     fileName,
-    resourceDefinition,
+    resourceDefinition
   };
 }
