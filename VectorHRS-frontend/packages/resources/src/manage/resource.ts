@@ -8,8 +8,9 @@ import {
   ModelTypes,
   ResourceFields,
   ResourceMetaType,
-  ResourceObjectOptions,
+  ResourceObject,
   ResourceOptions,
+  ResourceParams,
 } from "../types";
 
 import {useState} from "react";
@@ -26,7 +27,7 @@ const initialState: Istate = {
   results: [],
 };
 
-export class ResourceObject {
+export class Resource {
 
    baseUrl: string;
    fields: ResourceFields | AnnotatedResourceFields<ModelTypes>;
@@ -42,8 +43,12 @@ export class ResourceObject {
    meta?: ResourceMetaType;
    bootstrap?: boolean;
    data: any;
-   setData: React.Dispatch<React.SetStateAction<Istate>>;
-  constructor(options:ResourceObjectOptions) {
+   setData: React.Dispatch<React.SetStateAction<any>>;
+
+   queryResults: Istate;
+   setQueryResults: React.Dispatch<React.SetStateAction<any>>;
+
+  constructor(options:ResourceObject) {
     this.baseUrl = options.baseUrl;
     this.fields = options.fields;
     this.name = options.name;
@@ -56,9 +61,14 @@ export class ResourceObject {
     this.display = options.display;
     this.meta = options.meta;
     this.bootstrap = options.bootstrap;
-    const [data , setData] = useState<Istate> (initialState);
+    const [data , setData] = useState<any> ({});
     this.data = data;
     this.setData = setData;
+    const [queryResults , setQueryResults] = useState<any> ({});
+    this.queryResults = queryResults;
+    this.setQueryResults = setQueryResults;
+
+ 
     if( this.bootstrap){
       this.fetch();
     }
@@ -87,50 +97,26 @@ export class ResourceObject {
   }
 
 
-  private setCache(itemId?:number, data:Istate){
-
-    let found = false;
-    let newCount = this.data.count + data.count;
-    let newNext = data.next;
-    let newPrevious = data.previous;
+  private setCacheItem(itemId:number, data:any){
     let prevStateResults = this.data.results;
+    prevStateResults[itemId] = data
+    this.setData(prevStateResults);
+  }
 
+    /**
+     * Match reactive layer caches with data layer caches deep copy of existing object
+     */
+    private refreshCachesQuery = <T>(
+      resource: ResourceObject,
+      resourceParams?: ResourceParams,
+    ) => {
 
-    let newResult = prevStateResults.map(
-      (el: any) => {
-        const preEl = prevStateResults.filter(
-          (resultEl: any) => {
-            return el.id === resultEl.id;
-          }
-        );
-
-        if (preEl.length > 0) {
-          found = true;
-          return { ...el, ...preEl[0] };
-        } else {
-          return el;
-        }
-      }
-    );
-
-    if (!found) {
-      newResult = prevStateResults.concat(data.results);
+      const queryhash = hid(resourceParams);
+      const queriedObjects = this.resourceGlobal.QUERY_INTERNAL_CACHE.get<
+        ResourceList<T>
+      >(resource, queryhash);
+      this.QUERIED_DATA.set(resource.name, queriedObjects, queryhash);
     }
-
-    const newResultSerializedById: any[] = [];
-    newResult.map((el: any) => {
-      if (el.id) {
-        newResultSerializedById[el.id] = el;
-      }
-    });
-
-    this.setData({
-      count: newCount,
-      next: newNext,
-      previous: newPrevious,
-      results: newResultSerializedById,
-    });
-
   }
 
   async fetch(itemId?:number, options?: ResourceOptions): Promise<any> {

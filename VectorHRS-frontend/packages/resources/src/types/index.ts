@@ -154,7 +154,7 @@ export interface ResourceField {
     [key: string]: ResourceField;
   }
 
-  export interface ResourceObjectOptions{
+  export interface ResourceObject{
     baseUrl: string;
     fields: ResourceFields | AnnotatedResourceFields<ModelTypes>;
     name: string;
