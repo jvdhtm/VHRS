@@ -1,6 +1,8 @@
 import { definitions, paths } from "../servers/types/Models";
+import * as resources from "../servers/resources/index";
 
 
+export type ResourceKeys = keyof typeof resources;
 export type ModelTypes = definitions[keyof definitions];
 export type EndPointType = keyof paths;
 export type Models = definitions;

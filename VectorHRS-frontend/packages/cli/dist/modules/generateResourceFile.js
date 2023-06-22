@@ -15,14 +15,13 @@ function generateResourceFile(resource, model, choosenPath, relatedPath, fileNam
     let name = `${fileName}Resource`;
     file = "";
     if (model) {
-        file += ` import type { Models } from "../../types"
-                import { ResourceObject } from "../../manage/resource";
+        file += ` import type { Models, ResourceObject } from "../../types";
       `;
         name = `${model}Resource`;
         definitionsTowrite = `Models["${model}"]`;
     }
     else {
-        file += `import { ResourceObject } from "../../manage/resource"`;
+        file += `import type { ResourceObject } from "../../types";`;
     }
     file += `
     const mockType = (): ${definitionsTowrite} | undefined => {
@@ -30,7 +29,7 @@ function generateResourceFile(resource, model, choosenPath, relatedPath, fileNam
     };
     `;
     file += `
-    export const ${fileName}Resource:ResourceObject = new ResourceObject({
+    export const ${fileName}Resource:ResourceObject = {
       baseUrl: "${choosenPath}",
       relatedurls: ${JSON.stringify(relatedPath)},
       name: "${name}",
@@ -42,7 +41,7 @@ function generateResourceFile(resource, model, choosenPath, relatedPath, fileNam
       required: ${JSON.stringify(resource.required)} ,`;
     }
     file += `
-    })`;
+    }`;
     return file;
 }
 exports.generateResourceFile = generateResourceFile;

@@ -11,7 +11,7 @@ export interface RequestType {
     headers?: any,
     endpoint: string;
     name: string;
-    verb: Method | undefined,
+    method: Method | undefined,
 }
 
 class DataLayer {
@@ -76,7 +76,7 @@ class DataLayer {
                 hash([options.endpoint, options.headers]),
                 () =>
                     instance({
-                        method:  options.verb,
+                        method:  options.method,
                         url:  options.endpoint,
                         params:  options.data ,
                         headers: options.headers,

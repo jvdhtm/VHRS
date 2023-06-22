@@ -1,11 +1,10 @@
-import type { Models } from "../../types";
-import { ResourceObject } from "../../manage/resource";
+import type { Models, ResourceObject } from "../../types";
 
 const mockType = (): Models["StaffLog"] | undefined => {
   return;
 };
 
-export const StaffLogResource: ResourceObject = new ResourceObject({
+export const StaffLogResource: ResourceObject = {
   baseUrl: "/stafflog/",
   relatedurls: ["/stafflog/", "/stafflog/{id}/"],
   name: "StaffLogResource",
@@ -42,4 +41,4 @@ export const StaffLogResource: ResourceObject = new ResourceObject({
   },
 
   required: ["stage", "status"],
-});
+};

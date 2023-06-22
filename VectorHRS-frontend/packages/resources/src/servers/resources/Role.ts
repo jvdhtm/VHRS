@@ -1,11 +1,10 @@
-import type { Models } from "../../types";
-import { ResourceObject } from "../../manage/resource";
+import type { Models, ResourceObject } from "../../types";
 
 const mockType = (): Models["Role"] | undefined => {
   return;
 };
 
-export const RoleResource: ResourceObject = new ResourceObject({
+export const RoleResource: ResourceObject = {
   baseUrl: "/role/",
   relatedurls: ["/role/", "/role/{id}/"],
   name: "RoleResource",
@@ -31,4 +30,4 @@ export const RoleResource: ResourceObject = new ResourceObject({
   },
 
   required: ["title", "user", "app"],
-});
+};

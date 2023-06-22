@@ -19,13 +19,12 @@ export function generateResourceFile(
     let name = `${fileName}Resource`;
     file = "";
     if (model) {
-      file += ` import type { Models } from "../../types"
-                import { ResourceObject } from "../../manage/resource";
+      file += ` import type { Models, ResourceObject } from "../../types";
       `;
       name = `${model}Resource`;
       definitionsTowrite = `Models["${model}"]`;
     } else {
-      file += `import { ResourceObject } from "../../manage/resource"`;
+      file += `import type { ResourceObject } from "../../types";`;
     }
     
     file += `
@@ -35,7 +34,7 @@ export function generateResourceFile(
     `;
   
     file += `
-    export const ${fileName}Resource:ResourceObject = new ResourceObject({
+    export const ${fileName}Resource:ResourceObject = {
       baseUrl: "${choosenPath}",
       relatedurls: ${JSON.stringify(relatedPath)},
       name: "${name}",
@@ -47,6 +46,6 @@ export function generateResourceFile(
       required: ${JSON.stringify(resource.required)} ,`;
     }
     file += `
-    })`;
+    }`;
     return file;
   }
