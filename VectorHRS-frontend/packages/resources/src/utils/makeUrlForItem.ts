@@ -1,12 +1,13 @@
-import { ResourceOptions } from "../types";
+import { ResourceObject, ResourceOptions } from "../types";
 
 export function makeUrlForItem(
     itemId: number | string | undefined,
+    resource: ResourceObject,
     options?: ResourceOptions | false,
   ) {
-    if (!itemId) { return this.baseUrl }
+    if (!itemId) { return resource.baseUrl }
 
-    let url = this.baseUrl + itemId ;
+    let url = resource.baseUrl + itemId ;
 
     if (options && options.url) {
       url = options.url + itemId;

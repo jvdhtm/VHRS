@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
-import { dataLayerObj, RequestType } from "../connect";
+
 import type { ResourceKeys, ResourceObject, ResourceOptions } from "../types";
 import * as resources from "../servers/resources/index";
-import { makeUrlForItem } from "../utils/makeUrlForItem";
-import { ResourceCache } from "./DataCache";
 
 // Create a React Context for the resource item
 interface RItemContextValue {

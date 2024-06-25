@@ -1,16 +1,19 @@
-import { useRef } from 'react';
+import { useRef, MutableRefObject } from 'react';
 import { hid } from './hash';
 
-export const ResourceCache = () => {
-  const items = useRef({});
+interface ItemCache {
+  [key: string]: Map<string, MutableRefObject<any>>;
+}
 
-  const get = (resourceName, id) => {
-    if (!id && resourceName) {
-      id = hid(resourceName);
+export const ResourceCache = () => {
+  const items = useRef<ItemCache>({});
+
+  const get = (resourceName: string, id?: string): MutableRefObject<any> | undefined => {
+    if (!id) {
+      id = hid(resourceName).toString();
     }
 
     const resourceCache = items.current[resourceName];
-
     if (resourceCache) {
       const itemRef = resourceCache.get(id);
       if (itemRef) {
@@ -21,13 +24,17 @@ export const ResourceCache = () => {
     return set(resourceName, undefined, id);
   };
 
-  const set = (resourceName, item, id) => {
+  const set = (resourceName: string, item: any, id?: string): MutableRefObject<any> => {
     let resourceCache = items.current[resourceName];
     let itemRef;
 
     if (!resourceCache) {
       resourceCache = new Map();
       items.current[resourceName] = resourceCache;
+    }
+
+    if (!id ) {
+      id = hid(resourceName).toString();
     }
 
     itemRef = resourceCache.get(id);
@@ -42,7 +49,7 @@ export const ResourceCache = () => {
     return itemRef;
   };
 
-  const remove = (resourceName, id) => {
+  const remove = (resourceName: string, id: string): boolean => {
     const resourceCache = items.current[resourceName];
 
     if (resourceCache) {
