@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ResourceCache } from './DataCache';
 
 interface RListState {
@@ -16,7 +16,7 @@ interface RListState {
 }
 
 
-const useRListList = ({ resource, params, options, children }) => {
+const useRListList = ({ resource, params, options }) => {
   const [error, setError] = useState<any>(null);
   const [numberOfPendingRequests, setNumberOfPendingRequests] = useState(0);
   const isLoading = numberOfPendingRequests > 0;

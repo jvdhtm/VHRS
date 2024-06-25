@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { dataLayerObj, RequestType } from "../connect";
 import type { ResourceKeys, ResourceObject, ResourceOptions } from "../types";
 import * as resources from "../servers/resources/index";
@@ -73,11 +73,19 @@ export const rItemProvider = ({ resourceName, id, options }: RItemProvider) => {
   };
 
   const deleteItem = async (): Promise<boolean> => {
-    // Implement the deleteItem logic here
-    // You can use the provided options and other variables as needed
 
-    // Example implementation:
-    await fetch(`/api/resource/${id}`, { method: "DELETE" });
+    const request: RequestType = {
+      endpoint: makeUrlForItem(id, options),
+      name: "condition",
+      method: "delete",
+    };
+    try {
+       await dataLayerObj.requestApi(request);
+       resourceCache.remove(resourceName, id);
+    } catch (err: any) {
+      setError(err);
+    }
+  
     return true;
   };
 
