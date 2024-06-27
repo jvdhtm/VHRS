@@ -17,7 +17,7 @@
     "author": "jvdhtm@gmail.com",
     "devDependencies": {
         "@types/node": "^16.11.1",
-        "axios": "^0.24.0",
+        "axios": "^1.7.2",
         "openapi-typescript": "^4.0.1",
         "prettier": "^2.5.0",
         "tslib": "^2.3.1",

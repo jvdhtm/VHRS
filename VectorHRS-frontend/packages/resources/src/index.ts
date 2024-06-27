@@ -1,4 +1,7 @@
-export * as resources from "./types/index";
+export type { definitions } from "./servers/types/Models";
+export * as resources from "./servers/resources/index";
 export { makeUrlForItem } from "./utils/makeUrlForItem";
-export { ResourceCache } from "./manage/DataCache";
-export { dataLayerObj, RequestType } from "./connect";
+export { makeUrlForItems } from "./utils/makeUrlForItems";
+export { dataLayerObj } from "./connect";
+export type { RequestType } from "./connect";
+export type { ResourceKeys, ResourceObject, ResourceOptions } from "./types/index";

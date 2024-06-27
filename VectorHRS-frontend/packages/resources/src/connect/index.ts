@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosPromise, Method } from "axios";
-import hash from "../manage/hash";
+import hash from "../../../user-interfaces/src/context/hash";
 
 
 export const instance = axios.create();
