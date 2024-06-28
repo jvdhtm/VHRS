@@ -4,4 +4,4 @@ export { makeUrlForItem } from "./utils/makeUrlForItem";
 export { makeUrlForItems } from "./utils/makeUrlForItems";
 export { dataLayerObj } from "./connect";
 export type { RequestType } from "./connect";
-export type { ResourceKeys, ResourceObject, ResourceOptions } from "./types/index";
+export type { ResourceKeys, ResourceObject, ResourceOptions, AnnotatedResourceField } from "./types/index";

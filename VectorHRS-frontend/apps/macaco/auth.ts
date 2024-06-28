@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import crypto from "crypto";
 import { HttpException } from "./errorHandeling";
-import { Api, definitions } from "@vhrs/models";
+import { dataLayerObj, resources, makeUrlForItems, RequestType, type definitions } from "@vhrs/resources";
 
 export const logout = (req: any, res: Response) => {
   if (req.session) {
@@ -46,7 +46,15 @@ export const getToken = async (
     const headers = { Authorization: `Token ${token}` };
     if (email) {
       try {
-        const result = await Api.user_list(data, headers);
+        const request: RequestType = {
+          endpoint: makeUrlForItems(resources.UserResource),
+          name: "Auth",
+          method: "get",
+          headers,
+          data
+        };
+        
+        const result = await dataLayerObj.requestApi(request);
         if (result.data.results.length == 1)
           createSession(req, res, result.data.results[0]);
         else next(new HttpException(500, "Something has gone terribly wrong."));

@@ -144,8 +144,9 @@ export interface ResourceField {
 
   type DisplayResource =  (resourceData: any, ctx?:any) => any;
   export interface Display {
-    component?: DisplayResource;
-    props?: DisplayResource;
+    asComponent?: DisplayResource;
+    asFormInput?: DisplayResource;
+    asFilter?: DisplayResource;
   }
 
 

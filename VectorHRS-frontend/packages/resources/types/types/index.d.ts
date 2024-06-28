@@ -121,8 +121,9 @@ export interface Annotations<T> {
 }
 type DisplayResource = (resourceData: any, ctx?: any) => any;
 export interface Display {
-    component?: DisplayResource;
-    props?: DisplayResource;
+    asComponent?: DisplayResource;
+    asFormInput?: DisplayResource;
+    asFilter?: DisplayResource;
 }
 export type AnnotatedResourceFields<T> = {
     [P in keyof T]?: AnnotatedResourceField;
