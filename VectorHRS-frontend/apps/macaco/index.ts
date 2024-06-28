@@ -8,7 +8,7 @@ import session from "express-session";
 import { errorMiddleware } from "./errorHandeling";
 import url from "url";
 import { IGetUserAuthInfoRequest, initPassport } from "./passport";
-import { instance } from "@vhrs/models";
+import { instance } from "@vhrs/resources";
 
 dotenv.config({ path: path.resolve(__dirname, "./.env") });
 
@@ -66,7 +66,7 @@ export const  isLoggedIn = (req: IGetUserAuthInfoRequest, res: Response, next: N
     setToken();
   }
   else{
-    if(req.logout)  req.logout()
+    if(req.logout)  req.logout({},(err)=>console.log(err));
   }
   next();
 }

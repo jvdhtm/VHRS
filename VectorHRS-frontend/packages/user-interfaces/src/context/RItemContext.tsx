@@ -131,7 +131,7 @@ export const useRItem = (resource: ResourceObject, options?: ResourceOptions): U
   };
 
   return {
-    state,
+    data: state[resource.name],
     error,
     isLoading,
     fetchItem,

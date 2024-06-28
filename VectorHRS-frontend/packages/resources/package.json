@@ -11,7 +11,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf lib",
-    "build": "npm run clean && npm run build:cjs",
+    "build": "tsc && npm run clean && npm run build:cjs",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs"
   },
   "keywords": [
