@@ -142,11 +142,14 @@ export interface ResourceField {
     display?: Display;
   }
 
-  type DisplayResource =  (resourceData: any, ctx?:any) => any;
+type DisplayResource = (resourceData: any, ctx: { resource: ResourceObject, props:any}) =>  ReactNode;
   export interface Display {
-    asComponent?: DisplayResource;
+    asComponent: DisplayResource;
+    asForm?: DisplayResource;
     asFormInput?: DisplayResource;
     asFilter?: DisplayResource;
+    asList?: DisplayResource;
+    asTablecell?: DisplayResource;
   }
 
 

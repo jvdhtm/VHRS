@@ -119,11 +119,14 @@ export interface Annotations<T> {
     fields?: AnnotatedResourceFields<T>;
     display?: Display;
 }
-type DisplayResource = (resourceData: any, ctx?: any) => any;
+type DisplayResource = (resourceData: any, ctx: { resource: ResourceObject, props:any}) =>  ReactNode;
 export interface Display {
-    asComponent?: DisplayResource;
+    asComponent: DisplayResource;
+    asComponentPrivate: DisplayResource;
     asFormInput?: DisplayResource;
     asFilter?: DisplayResource;
+    asList?: DisplayResource;
+    asTablecell?: DisplayResource;
 }
 export type AnnotatedResourceFields<T> = {
     [P in keyof T]?: AnnotatedResourceField;

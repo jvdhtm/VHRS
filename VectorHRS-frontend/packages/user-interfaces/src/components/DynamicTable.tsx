@@ -6,7 +6,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useRItem } from "../context/RItemContext";
-import { ResourceObject } from "@vhrs/resources"; // Adjust path as needed
+import type { ResourceObject, AnnotatedResourceField } from "@vhrs/resources"; // Adjust path as needed
+import { Box } from "@mui/material";
 
 interface DynamicTableProps {
   resource: ResourceObject;
@@ -25,13 +26,22 @@ const DynamicTable: React.FC<DynamicTableProps> = ({
 
   const columnHelper = createColumnHelper<any>(); // Adjust type as per your data structure
 
+  // Function to get the cell component based on the display configuration
+  const getCellComponent = (field: AnnotatedResourceField, value: any) => {
+    const display = field.display?.asTablecell;
+    if (display) {
+        return display(value,{resource, props:{} });
+    }
+    return value; // Fallback to the raw value if no custom component is defined
+  };
+
   // Define columns based on includeHeader
   const columns = useMemo(() => {
     return includeHeader.map((field) => {
       const fields: any = resource.fields;
       return columnHelper.accessor(field, {
         header: fields[field].title || field,
-        cell: (info) => info.getValue(),
+        cell: (info) => getCellComponent(fields[field], info.getValue()),
         footer: (props) => props.column.id,
       });
     });
@@ -48,7 +58,7 @@ const DynamicTable: React.FC<DynamicTableProps> = ({
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="p-2">
+    <Box sx={{ p: 2 }}>
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -94,7 +104,7 @@ const DynamicTable: React.FC<DynamicTableProps> = ({
           ))}
         </tfoot>
       </table>
-    </div>
+    </Box>
   );
 };
 
