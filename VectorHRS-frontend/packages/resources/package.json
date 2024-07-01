@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Reactive resource managment library  for VectorHRS apps",
   "main": "src/index.ts",
-  "types": "types/index.d.ts",
+  "types": "src/index.ts",
   "exports": {
     "import": "./src/index.ts",
     "require": "./lib/cjs/index.js"
@@ -11,7 +11,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf lib",
-    "build": "tsc && npm run clean && npm run build:cjs",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs"
   },
   "keywords": [

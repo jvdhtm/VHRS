@@ -37,6 +37,16 @@ export const UserResource: ResourceObject = {
       minLength: 1,
     },
     is_active: { title: "Is active", type: "boolean" },
+    status: {
+      title: "Status",
+      type: "string",
+      enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+    },
+    created_date_time: {
+      title: "Created date time",
+      type: "string",
+      format: "date-time",
+    },
   },
 
   required: ["email", "passcode", "first_name", "last_name"],

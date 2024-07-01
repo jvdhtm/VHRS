@@ -10,12 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mui/icons-material": "^5.15.21",
     "@mui/material": "^5.15.20",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@tanstack/react-table": "^8.17.3",
     "@vhrs/resources": "1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-quill": "^2.0.0",
     "styled-components": "^6.1.11"
   },
   "devDependencies": {

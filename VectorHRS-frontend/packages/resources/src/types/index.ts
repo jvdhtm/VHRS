@@ -1,52 +1,47 @@
 import { definitions, paths } from "../servers/types/Models";
 import * as resources from "../servers/resources/index";
-
-
 export type ResourceKeys = keyof typeof resources;
 export type ModelTypes = definitions[keyof definitions];
 export type EndPointType = keyof paths;
 export type Models = definitions;
 export type urlTypes = paths;
-
 export interface ResourceParams {
-  ordering?: string[];
-  filters?: any;
-  page?: number;
-  limit?: number;
-  term?: string;
+    ordering?: string[];
+    filters?: any;
+    page?: number;
+    limit?: number;
+    term?: string;
 }
-
 import { ReactNode } from "react";
-
-export interface IcontextProvider{
-    children: ReactNode,
-    headers: any
+export interface IcontextProvider {
+    children: ReactNode;
+    headers: any;
 }
-
 export interface Stamp {
-  resourceName: string;
+    resourceName: string;
 }
-
 export interface ResourceList<T> {
-  next: null | number;
-  results: T[];
-  previous: null | number;
-  count: number;
+    next: null | number;
+    results: T[];
+    previous: null | number;
+    count: number;
 }
-
 export interface ResourceOptions {
-  url?: EndPointType;
-  params?: { name: string; value: string }[];
-  force?: boolean, // force the items to be fetch
-  headers?: any,
-  forceNoDedup?: boolean
-  fetchOnDeclare?: boolean,
-  forceFetchOnNavigation?: boolean,
-  forceFetchOnWinBlur?: boolean,
+    url?: EndPointType;
+    params?: {
+        name: string;
+        value: string;
+    }[];
+    force?: boolean;
+    headers?: any;
+    forceNoDedup?: boolean;
+    fetchOnDeclare?: boolean;
+    forceFetchOnNavigation?: boolean;
+    forceFetchOnWinBlur?: boolean;
 }
-
-export type ItemsCachedType = { [key: string]: Map<number | string, any> };
-
+export type ItemsCachedType = {
+    [key: string]: Map<number | string, any>;
+};
 export interface ResourceField {
     title?: string;
     type?: string;
@@ -62,44 +57,38 @@ export interface ResourceField {
     items?: ResourceField;
     'x-vhrs-relatedResource'?: string;
     uniqueItems?: boolean;
-    enum?:  string[];
+    enum?: string[];
     pattern?: string;
     default?: boolean | string | any;
     $ref?: string;
     fieldType?: string;
-  }
-
-  export const enum ErrorFunctionsEnum {
-    error404 = 'error404',
-    error403 = 'error403',
-    error400 = 'error400',
-    error402 = 'error402',
-    error401 = 'error401',
-    error500 = 'error500',
-  }
-  
-  export const enum successFunctionsEnum {
-    created = 'created',
-    deleted = 'deleted',
-    updated = 'updated',
-    get = 'get',
-    getList = 'getList',
-  }
-  
-  export declare type ErrorFunctions = {
+}
+export declare const enum ErrorFunctionsEnum {
+    error404 = "error404",
+    error403 = "error403",
+    error400 = "error400",
+    error402 = "error402",
+    error401 = "error401",
+    error500 = "error500"
+}
+export declare const enum successFunctionsEnum {
+    created = "created",
+    deleted = "deleted",
+    updated = "updated",
+    get = "get",
+    getList = "getList"
+}
+export declare type ErrorFunctions = {
     [key in ErrorFunctionsEnum]?: (err?: any) => void;
-  };
-  
-  export declare type SuccessFunctions = {
+};
+export declare type SuccessFunctions = {
     [key in successFunctionsEnum]?: (arg?: any) => void;
-  };
-
-  export type EnumItem = {
-    id: number | string,
-    text: string,
-  }
-
-  export interface AnnotatedResourceField extends ResourceField {
+};
+export type EnumItem = {
+    id: number | string;
+    text: string;
+};
+export interface AnnotatedResourceField extends ResourceField {
     multiple?: boolean;
     chip?: boolean;
     itemValue?: string;
@@ -107,26 +96,16 @@ export interface ResourceField {
     display?: Display;
     filterable?: boolean;
     sortable?: boolean;
-    serializeFunc?: (value:any, field: AnnotatedResourceField )=> any;
-  }
-
-  export interface ResourceMetaType {
+    serializeFunc?: (value: any, field: AnnotatedResourceField) => any;
+}
+export interface ResourceMetaType {
     resourceNameSingular: string;
     resourceNamePlural: string;
     resourceNameSingularDefinite: string;
     resourceNamePluralDefinite: string;
-  }
-
-  export type Colors =
-  | 'primary'
-  | 'secondary'
-  | 'default'
-  | 'info'
-  | 'success'
-  | 'error'
-  | 'warning';
-
-  export interface ActionPropType {
+}
+export type Colors = 'primary' | 'secondary' | 'default' | 'info' | 'success' | 'error' | 'warning';
+export interface ActionPropType {
     handler?: (ctx: any, item?: any | undefined) => void;
     route?: (item?: any) => string;
     name: string;
@@ -134,33 +113,31 @@ export interface ResourceField {
     icon?: string;
     color?: Colors | string;
     className?: string;
-  }
-
-  export interface Annotations<T> {
+}
+export interface Annotations<T> {
     actions?: ActionPropType[];
     fields?: AnnotatedResourceFields<T>;
     display?: Display;
-  }
-
-type DisplayResource = (resourceData: any, ctx: { resource: ResourceObject, props:any}) =>  ReactNode;
-  export interface Display {
-    asComponent: DisplayResource;
+}
+export type ResourceContext = { resource: ResourceObject, props:any}
+export type DisplayResource = (resourceData: any, ctx: ResourceContext) =>  ReactNode;
+type UserIds = number | string
+export interface Display {
+    asComponent?: DisplayResource;
     asForm?: DisplayResource;
     asFormInput?: DisplayResource;
     asFilter?: DisplayResource;
     asList?: DisplayResource;
     asTablecell?: DisplayResource;
-  }
-
-
-  export type AnnotatedResourceFields<T> = {
+    admissions?: 'DEFAULT_ADMIN' | 'GENERAL' | UserIds[]
+}
+export type AnnotatedResourceFields<T> = {
     [P in keyof T]?: AnnotatedResourceField;
-  };
-  export interface ResourceFields {
+};
+export interface ResourceFields {
     [key: string]: ResourceField;
-  }
-
-  export interface ResourceObject{
+}
+export interface ResourceObject {
     baseUrl: string;
     fields: ResourceFields | AnnotatedResourceFields<ModelTypes>;
     name: string;
@@ -172,5 +149,6 @@ type DisplayResource = (resourceData: any, ctx: { resource: ResourceObject, prop
     baseFilter?: any;
     display?: Display;
     meta?: ResourceMetaType;
-    bootstrap?: boolean
+    bootstrap?: boolean;
 }
+export {};

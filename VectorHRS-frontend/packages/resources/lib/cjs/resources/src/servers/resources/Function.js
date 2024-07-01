@@ -15,7 +15,7 @@ exports.FunctionResource = {
         description: {
             title: "Description",
             type: "string",
-            maxLength: 100,
+            maxLength: 800,
             "x-nullable": true,
         },
         shape: {
