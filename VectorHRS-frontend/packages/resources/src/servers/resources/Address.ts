@@ -1,58 +1,58 @@
-import type { Models, ResourceObject } from "../../types";
+import type { Models, ResourceObject } from '../../types';
 
-const mockType = (): Models["Address"] | undefined => {
+const mockType = (): Models['Address'] | undefined => {
   return;
 };
 
 export const AddressResource: ResourceObject = {
-  baseUrl: "/address/",
-  relatedurls: ["/address/", "/address/{id}/"],
-  name: "AddressResource",
+  baseUrl: '/address/',
+  relatedurls: ['/address/', '/address/{id}/'],
+  name: 'AddressResource',
   type: mockType,
   fields: {
-    id: { title: "ID", type: "integer", readOnly: true },
+    id: { title: 'ID', type: 'integer', readOnly: true },
     person: {
-      title: "Person",
-      type: "integer",
-      "x-vhrs-relatedResource": "people.Person",
+      title: 'Person',
+      type: 'integer',
+      'x-vhrs-relatedResource': 'people.Person',
     },
     description: {
-      title: "Description",
-      type: "string",
+      title: 'Description',
+      type: 'string',
       maxLength: 100,
-      "x-nullable": true,
+      'x-nullable': true,
     },
     address1: {
-      title: "Address1",
-      type: "string",
+      title: 'Address1',
+      type: 'string',
       maxLength: 100,
-      "x-nullable": true,
+      'x-nullable': true,
     },
     address2: {
-      title: "Address2",
-      type: "string",
+      title: 'Address2',
+      type: 'string',
       maxLength: 100,
-      "x-nullable": true,
+      'x-nullable': true,
     },
-    zip: { title: "Zip", type: "string", maxLength: 10, "x-nullable": true },
-    city: { title: "City", type: "string", maxLength: 100, "x-nullable": true },
+    zip: { title: 'Zip', type: 'string', maxLength: 10, 'x-nullable': true },
+    city: { title: 'City', type: 'string', maxLength: 100, 'x-nullable': true },
     country: {
-      title: "Country",
-      type: "string",
+      title: 'Country',
+      type: 'string',
       maxLength: 100,
-      "x-nullable": true,
+      'x-nullable': true,
     },
     status: {
-      title: "Status",
-      type: "string",
-      enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+      title: 'Status',
+      type: 'string',
+      enum: ['activated', 'deactivated', 'pending', 'confirmed', 'archived'],
     },
     created_date_time: {
-      title: "Created date time",
-      type: "string",
-      format: "date-time",
+      title: 'Created date time',
+      type: 'string',
+      format: 'date-time',
     },
   },
 
-  required: ["person", "status"],
+  required: ['person', 'status'],
 };

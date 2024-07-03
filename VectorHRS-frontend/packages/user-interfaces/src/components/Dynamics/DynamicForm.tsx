@@ -49,6 +49,7 @@ export const DynamicForm: FC<DynamicFormProps> = ({ resource, includeFields, mod
   };
 
   const renderField = (field: AnnotatedResourceField, fieldName: string, value: any) => {
+
     if (field.enum) {
       return (
         <FormControl fullWidth variant="outlined" key={fieldName}>
@@ -102,7 +103,7 @@ export const DynamicForm: FC<DynamicFormProps> = ({ resource, includeFields, mod
       );
     }
 
-    if (field.type === "string" && field.maxLength && field.maxLength >= 1000) {
+    if (field.type === "richtext" ) {
       return (
         <FormControl fullWidth key={fieldName}>
           <Typography variant="h6">{field.title || fieldName}</Typography>
@@ -133,14 +134,16 @@ export const DynamicForm: FC<DynamicFormProps> = ({ resource, includeFields, mod
 
   const renderFields = () => {
     const filteredFields = includeFields.filter((fieldName) => {
+
       const field = fields[fieldName];
       if (!field) return false;
-      if (field.admissions === 'PUBLIC') return true;
-      if (field.admissions === 'GENERAL' && isLoggedIn ) return true;
+      if (field.display.admissions === 'GENERAL') return true;
+      if (field.display.admissions === 'DEFAULT_ADMIN' && isLoggedIn ) return true;
       // Add additional logic if needed for UserIds[]
       return false;
     });
 
+    
     switch (mode) {
       case 'two-col':
         return (

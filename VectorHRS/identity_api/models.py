@@ -1,13 +1,14 @@
 from django.db import models
+from base.models import BaseModel
 
 
-class User(models.Model):
+class User(BaseModel):
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
         unique=True,
     )
-    passcode = models.CharField(max_length=1024)
+    password = models.CharField(max_length=1024)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     is_active = models.BooleanField(default=True)
@@ -15,7 +16,7 @@ class User(models.Model):
     def __str__(self):
        return self.email 
 
-class App(models.Model): 
+class App(BaseModel): 
    title = models.CharField(
         max_length=30,
         unique=True,
@@ -25,7 +26,7 @@ class App(models.Model):
    def __str__(self):
        return self.title 
 
-class Role(models.Model):
+class Role(BaseModel):
     
     PERMISSION_CHOICES = (
         ('R', 'r'),

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, ReactNode, useCallback, useMemo } from 'react';
+import { createContext, useContext, useReducer, ReactNode, useCallback } from 'react';
 import { hid } from './hash';
 
 interface ItemCache {

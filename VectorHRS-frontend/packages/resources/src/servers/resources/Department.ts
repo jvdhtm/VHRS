@@ -1,45 +1,45 @@
-import type { Models, ResourceObject } from "../../types";
+import type { Models, ResourceObject } from '../../types';
 
-const mockType = (): Models["Department"] | undefined => {
+const mockType = (): Models['Department'] | undefined => {
   return;
 };
 
 export const DepartmentResource: ResourceObject = {
-  baseUrl: "/department/",
-  relatedurls: ["/department/", "/department/{id}/"],
-  name: "DepartmentResource",
+  baseUrl: '/department/',
+  relatedurls: ['/department/', '/department/{id}/'],
+  name: 'DepartmentResource',
   type: mockType,
   fields: {
-    id: { title: "ID", type: "integer", readOnly: true },
-    name: { title: "Name", type: "string", maxLength: 100, "x-nullable": true },
+    id: { title: 'ID', type: 'integer', readOnly: true },
+    name: { title: 'Name', type: 'string', maxLength: 100, 'x-nullable': true },
     parentId: {
-      title: "ParentId",
-      type: "integer",
-      "x-vhrs-relatedResource": "staff_api.Department",
-      "x-nullable": true,
+      title: 'ParentId',
+      type: 'integer',
+      'x-vhrs-relatedResource': 'staff_api.Department',
+      'x-nullable': true,
     },
     description: {
-      title: "Description",
-      type: "string",
+      title: 'Description',
+      type: 'string',
       maxLength: 100,
-      "x-nullable": true,
+      'x-nullable': true,
     },
     shape: {
-      title: "Shape",
-      type: "string",
-      enum: ["circle", "square", "rectangle", "triangle"],
+      title: 'Shape',
+      type: 'string',
+      enum: ['circle', 'square', 'rectangle', 'triangle'],
     },
     status: {
-      title: "Status",
-      type: "string",
-      enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+      title: 'Status',
+      type: 'string',
+      enum: ['activated', 'deactivated', 'pending', 'confirmed', 'archived'],
     },
     created_date_time: {
-      title: "Created date time",
-      type: "string",
-      format: "date-time",
+      title: 'Created date time',
+      type: 'string',
+      format: 'date-time',
     },
   },
 
-  required: ["shape", "status"],
+  required: ['shape', 'status'],
 };

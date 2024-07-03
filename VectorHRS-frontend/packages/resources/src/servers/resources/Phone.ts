@@ -1,44 +1,44 @@
-import type { Models, ResourceObject } from "../../types";
+import type { Models, ResourceObject } from '../../types';
 
-const mockType = (): Models["Phone"] | undefined => {
+const mockType = (): Models['Phone'] | undefined => {
   return;
 };
 
 export const PhoneResource: ResourceObject = {
-  baseUrl: "/phone/",
-  relatedurls: ["/phone/", "/phone/{id}/"],
-  name: "PhoneResource",
+  baseUrl: '/phone/',
+  relatedurls: ['/phone/', '/phone/{id}/'],
+  name: 'PhoneResource',
   type: mockType,
   fields: {
-    id: { title: "ID", type: "integer", readOnly: true },
+    id: { title: 'ID', type: 'integer', readOnly: true },
     person: {
-      title: "Person",
-      type: "integer",
-      "x-vhrs-relatedResource": "people.Person",
+      title: 'Person',
+      type: 'integer',
+      'x-vhrs-relatedResource': 'people.Person',
     },
     description: {
-      title: "Description",
-      type: "string",
+      title: 'Description',
+      type: 'string',
       maxLength: 100,
-      "x-nullable": true,
+      'x-nullable': true,
     },
     phoneNumber: {
-      title: "PhoneNumber",
-      type: "string",
+      title: 'PhoneNumber',
+      type: 'string',
       maxLength: 100,
-      "x-nullable": true,
+      'x-nullable': true,
     },
     status: {
-      title: "Status",
-      type: "string",
-      enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+      title: 'Status',
+      type: 'string',
+      enum: ['activated', 'deactivated', 'pending', 'confirmed', 'archived'],
     },
     created_date_time: {
-      title: "Created date time",
-      type: "string",
-      format: "date-time",
+      title: 'Created date time',
+      type: 'string',
+      format: 'date-time',
     },
   },
 
-  required: ["person", "status"],
+  required: ['person', 'status'],
 };

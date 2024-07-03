@@ -1,5 +1,6 @@
 from pydoc import describe
 from django.db import models
+from base.models import BaseModel
 from utils.db_fields import SanitizedHTMLField
 from django.utils.timezone import now
 from people.models import Person
@@ -7,24 +8,20 @@ from base.constants import STATUS_CHOICES
 # Create your models here.
 
     
-class NewsLetter(models.Model):
+class NewsLetter(BaseModel):
     name = models.CharField(max_length=100, null=True, blank=True)
-    description = models.CharField(max_length=500, null=True, blank=True)
+    description = models.CharField(max_length=1000, null=True, blank=True)
     imageUrl = models.ImageField(upload_to='blah', null=True)
     html = SanitizedHTMLField(blank=True, null=True, help_text="")
     autor = models.ForeignKey(Person, on_delete=models.CASCADE)
-    status = models.CharField(max_length=1000, choices=STATUS_CHOICES)
-    created_date_time = models.DateTimeField(default=now)
-
-class NewsRelatedLink(models.Model):
+    
+class NewsRelatedLink(BaseModel):
     news =  models.ForeignKey(NewsLetter, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, null=True, blank=True)
-    created_date_time = models.DateTimeField(default=now)
     
-class Comment(models.Model):
+    
+class Comment(BaseModel):
     name = models.CharField(max_length=100, null=True, blank=True)
     html = SanitizedHTMLField(blank=True, null=True, help_text="")
     autor = models.ForeignKey(Person, on_delete=models.CASCADE)
-    status = models.CharField(max_length=1000, choices=STATUS_CHOICES)
-    created_date_time = models.DateTimeField(default=now)
     news =  models.ForeignKey(NewsLetter, on_delete=models.CASCADE)

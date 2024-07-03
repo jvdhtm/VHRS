@@ -41,8 +41,8 @@ export const getToken = async (
   } else {
     const token = res.app.get("api_token");
     const email = req.body.email;
-    const passcode = req.body.password;
-    const data = { query: { email, passcode } };
+    const password = req.body.password;
+    const data = { query: { email, password } };
     const headers = { Authorization: `Token ${token}` };
     if (email) {
       try {

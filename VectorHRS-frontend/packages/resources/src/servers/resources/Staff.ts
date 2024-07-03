@@ -1,47 +1,47 @@
-import type { Models, ResourceObject } from "../../types";
+import type { Models, ResourceObject } from '../../types';
 
-const mockType = (): Models["Staff"] | undefined => {
+const mockType = (): Models['Staff'] | undefined => {
   return;
 };
 
 export const StaffResource: ResourceObject = {
-  baseUrl: "/staff/",
-  relatedurls: ["/staff/", "/staff/{id}/"],
-  name: "StaffResource",
+  baseUrl: '/staff/',
+  relatedurls: ['/staff/', '/staff/{id}/'],
+  name: 'StaffResource',
   type: mockType,
   fields: {
-    id: { title: "ID", type: "integer", readOnly: true },
+    id: { title: 'ID', type: 'integer', readOnly: true },
     department: {
-      title: "Department",
-      type: "integer",
-      "x-vhrs-relatedResource": "staff_api.Department",
+      title: 'Department',
+      type: 'integer',
+      'x-vhrs-relatedResource': 'staff_api.Department',
     },
     condition: {
-      title: "Condition",
-      type: "integer",
-      "x-vhrs-relatedResource": "staff_api.Condition",
+      title: 'Condition',
+      type: 'integer',
+      'x-vhrs-relatedResource': 'staff_api.Condition',
     },
     title: {
-      title: "Title",
-      type: "string",
+      title: 'Title',
+      type: 'string',
       maxLength: 100,
-      "x-nullable": true,
+      'x-nullable': true,
     },
     bossId: {
-      title: "BossId",
-      type: "integer",
-      "x-vhrs-relatedResource": "staff_api.Staff",
-      "x-nullable": true,
+      title: 'BossId',
+      type: 'integer',
+      'x-vhrs-relatedResource': 'staff_api.Staff',
+      'x-nullable': true,
     },
     who: {
-      title: "Who",
-      type: "integer",
-      "x-vhrs-relatedResource": "people.Person",
+      title: 'Who',
+      type: 'integer',
+      'x-vhrs-relatedResource': 'people.Person',
     },
-    x: { title: "X", type: "number" },
-    y: { title: "Y", type: "number" },
-    level: { title: "Level", type: "integer" },
+    x: { title: 'X', type: 'number' },
+    y: { title: 'Y', type: 'number' },
+    level: { title: 'Level', type: 'integer' },
   },
 
-  required: ["department", "condition", "who", "x", "y", "level"],
+  required: ['department', 'condition', 'who', 'x', 'y', 'level'],
 };

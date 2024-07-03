@@ -1,44 +1,44 @@
-import type { Models, ResourceObject } from "../../types";
+import type { Models, ResourceObject } from '../../types';
 
-const mockType = (): Models["StaffLog"] | undefined => {
+const mockType = (): Models['StaffLog'] | undefined => {
   return;
 };
 
 export const StaffLogResource: ResourceObject = {
-  baseUrl: "/stafflog/",
-  relatedurls: ["/stafflog/", "/stafflog/{id}/"],
-  name: "StaffLogResource",
+  baseUrl: '/stafflog/',
+  relatedurls: ['/stafflog/', '/stafflog/{id}/'],
+  name: 'StaffLogResource',
   type: mockType,
   fields: {
-    id: { title: "ID", type: "integer", readOnly: true },
+    id: { title: 'ID', type: 'integer', readOnly: true },
     description: {
-      title: "Description",
-      type: "string",
+      title: 'Description',
+      type: 'string',
       maxLength: 100,
-      "x-nullable": true,
+      'x-nullable': true,
     },
     stage: {
-      title: "Stage",
-      type: "integer",
-      "x-vhrs-relatedResource": "people.PersonStage",
+      title: 'Stage',
+      type: 'integer',
+      'x-vhrs-relatedResource': 'people.PersonStage',
     },
     with_person: {
-      title: "With person",
-      type: "integer",
-      "x-vhrs-relatedResource": "people.Person",
-      "x-nullable": true,
+      title: 'With person',
+      type: 'integer',
+      'x-vhrs-relatedResource': 'people.Person',
+      'x-nullable': true,
     },
     status: {
-      title: "Status",
-      type: "string",
-      enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+      title: 'Status',
+      type: 'string',
+      enum: ['activated', 'deactivated', 'pending', 'confirmed', 'archived'],
     },
     created_date_time: {
-      title: "Created date time",
-      type: "string",
-      format: "date-time",
+      title: 'Created date time',
+      type: 'string',
+      format: 'date-time',
     },
   },
 
-  required: ["stage", "status"],
+  required: ['stage', 'status'],
 };

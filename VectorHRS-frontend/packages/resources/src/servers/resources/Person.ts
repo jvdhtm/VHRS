@@ -1,46 +1,46 @@
-import type { Models, ResourceObject } from "../../types";
+import type { Models, ResourceObject } from '../../types';
 
-const mockType = (): Models["Person"] | undefined => {
+const mockType = (): Models['Person'] | undefined => {
   return;
 };
 
 export const PersonResource: ResourceObject = {
-  baseUrl: "/person/",
-  relatedurls: ["/person/", "/person/{id}/"],
-  name: "PersonResource",
+  baseUrl: '/person/',
+  relatedurls: ['/person/', '/person/{id}/'],
+  name: 'PersonResource',
   type: mockType,
   fields: {
-    id: { title: "ID", type: "integer", readOnly: true },
+    id: { title: 'ID', type: 'integer', readOnly: true },
     firstname: {
-      title: "Firstname",
-      type: "string",
+      title: 'Firstname',
+      type: 'string',
       maxLength: 100,
-      "x-nullable": true,
+      'x-nullable': true,
     },
     lastname: {
-      title: "Lastname",
-      type: "string",
+      title: 'Lastname',
+      type: 'string',
       maxLength: 100,
-      "x-nullable": true,
+      'x-nullable': true,
     },
-    age: { title: "Age", type: "integer" },
+    age: { title: 'Age', type: 'integer' },
     nationalId: {
-      title: "NationalId",
-      type: "string",
+      title: 'NationalId',
+      type: 'string',
       maxLength: 100,
-      "x-nullable": true,
+      'x-nullable': true,
     },
     status: {
-      title: "Status",
-      type: "string",
-      enum: ["activated", "deactivated", "pending", "confirmed", "archived"],
+      title: 'Status',
+      type: 'string',
+      enum: ['activated', 'deactivated', 'pending', 'confirmed', 'archived'],
     },
     created_date_time: {
-      title: "Created date time",
-      type: "string",
-      format: "date-time",
+      title: 'Created date time',
+      type: 'string',
+      format: 'date-time',
     },
   },
 
-  required: ["age", "status"],
+  required: ['age', 'status'],
 };

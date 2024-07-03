@@ -3,38 +3,47 @@ import {
   ResourceObject,
   Annotations,
   ResourceKeys,
-} from "../types"; // Adjust the import path according to your project structure
+  AnnotatedResourceFields,
+} from "../types"; // Adjust the import path and types according to your project structure
 
-/**
- * Utility function to annotate a resource with new annotations
- * @param resourceKey - The key of the resource to be annotated
- * @param annotations - The new annotations to merge into the resource
- * @returns - The annotated resource object
- */
 export const annotateResource = (
   resourceKey: ResourceKeys,
   annotations: Annotations<any>
 ): ResourceObject => {
-  // Retrieve the existing resource
-  const resource: ResourceObject = resources[resourceKey];
+  // Ensure resourceKey is a valid key for resources
+  if (!(resourceKey in resources)) {
+    throw new Error(`Resource key '${resourceKey}' not found in resources.`);
+  }
 
-  // Merge the new annotations into the existing resource
-  const annotatedResource: ResourceObject = {
-    ...resource,
-    ...annotations,
-    fields: {
-      ...resource.fields,
-      ...annotations.fields,
-    },
-    display: {
+  // Retrieve the existing resource
+  const resource = resources[resourceKey] as ResourceObject;
+
+  // Mutate the existing resource directly with the new annotations
+  if (annotations.fields) {
+    const existingFields = resource.fields as AnnotatedResourceFields<any>; // Adjust type as per your project
+    for (const fieldName in annotations.fields) {
+      if (Object.prototype.hasOwnProperty.call(annotations.fields, fieldName)) {
+        existingFields[fieldName] = {
+          ...existingFields[fieldName],
+          ...annotations.fields[fieldName],
+        };
+      }
+    }
+  }
+
+  if (annotations.display) {
+    resource.display = {
       ...resource.display,
       ...annotations.display,
-    },
-    actions: [
-      ...(resource.actions || []),
-      ...(annotations.actions || []),
-    ],
-  };
+    };
+  }
 
-  return annotatedResource;
+  if (annotations.actions) {
+    resource.actions = [
+      ...(resource.actions || []),
+      ...annotations.actions,
+    ];
+  }
+
+  return resource;
 };

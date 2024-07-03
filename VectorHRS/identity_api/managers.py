@@ -3,10 +3,10 @@ from .models import App, Role, User
 
 
 class CustomUserManager:
-    def create_user(self, email, passcode, first_name,last_name,is_active):
+    def create_user(self, email, password, first_name,last_name,is_active):
         if not email:
             raise ValueError(_('The Email must be set'))
-        newUser = User.objects.update_or_create(email, passcode, first_name,last_name,is_active)
+        newUser = User.objects.update_or_create(email, password, first_name,last_name,is_active)
         return newUser
         
     def register_app(self, title, pathUrl):

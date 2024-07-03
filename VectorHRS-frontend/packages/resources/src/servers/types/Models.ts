@@ -838,8 +838,8 @@ export interface definitions {
      * Format: email
      */
     email: string;
-    /** Passcode */
-    passcode: string;
+    /** Password */
+    password: string;
     /** First name */
     first_name: string;
     /** Last name */
@@ -2933,7 +2933,7 @@ export interface operations {
       query: {
         id?: number;
         email?: string;
-        passcode?: string;
+        password?: string;
         first_name?: string;
         last_name?: string;
         is_active?: string;

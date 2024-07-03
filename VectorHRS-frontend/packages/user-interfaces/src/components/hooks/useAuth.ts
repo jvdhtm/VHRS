@@ -1,7 +1,7 @@
 // useAuth.ts
 import { useRItem } from "./useRItem";
 import { useEffect, useState } from 'react';
-import { LoginResource } from "../../annotates/login";
+import { resources } from "@vhrs/resources";
 
 interface UseAuthHook {
   isLoggedIn: boolean;
@@ -12,20 +12,21 @@ interface UseAuthHook {
 }
 
 export const useAuth = (): UseAuthHook => {
-  const { fetchItem, saveItem, deleteItem, data, isLoading, error } = useRItem(LoginResource);
+  const { fetchItem, saveItem, deleteItem, data, isLoading, error } = useRItem(resources.UserResource);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        await fetchItem(false, "status");
-        setIsLoggedIn(!!data?.status?.isLoggedIn);
+        const response = await fetchItem(false);
+        setIsLoggedIn(!!response?.status?.isLoggedIn);
       } catch (err) {
         setIsLoggedIn(false);
       }
     };
-    checkAuthStatus();
-  }, [data, fetchItem]);
+
+    //checkAuthStatus();
+  }, [fetchItem]); // Only run once on mount
 
   const login = async (username: string, password: string): Promise<void> => {
     try {
