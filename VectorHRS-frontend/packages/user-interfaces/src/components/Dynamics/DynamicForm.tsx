@@ -1,25 +1,34 @@
-// DynamicForm.tsx
-
 import React, { useState } from 'react';
-import { TextField, Button, Grid, Typography, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Grid,
+  Typography,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Box,
+} from '@mui/material';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import type { ResourceObject, AnnotatedResourceField } from "@vhrs/resources";
+import type { ResourceObject, AnnotatedResourceField, ActionPropType } from "@vhrs/resources";
 import { SelectChangeEvent } from '@mui/material';
 import { useAuth } from '../hooks/useAuth';
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 interface DynamicFormProps {
-  resource: ResourceObject;
+  resource?: ResourceObject;
   includeFields: string[];
   mode?: 'normal' | 'two-col' | 'three-col'; // New mode prop
 }
 
 export const DynamicForm = ({ resource, includeFields, mode }: DynamicFormProps) => {
-
-
   const { isLoggedIn } = useAuth();
-
   const [formData, setFormData] = useState<any>({});
+
+  if(!resource) return null; 
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -41,15 +50,14 @@ export const DynamicForm = ({ resource, includeFields, mode }: DynamicFormProps)
   };
 
   const getDisplayComponent = (field: AnnotatedResourceField, value: any) => {
-    const display = field.display?.asFormInput;
+    const display = field.display?.components?.asFormInput;
     if (display) {
-      return display(value, { resource, props: {} });
+      return display(value);
     }
     return null;
   };
 
   const renderField = (field: AnnotatedResourceField, fieldName: string, value: any) => {
-
     if (field.enum) {
       return (
         <FormControl fullWidth variant="outlined" key={fieldName}>
@@ -130,20 +138,54 @@ export const DynamicForm = ({ resource, includeFields, mode }: DynamicFormProps)
     );
   };
 
+  const renderActions = (actions: ActionPropType[] = []) => {
+    if (actions.length === 0) {
+      // If no actions are provided, create default save and cancel buttons with icons
+      return (
+        <>
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<SaveIcon />}
+            onClick={handleSubmit}
+          >
+            Save
+          </Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            startIcon={<CancelIcon />}
+          >
+            Cancel
+          </Button>
+        </>
+      );
+    }
+
+    return actions.map((action, index) => (
+      <Button
+        key={index}
+        variant="contained"
+        color={action.color as any}
+        onClick={() => action.handler?.(formData)}
+      >
+        {action.title}
+      </Button>
+    ));
+  };
+
   const fields: any = resource.fields;
 
   const renderFields = () => {
     const filteredFields = includeFields.filter((fieldName) => {
-
       const field = fields[fieldName];
-      if (!field) return false;
+      if (!field.display) return true;
       if (field.display.admissions === 'GENERAL') return true;
       if (field.display.admissions === 'DEFAULT_ADMIN' && isLoggedIn ) return true;
       // Add additional logic if needed for UserIds[]
       return false;
     });
 
-    
     switch (mode) {
       case 'two-col':
         return (
@@ -212,15 +254,15 @@ export const DynamicForm = ({ resource, includeFields, mode }: DynamicFormProps)
 
   return (
     <>
-    <form onSubmit={handleSubmit}>
-      <Typography variant="h5" gutterBottom>{resource.name} Form</Typography>
-      <Grid container spacing={2}>
-        {renderFields()}
-      </Grid>
-      <Button variant="contained" color="primary" type="submit">
-        Submit
-      </Button>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <Typography variant="h5" gutterBottom>{resource.name} Form</Typography>
+        <Grid container spacing={2}>
+          {renderFields()}
+        </Grid>
+        <Grid container justifyContent="flex-end" spacing={2}>
+          {renderActions(resource.actions)}
+        </Grid>
+      </form>
     </>
   );
 };

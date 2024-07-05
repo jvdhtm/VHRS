@@ -56,6 +56,7 @@ export interface paths {
     };
   };
   "/auth/login/": {
+    /** User login endpoint */
     post: operations["auth_login"];
     parameters: {};
   };
@@ -471,22 +472,21 @@ export interface definitions {
     /** PathUrl */
     pathUrl: string;
   };
-  User: {
+  Login: {
     /** ID */
     id?: number;
     /**
-     * Email address
+     * Email
      * Format: email
      */
     email: string;
     /** Password */
     password: string;
-    /** First name */
-    first_name: string;
-    /** Last name */
-    last_name: string;
-    /** Is active */
-    is_active?: boolean;
+    /**
+     * Timestamp
+     * Format: date-time
+     */
+    timestamp?: string;
   };
   Comment: {
     /** ID */
@@ -851,6 +851,23 @@ export interface definitions {
      */
     created_date_time?: string;
   };
+  User: {
+    /** ID */
+    id?: number;
+    /**
+     * Email address
+     * Format: email
+     */
+    email: string;
+    /** Password */
+    password: string;
+    /** First name */
+    first_name: string;
+    /** Last name */
+    last_name: string;
+    /** Is active */
+    is_active?: boolean;
+  };
 }
 
 export interface operations {
@@ -1127,16 +1144,21 @@ export interface operations {
       };
     };
   };
+  /** User login endpoint */
   auth_login: {
     parameters: {
       body: {
-        data: definitions["User"];
+        data: definitions["Login"];
       };
     };
     responses: {
       /** Login successful */
       201: {
-        schema: definitions["User"];
+        schema: {
+          /** @description Response message */
+          message?: string;
+          user?: definitions["User"];
+        };
       };
     };
   };

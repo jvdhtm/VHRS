@@ -4,7 +4,9 @@ import {
   Annotations,
   ResourceKeys,
   AnnotatedResourceFields,
-} from "../types"; // Adjust the import path and types according to your project structure
+  Display,
+  ResourceContext,
+} from "../types"; // Adjust imports as per your project structure
 
 export const annotateResource = (
   resourceKey: ResourceKeys,
@@ -23,18 +25,67 @@ export const annotateResource = (
     const existingFields = resource.fields as AnnotatedResourceFields<any>; // Adjust type as per your project
     for (const fieldName in annotations.fields) {
       if (Object.prototype.hasOwnProperty.call(annotations.fields, fieldName)) {
-        existingFields[fieldName] = {
-          ...existingFields[fieldName],
-          ...annotations.fields[fieldName],
-        };
+        const field = annotations.fields[fieldName];
+        if (field?.display) {
+          const { components, ctx, admissions } = field.display;
+
+          // Update components if provided
+          const componentsWithContext: any = {};
+          if (components) {
+            for (const methodName in components) {
+              if (Object.prototype.hasOwnProperty.call(components, methodName)) {
+                const method: Function = components[methodName as keyof Display["components"]];
+                if (method) {
+                  componentsWithContext[methodName as keyof Display["components"]] = (data: any, context: ResourceContext | undefined) => {
+                    if (context) return method(data, context);
+                    else return method(data, { resource, props: {} });
+                  };
+                }
+              }
+            }
+          }
+
+          if( existingFields[fieldName]){
+            existingFields[fieldName].display = {
+              ...existingFields[fieldName].display,
+              components: {
+                ...componentsWithContext
+              },
+              ctx: ctx || { resource, props: {} },
+              admissions: admissions,
+            };
+          }
+        }
       }
     }
   }
 
   if (annotations.display) {
+    const { components, ctx, admissions } = annotations.display;
+
+    // Update components if provided
+    const componentsWithContext: any = {};
+    if (components) {
+      for (const methodName in components) {
+        if (Object.prototype.hasOwnProperty.call(components, methodName)) {
+          const method: Function = components[methodName as keyof Display["components"]];
+          if (method) {
+            componentsWithContext[methodName as keyof Display["components"]] = (data: any, context: ResourceContext | undefined) => {
+              if (context) return method(data, context);
+              else return method(data, { resource, props: {} });
+            };
+          }
+        }
+      }
+    }
+
     resource.display = {
       ...resource.display,
-      ...annotations.display,
+      components: {
+        ...componentsWithContext
+      },
+      ctx: ctx || { resource, props: {} },
+      admissions,
     };
   }
 

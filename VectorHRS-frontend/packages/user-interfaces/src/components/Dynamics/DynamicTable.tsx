@@ -28,9 +28,9 @@ const DynamicTable: React.FC<DynamicTableProps> = ({
 
   // Function to get the cell component based on the display configuration
   const getCellComponent = (field: AnnotatedResourceField, value: any) => {
-    const display = field.display?.asTablecell;
+    const display = field.display?.components?.asTableCell;
     if (display) {
-        return display(value,{resource, props:{} });
+        return display(value);
     }
     return value; // Fallback to the raw value if no custom component is defined
   };

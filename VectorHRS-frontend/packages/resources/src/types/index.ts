@@ -104,14 +104,14 @@ export interface ResourceMetaType {
     resourceNameSingularDefinite: string;
     resourceNamePluralDefinite: string;
 }
-export type Colors = 'primary' | 'secondary' | 'default' | 'info' | 'success' | 'error' | 'warning';
+export type Colors = "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning";
 export interface ActionPropType {
     handler?: (ctx: any, item?: any | undefined) => void;
     route?: (item?: any) => string;
     name: string;
     title: string;
-    icon?: string;
-    color?: Colors | string;
+    icon?: ReactNode;
+    color?: Colors ;
     className?: string;
 }
 export interface Annotations<T> {
@@ -120,15 +120,18 @@ export interface Annotations<T> {
     display?: Display;
 }
 export type ResourceContext = { resource: ResourceObject, props:any}
-export type DisplayResource = (resourceData: any, ctx: ResourceContext) =>  ReactNode;
+export type DisplayResource = (data?: any, ctx?:ResourceContext) =>  ReactNode;
 type UserIds = number | string
 export interface Display {
-    asComponent?: DisplayResource;
-    asForm?: DisplayResource;
-    asFormInput?: DisplayResource;
-    asFilter?: DisplayResource;
-    asList?: DisplayResource;
-    asTablecell?: DisplayResource;
+    components? :{
+        asComponent?: DisplayResource;
+        asForm?: DisplayResource;
+        asFormInput?: DisplayResource;
+        asFilter?: DisplayResource;
+        asList?: DisplayResource;
+        asTableCell?: DisplayResource;
+    }
+    ctx?: ResourceContext;
     admissions?: 'DEFAULT_ADMIN' | 'GENERAL' | UserIds[]
 }
 export type AnnotatedResourceFields<T> = {

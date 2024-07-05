@@ -41,3 +41,9 @@ class Role(BaseModel):
     
     def __str__(self):
        return self.title 
+   
+class Login(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f"Login for {self.user.email} at {self.timestamp}"

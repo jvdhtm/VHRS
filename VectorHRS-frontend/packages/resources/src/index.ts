@@ -14,4 +14,5 @@ export type {
   AnnotatedResourceFields,
   DisplayResource,
   ResourceContext,
+  ActionPropType,
 } from "./types/index";

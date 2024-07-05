@@ -11,7 +11,7 @@ interface DynamicComponentProps {
 
 const DynamicComponent = ({ resource, id,  props }: DynamicComponentProps) => {
   const displayType: Display | undefined = resource.display;
-  const display = displayType?.asComponent;
+  const display = displayType?.components?.asComponent;
   const { data, isLoading, error, fetchItem } = useRItem(resource);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const DynamicComponent = ({ resource, id,  props }: DynamicComponentProps) => {
   if (error) return <div>Error: {error.message}</div>;
 
   if (display) {
-    return display(data,{resource, props});
+    return display(data);
   }
 
   return null; // Or some fallback UI if the component is not found
