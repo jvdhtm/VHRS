@@ -1,6 +1,6 @@
 // DynamicForm.tsx
 
-import React, { FC, ReactElement, useState } from 'react';
+import React, { useState } from 'react';
 import { TextField, Button, Grid, Typography, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -14,7 +14,7 @@ interface DynamicFormProps {
   mode?: 'normal' | 'two-col' | 'three-col'; // New mode prop
 }
 
-export const DynamicForm: FC<DynamicFormProps> = ({ resource, includeFields, mode }): ReactElement => {
+export const DynamicForm = ({ resource, includeFields, mode }: DynamicFormProps) => {
 
 
   const { isLoggedIn } = useAuth();
@@ -211,6 +211,7 @@ export const DynamicForm: FC<DynamicFormProps> = ({ resource, includeFields, mod
   };
 
   return (
+    <>
     <form onSubmit={handleSubmit}>
       <Typography variant="h5" gutterBottom>{resource.name} Form</Typography>
       <Grid container spacing={2}>
@@ -220,5 +221,6 @@ export const DynamicForm: FC<DynamicFormProps> = ({ resource, includeFields, mod
         Submit
       </Button>
     </form>
+    </>
   );
 };

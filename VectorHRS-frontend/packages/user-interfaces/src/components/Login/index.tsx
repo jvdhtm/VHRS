@@ -1,11 +1,11 @@
-// Login.tsx
-import React from 'react';
 import { Box } from '@mui/material';
 import { DynamicForm } from '../Dynamics/DynamicForm';
 import { resources } from "@vhrs/resources";
 
-const Login: React.FC = () => {
+const Login = () => {
   const includeFields = ['email', 'password'];
+
+  console.log(resources.UserResource);
 
   return (
     <Box 

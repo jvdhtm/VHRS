@@ -1,6 +1,7 @@
 import { AddressResource } from './Address';
 import { answersResource } from './answers';
 import { AppResource } from './App';
+import { UserResource } from './User';
 import { CommentResource } from './Comment';
 import { ConditionResource } from './Condition';
 import { DepartmentResource } from './Department';
@@ -21,11 +22,11 @@ import { StaffCommentResource } from './StaffComment';
 import { StaffFunctionsResource } from './StaffFunctions';
 import { StaffLogResource } from './StaffLog';
 import { StaffStageResource } from './StaffStage';
-import { UserResource } from './User';
 export {
   AddressResource,
   answersResource,
   AppResource,
+  UserResource,
   CommentResource,
   ConditionResource,
   DepartmentResource,
@@ -46,5 +47,4 @@ export {
   StaffFunctionsResource,
   StaffLogResource,
   StaffStageResource,
-  UserResource,
 };

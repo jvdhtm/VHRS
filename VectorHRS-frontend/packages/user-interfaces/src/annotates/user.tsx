@@ -25,7 +25,7 @@ const newAnnotations: AnnotatedResourceFields<definitions['User']> = {
       admissions: 'GENERAL', // Marking email as GENERAL
     },
   },
-  passcode: {
+  password: {
     display: {
       asComponent: (data: any, ctx: ResourceContext) => <span>{data}</span>,
       asTablecell: (data: any, ctx: ResourceContext) => <TableCell>{data}</TableCell>,

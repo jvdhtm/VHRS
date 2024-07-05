@@ -55,6 +55,10 @@ export interface paths {
       };
     };
   };
+  "/auth/login/": {
+    post: operations["auth_login"];
+    parameters: {};
+  };
   "/comment/": {
     get: operations["comment_list"];
     post: operations["comment_create"];
@@ -467,6 +471,23 @@ export interface definitions {
     /** PathUrl */
     pathUrl: string;
   };
+  User: {
+    /** ID */
+    id?: number;
+    /**
+     * Email address
+     * Format: email
+     */
+    email: string;
+    /** Password */
+    password: string;
+    /** First name */
+    first_name: string;
+    /** Last name */
+    last_name: string;
+    /** Is active */
+    is_active?: boolean;
+  };
   Comment: {
     /** ID */
     id?: number;
@@ -830,23 +851,6 @@ export interface definitions {
      */
     created_date_time?: string;
   };
-  User: {
-    /** ID */
-    id?: number;
-    /**
-     * Email address
-     * Format: email
-     */
-    email: string;
-    /** Password */
-    password: string;
-    /** First name */
-    first_name: string;
-    /** Last name */
-    last_name: string;
-    /** Is active */
-    is_active?: boolean;
-  };
 }
 
 export interface operations {
@@ -1120,6 +1124,19 @@ export interface operations {
     responses: {
       200: {
         schema: definitions["App"];
+      };
+    };
+  };
+  auth_login: {
+    parameters: {
+      body: {
+        data: definitions["User"];
+      };
+    };
+    responses: {
+      /** Login successful */
+      201: {
+        schema: definitions["User"];
       };
     };
   };

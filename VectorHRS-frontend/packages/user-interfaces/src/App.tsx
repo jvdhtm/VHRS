@@ -7,7 +7,7 @@ import  './annotates/';
 import Login from './components/Login';
 
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <BrowserRouter>
       <Routes>

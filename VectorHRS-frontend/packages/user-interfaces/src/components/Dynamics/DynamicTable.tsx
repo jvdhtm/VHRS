@@ -45,7 +45,7 @@ const DynamicTable: React.FC<DynamicTableProps> = ({
         footer: (props) => props.column.id,
       });
     });
-  }, [columnHelper, includeHeader, resource]);
+  }, [columnHelper, getCellComponent, includeHeader, resource.fields]);
 
   // Initialize react-table hooks
   const table = useReactTable({
