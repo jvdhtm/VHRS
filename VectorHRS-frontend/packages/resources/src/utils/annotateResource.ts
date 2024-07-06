@@ -45,15 +45,25 @@ export const annotateResource = (
             }
           }
 
-          if( existingFields[fieldName]){
-            existingFields[fieldName].display = {
-              ...existingFields[fieldName].display,
+
+          let tempField = existingFields[fieldName];
+          if(existingFields && typeof tempField !== 'undefined'){
+
+            if(!tempField.display) tempField.display = {};
+            let oldDisplay = tempField.display;
+
+            tempField.display = {
+              ...(oldDisplay),
               components: {
                 ...componentsWithContext
               },
               ctx: ctx || { resource, props: {} },
               admissions: admissions,
             };
+
+            existingFields[fieldName] = field;
+
+
           }
         }
       }

@@ -57,7 +57,7 @@ class LoginViewSet(ViewSet):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             user = serializer.validated_data['user']
-            return  Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return  Response(user)
+        return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
     
     

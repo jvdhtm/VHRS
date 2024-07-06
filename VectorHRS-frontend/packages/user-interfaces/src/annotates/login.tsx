@@ -7,7 +7,7 @@ import LockIcon from '@mui/icons-material/Lock'; // Import Material-UI Lock icon
 import ForgotPasswordIcon from '@mui/icons-material/HelpOutline'; 
 
 const asForm: DisplayResource = (_data?: any, ctx?: ResourceContext) => (
-  <DynamicForm resource={ctx?.resource} includeFields={['email', 'password']} />
+  <DynamicForm resource={ctx?.resource} includeFields={['email', 'password']} mode={'two-col'} />
 );
 
 const newAnnotations: AnnotatedResourceFields<definitions['Login']> = {

@@ -1,33 +1,33 @@
 import passport from "passport";
 import passportLocal from "passport-local";
-import passportFacebook from "passport-facebook";
-import { Api } from "@vhrs/models";
-import { NextFunction, Request, Response } from "express";
+import { dataLayerObj, resources, makeUrlForItems, RequestType, type definitions } from "@vhrs/resources";
 /**
  * Sign in using Email and Password.
  */
- export interface IGetUserAuthInfoRequest extends Request {
-    isAuthenticated: () => boolean // or any other type
-  }
-
 
  export const  initPassport = (app:any) =>{
 
     const LocalStrategy = passportLocal.Strategy;
-    const FacebookStrategy = passportFacebook.Strategy;
     
     // passport local strategy for local-login, local refers to this app
     passport.use('local', new LocalStrategy(
-         async (username, password, done) => {
+         async (email, password, done) => {
             const token = app.get("api_token");
-            const email = username;
-            const passcode = password;
-            const data = { query: { email, passcode } };
+            const data = { query: { email, password } };
             const headers = { Authorization: `Token ${token}` };
-            const result = await Api.user_list(data, headers,"");
-            const users = result.data.results;
-            if (username === users[0].email && password === users[0].passcode) {
-                return done(null, users[0]);
+
+            const request: RequestType = {
+                endpoint: makeUrlForItems(resources.LoginResource),
+                name: "Auth",
+                method: "post",
+                headers,
+                data
+              };
+
+            const result = await dataLayerObj.requestApi(request);
+            const user = result.data.result;
+            if (user === user.email && password === user.password) {
+                return done(null, user);
             } else {
                 return done(null, false, {"message": "User not found."});
             }
@@ -38,11 +38,18 @@ import { NextFunction, Request, Response } from "express";
         done(null, user);
     });
     
-    passport.deserializeUser(async (user:any, done) => {
+    passport.deserializeUser(async (user: definitions['User'], done) => {
         const token = app.get("api_token");
         const headers = { Authorization: `Token ${token}` };
-        const result = await Api.user_read(user.id,headers,"");
-        done(null, result.data);
+        const request: RequestType = {
+            endpoint: `${resources.UserResource.baseUrl}/${user.id}`,
+            name: "Auth",
+            method: "get",
+            headers
+          };
+
+        const result = await dataLayerObj.requestApi(request);
+        done(null, result.data.user);
     });
 
     app.use(passport.initialize());

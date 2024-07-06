@@ -142,7 +142,7 @@ export const DynamicForm = ({ resource, includeFields, mode }: DynamicFormProps)
     if (actions.length === 0) {
       // If no actions are provided, create default save and cancel buttons with icons
       return (
-        <>
+        <Box sx={{ display: 'flex', gap: 2 }}>
           <Button
             variant="contained"
             color="primary"
@@ -158,20 +158,26 @@ export const DynamicForm = ({ resource, includeFields, mode }: DynamicFormProps)
           >
             Cancel
           </Button>
-        </>
+        </Box>
       );
     }
-
-    return actions.map((action, index) => (
-      <Button
-        key={index}
-        variant="contained"
-        color={action.color as any}
-        onClick={() => action.handler?.(formData)}
-      >
-        {action.title}
-      </Button>
-    ));
+  
+    return (
+      <Box sx={{ display: 'flex', gap: 2 }}>
+        {actions.map((action) => (
+          <Button
+            key={action.name}
+            variant="contained"
+            color={action.color}
+            className={action.className}
+            onClick={() => action.handler && action.handler({})}
+            startIcon={action.icon}
+          >
+            {action.title}
+          </Button>
+        ))}
+      </Box>
+    );
   };
 
   const fields: any = resource.fields;
@@ -253,16 +259,18 @@ export const DynamicForm = ({ resource, includeFields, mode }: DynamicFormProps)
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <Typography variant="h5" gutterBottom>{resource.name} Form</Typography>
-        <Grid container spacing={2}>
-          {renderFields()}
-        </Grid>
+    <form onSubmit={handleSubmit}>
+      <Typography variant="h5" gutterBottom>
+        {resource.name} Form
+      </Typography>
+      <Grid container spacing={2}>
+        {renderFields()}
+      </Grid>
+      <Box sx={{ pt: 4 }}> {/* Add padding here */}
         <Grid container justifyContent="flex-end" spacing={2}>
           {renderActions(resource.actions)}
         </Grid>
-      </form>
-    </>
+      </Box>
+    </form>
   );
 };

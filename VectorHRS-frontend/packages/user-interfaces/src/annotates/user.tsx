@@ -27,7 +27,7 @@ annotateResource("UserResource", {
   fields: newAnnotations,
   display: {
     components:{
-      asList: (data: any) => <div>{data}</div>,
+      asList: (data: any) => <li>{data}</li>,
       asForm,
     },
     admissions: 'DEFAULT_ADMIN', // Pass the DEFAULT_ADMIN setting from newAnnotations

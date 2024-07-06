@@ -1,37 +1,27 @@
 {
   "name": "@vhrs/resources",
   "version": "1.0.0",
-  "description": "Reactive resource managment library  for VectorHRS apps",
-  "main": "src/index.ts",
+  "main": "lib/cjs/index.js",
   "types": "src/index.ts",
   "exports": {
     "import": "./src/index.ts",
     "require": "./lib/cjs/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rimraf lib",
     "build": "npm run clean && npm run build:esm && npm run build:cjs",
     "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir lib/cjs"
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "clean": "rimraf lib"
   },
-  "keywords": [
-    "vue",
-    "vue",
-    "composition",
-    "api"
-  ],
-  "author": "jvdhtm@gmail.com",
   "dependencies": {
     "axios": "^1.7.2",
     "universal-cookie": "^4.0.4",
-    "typescript": "^4.1.2",
+    "typescript": "^4.4.4",
     "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "^16.11.1",
-    "typescript": "^4.4.4",
     "@types/uuid": "^8.3.4"
   }
 }

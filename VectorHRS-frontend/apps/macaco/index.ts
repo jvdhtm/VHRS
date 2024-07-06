@@ -1,21 +1,19 @@
-import express from "express";
-import { NextFunction,  Response } from "express";
+import express, { Request, Response, NextFunction } from "express";
 import * as dotenv from "dotenv";
 import * as path from "path";
 import * as bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import session from "express-session";
-import { errorMiddleware } from "./errorHandeling";
+import { errorMiddleware } from "./errorHandling";
 import url from "url";
-import { IGetUserAuthInfoRequest, initPassport } from "./passport";
+import { initPassport } from "./passport";
 import { instance } from "@vhrs/resources";
 
 dotenv.config({ path: path.resolve(__dirname, "./.env") });
 
-
 const app: express.Express = express();
 
-app.get("/api/health-check", (req, res) => {
+app.get("/api/health-check", (req: Request, res: Response) => {
   res.json({ status: "ok" });
 });
 
@@ -40,8 +38,7 @@ app.set(
     process.env.CLIENT_APP_PATH ? process.env.CLIENT_APP_PATH : ""
   )
 );
-app.set("login_url", "/login");
-app.set("login_auth", "/auth");
+app.set("login_auth", "/auth/login/");
 
 app.set(
   "client_index_path",
@@ -58,26 +55,23 @@ function setToken(){
   );
 }
 
-
-export const  isLoggedIn = (req: IGetUserAuthInfoRequest, res: Response, next: NextFunction) => {
-  if (req.isAuthenticated()){
+export const isLoggedIn = (req: Request & { isAuthenticated?: () => boolean; logout?: (options: any, callback: (err: Error) => void) => void }, res: Response, next: NextFunction) => {
+  if (req.isAuthenticated && req.isAuthenticated()) {
     setToken();
-  } else if(req.url == res.app.get("login_url") || req.url == res.app.get("login_auth") ){
+  } else if (req.url == res.app.get("login_auth")) {
     setToken();
-  }
-  else{
-    if(req.logout)  req.logout({},(err)=>console.log(err));
+  } else {
+    if (req.logout) req.logout({}, (err: Error) => console.log(err));
   }
   next();
-}
+};
 
 app.set(
   "api_url",
   process.env.API_URL ? process.env.API_URL : ""
 );
 
-
-instance.defaults.baseURL =  app.get("api_url")
+instance.defaults.baseURL = app.get("api_url");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -86,37 +80,37 @@ app.get('/static/*', express.static(app.get("client_app_path")));
 
 const passport = initPassport(app);
 app.use(isLoggedIn);
-app.post(app.get("login_auth"), function(req, res, next) {
+app.post(app.get("login_auth"), function(req: Request, res: Response, next: NextFunction) {
   // generate the authenticate method and pass the req/res
-  passport.authenticate("local", function(err, user, info){
-
-    if (err) { return next(err); console.log(err) }
-    if (!user) { return res.redirect('/'); }
+  passport.authenticate("local", function(err: Error, user: any, info: any) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    if (!user) {
+      return res.redirect('/');
+    }
     // req / res held in closure
-    //TODO:if req8uest doesnt have the cookie also try again
-    if (req.isAuthenticated()) {
+    // TODO: if request doesn't have the cookie also try again
+    if (req.isAuthenticated && req.isAuthenticated()) {
       res.send(req.user);
     } else {
-      req.logIn(user, function(err) {
-        if (err) { return next(err); }
+      req.logIn(user, function(err: Error) {
+        if (err) {
+          return next(err);
+        }
         return res.send(user);
       });
     }
-
-  })(req,res,next); 
-
+  })(req, res, next);
 });
 
-
-const apiProxy = async ( req: any,
-  res: any, next:NextFunction) =>{
-
-  const path = url.parse(req.baseUrl).path?.replace('/api','');
+const apiProxy = async (req: Request, res: Response, next: NextFunction) => {
+  const path = url.parse(req.baseUrl).path?.replace('/api', '');
   const data = req.body;
   const headers = { Authorization: `Token ${app.get("api_token")}` };
-  const method = req.method;
-  if(path)
-  {
+  const method = req.method as "GET" | "POST" | "PUT" | "DELETE"; // or any other methods you expect
+  if (path) {
     const result = await instance({
       method: method,
       url: path,
@@ -126,16 +120,13 @@ const apiProxy = async ( req: any,
 
     return res.send(JSON.stringify(result.data));
   }
-  return
-
+  return;
 }
 
 app.use("/api/*", apiProxy);
-app.get("*", (_req: any, res: any, next) => {
+app.get("*", (_req: Request, res: Response, next: NextFunction) => {
   res.sendFile(app.get("client_index_path"));
 });
-
-
 
 app.listen(app.get("port"), function () {
   console.log(`Express server start at port ${app.get("port")}`);
