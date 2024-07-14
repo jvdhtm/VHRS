@@ -10,10 +10,11 @@ interface UseRItemHook {
   fetchItem: (force?: boolean, id?: string) => Promise<any>;
   fetchItems: (force?: boolean) => Promise<any>;
   saveItem: (id: string, newData: any) => Promise<any>;
-  deleteItem: (id: string) => Promise<boolean>;
+  createItem: ( newData: any) => Promise<any>;
+  deleteItem: (id: string, force?: boolean) => Promise<boolean>;
 }
 
-export const useRItem = (resource: ResourceObject, options?: ResourceOptions): UseRItemHook => {
+export const useRItem = (resource?: ResourceObject, options?: ResourceOptions): UseRItemHook => {
   const [error, setError] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { get, state } = useDataCacheState();
@@ -22,7 +23,11 @@ export const useRItem = (resource: ResourceObject, options?: ResourceOptions): U
   const fetchItem = async (force = false, id?: string): Promise<any> => {
     setIsLoading(true);
     try {
-      if (force) {
+      if (!resource) {
+        throw new Error('Resource must be provided.');
+      }
+
+      if (force || !get(resource.name, id)) {
         const request: RequestType = {
           endpoint: makeUrlForItem(id, resource, options),
           name: "fetchItem",
@@ -32,23 +37,12 @@ export const useRItem = (resource: ResourceObject, options?: ResourceOptions): U
         set(resource.name, fetchedData.result, id);
         return fetchedData;
       } else {
-        const cachedData = get(resource.name, id);
-        if (cachedData) {
-          setIsLoading(false);
-          return cachedData;
-        } else {
-          const request: RequestType = {
-            endpoint: makeUrlForItem(id, resource, options),
-            name: "fetchItem",
-            method: "get",
-          };
-          const fetchedData = await dataLayerObj.requestApi(request);
-          set(resource.name, fetchedData.result, id);
-          return fetchedData;
-        }
+        setIsLoading(false);
+        return get(resource.name, id);
       }
     } catch (err: any) {
       setError(err);
+      throw err;
     } finally {
       setIsLoading(false);
     }
@@ -57,7 +51,11 @@ export const useRItem = (resource: ResourceObject, options?: ResourceOptions): U
   const fetchItems = async (force = false): Promise<any> => {
     setIsLoading(true);
     try {
-      if (force) {
+      if (!resource) {
+        throw new Error('Resource must be provided.');
+      }
+
+      if (force || !get(resource.name)) {
         const request: RequestType = {
           endpoint: makeUrlForItems(resource, options),
           name: "fetchItems",
@@ -67,23 +65,12 @@ export const useRItem = (resource: ResourceObject, options?: ResourceOptions): U
         set(resource.name, fetchedData.result);
         return fetchedData;
       } else {
-        const cachedData = get(resource.name);
-        if (cachedData) {
-          setIsLoading(false);
-          return cachedData;
-        } else {
-          const request: RequestType = {
-            endpoint: makeUrlForItems(resource, options),
-            name: "fetchItems",
-            method: "get",
-          };
-          const fetchedData = await dataLayerObj.requestApi(request);
-          set(resource.name, fetchedData.result);
-          return fetchedData;
-        }
+        setIsLoading(false);
+        return get(resource.name);
       }
     } catch (err: any) {
       setError(err);
+      throw err;
     } finally {
       setIsLoading(false);
     }
@@ -92,12 +79,17 @@ export const useRItem = (resource: ResourceObject, options?: ResourceOptions): U
   const saveItem = async (id: string, newData: any): Promise<any> => {
     setIsLoading(true);
     try {
+      if (!resource) {
+        throw new Error('Resource must be provided.');
+      }
+
       const request: RequestType = {
         endpoint: makeUrlForItem(id, resource, options),
         name: "saveItem",
         method: "put", // or "post" depending on your API
         data: newData,
       };
+
       const savedData = await dataLayerObj.requestApi(request);
       set(resource.name, savedData.result, id);
       setError(null);
@@ -113,11 +105,16 @@ export const useRItem = (resource: ResourceObject, options?: ResourceOptions): U
   const deleteItem = async (id: string): Promise<boolean> => {
     setIsLoading(true);
     try {
+      if (!resource) {
+        throw new Error('Resource must be provided.');
+      }
+
       const request: RequestType = {
         endpoint: makeUrlForItem(id, resource, options),
         name: "deleteItem",
         method: "delete",
       };
+
       await dataLayerObj.requestApi(request);
       remove(resource.name, id);
       setError(null);
@@ -130,13 +127,41 @@ export const useRItem = (resource: ResourceObject, options?: ResourceOptions): U
     }
   };
 
+  const createItem = async (newData: any): Promise<any> => {
+    setIsLoading(true);
+    try {
+      if (!resource) {
+        throw new Error('Resource must be provided.');
+      }
+      console.log(resource);
+      console.log( makeUrlForItems(resource, options));
+      const request: RequestType = {
+        endpoint: makeUrlForItems(resource, options),
+        name: "createItem",
+        method: "post",
+        data: newData,
+      };
+
+      const createdData = await dataLayerObj.requestApi(request);
+      set(resource.name, createdData.result);
+      setError(null);
+      return createdData;
+    } catch (err: any) {
+      setError(err);
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return {
-    data: state[resource.name],
+    data: resource ? state[resource.name] : null,
     error,
     isLoading,
     fetchItem,
     fetchItems,
     saveItem,
+    createItem,
     deleteItem,
   };
 };

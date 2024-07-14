@@ -1,13 +1,14 @@
-import { ActionPropType, annotateResource, ResourceContext} from "@vhrs/resources";
+import { Action, annotateResource, ResourceContext} from "@vhrs/resources";
 import { definitions } from "@vhrs/resources";
 import { AnnotatedResourceFields, DisplayResource } from "@vhrs/resources";
 import { DynamicForm } from '../components/Dynamics/DynamicForm'; // Assuming DynamicForm is correctly implemented
-import { commonAnnotations } from "./common";
+import { commonAnnotations, defaultActions } from "./common";
 import LockIcon from '@mui/icons-material/Lock'; // Import Material-UI Lock icon
 import ForgotPasswordIcon from '@mui/icons-material/HelpOutline'; 
+import { useAuth, UseAuthHook } from "../context/AuthContext";
 
 const asForm: DisplayResource = (_data?: any, ctx?: ResourceContext) => (
-  <DynamicForm resource={ctx?.resource} includeFields={['email', 'password']} mode={'two-col'} />
+  <DynamicForm resource={ctx?.resource} includeFields={['email', 'password']}  />
 );
 
 const newAnnotations: AnnotatedResourceFields<definitions['Login']> = {
@@ -24,26 +25,30 @@ const newAnnotations: AnnotatedResourceFields<definitions['Login']> = {
   ...commonAnnotations
 };
 
-const loginActions: ActionPropType[] = [
-  {
-    name: 'login',
-    title: 'Login',
-    handler: (ctx: any) => {
-      // Handle login logic here
-      console.log('Logging in...');
-    },
-    icon: <LockIcon />, 
-    color: 'primary',
-    className: 'login-button', 
-  },
-  {
+const loginActions: Action[] = [
+  ...defaultActions,
+  ()=>({
     name: 'forgotPassword',
     title: 'Forgot Password',
     route: () => '/forgot-password', 
     icon: <ForgotPasswordIcon />, 
     color: 'warning', 
     className: 'forgot-password-button', 
-  },
+  }),
+  (data?: any, ctx?: ResourceContext)=>({
+    name: 'login',
+    title: 'Login',
+    useHandler: () => {
+      if(ctx?.auth)
+      {
+        const { login } = ctx?.auth as UseAuthHook; 
+        login(data.username, data.password); 
+      }
+
+    },
+    route: () => `${data.id}`,
+    icon: <LockIcon />, 
+  }),
 ];
 
 annotateResource("LoginResource", {

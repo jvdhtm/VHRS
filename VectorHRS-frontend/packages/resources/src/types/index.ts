@@ -105,21 +105,26 @@ export interface ResourceMetaType {
     resourceNamePluralDefinite: string;
 }
 export type Colors = "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning";
+export type ResourceContext = { resource: ResourceObject, props:any, auth?:any}
 export interface ActionPropType {
-    handler?: (ctx: any, item?: any | undefined) => void;
-    route?: (item?: any) => string;
+    useHandler?: () => void;
+    route?: () => string;
     name: string;
     title: string;
     icon?: ReactNode;
     color?: Colors ;
     className?: string;
+    disable?: boolean,
+    hidden?: boolean;
+    admissions?: 'DEFAULT_ADMIN' | 'GENERAL' | UserIds[]
 }
+
+export type Action = (data?: any, ctx?:ResourceContext) =>  ActionPropType;
 export interface Annotations<T> {
-    actions?: ActionPropType[];
+    actions?: Action[];
     fields?: AnnotatedResourceFields<T>;
     display?: Display;
 }
-export type ResourceContext = { resource: ResourceObject, props:any}
 export type DisplayResource = (data?: any, ctx?:ResourceContext) =>  ReactNode;
 type UserIds = number | string
 export interface Display {
@@ -133,6 +138,8 @@ export interface Display {
     }
     ctx?: ResourceContext;
     admissions?: 'DEFAULT_ADMIN' | 'GENERAL' | UserIds[]
+    disable?: boolean,
+    hidden?: boolean;
 }
 export type AnnotatedResourceFields<T> = {
     [P in keyof T]?: AnnotatedResourceField;
@@ -148,7 +155,7 @@ export interface ResourceObject {
     type?: ModelTypes | any;
     errors?: ErrorFunctions;
     required?: string[];
-    actions?: ActionPropType[];
+    actions?: Action[];
     baseFilter?: any;
     display?: Display;
     meta?: ResourceMetaType;

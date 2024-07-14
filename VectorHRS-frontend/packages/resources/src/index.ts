@@ -15,4 +15,5 @@ export type {
   DisplayResource,
   ResourceContext,
   ActionPropType,
+  Action,
 } from "./types/index";

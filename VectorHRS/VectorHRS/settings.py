@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-t@2a7x7fbdcstln+3^5$-)!hqo(tr6l5m#t93@lt+x0il!s7in
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']  # Adjust to your production domain(s)
 
 
 # SWAGGER (Openapi 2.0)
@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     'identity_api.apps.IdentityApiConfig',
     'questions.apps.QuestionsConfig',
     'api_doc.apps.ApiDocConfig',
-    
     'staff_api.apps.StaffApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -73,7 +72,6 @@ INSTALLED_APPS = [
     'django_extensions',
     'ckeditor',
     'bleach',
-    'api_generators_vhrs',
     'django_filters',
     'modelcluster',
     'taggit',
@@ -132,8 +130,15 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'your_database_name',     # Replace with your actual database name
+        'USER': 'your_database_user',     # Replace with your actual database user
+        'PASSWORD': 'your_database_password',  # Replace with your actual database password
+        'HOST': 'mysql_database',        # Docker container name as the host
+        'PORT': '3306',                  # MySQL default port
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        },
     }
 }
 

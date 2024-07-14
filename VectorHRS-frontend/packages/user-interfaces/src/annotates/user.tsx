@@ -17,7 +17,7 @@ const newAnnotations: AnnotatedResourceFields<definitions['User']> = {
       asComponent: (data?: any) => <span>{data ? 'Active' : 'Inactive'}</span>,
       asTableCell: (data?: any) => <TableCell>{data ? 'Active' : 'Inactive'}</TableCell>,
       },
-      admissions: 'DEFAULT_ADMIN', // Marking is_active as GENERAL
+      admissions: 'DEFAULT_ADMIN', // Marking is_active as DEFAULT_ADMIN
     },
   },
   ...commonAnnotations

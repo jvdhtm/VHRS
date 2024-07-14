@@ -1,0 +1,37 @@
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
+
+# Set environment variables
+ENV PYTHONUNBUFFERED 1
+
+# Install system dependencies
+RUN apt-get update \
+    && apt-get install -y \
+       default-libmysqlclient-dev \
+       mariadb-client \
+       gcc \
+       python3-dev \
+       libmariadb-dev
+
+# Set the working directory in the container
+WORKDIR /VectorHRS
+
+# Copy the requirements file into the container at /VectorHRS
+COPY requirements.txt /VectorHRS/
+
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --upgrade pip \
+    && pip install -r requirements.txt
+
+# Copy the rest of the application code into the container at /VectorHRS
+COPY . /VectorHRS/
+
+# Copy the create_superuser.py script into the container at /VectorHRS
+COPY create_superuser.py /VectorHRS/
+
+# Expose port 8000 to the outside world
+EXPOSE 8000
+
+# Command to run the Django server
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

@@ -4,9 +4,8 @@ import {
   Annotations,
   ResourceKeys,
   AnnotatedResourceFields,
-  Display,
-  ResourceContext,
 } from "../types"; // Adjust imports as per your project structure
+import { addContext, addContextToActions } from "./addContext"; // Adjust import path as needed
 
 export const annotateResource = (
   resourceKey: ResourceKeys,
@@ -29,27 +28,11 @@ export const annotateResource = (
         if (field?.display) {
           const { components, ctx, admissions } = field.display;
 
-          // Update components if provided
-          const componentsWithContext: any = {};
-          if (components) {
-            for (const methodName in components) {
-              if (Object.prototype.hasOwnProperty.call(components, methodName)) {
-                const method: Function = components[methodName as keyof Display["components"]];
-                if (method) {
-                  componentsWithContext[methodName as keyof Display["components"]] = (data: any, context: ResourceContext | undefined) => {
-                    if (context) return method(data, context);
-                    else return method(data, { resource, props: {} });
-                  };
-                }
-              }
-            }
-          }
-
+          const componentsWithContext = addContext(components, resource);
 
           let tempField = existingFields[fieldName];
-          if(existingFields && typeof tempField !== 'undefined'){
-
-            if(!tempField.display) tempField.display = {};
+          if (existingFields && typeof tempField !== 'undefined') {
+            if (!tempField.display) tempField.display = {};
             let oldDisplay = tempField.display;
 
             tempField.display = {
@@ -62,8 +45,6 @@ export const annotateResource = (
             };
 
             existingFields[fieldName] = field;
-
-
           }
         }
       }
@@ -73,21 +54,7 @@ export const annotateResource = (
   if (annotations.display) {
     const { components, ctx, admissions } = annotations.display;
 
-    // Update components if provided
-    const componentsWithContext: any = {};
-    if (components) {
-      for (const methodName in components) {
-        if (Object.prototype.hasOwnProperty.call(components, methodName)) {
-          const method: Function = components[methodName as keyof Display["components"]];
-          if (method) {
-            componentsWithContext[methodName as keyof Display["components"]] = (data: any, context: ResourceContext | undefined) => {
-              if (context) return method(data, context);
-              else return method(data, { resource, props: {} });
-            };
-          }
-        }
-      }
-    }
+    const componentsWithContext = addContext(components, resource);
 
     resource.display = {
       ...resource.display,
@@ -100,10 +67,7 @@ export const annotateResource = (
   }
 
   if (annotations.actions) {
-    resource.actions = [
-      ...(resource.actions || []),
-      ...annotations.actions,
-    ];
+    resource.actions = addContextToActions(annotations.actions, resource);
   }
 
   return resource;

@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosPromise, Method } from "axios";
-import hash from "../../../user-interfaces/src/context/hash";
+import hash from "./hash";
 
 
 export const instance = axios.create();
@@ -71,14 +71,14 @@ class DataLayer {
 
     async requestApi( options:RequestType ): Promise<any> {
         try {
-
+            
             return await this.dedupRequest(
                 hash([options.endpoint, options.headers]),
                 () =>
                     instance({
                         method:  options.method,
                         url:  options.endpoint,
-                        params:  options.data ,
+                        data:  options.data ,
                         headers: options.headers,
                     }),
                 options.forceNoDedup

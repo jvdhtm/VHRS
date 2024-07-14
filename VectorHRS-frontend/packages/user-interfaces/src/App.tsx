@@ -5,16 +5,22 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme'; // Adjust the import path as necessary
 import './annotates/';
 import Login from './components/Login';
+import { AuthProvider } from './context/AuthContext';
+import { DataCacheProvider } from './context/DataCache';
 
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />} />
-        </Routes>
-      </BrowserRouter>
+      <DataCacheProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
+      </DataCacheProvider>
     </ThemeProvider>
   );
 };
