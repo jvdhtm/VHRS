@@ -36,7 +36,9 @@ class AccountViewSet(CreateListMixin, BaseViewSet):
     filter_fields = ["id", "name"]
 
 class LoginViewSet(ViewSet):
-
+    serializer_class = LoginSerializer
+    filter_fields = ["id", "email", "password", "is_active"]
+    
     @swagger_auto_schema(
         method='post',
         request_body=LoginSerializer,

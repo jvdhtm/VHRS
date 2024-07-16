@@ -1,15 +1,21 @@
 from rest_framework import serializers
-from django.contrib.auth.hashers import check_password
+from django.contrib.auth import authenticate
 from identity_api.models import CustomUser as User, App, Role, Login, Account
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def custom_authenticate(email, password):
     try:
         user = User.objects.get(email=email)
-        if check_password(password, user.password) and user.is_active:
+        logger.debug("identity user: %s", user)
+        if user.check_password(password) and user.is_active:
             return user
     except User.DoesNotExist:
         return None
     return None
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -56,7 +62,8 @@ class LoginSerializer(serializers.Serializer):
     def validate(self, data):
         email = data.get('email')
         password = data.get('password')
-
+        logger.debug("identity email: %s", email)
+        logger.debug("identity pass: %s", password)
         if email and password:
             user = custom_authenticate(email=email, password=password)
             if user:
