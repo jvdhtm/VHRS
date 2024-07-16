@@ -15,7 +15,7 @@ export const RoleResource: ResourceObject = {
     user: {
       title: 'User',
       type: 'integer',
-      'x-vhrs-relatedResource': 'identity_api.User',
+      'x-vhrs-relatedResource': 'identity_api.CustomUser',
     },
     permission: {
       title: 'Permission',

@@ -23,7 +23,12 @@ export const PersonResource: ResourceObject = {
       maxLength: 100,
       'x-nullable': true,
     },
-    age: { title: 'Age', type: 'integer' },
+    age: {
+      title: 'Age',
+      type: 'integer',
+      maximum: 2147483647,
+      minimum: -2147483648,
+    },
     nationalId: {
       title: 'NationalId',
       type: 'string',
@@ -42,5 +47,5 @@ export const PersonResource: ResourceObject = {
     },
   },
 
-  required: ['age', 'status'],
+  required: ['age'],
 };

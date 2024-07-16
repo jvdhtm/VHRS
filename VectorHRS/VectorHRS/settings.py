@@ -16,7 +16,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -28,8 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']  # Adjust to your production domain(s)
 
+AUTH_USER_MODEL = 'identity_api.CustomUser'
 
-# SWAGGER (Openapi 2.0)
+# SWAGGER (OpenAPI) Settings
 SWAGGER_SETTINGS = {
     "DEFAULT_FIELD_INSPECTORS": [
         "drf_yasg.inspectors.CamelCaseJSONFilter",
@@ -47,9 +47,7 @@ SWAGGER_SETTINGS = {
     ]
 }
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'drf_yasg',
     'utils.apps.UtilsConfig',
@@ -77,9 +75,11 @@ INSTALLED_APPS = [
     'taggit',
 ]
 
+# Faker Settings
 FAKER_LOCALE = None     # settings.LANGUAGE_CODE is loaded
 FAKER_PROVIDERS = None  # faker.DEFAULT_PROVIDERS is loaded (all)
 
+# Middleware Settings
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -90,9 +90,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
+# Root URL Configuration
 ROOT_URLCONF = 'VectorHRS.urls'
 
+# Template Configuration
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -109,43 +110,44 @@ TEMPLATES = [
     },
 ]
 
+# Rest Framework Configuration
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
-    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.TokenAuthentication'],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
     'DEFAULT_PAGINATION_CLASS': 'utils.pagination.MycustomPagination',
     'PAGE_SIZE': 5
 }
 
+# WSGI Application
 WSGI_APPLICATION = 'VectorHRS.wsgi.application'
 
+# Static and Media Files Settings
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-WAGTAIL_SITE_NAME = 'VHRS CMS'
 
+# Wagtail CMS Settings
+WAGTAIL_SITE_NAME = 'VHRS CMS'
 WAGTAILADMIN_BASE_URL = "http://example.com"
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+# Database Configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'your_database_name',     # Replace with your actual database name
-        'USER': 'your_database_user',     # Replace with your actual database user
-        'PASSWORD': 'your_database_password',  # Replace with your actual database password
-        'HOST': 'mysql_database',        # Docker container name as the host
-        'PORT': '3306',                  # MySQL default port
+        'NAME': 'vhrs',
+        'USER': 'user',      # Should match MYSQL_USER in Docker Compose
+        'PASSWORD': 'admin', # Should match MYSQL_PASSWORD in Docker Compose
+        'HOST': 'vhrs_database',  # Docker service name for MySQL container
+        'PORT': '3306',
         'OPTIONS': {
             'charset': 'utf8mb4',
         },
     }
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
-
+# Password Validation
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -161,27 +163,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/3.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-
 STATIC_URL = '/static/'
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+

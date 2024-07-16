@@ -35,6 +35,4 @@ export const ExpertiseResource: ResourceObject = {
       format: 'date-time',
     },
   },
-
-  required: ['status'],
 };

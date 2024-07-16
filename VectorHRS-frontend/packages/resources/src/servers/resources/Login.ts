@@ -5,19 +5,18 @@ const mockType = (): Models['Login'] | undefined => {
 };
 
 export const LoginResource: ResourceObject = {
-  baseUrl: '/auth/login/',
-  relatedurls: ['/auth/login/'],
+  baseUrl: '/logout/logout/',
+  relatedurls: ['/logout/logout/'],
   name: 'LoginResource',
   type: mockType,
   fields: {
-    id: { title: 'ID', type: 'integer', readOnly: true },
     email: { title: 'Email', type: 'string', format: 'email', minLength: 1 },
     password: { title: 'Password', type: 'string', minLength: 1 },
-    timestamp: {
-      title: 'Timestamp',
-      type: 'string',
-      format: 'date-time',
+    user: {
+      title: 'User',
+      type: 'integer',
       readOnly: true,
+      'x-vhrs-relatedResource': 'identity_api.CustomUser',
     },
   },
 

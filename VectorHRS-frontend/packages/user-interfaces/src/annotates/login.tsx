@@ -42,7 +42,8 @@ const loginActions: Action[] = [
       if(ctx?.auth)
       {
         const { login } = ctx?.auth as UseAuthHook; 
-        login(data.username, data.password); 
+        console.log(data);
+        login(data.email, data.password); 
       }
 
     },

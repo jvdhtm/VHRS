@@ -28,5 +28,5 @@ export const ConditionResource: ResourceObject = {
     },
   },
 
-  required: ['severity', 'status'],
+  required: ['severity'],
 };

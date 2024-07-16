@@ -35,5 +35,5 @@ export const FunctionResource: ResourceObject = {
     },
   },
 
-  required: ['shape', 'status'],
+  required: ['shape'],
 };

@@ -40,7 +40,12 @@ export const StaffResource: ResourceObject = {
     },
     x: { title: 'X', type: 'number' },
     y: { title: 'Y', type: 'number' },
-    level: { title: 'Level', type: 'integer' },
+    level: {
+      title: 'Level',
+      type: 'integer',
+      maximum: 2147483647,
+      minimum: -2147483648,
+    },
   },
 
   required: ['department', 'condition', 'who', 'x', 'y', 'level'],

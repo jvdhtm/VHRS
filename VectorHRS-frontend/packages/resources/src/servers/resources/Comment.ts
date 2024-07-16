@@ -35,5 +35,5 @@ export const CommentResource: ResourceObject = {
     },
   },
 
-  required: ['autor', 'status', 'news'],
+  required: ['autor', 'news'],
 };

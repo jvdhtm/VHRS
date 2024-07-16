@@ -41,5 +41,5 @@ export const DepartmentResource: ResourceObject = {
     },
   },
 
-  required: ['shape', 'status'],
+  required: ['shape'],
 };

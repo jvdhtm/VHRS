@@ -39,5 +39,5 @@ export const PersonLogResource: ResourceObject = {
     },
   },
 
-  required: ['stage', 'person', 'status'],
+  required: ['stage', 'person'],
 };

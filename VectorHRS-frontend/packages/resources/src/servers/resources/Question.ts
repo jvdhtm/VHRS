@@ -36,5 +36,5 @@ export const QuestionResource: ResourceObject = {
     },
   },
 
-  required: ['autor', 'status'],
+  required: ['autor'],
 };

@@ -162,6 +162,11 @@ export interface paths {
       };
     };
   };
+  "/logout/logout/": {
+    /** User login endpoint */
+    post: operations["auth_login"];
+    parameters: {};
+  };
   "/newsletter/": {
     get: operations["newsletter_list"];
     post: operations["newsletter_create"];
@@ -438,7 +443,7 @@ export interface definitions {
     /** Country */
     country?: string;
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -455,7 +460,7 @@ export interface definitions {
     /** Autor */
     autor: number;
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -473,8 +478,6 @@ export interface definitions {
     pathUrl: string;
   };
   Login: {
-    /** ID */
-    id?: number;
     /**
      * Email
      * Format: email
@@ -482,11 +485,8 @@ export interface definitions {
     email: string;
     /** Password */
     password: string;
-    /**
-     * Timestamp
-     * Format: date-time
-     */
-    timestamp?: string;
+    /** User */
+    user?: number;
   };
   Comment: {
     /** ID */
@@ -498,7 +498,7 @@ export interface definitions {
     /** Autor */
     autor: number;
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -513,7 +513,7 @@ export interface definitions {
     /** Severity */
     severity: "small" | "mild" | "sever";
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -532,7 +532,7 @@ export interface definitions {
     /** Shape */
     shape: "circle" | "square" | "rectangle" | "triangle";
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -549,7 +549,7 @@ export interface definitions {
     /** ParentId */
     parentId?: number;
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -568,7 +568,7 @@ export interface definitions {
     /** Expertise */
     expertise: number;
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -585,7 +585,7 @@ export interface definitions {
     /** Shape */
     shape: "circle" | "square" | "rectangle" | "triangle";
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -604,7 +604,7 @@ export interface definitions {
     /** Autor */
     autor: number;
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -636,7 +636,7 @@ export interface definitions {
     /** NationalId */
     nationalId?: string;
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -653,7 +653,7 @@ export interface definitions {
     /** Person */
     person: number;
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -682,7 +682,7 @@ export interface definitions {
     /** X */
     x: number;
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -699,7 +699,7 @@ export interface definitions {
     /** PhoneNumber */
     phoneNumber?: string;
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -718,7 +718,7 @@ export interface definitions {
     /** Autor */
     autor: number;
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -780,7 +780,7 @@ export interface definitions {
     /** Description */
     description?: string;
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -795,7 +795,7 @@ export interface definitions {
     /** Staff */
     staff: number;
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -812,7 +812,7 @@ export interface definitions {
     /** With person */
     with_person?: number;
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -844,7 +844,7 @@ export interface definitions {
     /** X */
     x: number;
     /** Status */
-    status: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
     /**
      * Created date time
      * Format: date-time
@@ -858,15 +858,25 @@ export interface definitions {
      * Email address
      * Format: email
      */
-    email: string;
+    email?: string;
     /** Password */
     password: string;
     /** First name */
-    first_name: string;
+    first_name?: string;
     /** Last name */
-    last_name: string;
-    /** Is active */
+    last_name?: string;
+    /**
+     * Active
+     * @description Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
+     */
     is_active?: boolean;
+    /**
+     * Staff status
+     * @description Designates whether the user can log into this admin site.
+     */
+    is_staff?: boolean;
+    /** Status */
+    status?: "activated" | "deactivated" | "pending" | "confirmed" | "archived";
   };
 }
 
@@ -1054,9 +1064,6 @@ export interface operations {
   app_list: {
     parameters: {
       query: {
-        id?: number;
-        title?: string;
-        pathUrl?: string;
         /** A page number within the paginated result set. */
         page?: number;
         /** Number of results to return per page. */
@@ -1152,12 +1159,11 @@ export interface operations {
       };
     };
     responses: {
-      /** Login successful */
-      201: {
+      /** Logout successful */
+      200: {
         schema: {
           /** @description Response message */
           message?: string;
-          user?: definitions["User"];
         };
       };
     };
@@ -2425,11 +2431,6 @@ export interface operations {
   role_list: {
     parameters: {
       query: {
-        id?: number;
-        title?: string;
-        user?: string;
-        permission?: string;
-        app?: string;
         /** A page number within the paginated result set. */
         page?: number;
         /** Number of results to return per page. */
@@ -2970,12 +2971,6 @@ export interface operations {
   user_list: {
     parameters: {
       query: {
-        id?: number;
-        email?: string;
-        password?: string;
-        first_name?: string;
-        last_name?: string;
-        is_active?: string;
         /** A page number within the paginated result set. */
         page?: number;
         /** Number of results to return per page. */

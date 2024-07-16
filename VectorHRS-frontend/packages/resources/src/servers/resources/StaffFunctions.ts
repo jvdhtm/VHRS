@@ -33,5 +33,5 @@ export const StaffFunctionsResource: ResourceObject = {
     },
   },
 
-  required: ['function', 'staff', 'status'],
+  required: ['function', 'staff'],
 };

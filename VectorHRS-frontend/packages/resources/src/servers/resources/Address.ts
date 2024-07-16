@@ -54,5 +54,5 @@ export const AddressResource: ResourceObject = {
     },
   },
 
-  required: ['person', 'status'],
+  required: ['person'],
 };

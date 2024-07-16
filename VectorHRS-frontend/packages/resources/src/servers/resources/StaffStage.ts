@@ -50,5 +50,5 @@ export const StaffStageResource: ResourceObject = {
     },
   },
 
-  required: ['step', 'x', 'status'],
+  required: ['step', 'x'],
 };

@@ -15,29 +15,33 @@ export const UserResource: ResourceObject = {
       title: 'Email address',
       type: 'string',
       format: 'email',
-      maxLength: 255,
-      minLength: 1,
+      maxLength: 254,
     },
     password: {
       title: 'Password',
       type: 'string',
-      maxLength: 1024,
+      maxLength: 128,
       minLength: 1,
     },
-    first_name: {
-      title: 'First name',
+    first_name: { title: 'First name', type: 'string', maxLength: 150 },
+    last_name: { title: 'Last name', type: 'string', maxLength: 150 },
+    is_active: {
+      title: 'Active',
+      description:
+        'Designates whether this user should be treated as active. Unselect this instead of deleting accounts.',
+      type: 'boolean',
+    },
+    is_staff: {
+      title: 'Staff status',
+      description: 'Designates whether the user can log into this admin site.',
+      type: 'boolean',
+    },
+    status: {
+      title: 'Status',
       type: 'string',
-      maxLength: 30,
-      minLength: 1,
+      enum: ['activated', 'deactivated', 'pending', 'confirmed', 'archived'],
     },
-    last_name: {
-      title: 'Last name',
-      type: 'string',
-      maxLength: 30,
-      minLength: 1,
-    },
-    is_active: { title: 'Is active', type: 'boolean' },
   },
 
-  required: ['email', 'password', 'first_name', 'last_name'],
+  required: ['password'],
 };

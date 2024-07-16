@@ -35,5 +35,5 @@ export const StaffCommentResource: ResourceObject = {
     },
   },
 
-  required: ['staff', 'status'],
+  required: ['staff'],
 };

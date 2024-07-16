@@ -47,5 +47,5 @@ export const PersonStageResource: ResourceObject = {
     },
   },
 
-  required: ['step', 'x', 'status'],
+  required: ['step', 'x'],
 };

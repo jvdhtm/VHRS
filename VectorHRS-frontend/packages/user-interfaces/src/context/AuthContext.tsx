@@ -5,7 +5,7 @@ import { useRItem } from '../components/hooks/useRItem';
 
 export interface UseAuthHook {
   isLoggedIn: boolean;
-  login: (username: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   error: any;
   isLoading: boolean;
@@ -34,9 +34,9 @@ interface AuthProviderProps {
     //checkAuthStatus();
   }, [fetchItem]);
 
-  const login = async (username: string, password: string): Promise<void> => {
+  const login = async (email: string, password: string): Promise<void> => {
     try {
-      await createItem({ username, password });
+      await createItem({ email, password });
       setIsLoggedIn(true);
     } catch (err) {
       setIsLoggedIn(false);

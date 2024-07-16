@@ -40,5 +40,5 @@ export const PhoneResource: ResourceObject = {
     },
   },
 
-  required: ['person', 'status'],
+  required: ['person'],
 };

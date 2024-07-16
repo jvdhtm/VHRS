@@ -35,5 +35,5 @@ export const answersResource: ResourceObject = {
     },
   },
 
-  required: ['autor', 'status', 'question'],
+  required: ['autor', 'question'],
 };

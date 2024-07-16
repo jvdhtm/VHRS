@@ -40,5 +40,5 @@ export const ExpertiseProfileResource: ResourceObject = {
     },
   },
 
-  required: ['person', 'expertise', 'status'],
+  required: ['person', 'expertise'],
 };

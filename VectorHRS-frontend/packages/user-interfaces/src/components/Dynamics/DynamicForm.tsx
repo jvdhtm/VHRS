@@ -310,8 +310,6 @@ export const DynamicForm = ({
         {renderFields()}
       </Grid>
       <Box sx={{ pt: 4 }}>
-        {" "}
-        {/* Add padding here */}
         <Grid container justifyContent="flex-end" spacing={2}>
           {renderActions(resource.actions, props, auth)}
         </Grid>

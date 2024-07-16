@@ -40,5 +40,5 @@ export const StaffLogResource: ResourceObject = {
     },
   },
 
-  required: ['stage', 'status'],
+  required: ['stage'],
 };

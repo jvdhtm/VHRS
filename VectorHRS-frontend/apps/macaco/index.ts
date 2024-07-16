@@ -81,30 +81,19 @@ app.get("/static/*", express.static(app.get("client_app_path")));
 
 const passport = initPassport(app);
 app.use(isLoggedIn);
-app.post(
-  app.get("login_auth"),
-  function (req: Request, res: Response, next: NextFunction) {
-    passport.authenticate("local", function (err: Error, user: any, info: any) {
-      if (err) {
-        console.log(err);
-        return next(err);
-      }
-      if (!user) {
-        return res.redirect("/");
-      }
-      if (req.isAuthenticated && req.isAuthenticated()) {
-        res.send(req.user);
-      } else {
-        req.logIn(user, function (err: Error) {
-          if (err) {
-            return next(err);
-          }
-          return res.send(user);
-        });
-      }
-    })(req, res, next);
-  }
-);
+app.post(app.get("login_auth"), (req: Request, res: Response, next: NextFunction) => {
+
+  passport.authenticate("local", (err: Error, user: any, info: any) => {
+    if (err) return next(err);
+    if (!user) {
+      return res.redirect("/");
+    }
+    req.logIn(user, (err: Error) => {
+      if (err) return next(err);
+      return res.send(user);
+    });
+  })(req, res, next);
+});
 
 const apiProxy = async (req: Request, res: Response, next: NextFunction) => {
   const path = url.parse(req.baseUrl).path?.replace("/api", "");

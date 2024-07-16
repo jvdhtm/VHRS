@@ -4,12 +4,11 @@ services:
   django:
     build:
       context: ./VectorHRS
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile  # Assuming you have a Dockerfile for Django setup
     ports:
       - "8080:8000"
     depends_on:
-      mysql_database:
-        condition: service_healthy  # Ensure the service is healthy before starting Django
+      - vhrs_database
     environment:
       - DJANGO_SETTINGS_MODULE=VectorHRS.settings
     command: >
@@ -19,20 +18,20 @@ services:
     volumes:
       - ./VectorHRS:/VectorHRS
 
-  mysql_database:
+  vhrs_database:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_DATABASE: 'your_database_name'
-      MYSQL_USER: 'your_database_user'
-      MYSQL_PASSWORD: 'your_database_password'
-      MYSQL_ROOT_PASSWORD: 'your_root_password'
+      MYSQL_DATABASE: 'vhrs'
+      MYSQL_USER: 'user'  # Make sure this matches the user defined in Django settings
+      MYSQL_PASSWORD: 'admin'  # Make sure this matches the password defined in Django settings
+      MYSQL_ROOT_PASSWORD: 'admin'
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u your_database_user -pyour_database_password"]
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u user -padmin"]
       interval: 10s
       timeout: 5s
       retries: 3
