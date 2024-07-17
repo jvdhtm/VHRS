@@ -163,8 +163,7 @@ export interface paths {
     };
   };
   "/logout/logout/": {
-    /** User login endpoint */
-    post: operations["auth_login"];
+    post: operations["logout_logout"];
     parameters: {};
   };
   "/newsletter/": {
@@ -1159,11 +1158,14 @@ export interface operations {
       };
     };
     responses: {
-      /** Logout successful */
-      200: {
+      /** Login successful */
+      201: {
         schema: {
           /** @description Response message */
           message?: string;
+          /** @description Authentication token */
+          token?: string;
+          user?: definitions["User"];
         };
       };
     };
@@ -1706,6 +1708,12 @@ export interface operations {
       200: {
         schema: definitions["Function"];
       };
+    };
+  };
+  logout_logout: {
+    parameters: {};
+    responses: {
+      201: unknown;
     };
   };
   newsletter_list: {

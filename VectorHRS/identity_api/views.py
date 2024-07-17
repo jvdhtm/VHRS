@@ -96,24 +96,6 @@ class LogoutViewSet(BaseViewSetNoSerializer):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    @swagger_auto_schema(
-        method='post',
-        request_body=LoginSerializer,
-        responses={
-            200: openapi.Response(
-                description="Logout successful",
-                schema=openapi.Schema(
-                    type=openapi.TYPE_OBJECT,
-                    properties={
-                        'message': openapi.Schema(type=openapi.TYPE_STRING, description='Response message'),
-                    }
-                )
-            )
-        },
-        tags=['auth'],
-        operation_id='auth_login',
-        operation_description='User login endpoint'
-    )
     @action(methods=['post'], detail=False)
     def logout(self, request, *args, **kwargs):
         logger.debug("Logout request received")

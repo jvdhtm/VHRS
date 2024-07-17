@@ -5,8 +5,8 @@ const mockType = (): Models['Login'] | undefined => {
 };
 
 export const LoginResource: ResourceObject = {
-  baseUrl: '/logout/logout/',
-  relatedurls: ['/logout/logout/'],
+  baseUrl: '/auth/login/',
+  relatedurls: ['/auth/login/'],
   name: 'LoginResource',
   type: mockType,
   fields: {

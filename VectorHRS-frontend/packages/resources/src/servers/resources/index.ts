@@ -8,6 +8,7 @@ import { DepartmentResource } from './Department';
 import { ExpertiseResource } from './Expertise';
 import { ExpertiseProfileResource } from './ExpertiseProfile';
 import { FunctionResource } from './Function';
+import { _logout_logout_Resource } from './_logout_logout_';
 import { NewsLetterResource } from './NewsLetter';
 import { NewsRelatedLinkResource } from './NewsRelatedLink';
 import { PersonResource } from './Person';
@@ -34,6 +35,7 @@ export {
   ExpertiseResource,
   ExpertiseProfileResource,
   FunctionResource,
+  _logout_logout_Resource,
   NewsLetterResource,
   NewsRelatedLinkResource,
   PersonResource,
