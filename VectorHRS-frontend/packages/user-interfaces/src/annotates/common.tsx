@@ -1,17 +1,17 @@
-import { Action, ResourceContext } from "@vhrs/resources";
+import { Action, AnnotatedResourceFields, ResourceContext, ResourceObject } from "@vhrs/resources";
 import { TextField, Select, MenuItem, TableCell } from "@mui/material";
 import { Edit, CheckCircle, Cancel, Info } from "@mui/icons-material"; // Import MUI icons as needed
 import { useRItem } from "../components/hooks/useRItem";
 
-export const commonAnnotations = {
+export const commonAnnotations: AnnotatedResourceFields<any> = {
   status: {
     display: {
-      Components: {
-        asComponent: (data: any) => <span>{data}</span>,
-        asFormInput: (data: any, ctx: ResourceContext) => (
+      components: {
+        asTitle: (data: any) => <span>{data}</span>,
+        asFormInput: (data: any, ctx?: ResourceContext) => (
           <Select
             value={data}
-            onChange={(e) => ctx.props.onChange(e.target.value)}
+            onChange={(e) => ctx?.props.onChange(e.target.value)}
             fullWidth
             displayEmpty
             renderValue={(value) => (
@@ -34,36 +34,20 @@ export const commonAnnotations = {
         ),
         asTableCell: (data: any) => (
           <TableCell>{data}</TableCell>
-        ),
-        asIcon: (data: any) => {
-          switch (data) {
-            case "activated":
-              return <CheckCircle />;
-            case "deactivated":
-              return <Cancel />;
-            case "pending":
-              return <Info />;
-            case "confirmed":
-              return <CheckCircle />;
-            case "archived":
-              return <Cancel />;
-            default:
-              return null;
-          }
-        },
+        )
       },
       admissions: "DEFAULT_ADMIN",
     },
   },
   created_date_time: {
     display: {
-      Components: {
-        asComponent: (data: any) => <span>{data}</span>,
-        asFormInput: (data: any, ctx: ResourceContext) => (
+      components: {
+        asTitle: (data: any) => <span>{data}</span>,
+        asFormInput: (data?: any, ctx?: ResourceContext) => (
           <TextField
             type="datetime-local"
             value={data}
-            onChange={(e) => ctx.props.onChange(e.target.value)}
+            onChange={(e) => ctx?.props.onChange(e.target.value)}
             fullWidth
           />
         ),
@@ -76,14 +60,14 @@ export const commonAnnotations = {
   },
   description: {
     display: {
-      Components: {
-        asComponent: (data: any) => <span>{data}</span>,
-        asFormInput: (data: any, ctx: ResourceContext) => (
+      components: {
+        asTitle: (data: any) => <span>{data}</span>,
+        asFormInput: (data: any, ctx?: ResourceContext) => (
           <TextField
             multiline
             rows={4}
             value={data}
-            onChange={(e) => ctx.props.onChange(e.target.value)}
+            onChange={(e) => ctx?.props.onChange(e.target.value)}
             fullWidth
             InputProps={{
               startAdornment: <Edit />,
@@ -113,8 +97,8 @@ export const defaultActions: Action[] = [
     admissions: 'DEFAULT_ADMIN',
   }),
   (data?: any, ctx?: ResourceContext) =>({
-    name: 'edit',
-    title: 'Edit User',
+    name: 'delete',
+    title: 'Delete User',
     useHandler: () => {
         const { deleteItem } = useRItem(ctx?.resource); // Assuming useRItem is set up to handle saveItem
         deleteItem(data.id); // Assuming saveItem handles the API request and cache update

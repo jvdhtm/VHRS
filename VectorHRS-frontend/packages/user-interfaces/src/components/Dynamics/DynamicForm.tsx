@@ -21,6 +21,7 @@ import { SelectChangeEvent } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useAuth, UseAuthHook } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface DynamicFormProps {
   resource?: ResourceObject;
@@ -36,6 +37,7 @@ export const DynamicForm = ({
   props,
 }: DynamicFormProps) => {
   const auth = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<any>({});
 
   if (!resource) return null;
@@ -54,9 +56,11 @@ export const DynamicForm = ({
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent, action?: any) => {
-    action?.(formData);
+  const handleSubmit = async (e: React.FormEvent, action?: Action) => {
     e.preventDefault();
+    await action?.(formData, { resource, props, auth }).useHandler?.();
+    const redirect = action?.().redirect;
+    if (redirect) navigate(redirect);
     return formData;
   };
 
@@ -152,12 +156,22 @@ export const DynamicForm = ({
       />
     );
   };
+
   const renderActions = (
     actions: Action[] = [],
     props: any,
     auth: UseAuthHook
   ) => {
-    if (actions.length === 0) {
+    const filteredActions = actions.filter((action) => {
+      if (!action().admissions) return true; // No admission restrictions
+      if (action().admissions === "GENERAL") return true;
+      if (action().admissions === "DEFAULT_ADMIN" && auth.isLoggedIn) {
+        return true;
+      }
+      return false;
+    });
+
+    if (filteredActions.length === 0) {
       // If no actions are provided, create default save and cancel buttons with icons
       return (
         <Box sx={{ display: "flex", gap: 2 }}>
@@ -165,7 +179,7 @@ export const DynamicForm = ({
             variant="contained"
             color="primary"
             startIcon={<SaveIcon />}
-            onClick={handleSubmit}
+            onClick={(e) => handleSubmit(e)}
           >
             Save
           </Button>
@@ -178,35 +192,20 @@ export const DynamicForm = ({
 
     return (
       <Box sx={{ display: "flex", gap: 2 }}>
-        {actions
-          .filter((action) => {
-            // Filter actions based on admission permissions
-            if (!action().admissions) return true; // No admission restrictions
-
-            if (action().admissions === "GENERAL") return true;
-
-            if (action().admissions === "DEFAULT_ADMIN" && auth.isLoggedIn) {
-              return true;
-            }
-
-            return false;
-          })
-          .map((action) => (
-            <Button
-              key={action().name}
-              variant="contained"
-              color={action().color || "primary"}
-              className={action().className}
-              onClick={(e) =>
-                action(formData, { resource, props, auth }).useHandler?.()
-              }
-              startIcon={action().icon}
-              disabled={action().disable}
-              hidden={action().hidden}
-            >
-              {action().title}
-            </Button>
-          ))}
+        {filteredActions.map((action) => (
+          <Button
+            key={action().name}
+            variant="contained"
+            color={action().color || "primary"}
+            className={action().className}
+            onClick={(e) => handleSubmit(e, action)}
+            startIcon={action().icon}
+            disabled={action().disable}
+            hidden={action().hidden}
+          >
+            {action().title}
+          </Button>
+        ))}
       </Box>
     );
   };
@@ -300,11 +299,11 @@ export const DynamicForm = ({
         ));
     }
   };
-
+  const formTitle = resource.display?.components?.asTitle?.() || resource.name
   return (
     <form onSubmit={handleSubmit}>
       <Typography variant="h5" gutterBottom>
-        {resource.name} Form
+        {formTitle} 
       </Typography>
       <Grid container spacing={2}>
         {renderFields()}

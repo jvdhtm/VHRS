@@ -1,15 +1,10 @@
 import { Action, annotateResource, ResourceContext} from "@vhrs/resources";
 import { definitions } from "@vhrs/resources";
-import { AnnotatedResourceFields, DisplayResource } from "@vhrs/resources";
-import { DynamicForm } from '../components/Dynamics/DynamicForm'; // Assuming DynamicForm is correctly implemented
+import { AnnotatedResourceFields } from "@vhrs/resources";
 import { commonAnnotations, defaultActions } from "./common";
 import LockIcon from '@mui/icons-material/Lock'; // Import Material-UI Lock icon
 import ForgotPasswordIcon from '@mui/icons-material/HelpOutline'; 
-import { useAuth, UseAuthHook } from "../context/AuthContext";
-
-const asForm: DisplayResource = (_data?: any, ctx?: ResourceContext) => (
-  <DynamicForm resource={ctx?.resource} includeFields={['email', 'password']}  />
-);
+import { UseAuthHook } from "../context/AuthContext";
 
 const newAnnotations: AnnotatedResourceFields<definitions['Login']> = {
   email: {
@@ -38,16 +33,15 @@ const loginActions: Action[] = [
   (data?: any, ctx?: ResourceContext)=>({
     name: 'login',
     title: 'Login',
-    useHandler: () => {
+    useHandler: async () => {
       if(ctx?.auth)
       {
         const { login } = ctx?.auth as UseAuthHook; 
-        console.log(data);
-        login(data.email, data.password); 
+        return login(data.email, data.password); 
       }
-
+      return 
     },
-    route: () => `${data.id}`,
+    redirect: '/dashboard',
     icon: <LockIcon />, 
   }),
 ];
@@ -56,8 +50,8 @@ annotateResource("LoginResource", {
   fields: newAnnotations,
   display: {
     components:{
-      asList: (data: any) => <div>{data}</div>,
-      asForm,
+      asListItem: (data: any) => <div>{data}</div>,
+      asTitle: () => <>Login</>,
     },
     admissions: 'DEFAULT_ADMIN', // Pass the DEFAULT_ADMIN setting from newAnnotations
   },

@@ -1,5 +1,4 @@
-// AuthContext.tsx
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { resources } from '@vhrs/resources';
 import { useRItem } from '../components/hooks/useRItem';
 
@@ -14,25 +13,12 @@ export interface UseAuthHook {
 const AuthContext = createContext<UseAuthHook | undefined>(undefined);
 
 interface AuthProviderProps {
-    children: React.ReactNode;
-  }
-  
-  export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const { fetchItem, createItem, isLoading, error } = useRItem(resources.LoginResource);
+  children: React.ReactNode;
+}
+
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const { createItem, isLoading, error } = useRItem(resources.LoginResource);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-
-  useEffect(() => {
-    const checkAuthStatus = async () => {
-      try {
-        const response = await fetchItem(false);
-        setIsLoggedIn(!!response?.status?.isLoggedIn);
-      } catch (err) {
-        setIsLoggedIn(false);
-      }
-    };
-
-    //checkAuthStatus();
-  }, [fetchItem]);
 
   const login = async (email: string, password: string): Promise<void> => {
     try {
@@ -40,15 +26,17 @@ interface AuthProviderProps {
       setIsLoggedIn(true);
     } catch (err) {
       setIsLoggedIn(false);
+      throw err; // Ensure the promise rejects if there's an error
     }
   };
 
   const logout = async (): Promise<void> => {
     try {
-
+      // Add your logout logic here (e.g., API call to invalidate session)
       setIsLoggedIn(false);
     } catch (err) {
       console.error('Failed to logout:', err);
+      throw err; // Ensure the promise rejects if there's an error
     }
   };
 

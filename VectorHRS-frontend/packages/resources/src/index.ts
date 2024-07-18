@@ -16,4 +16,5 @@ export type {
   ResourceContext,
   ActionPropType,
   Action,
+  Menu,
 } from "./types/index";

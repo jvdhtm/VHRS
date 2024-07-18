@@ -107,8 +107,9 @@ export interface ResourceMetaType {
 export type Colors = "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning";
 export type ResourceContext = { resource: ResourceObject, props:any, auth?:any}
 export interface ActionPropType {
-    useHandler?: () => void;
+    useHandler?: () => Promise<void> | void;
     route?: () => string;
+    redirect?: string;
     name: string;
     title: string;
     icon?: ReactNode;
@@ -124,17 +125,21 @@ export interface Annotations<T> {
     actions?: Action[];
     fields?: AnnotatedResourceFields<T>;
     display?: Display;
+    menu?: Menu[]
 }
 export type DisplayResource = (data?: any, ctx?:ResourceContext) =>  ReactNode;
 type UserIds = number | string
 export interface Display {
     components? :{
-        asComponent?: DisplayResource;
-        asForm?: DisplayResource;
+        asTitle?: DisplayResource;
+        asSubTile?: DisplayResource;
         asFormInput?: DisplayResource;
         asFilter?: DisplayResource;
-        asList?: DisplayResource;
+        asListItem?: DisplayResource;
         asTableCell?: DisplayResource;
+        asImage?: DisplayResource;
+        asThumbnail?: DisplayResource;
+        asIcon?: DisplayResource;
     }
     ctx?: ResourceContext;
     admissions?: 'DEFAULT_ADMIN' | 'GENERAL' | UserIds[]
@@ -147,6 +152,12 @@ export type AnnotatedResourceFields<T> = {
 export interface ResourceFields {
     [key: string]: ResourceField;
 }
+
+export interface Menu {
+    partOf: 'SIDEBAR' | 'TOP_MENU'
+    parent?: string
+    to?:  string
+}
 export interface ResourceObject {
     baseUrl: string;
     fields: ResourceFields | AnnotatedResourceFields<ModelTypes>;
@@ -158,7 +169,9 @@ export interface ResourceObject {
     actions?: Action[];
     baseFilter?: any;
     display?: Display;
+    menu?: Menu[]
     meta?: ResourceMetaType;
     bootstrap?: boolean;
 }
 export {};
+

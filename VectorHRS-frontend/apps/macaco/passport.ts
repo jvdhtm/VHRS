@@ -71,7 +71,7 @@ export const initPassport = (app: any) => {
       const token = req.session.user.token; // Retrieve token from session
       const headers = { Authorization: `Token ${token}` };
       const request: RequestType = {
-        endpoint: `${resources.UserResource.baseUrl}/${id}`,
+        endpoint: `${resources.UserResource.baseUrl}${id}`,
         name: "Auth",
         method: "get",
         headers,

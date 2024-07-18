@@ -70,5 +70,13 @@ export const annotateResource = (
     resource.actions = addContextToActions(annotations.actions, resource);
   }
 
+  if (annotations.actions) {
+    resource.actions = addContextToActions(annotations.actions, resource);
+  }
+
+  if (annotations.menu) {
+    resource.menu = [ ...annotations.menu];
+  }
+
   return resource;
 };

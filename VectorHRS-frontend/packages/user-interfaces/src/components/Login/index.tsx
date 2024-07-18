@@ -3,8 +3,7 @@ import { DynamicForm } from "../Dynamics/DynamicForm";
 import { resources } from "@vhrs/resources";
 
 const Login = () => {
-  const displayType = resources.LoginResource.display;
-  const loginForm = displayType?.components?.asForm;
+
 
   return (
     <Box
@@ -26,7 +25,7 @@ const Login = () => {
           boxShadow: 1,
         }}
       >
-        {loginForm && loginForm()}
+        <DynamicForm resource={resources.LoginResource} includeFields={['email', 'password']}  />
       </Box>
     </Box>
   );
