@@ -31,7 +31,7 @@ annotateResource("UserResource", {
   menu:[
     {
       partOf:'SIDEBAR',
-      to:'./user'
+      to:'/user'
     }
 
   ]

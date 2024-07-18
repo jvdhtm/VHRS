@@ -5,10 +5,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme'; // Adjust the import path as necessary
 import './annotates/';
 import Login from './components/Login';
-import Dashboard from './components/Dashboard';
+import User from './components/User';
 import { AuthProvider } from './context/AuthContext';
 import { DataCacheProvider } from './context/DataCache';
 import PrivateRoute from './components/PrivateRoute';
+import People from './components/People';
 
 const App: React.FC = () => {
   return (
@@ -20,7 +21,8 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/" element={<PrivateRoute />}>
-                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="dashboard" element={<People />} />
+                <Route path="user" element={<User />} />
               </Route>
               <Route path="*" element={<Navigate to="/login" />} />
             </Routes>

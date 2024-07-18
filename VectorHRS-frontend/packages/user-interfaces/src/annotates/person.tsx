@@ -23,6 +23,7 @@ annotateResource("PersonResource", {
   menu:[
     {
       partOf:'SIDEBAR',
+      to:'/dashboard'
     }
 
   ]

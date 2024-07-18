@@ -5,7 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { ResourceObject } from "@vhrs/resources"; // Assuming ResourceObject is imported from your resources module
-
+import { useNavigate } from "react-router-dom";
 interface SidebarProps {
   resources: ResourceObject[];
 }
@@ -19,17 +19,19 @@ const Sidebar: React.FC<SidebarProps> = ({ resources }) => {
   const [nestedResources, setNestedResources] = useState<
     ResourceObjectWithChildren[]
   >([]);
-
+  const navigate = useNavigate();
   const nestResources = (
     resources: ResourceObject[]
   ): ResourceObjectWithChildren[] => {
     const resourceMap: { [key: string]: ResourceObjectWithChildren } = {};
 
-    const resourceFiltered = resources.filter((resource)=>resource.menu?.some((menuItem) => menuItem.partOf === "SIDEBAR"))
+    const resourceFiltered = resources.filter((resource) =>
+      resource.menu?.some((menuItem) => menuItem.partOf === "SIDEBAR")
+    );
 
     // First pass: map resources by name
     resourceFiltered.forEach((resource) => {
-          resourceMap[resource.name] = { ...resource, children: [] };
+      resourceMap[resource.name] = { ...resource, children: [] };
     });
 
     // Second pass: assign children to their respective parents
@@ -55,21 +57,25 @@ const Sidebar: React.FC<SidebarProps> = ({ resources }) => {
     setNestedResources(results);
   }, [resources]);
 
-  const handleClick = (baseUrl: string) => {
+  const handleClick = (resource: ResourceObjectWithChildren) => {
     setOpen((open) =>
-      open.includes(baseUrl)
-        ? open.filter((item) => item !== baseUrl)
-        : [...open, baseUrl]
+      open.includes(resource.name)
+        ? open.filter((item) => item !== resource.name)
+        : [...open, resource.name]
     );
+    const inMenu = resource.menu?.find((menuItem) => menuItem.partOf === "SIDEBAR");
+    if (inMenu?.to) {
+      navigate(inMenu.to); // Navigate to the specified path
+    }
   };
 
   // Recursive function to render nested list
   const renderNestedList = (items: ResourceObjectWithChildren[]) => {
     return (
       <List disablePadding>
-        {items.map((item) => (
-          <div key={item.baseUrl}>
-            <ListItem button onClick={() => handleClick(item.baseUrl)}>
+        {items.map((item, index) => (
+          <div key={item.name + index}>
+            <ListItem button onClick={() => handleClick(item)}>
               {item.display?.components?.asIcon?.() && (
                 <ListItemIcon>{item.display.components.asIcon()}</ListItemIcon>
               )}
@@ -78,7 +84,7 @@ const Sidebar: React.FC<SidebarProps> = ({ resources }) => {
               />
             </ListItem>
             <Collapse
-              in={open.includes(item.baseUrl)}
+              in={open.includes(item.name)}
               timeout="auto"
               unmountOnExit
             >
@@ -93,10 +99,10 @@ const Sidebar: React.FC<SidebarProps> = ({ resources }) => {
   console.log(nestedResources);
   return (
     <List component="nav">
-      {nestedResources.map((resource) => {
+      {nestedResources.map((resource, index) => {
         return (
-          <div key={resource.baseUrl}>
-            <ListItem button onClick={() => handleClick(resource.baseUrl)}>
+          <div key={resource.name + index}>
+            <ListItem button onClick={() => handleClick(resource)}>
               {resource.display?.components?.asIcon?.() && (
                 <ListItemIcon>
                   {resource.display.components.asIcon()}
@@ -109,7 +115,7 @@ const Sidebar: React.FC<SidebarProps> = ({ resources }) => {
               />
             </ListItem>
             <Collapse
-              in={open.includes(resource.baseUrl)}
+              in={open.includes(resource.name)}
               timeout="auto"
               unmountOnExit
             >
