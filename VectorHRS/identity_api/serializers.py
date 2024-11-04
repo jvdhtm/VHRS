@@ -10,6 +10,8 @@ def custom_authenticate(email, password):
     try:
         user = User.objects.get(email=email)
         logger.debug("identity user: %s", user)
+        logger.debug("identity user is_active: %s", user.is_active)
+        logger.debug("identity user check_password: %s", user.check_password(password))
         if user.check_password(password) and user.is_active:
             return user
     except User.DoesNotExist:
@@ -66,6 +68,7 @@ class LoginSerializer(serializers.Serializer):
         logger.debug("identity pass: %s", password)
         if email and password:
             user = custom_authenticate(email=email, password=password)
+            logger.debug("User found: %s", user)
             if user:
                 data['user'] = user
             else:

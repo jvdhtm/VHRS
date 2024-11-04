@@ -14,11 +14,7 @@ class CustomUserAdmin(UserAdmin):
 
     def save_model(self, request, obj, form, change):
         logger.debug("Saving user: %s", obj.email)
-
-        if 'password' in form.cleaned_data:
-            obj.set_password(form.cleaned_data['password'])
-        
-        # Save the user instance
+        # No need to call set_password; Django admin does this automatically.
         obj.save()
 
 admin.site.register(CustomUser, CustomUserAdmin)
