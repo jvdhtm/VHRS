@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var PersonResource = {
+export var Person = {
     baseUrl: '/person/',
     relatedurls: ['/person/', '/person/{id}/'],
-    name: 'PersonResource',
+    name: 'Person',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -20,7 +20,12 @@ export var PersonResource = {
             maxLength: 100,
             'x-nullable': true,
         },
-        age: { title: 'Age', type: 'integer' },
+        age: {
+            title: 'Age',
+            type: 'integer',
+            maximum: 2147483647,
+            minimum: -2147483648,
+        },
         nationalId: {
             title: 'NationalId',
             type: 'string',
@@ -38,6 +43,6 @@ export var PersonResource = {
             format: 'date-time',
         },
     },
-    required: ['age', 'status'],
+    required: ['age'],
 };
 //# sourceMappingURL=Person.js.map

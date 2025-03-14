@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var PhoneResource = {
+export var Phone = {
     baseUrl: '/phone/',
     relatedurls: ['/phone/', '/phone/{id}/'],
-    name: 'PhoneResource',
+    name: 'Phone',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -36,6 +36,6 @@ export var PhoneResource = {
             format: 'date-time',
         },
     },
-    required: ['person', 'status'],
+    required: ['person'],
 };
 //# sourceMappingURL=Phone.js.map

@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var QuestionResource = {
+export var Question = {
     baseUrl: '/question/',
     relatedurls: ['/question/', '/question/{id}/'],
-    name: 'QuestionResource',
+    name: 'Question',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -32,6 +32,6 @@ export var QuestionResource = {
             format: 'date-time',
         },
     },
-    required: ['autor', 'status'],
+    required: ['autor'],
 };
 //# sourceMappingURL=Question.js.map

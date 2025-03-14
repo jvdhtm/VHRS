@@ -40,6 +40,12 @@ var annotateResource = function (resourceKey, annotations) {
     if (annotations.actions) {
         resource.actions = (0, addContext_1.addContextToActions)(annotations.actions, resource);
     }
+    if (annotations.actions) {
+        resource.actions = (0, addContext_1.addContextToActions)(annotations.actions, resource);
+    }
+    if (annotations.menu) {
+        resource.menu = tslib_1.__spreadArray([], annotations.menu, true);
+    }
     return resource;
 };
 exports.annotateResource = annotateResource;

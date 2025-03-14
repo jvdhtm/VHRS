@@ -86,8 +86,8 @@ export default async function generateResources(dest?: string): Promise<void> {
             fileName
           );
 
-          indexImportFileToWrite[fileName] = `import { ${fileName}Resource } from "./${fileName}";\n`;
-          indexExportFileToWrite[fileName] = `${fileName}Resource, `;
+          indexImportFileToWrite[fileName] = `import { ${fileName} } from "./${fileName}";\n`;
+          indexExportFileToWrite[fileName] = `${fileName}, `;
         }
       }
 

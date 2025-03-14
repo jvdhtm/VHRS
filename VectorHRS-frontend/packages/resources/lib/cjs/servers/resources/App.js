@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppResource = void 0;
+exports.App = void 0;
 var mockType = function () {
     return;
 };
-exports.AppResource = {
+exports.App = {
     baseUrl: '/app/',
     relatedurls: ['/app/', '/app/{id}/'],
-    name: 'AppResource',
+    name: 'App',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },

@@ -1,4 +1,4 @@
-import { __assign } from "tslib";
+import { __assign, __spreadArray } from "tslib";
 import * as resources from "../servers/resources/index";
 import { addContext, addContextToActions } from "./addContext"; // Adjust import path as needed
 export var annotateResource = function (resourceKey, annotations) {
@@ -36,6 +36,12 @@ export var annotateResource = function (resourceKey, annotations) {
     }
     if (annotations.actions) {
         resource.actions = addContextToActions(annotations.actions, resource);
+    }
+    if (annotations.actions) {
+        resource.actions = addContextToActions(annotations.actions, resource);
+    }
+    if (annotations.menu) {
+        resource.menu = __spreadArray([], annotations.menu, true);
     }
     return resource;
 };

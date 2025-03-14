@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PersonStageResource = void 0;
+exports.PersonStage = void 0;
 var mockType = function () {
     return;
 };
-exports.PersonStageResource = {
+exports.PersonStage = {
     baseUrl: '/personstage/',
     relatedurls: ['/personstage/', '/personstage/{id}/'],
-    name: 'PersonStageResource',
+    name: 'PersonStage',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -46,6 +46,6 @@ exports.PersonStageResource = {
             format: 'date-time',
         },
     },
-    required: ['step', 'x', 'status'],
+    required: ['step', 'x'],
 };
 //# sourceMappingURL=PersonStage.js.map

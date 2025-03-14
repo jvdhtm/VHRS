@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StaffLogResource = void 0;
+exports.StaffLog = void 0;
 var mockType = function () {
     return;
 };
-exports.StaffLogResource = {
+exports.StaffLog = {
     baseUrl: '/stafflog/',
     relatedurls: ['/stafflog/', '/stafflog/{id}/'],
-    name: 'StaffLogResource',
+    name: 'StaffLog',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -39,6 +39,6 @@ exports.StaffLogResource = {
             format: 'date-time',
         },
     },
-    required: ['stage', 'status'],
+    required: ['stage'],
 };
 //# sourceMappingURL=StaffLog.js.map

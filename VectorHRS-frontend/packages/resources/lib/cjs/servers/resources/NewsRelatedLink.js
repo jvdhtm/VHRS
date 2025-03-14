@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NewsRelatedLinkResource = void 0;
+exports.NewsRelatedLink = void 0;
 var mockType = function () {
     return;
 };
-exports.NewsRelatedLinkResource = {
+exports.NewsRelatedLink = {
     baseUrl: '/newsrelatedlink/',
     relatedurls: ['/newsrelatedlink/', '/newsrelatedlink/{id}/'],
-    name: 'NewsRelatedLinkResource',
+    name: 'NewsRelatedLink',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },

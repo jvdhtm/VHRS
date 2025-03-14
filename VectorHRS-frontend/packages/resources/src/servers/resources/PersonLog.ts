@@ -4,10 +4,10 @@ const mockType = (): Models['PersonLog'] | undefined => {
   return;
 };
 
-export const PersonLogResource: ResourceObject = {
+export const PersonLog: ResourceObject = {
   baseUrl: '/personlog/',
   relatedurls: ['/personlog/', '/personlog/{id}/'],
-  name: 'PersonLogResource',
+  name: 'PersonLog',
   type: mockType,
   fields: {
     id: { title: 'ID', type: 'integer', readOnly: true },

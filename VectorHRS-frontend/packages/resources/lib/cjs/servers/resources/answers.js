@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.answersResource = void 0;
+exports.answers = void 0;
 var mockType = function () {
     return;
 };
-exports.answersResource = {
+exports.answers = {
     baseUrl: '/answers/',
     relatedurls: ['/answers/', '/answers/{id}/'],
-    name: 'answersResource',
+    name: 'answers',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -34,6 +34,6 @@ exports.answersResource = {
             'x-vhrs-relatedResource': 'questions.Question',
         },
     },
-    required: ['autor', 'status', 'question'],
+    required: ['autor', 'question'],
 };
 //# sourceMappingURL=answers.js.map

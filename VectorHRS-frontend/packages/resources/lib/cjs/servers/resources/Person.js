@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PersonResource = void 0;
+exports.Person = void 0;
 var mockType = function () {
     return;
 };
-exports.PersonResource = {
+exports.Person = {
     baseUrl: '/person/',
     relatedurls: ['/person/', '/person/{id}/'],
-    name: 'PersonResource',
+    name: 'Person',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -23,7 +23,12 @@ exports.PersonResource = {
             maxLength: 100,
             'x-nullable': true,
         },
-        age: { title: 'Age', type: 'integer' },
+        age: {
+            title: 'Age',
+            type: 'integer',
+            maximum: 2147483647,
+            minimum: -2147483648,
+        },
         nationalId: {
             title: 'NationalId',
             type: 'string',
@@ -41,6 +46,6 @@ exports.PersonResource = {
             format: 'date-time',
         },
     },
-    required: ['age', 'status'],
+    required: ['age'],
 };
 //# sourceMappingURL=Person.js.map

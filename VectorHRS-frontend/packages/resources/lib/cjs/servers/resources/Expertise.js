@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ExpertiseResource = void 0;
+exports.Expertise = void 0;
 var mockType = function () {
     return;
 };
-exports.ExpertiseResource = {
+exports.Expertise = {
     baseUrl: '/expertise/',
     relatedurls: ['/expertise/', '/expertise/{id}/'],
-    name: 'ExpertiseResource',
+    name: 'Expertise',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -35,6 +35,5 @@ exports.ExpertiseResource = {
             format: 'date-time',
         },
     },
-    required: ['status'],
 };
 //# sourceMappingURL=Expertise.js.map

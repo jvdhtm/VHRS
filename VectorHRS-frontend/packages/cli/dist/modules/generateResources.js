@@ -64,8 +64,8 @@ async function generateResources(dest) {
                         }
                     });
                     FileToWrite[fileName] = (0, generateResourceFile_1.generateResourceFile)(resource, definition, chosenPath, relatedPath, fileName);
-                    indexImportFileToWrite[fileName] = `import { ${fileName}Resource } from "./${fileName}";\n`;
-                    indexExportFileToWrite[fileName] = `${fileName}Resource, `;
+                    indexImportFileToWrite[fileName] = `import { ${fileName} } from "./${fileName}";\n`;
+                    indexExportFileToWrite[fileName] = `${fileName}, `;
                 }
             }
             let indexToWrite = "";

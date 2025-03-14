@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var ConditionResource = {
+export var Condition = {
     baseUrl: '/condition/',
     relatedurls: ['/condition/', '/condition/{id}/'],
-    name: 'ConditionResource',
+    name: 'Condition',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -24,6 +24,6 @@ export var ConditionResource = {
             format: 'date-time',
         },
     },
-    required: ['severity', 'status'],
+    required: ['severity'],
 };
 //# sourceMappingURL=Condition.js.map

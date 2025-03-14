@@ -14,9 +14,10 @@
     "clean": "rimraf lib"
   },
   "dependencies": {
+    "@vhrs/resources": "file:",
     "axios": "^1.7.2",
-    "universal-cookie": "^4.0.4",
     "typescript": "^5.0.2",
+    "universal-cookie": "^4.0.4",
     "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },

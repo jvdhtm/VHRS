@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var StaffResource = {
+export var Staff = {
     baseUrl: '/staff/',
     relatedurls: ['/staff/', '/staff/{id}/'],
-    name: 'StaffResource',
+    name: 'Staff',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -37,7 +37,12 @@ export var StaffResource = {
         },
         x: { title: 'X', type: 'number' },
         y: { title: 'Y', type: 'number' },
-        level: { title: 'Level', type: 'integer' },
+        level: {
+            title: 'Level',
+            type: 'integer',
+            maximum: 2147483647,
+            minimum: -2147483648,
+        },
     },
     required: ['department', 'condition', 'who', 'x', 'y', 'level'],
 };

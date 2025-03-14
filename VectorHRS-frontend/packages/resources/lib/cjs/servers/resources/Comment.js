@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CommentResource = void 0;
+exports.Comment = void 0;
 var mockType = function () {
     return;
 };
-exports.CommentResource = {
+exports.Comment = {
     baseUrl: '/comment/',
     relatedurls: ['/comment/', '/comment/{id}/'],
-    name: 'CommentResource',
+    name: 'Comment',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -34,6 +34,6 @@ exports.CommentResource = {
             'x-vhrs-relatedResource': 'news.NewsLetter',
         },
     },
-    required: ['autor', 'status', 'news'],
+    required: ['autor', 'news'],
 };
 //# sourceMappingURL=Comment.js.map

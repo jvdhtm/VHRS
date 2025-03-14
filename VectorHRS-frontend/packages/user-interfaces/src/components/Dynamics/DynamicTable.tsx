@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import {
   createColumnHelper,
   flexRender,
@@ -27,14 +27,13 @@ const DynamicTable: React.FC<DynamicTableProps> = ({
   const columnHelper = createColumnHelper<any>(); // Adjust type as per your data structure
 
   // Function to get the cell component based on the display configuration
-  const getCellComponent = (field: AnnotatedResourceField, value: any) => {
-    const display = field.display?.components?.asTableCell;
-    if (display) {
-        return display(value);
-    }
-    return value; // Fallback to the raw value if no custom component is defined
-  };
-
+  const getCellComponent = useCallback(
+    (field: AnnotatedResourceField, value: any) => {
+      const display = field.display?.components?.asTableCell;
+      return display ? display(value) : value; // Fallback to the raw value if no custom component is defined
+    },
+    []
+  );
   // Define columns based on includeHeader
   const columns = useMemo(() => {
     return includeHeader.map((field) => {

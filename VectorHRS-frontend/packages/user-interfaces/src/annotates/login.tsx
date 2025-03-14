@@ -46,7 +46,7 @@ const loginActions: Action[] = [
   }),
 ];
 
-annotateResource("LoginResource", {
+annotateResource("Login", {
   fields: newAnnotations,
   display: {
     components:{

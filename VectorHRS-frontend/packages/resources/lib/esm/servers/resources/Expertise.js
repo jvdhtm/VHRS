@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var ExpertiseResource = {
+export var Expertise = {
     baseUrl: '/expertise/',
     relatedurls: ['/expertise/', '/expertise/{id}/'],
-    name: 'ExpertiseResource',
+    name: 'Expertise',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -32,6 +32,5 @@ export var ExpertiseResource = {
             format: 'date-time',
         },
     },
-    required: ['status'],
 };
 //# sourceMappingURL=Expertise.js.map

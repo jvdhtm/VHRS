@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StaffStageResource = void 0;
+exports.StaffStage = void 0;
 var mockType = function () {
     return;
 };
-exports.StaffStageResource = {
+exports.StaffStage = {
     baseUrl: '/staffstage/',
     relatedurls: ['/staffstage/', '/staffstage/{id}/'],
-    name: 'StaffStageResource',
+    name: 'StaffStage',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -49,6 +49,6 @@ exports.StaffStageResource = {
             format: 'date-time',
         },
     },
-    required: ['step', 'x', 'status'],
+    required: ['step', 'x'],
 };
 //# sourceMappingURL=StaffStage.js.map

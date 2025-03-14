@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.QuestionResource = void 0;
+exports.Question = void 0;
 var mockType = function () {
     return;
 };
-exports.QuestionResource = {
+exports.Question = {
     baseUrl: '/question/',
     relatedurls: ['/question/', '/question/{id}/'],
-    name: 'QuestionResource',
+    name: 'Question',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -35,6 +35,6 @@ exports.QuestionResource = {
             format: 'date-time',
         },
     },
-    required: ['autor', 'status'],
+    required: ['autor'],
 };
 //# sourceMappingURL=Question.js.map

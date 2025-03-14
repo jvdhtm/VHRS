@@ -12,12 +12,12 @@ exports.generateResourceFile = void 0;
 function generateResourceFile(resource, model, choosenPath, relatedPath, fileName) {
     let file = "";
     let definitionsTowrite = "any";
-    let name = `${fileName}Resource`;
+    let name = `${fileName}`;
     file = "";
     if (model) {
         file += ` import type { Models, ResourceObject } from "../../types";
       `;
-        name = `${model}Resource`;
+        name = `${model}`;
         definitionsTowrite = `Models["${model}"]`;
     }
     else {
@@ -29,7 +29,7 @@ function generateResourceFile(resource, model, choosenPath, relatedPath, fileNam
     };
     `;
     file += `
-    export const ${fileName}Resource:ResourceObject = {
+    export const ${fileName}:ResourceObject = {
       baseUrl: "${choosenPath}",
       relatedurls: ${JSON.stringify(relatedPath)},
       name: "${name}",

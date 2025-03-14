@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "concurrently": "^7.3.0",
+    "frontend": "file:",
     "rimraf": "^3.0.2"
   }
 }

@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var StaffCommentResource = {
+export var StaffComment = {
     baseUrl: '/staffcomment/',
     relatedurls: ['/staffcomment/', '/staffcomment/{id}/'],
-    name: 'StaffCommentResource',
+    name: 'StaffComment',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -31,6 +31,6 @@ export var StaffCommentResource = {
             format: 'date-time',
         },
     },
-    required: ['staff', 'status'],
+    required: ['staff'],
 };
 //# sourceMappingURL=StaffComment.js.map

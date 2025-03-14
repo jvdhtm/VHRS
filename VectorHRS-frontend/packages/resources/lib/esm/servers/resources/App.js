@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var AppResource = {
+export var App = {
     baseUrl: '/app/',
     relatedurls: ['/app/', '/app/{id}/'],
-    name: 'AppResource',
+    name: 'App',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },

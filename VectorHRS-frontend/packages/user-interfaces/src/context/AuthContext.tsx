@@ -17,7 +17,7 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const { createItem, isLoading, error } = useRItem(resources.LoginResource);
+  const { createItem, isLoading, error } = useRItem(resources.Login);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const login = async (email: string, password: string): Promise<void> => {

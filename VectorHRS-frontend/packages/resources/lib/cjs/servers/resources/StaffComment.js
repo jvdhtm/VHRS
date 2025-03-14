@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StaffCommentResource = void 0;
+exports.StaffComment = void 0;
 var mockType = function () {
     return;
 };
-exports.StaffCommentResource = {
+exports.StaffComment = {
     baseUrl: '/staffcomment/',
     relatedurls: ['/staffcomment/', '/staffcomment/{id}/'],
-    name: 'StaffCommentResource',
+    name: 'StaffComment',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -34,6 +34,6 @@ exports.StaffCommentResource = {
             format: 'date-time',
         },
     },
-    required: ['staff', 'status'],
+    required: ['staff'],
 };
 //# sourceMappingURL=StaffComment.js.map

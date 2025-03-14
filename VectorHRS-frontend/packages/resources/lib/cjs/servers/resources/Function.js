@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FunctionResource = void 0;
+exports.Function = void 0;
 var mockType = function () {
     return;
 };
-exports.FunctionResource = {
+exports.Function = {
     baseUrl: '/function/',
     relatedurls: ['/function/', '/function/{id}/'],
-    name: 'FunctionResource',
+    name: 'Function',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -34,6 +34,6 @@ exports.FunctionResource = {
             format: 'date-time',
         },
     },
-    required: ['shape', 'status'],
+    required: ['shape'],
 };
 //# sourceMappingURL=Function.js.map

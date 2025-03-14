@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var NewsRelatedLinkResource = {
+export var NewsRelatedLink = {
     baseUrl: '/newsrelatedlink/',
     relatedurls: ['/newsrelatedlink/', '/newsrelatedlink/{id}/'],
-    name: 'NewsRelatedLinkResource',
+    name: 'NewsRelatedLink',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },

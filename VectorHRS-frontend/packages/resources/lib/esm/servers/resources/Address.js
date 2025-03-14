@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var AddressResource = {
+export var Address = {
     baseUrl: '/address/',
     relatedurls: ['/address/', '/address/{id}/'],
-    name: 'AddressResource',
+    name: 'Address',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -50,6 +50,6 @@ export var AddressResource = {
             format: 'date-time',
         },
     },
-    required: ['person', 'status'],
+    required: ['person'],
 };
 //# sourceMappingURL=Address.js.map

@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var FunctionResource = {
+export var Function = {
     baseUrl: '/function/',
     relatedurls: ['/function/', '/function/{id}/'],
-    name: 'FunctionResource',
+    name: 'Function',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -31,6 +31,6 @@ export var FunctionResource = {
             format: 'date-time',
         },
     },
-    required: ['shape', 'status'],
+    required: ['shape'],
 };
 //# sourceMappingURL=Function.js.map

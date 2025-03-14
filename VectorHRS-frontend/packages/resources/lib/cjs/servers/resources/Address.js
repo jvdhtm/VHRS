@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AddressResource = void 0;
+exports.Address = void 0;
 var mockType = function () {
     return;
 };
-exports.AddressResource = {
+exports.Address = {
     baseUrl: '/address/',
     relatedurls: ['/address/', '/address/{id}/'],
-    name: 'AddressResource',
+    name: 'Address',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -53,6 +53,6 @@ exports.AddressResource = {
             format: 'date-time',
         },
     },
-    required: ['person', 'status'],
+    required: ['person'],
 };
 //# sourceMappingURL=Address.js.map

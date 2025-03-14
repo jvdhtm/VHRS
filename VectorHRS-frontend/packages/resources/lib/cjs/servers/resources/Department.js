@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DepartmentResource = void 0;
+exports.Department = void 0;
 var mockType = function () {
     return;
 };
-exports.DepartmentResource = {
+exports.Department = {
     baseUrl: '/department/',
     relatedurls: ['/department/', '/department/{id}/'],
-    name: 'DepartmentResource',
+    name: 'Department',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -40,6 +40,6 @@ exports.DepartmentResource = {
             format: 'date-time',
         },
     },
-    required: ['shape', 'status'],
+    required: ['shape'],
 };
 //# sourceMappingURL=Department.js.map

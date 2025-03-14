@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConditionResource = void 0;
+exports.Condition = void 0;
 var mockType = function () {
     return;
 };
-exports.ConditionResource = {
+exports.Condition = {
     baseUrl: '/condition/',
     relatedurls: ['/condition/', '/condition/{id}/'],
-    name: 'ConditionResource',
+    name: 'Condition',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -27,6 +27,6 @@ exports.ConditionResource = {
             format: 'date-time',
         },
     },
-    required: ['severity', 'status'],
+    required: ['severity'],
 };
 //# sourceMappingURL=Condition.js.map

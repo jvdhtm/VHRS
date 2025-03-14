@@ -4,10 +4,10 @@ const mockType = (): Models['NewsLetter'] | undefined => {
   return;
 };
 
-export const NewsLetterResource: ResourceObject = {
+export const NewsLetter: ResourceObject = {
   baseUrl: '/newsletter/',
   relatedurls: ['/newsletter/', '/newsletter/{id}/'],
-  name: 'NewsLetterResource',
+  name: 'NewsLetter',
   type: mockType,
   fields: {
     id: { title: 'ID', type: 'integer', readOnly: true },

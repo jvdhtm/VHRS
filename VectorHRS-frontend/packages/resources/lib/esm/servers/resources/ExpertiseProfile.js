@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var ExpertiseProfileResource = {
+export var ExpertiseProfile = {
     baseUrl: '/expertiseprofile/',
     relatedurls: ['/expertiseprofile/', '/expertiseprofile/{id}/'],
-    name: 'ExpertiseProfileResource',
+    name: 'ExpertiseProfile',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -36,6 +36,6 @@ export var ExpertiseProfileResource = {
             format: 'date-time',
         },
     },
-    required: ['person', 'expertise', 'status'],
+    required: ['person', 'expertise'],
 };
 //# sourceMappingURL=ExpertiseProfile.js.map

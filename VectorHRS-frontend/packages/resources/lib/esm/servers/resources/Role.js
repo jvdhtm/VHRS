@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var RoleResource = {
+export var Role = {
     baseUrl: '/role/',
     relatedurls: ['/role/', '/role/{id}/'],
-    name: 'RoleResource',
+    name: 'Role',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -12,7 +12,7 @@ export var RoleResource = {
         user: {
             title: 'User',
             type: 'integer',
-            'x-vhrs-relatedResource': 'identity_api.User',
+            'x-vhrs-relatedResource': 'identity_api.CustomUser',
         },
         permission: {
             title: 'Permission',

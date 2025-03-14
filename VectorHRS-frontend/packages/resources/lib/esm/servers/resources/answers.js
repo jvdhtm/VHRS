@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var answersResource = {
+export var answers = {
     baseUrl: '/answers/',
     relatedurls: ['/answers/', '/answers/{id}/'],
-    name: 'answersResource',
+    name: 'answers',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -31,6 +31,6 @@ export var answersResource = {
             'x-vhrs-relatedResource': 'questions.Question',
         },
     },
-    required: ['autor', 'status', 'question'],
+    required: ['autor', 'question'],
 };
 //# sourceMappingURL=answers.js.map

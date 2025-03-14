@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var NewsLetterResource = {
+export var NewsLetter = {
     baseUrl: '/newsletter/',
     relatedurls: ['/newsletter/', '/newsletter/{id}/'],
-    name: 'NewsLetterResource',
+    name: 'NewsLetter',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -32,6 +32,6 @@ export var NewsLetterResource = {
             format: 'date-time',
         },
     },
-    required: ['autor', 'status'],
+    required: ['autor'],
 };
 //# sourceMappingURL=NewsLetter.js.map

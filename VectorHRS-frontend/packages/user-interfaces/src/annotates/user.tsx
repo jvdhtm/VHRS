@@ -18,7 +18,7 @@ const newAnnotations: AnnotatedResourceFields<definitions['User']> = {
   ...commonAnnotations
 };
 
-annotateResource("UserResource", {
+annotateResource("User", {
   fields: newAnnotations,
   display: {
     components:{

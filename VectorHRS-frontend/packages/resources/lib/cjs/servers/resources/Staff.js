@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StaffResource = void 0;
+exports.Staff = void 0;
 var mockType = function () {
     return;
 };
-exports.StaffResource = {
+exports.Staff = {
     baseUrl: '/staff/',
     relatedurls: ['/staff/', '/staff/{id}/'],
-    name: 'StaffResource',
+    name: 'Staff',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -40,7 +40,12 @@ exports.StaffResource = {
         },
         x: { title: 'X', type: 'number' },
         y: { title: 'Y', type: 'number' },
-        level: { title: 'Level', type: 'integer' },
+        level: {
+            title: 'Level',
+            type: 'integer',
+            maximum: 2147483647,
+            minimum: -2147483648,
+        },
     },
     required: ['department', 'condition', 'who', 'x', 'y', 'level'],
 };

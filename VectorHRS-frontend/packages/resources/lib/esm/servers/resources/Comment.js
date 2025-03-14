@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var CommentResource = {
+export var Comment = {
     baseUrl: '/comment/',
     relatedurls: ['/comment/', '/comment/{id}/'],
-    name: 'CommentResource',
+    name: 'Comment',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -31,6 +31,6 @@ export var CommentResource = {
             'x-vhrs-relatedResource': 'news.NewsLetter',
         },
     },
-    required: ['autor', 'status', 'news'],
+    required: ['autor', 'news'],
 };
 //# sourceMappingURL=Comment.js.map

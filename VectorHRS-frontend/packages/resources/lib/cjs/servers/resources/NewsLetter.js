@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NewsLetterResource = void 0;
+exports.NewsLetter = void 0;
 var mockType = function () {
     return;
 };
-exports.NewsLetterResource = {
+exports.NewsLetter = {
     baseUrl: '/newsletter/',
     relatedurls: ['/newsletter/', '/newsletter/{id}/'],
-    name: 'NewsLetterResource',
+    name: 'NewsLetter',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -35,6 +35,6 @@ exports.NewsLetterResource = {
             format: 'date-time',
         },
     },
-    required: ['autor', 'status'],
+    required: ['autor'],
 };
 //# sourceMappingURL=NewsLetter.js.map

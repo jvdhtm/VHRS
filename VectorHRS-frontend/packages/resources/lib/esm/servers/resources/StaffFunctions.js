@@ -1,10 +1,10 @@
 var mockType = function () {
     return;
 };
-export var StaffFunctionsResource = {
+export var StaffFunctions = {
     baseUrl: '/stafffunctions/',
     relatedurls: ['/stafffunctions/', '/stafffunctions/{id}/'],
-    name: 'StaffFunctionsResource',
+    name: 'StaffFunctions',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -29,6 +29,6 @@ export var StaffFunctionsResource = {
             format: 'date-time',
         },
     },
-    required: ['function', 'staff', 'status'],
+    required: ['function', 'staff'],
 };
 //# sourceMappingURL=StaffFunctions.js.map

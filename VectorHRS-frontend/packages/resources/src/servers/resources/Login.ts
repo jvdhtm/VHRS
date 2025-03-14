@@ -4,10 +4,10 @@ const mockType = (): Models['Login'] | undefined => {
   return;
 };
 
-export const LoginResource: ResourceObject = {
+export const Login: ResourceObject = {
   baseUrl: '/auth/login/',
   relatedurls: ['/auth/login/'],
-  name: 'LoginResource',
+  name: 'Login',
   type: mockType,
   fields: {
     email: { title: 'Email', type: 'string', format: 'email', minLength: 1 },

@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RoleResource = void 0;
+exports.Role = void 0;
 var mockType = function () {
     return;
 };
-exports.RoleResource = {
+exports.Role = {
     baseUrl: '/role/',
     relatedurls: ['/role/', '/role/{id}/'],
-    name: 'RoleResource',
+    name: 'Role',
     type: mockType,
     fields: {
         id: { title: 'ID', type: 'integer', readOnly: true },
@@ -15,7 +15,7 @@ exports.RoleResource = {
         user: {
             title: 'User',
             type: 'integer',
-            'x-vhrs-relatedResource': 'identity_api.User',
+            'x-vhrs-relatedResource': 'identity_api.CustomUser',
         },
         permission: {
             title: 'Permission',
