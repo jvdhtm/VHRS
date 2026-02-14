@@ -2,24 +2,17 @@ import { annotateResource } from "@vhrs/resources";
 import { definitions } from "@vhrs/resources";
 import { AnnotatedResourceFields } from "@vhrs/resources";
 import { commonAnnotations } from "./common";
-import { People } from "@mui/icons-material";
 
-
-
-const newAnnotations: AnnotatedResourceFields<definitions['Person']> = {
+const newAnnotations: AnnotatedResourceFields<definitions['Function']> = {
   ...commonAnnotations
 };
 
-annotateResource("Person", {
+annotateResource("Function", {
   fields: newAnnotations,
   display: {
-    components:{
-      asListItem: (data: any) => <li>{data}</li>,
-      asTitle: () => <>People</>,
-      asIcon: () => <People/>
+    components: {
+      asListItem: (data: any) => <span>{data.name}</span>,
+      asTitle: () => <>Function</>,
     }
   }
 });
-
-
-

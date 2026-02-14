@@ -6,8 +6,9 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useRItem } from "../hooks/useRItem";
-import type { ResourceObject, AnnotatedResourceField } from "@vhrs/resources"; // Adjust path as needed
+import type { ResourceObject, AnnotatedResourceField } from "@vhrs/resources";
 import { Box } from "@mui/material";
+import { useAuth } from "../../context/AuthContext";
 
 interface DynamicTableProps {
   resource: ResourceObject;
@@ -18,7 +19,8 @@ const DynamicTable: React.FC<DynamicTableProps> = ({
   resource,
   includeHeader,
 }) => {
-  const { data, isLoading, error, fetchItems }: any = useRItem(resource); // Adjust useRItem type as per your context
+  const auth = useAuth();
+  const { data, isLoading, error, fetchItems }: any = useRItem(resource);
 
   useEffect(() => {
     fetchItems(); // Fetch items when component mounts
@@ -26,13 +28,12 @@ const DynamicTable: React.FC<DynamicTableProps> = ({
 
   const columnHelper = createColumnHelper<any>(); // Adjust type as per your data structure
 
-  // Function to get the cell component based on the display configuration
   const getCellComponent = useCallback(
     (field: AnnotatedResourceField, value: any) => {
       const display = field.display?.components?.asTableCell;
-      return display ? display(value) : value; // Fallback to the raw value if no custom component is defined
+      return display ? display(value, { resource, props: {}, auth }) : value;
     },
-    []
+    [resource, auth]
   );
   // Define columns based on includeHeader
   const columns = useMemo(() => {

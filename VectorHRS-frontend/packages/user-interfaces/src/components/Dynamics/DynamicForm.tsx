@@ -20,8 +20,8 @@ import type {
 import { SelectChangeEvent } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { useAuth, UseAuthHook } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 interface DynamicFormProps {
   resource?: ResourceObject;
@@ -36,8 +36,8 @@ export const DynamicForm = ({
   mode,
   props,
 }: DynamicFormProps) => {
-  const auth = useAuth();
   const navigate = useNavigate();
+  const auth = useAuth();
   const [formData, setFormData] = useState<any>({});
 
   if (!resource) return null;
@@ -64,10 +64,15 @@ export const DynamicForm = ({
     return formData;
   };
 
-  const getDisplayComponent = (field: AnnotatedResourceField, value: any) => {
+  const getDisplayComponent = (field: AnnotatedResourceField, value: any, fieldName: string) => {
     const display = field.display?.components?.asFormInput;
     if (display) {
-      return display(value);
+      const contextProps = { 
+        ...props, 
+        TextField, 
+        onChange: (value: any) => setFormData((prev: any) => ({ ...prev, [fieldName]: value }))
+      };
+      return display(value, { resource, props: contextProps, auth });
     }
     return null;
   };
@@ -95,6 +100,38 @@ export const DynamicForm = ({
             ))}
           </Select>
         </FormControl>
+      );
+    }
+
+    if (fieldName === "password") {
+      return (
+        <TextField
+          fullWidth
+          key={fieldName}
+          id={fieldName}
+          name={fieldName}
+          label={field.title || fieldName}
+          type="password"
+          value={value || ""}
+          onChange={handleInputChange}
+          variant="outlined"
+        />
+      );
+    }
+
+    if (field.format === "email") {
+      return (
+        <TextField
+          fullWidth
+          key={fieldName}
+          id={fieldName}
+          name={fieldName}
+          label={field.title || fieldName}
+          type="email"
+          value={value || ""}
+          onChange={handleInputChange}
+          variant="outlined"
+        />
       );
     }
 
@@ -158,25 +195,9 @@ export const DynamicForm = ({
   };
 
   const renderActions = (
-    actions: Action[] = [],
-    auth: UseAuthHook
+    actions: Action[] = []
   ) => {
-    const filteredActions = actions.filter((action) => {
-      if (!action().partOf) return true; // No visibility restrictions
-      if (action().partOf === "GENERAL") return true;
-      if (action().partOf === "DEFAULT_ADMIN" && auth.isLoggedIn) {
-        return true;
-      }
-      return false;
-    });
-
-    const filteredActionsAccess = filteredActions.filter((action) => {
-      if (!action().access) return true; // No visibility restrictions
-      if (action()?.access?.(auth.user.id)) return true;
-      return false;
-    });
-
-    if (filteredActionsAccess.length === 0) {
+    if (actions.length === 0) {
       // If no actions are provided, create default save and cancel buttons with icons
       return (
         <Box sx={{ display: "flex", gap: 2 }}>
@@ -197,7 +218,7 @@ export const DynamicForm = ({
 
     return (
       <Box sx={{ display: "flex", gap: 2 }}>
-        {filteredActions.map((action) => (
+        {actions.map((action) => (
           <Button
             key={action().name}
             variant="contained"
@@ -218,36 +239,27 @@ export const DynamicForm = ({
   const fields: any = resource.fields;
 
   const renderFields = () => {
-    const filteredFields = includeFields.filter((fieldName) => {
-      const field = fields[fieldName];
-      if (!field.display) return true;
-      if (field.display.partOf === "GENERAL") return true;
-      if (field.display.partOf === "DEFAULT_ADMIN" && auth.isLoggedIn)
-        return true;
-      // Add additional logic if needed for UserIds[]
-      return false;
-    });
 
     switch (mode) {
       case "two-col":
         return (
           <>
             <Grid item xs={6}>
-              {filteredFields
-                .slice(0, Math.ceil(filteredFields.length / 2))
+              {includeFields
+                .slice(0, Math.ceil(includeFields.length / 2))
                 .map((field) => (
                   <Box key={field} marginBottom={2}>
-                    {getDisplayComponent(fields[field], formData[field]) ||
+                    {getDisplayComponent(fields[field], formData[field], field) ||
                       renderField(fields[field], field, formData[field])}
                   </Box>
                 ))}
             </Grid>
             <Grid item xs={6}>
-              {filteredFields
-                .slice(Math.ceil(filteredFields.length / 2))
+              {includeFields
+                .slice(Math.ceil(includeFields.length / 2))
                 .map((field) => (
                   <Box key={field} marginBottom={2}>
-                    {getDisplayComponent(fields[field], formData[field]) ||
+                    {getDisplayComponent(fields[field], formData[field], field) ||
                       renderField(fields[field], field, formData[field])}
                   </Box>
                 ))}
@@ -258,34 +270,34 @@ export const DynamicForm = ({
         return (
           <>
             <Grid item xs={4}>
-              {filteredFields
-                .slice(0, Math.ceil(filteredFields.length / 3))
+              {includeFields
+                .slice(0, Math.ceil(includeFields.length / 3))
                 .map((field) => (
                   <Box key={field} marginBottom={2}>
-                    {getDisplayComponent(fields[field], formData[field]) ||
+                    {getDisplayComponent(fields[field], formData[field], field) ||
                       renderField(fields[field], field, formData[field])}
                   </Box>
                 ))}
             </Grid>
             <Grid item xs={4}>
-              {filteredFields
+              {includeFields
                 .slice(
-                  Math.ceil(filteredFields.length / 3),
-                  Math.ceil((filteredFields.length * 2) / 3)
+                  Math.ceil(includeFields.length / 3),
+                  Math.ceil((includeFields.length * 2) / 3)
                 )
                 .map((field) => (
                   <Box key={field} marginBottom={2}>
-                    {getDisplayComponent(fields[field], formData[field]) ||
+                    {getDisplayComponent(fields[field], formData[field], field) ||
                       renderField(fields[field], field, formData[field])}
                   </Box>
                 ))}
             </Grid>
             <Grid item xs={4}>
-              {filteredFields
-                .slice(Math.ceil((filteredFields.length * 2) / 3))
+              {includeFields
+                .slice(Math.ceil((includeFields.length * 2) / 3))
                 .map((field) => (
                   <Box key={field} marginBottom={2}>
-                    {getDisplayComponent(fields[field], formData[field]) ||
+                    {getDisplayComponent(fields[field], formData[field], field) ||
                       renderField(fields[field], field, formData[field])}
                   </Box>
                 ))}
@@ -294,11 +306,11 @@ export const DynamicForm = ({
         );
       case "normal":
       default:
-        return filteredFields.map((field) => (
-          <Grid item xs={12} key={field}>
+        return includeFields.map((fieldName) => (
+          <Grid item xs={12} key={fieldName}>
             <Box marginBottom={2}>
-              {getDisplayComponent(fields[field], formData[field]) ||
-                renderField(fields[field], field, formData[field])}
+              {getDisplayComponent(fields[fieldName], formData[fieldName], fieldName) ||
+                renderField(fields[fieldName], fieldName, formData[fieldName])}
             </Box>
           </Grid>
         ));
@@ -315,7 +327,7 @@ export const DynamicForm = ({
       </Grid>
       <Box sx={{ pt: 4 }}>
         <Grid container justifyContent="flex-end" spacing={2}>
-          {renderActions(resource.actions, auth)}
+          {renderActions(resource.actions)}
         </Grid>
       </Box>
     </form>

@@ -1,4 +1,4 @@
-import { Action, AnnotatedResourceFields, ResourceContext, ResourceObject } from "@vhrs/resources";
+import { Action, AnnotatedResourceFields, ResourceContext } from "@vhrs/resources";
 import { TextField, Select, MenuItem, TableCell } from "@mui/material";
 import { Edit, CheckCircle, Cancel, Info } from "@mui/icons-material"; // Import MUI icons as needed
 import { useRItem } from "../components/hooks/useRItem";
@@ -36,8 +36,6 @@ export const commonAnnotations: AnnotatedResourceFields<any> = {
           <TableCell>{data}</TableCell>
         )
       },
-      access: ()=>true,
-          partOf:'DEFAULT_ADMIN'
     },
   },
   created_date_time: {
@@ -56,8 +54,6 @@ export const commonAnnotations: AnnotatedResourceFields<any> = {
           <TableCell>{data}</TableCell>
         ),
       },
-      access: ()=>true,
-       partOf:'DEFAULT_ADMIN'
     },
   },
   description: {
@@ -80,8 +76,6 @@ export const commonAnnotations: AnnotatedResourceFields<any> = {
           <TableCell>{data}</TableCell>
         ),
       },
-      access: ()=>true,
-       partOf:'DEFAULT_ADMIN'
     },
   },
 };
@@ -90,27 +84,18 @@ export const defaultActions: Action[] = [
     name: 'edit',
     title: `Edit ${ctx?.resource.display?.components?.asTitle?.(data, ctx) ?? ''}`,
     useHandler: () => {
-        const { saveItem } = useRItem(ctx?.resource); // Assuming useRItem is set up to handle saveItem
-        saveItem(data.id, data); // Assuming saveItem handles the API request and cache update
-
-      // Example: dispatch an action to update user
-
+        const { saveItem } = useRItem(ctx?.resource);
+        saveItem(data.id, data);
     },
     route: () => `${data.id}`,
-    access: ()=>true,
-     partOf:'DEFAULT_ADMIN'
   }),
   (data?: any, ctx?: ResourceContext) =>({
     name: 'delete',
     title: `Delete ${ctx?.resource.display?.components?.asTitle?.(data, ctx) ?? ''}`,
     useHandler: () => {
-        const { deleteItem } = useRItem(ctx?.resource); // Assuming useRItem is set up to handle saveItem
-        deleteItem(data.id); // Assuming saveItem handles the API request and cache update
-      // Example: dispatch an action to update user
-
+        const { deleteItem } = useRItem(ctx?.resource);
+        deleteItem(data.id);
     },
     route: () => `${data.id}`,
-    access: ()=>true,
-     partOf:'DEFAULT_ADMIN'
   }),
 ];

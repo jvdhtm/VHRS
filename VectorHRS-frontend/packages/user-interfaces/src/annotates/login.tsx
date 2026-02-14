@@ -2,19 +2,53 @@ import { Action, annotateResource, ResourceContext} from "@vhrs/resources";
 import { definitions } from "@vhrs/resources";
 import { AnnotatedResourceFields } from "@vhrs/resources";
 import { commonAnnotations, defaultActions } from "./common";
-import LockIcon from '@mui/icons-material/Lock'; // Import Material-UI Lock icon
+import LockIcon from '@mui/icons-material/Lock'; 
 import ForgotPasswordIcon from '@mui/icons-material/HelpOutline'; 
 import { UseAuthHook } from "../context/AuthContext";
 
 const newAnnotations: AnnotatedResourceFields<definitions['Login']> = {
   email: {
     display: {
-      partOf: 'GENERAL', // Marking email as GENERAL
+      components: {
+        asTitle: (data: any) => <span>{data}</span>,
+        asFormInput: (data?: any, ctx?: ResourceContext) => {
+          const TextField = ctx?.props.TextField;
+          if (!TextField) return null;
+          return (
+            <TextField
+              label="Email"
+              name="email"
+              value={data}
+              onChange={(e: any) => ctx?.props.onChange?.(e.target.value)}
+              fullWidth
+              type="email"
+            />
+          );
+        },
+        asTableCell: (data: any) => <span>{data}</span>,
+      },
     },
   },
   password: {
     display: {
-      partOf: 'GENERAL', // Marking password as GENERAL
+      components: {
+        asTitle: (data: any) => <span>******</span>,
+        asFormInput: (data?: any, ctx?: ResourceContext) => {
+          const TextField = ctx?.props.TextField;
+          if (!TextField) return null;
+          return (
+            <TextField
+              label="Password"
+              name="password"
+              value={data}
+              onChange={(e: any) => ctx?.props.onChange?.(e.target.value)}
+              fullWidth
+              type="password"
+            />
+          );
+        },
+        asTableCell: (data: any) => <span>******</span>,
+      },
     },
   },
   ...commonAnnotations
@@ -52,8 +86,7 @@ annotateResource("Login", {
     components:{
       asListItem: (data: any) => <div>{data}</div>,
       asTitle: () => <>Login</>,
-    },
-    partOf: 'DEFAULT_ADMIN', // Pass the DEFAULT_ADMIN setting from newAnnotations
+    }
   },
   actions:loginActions
 });

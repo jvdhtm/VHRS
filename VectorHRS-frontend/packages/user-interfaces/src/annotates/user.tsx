@@ -12,8 +12,7 @@ const newAnnotations: AnnotatedResourceFields<definitions['User']> = {
       components:{
       asTitle: (data?: any) => <span>{data ? 'Active' : 'Inactive'}</span>,
       asTableCell: (data?: any) => <TableCell>{data ? 'Active' : 'Inactive'}</TableCell>,
-      },
-      partOf: 'DEFAULT_ADMIN'
+      }
     },
   },
   ...commonAnnotations
@@ -26,16 +25,8 @@ annotateResource("User", {
       asListItem: (data: any) => <li>{data}</li>,
       asTitle: () => <>User</>,
       asIcon: () => <Person/>
-    },
-    partOf: 'DEFAULT_ADMIN', // Pass the DEFAULT_ADMIN setting from newAnnotations
-  },
-  menu:[
-    {
-      partOf:'SIDEBAR',
-      to:'/user'
     }
-
-  ]
+  }
 });
 
 

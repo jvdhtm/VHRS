@@ -17,17 +17,8 @@ annotateResource("Address", {
       asListItem: (data: any) => <li>{data}</li>,
       asTitle: () => <>Address</>,
       asIcon: () => <Contacts/>
-    },
-    access: ()=>true,
-    partOf:'DEFAULT_ADMIN'
-  },
-  menu:[
-    {
-      partOf:'SIDEBAR',
-      parent:'PersonResource'
     }
-
-  ]
+  }
 });
 
 
