@@ -9,12 +9,12 @@ import { UseAuthHook } from "../context/AuthContext";
 const newAnnotations: AnnotatedResourceFields<definitions['Login']> = {
   email: {
     display: {
-      admissions: 'GENERAL', // Marking email as GENERAL
+      partOf: 'GENERAL', // Marking email as GENERAL
     },
   },
   password: {
     display: {
-      admissions: 'GENERAL', // Marking password as GENERAL
+      partOf: 'GENERAL', // Marking password as GENERAL
     },
   },
   ...commonAnnotations
@@ -53,7 +53,7 @@ annotateResource("Login", {
       asListItem: (data: any) => <div>{data}</div>,
       asTitle: () => <>Login</>,
     },
-    admissions: 'DEFAULT_ADMIN', // Pass the DEFAULT_ADMIN setting from newAnnotations
+    partOf: 'DEFAULT_ADMIN', // Pass the DEFAULT_ADMIN setting from newAnnotations
   },
   actions:loginActions
 });

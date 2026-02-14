@@ -159,19 +159,24 @@ export const DynamicForm = ({
 
   const renderActions = (
     actions: Action[] = [],
-    props: any,
     auth: UseAuthHook
   ) => {
     const filteredActions = actions.filter((action) => {
-      if (!action().admissions) return true; // No admission restrictions
-      if (action().admissions === "GENERAL") return true;
-      if (action().admissions === "DEFAULT_ADMIN" && auth.isLoggedIn) {
+      if (!action().partOf) return true; // No visibility restrictions
+      if (action().partOf === "GENERAL") return true;
+      if (action().partOf === "DEFAULT_ADMIN" && auth.isLoggedIn) {
         return true;
       }
       return false;
     });
 
-    if (filteredActions.length === 0) {
+    const filteredActionsAccess = filteredActions.filter((action) => {
+      if (!action().access) return true; // No visibility restrictions
+      if (action()?.access?.(auth.user.id)) return true;
+      return false;
+    });
+
+    if (filteredActionsAccess.length === 0) {
       // If no actions are provided, create default save and cancel buttons with icons
       return (
         <Box sx={{ display: "flex", gap: 2 }}>
@@ -216,8 +221,8 @@ export const DynamicForm = ({
     const filteredFields = includeFields.filter((fieldName) => {
       const field = fields[fieldName];
       if (!field.display) return true;
-      if (field.display.admissions === "GENERAL") return true;
-      if (field.display.admissions === "DEFAULT_ADMIN" && auth.isLoggedIn)
+      if (field.display.partOf === "GENERAL") return true;
+      if (field.display.partOf === "DEFAULT_ADMIN" && auth.isLoggedIn)
         return true;
       // Add additional logic if needed for UserIds[]
       return false;
@@ -310,7 +315,7 @@ export const DynamicForm = ({
       </Grid>
       <Box sx={{ pt: 4 }}>
         <Grid container justifyContent="flex-end" spacing={2}>
-          {renderActions(resource.actions, props, auth)}
+          {renderActions(resource.actions, auth)}
         </Grid>
       </Box>
     </form>

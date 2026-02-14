@@ -18,7 +18,7 @@ annotateResource("Person", {
       asTitle: () => <>People</>,
       asIcon: () => <People/>
     },
-    admissions: 'DEFAULT_ADMIN', // Pass the DEFAULT_ADMIN setting from newAnnotations
+    partOf: 'DEFAULT_ADMIN', // Pass the DEFAULT_ADMIN setting from newAnnotations
   },
   menu:[
     {

@@ -18,7 +18,8 @@ annotateResource("Address", {
       asTitle: () => <>Address</>,
       asIcon: () => <Contacts/>
     },
-    admissions: 'DEFAULT_ADMIN', // Pass the DEFAULT_ADMIN setting from newAnnotations
+    access: ()=>true,
+    partOf:'DEFAULT_ADMIN'
   },
   menu:[
     {

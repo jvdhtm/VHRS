@@ -18,14 +18,14 @@ var annotateResource = function (resourceKey, annotations) {
             if (Object.prototype.hasOwnProperty.call(annotations.fields, fieldName)) {
                 var field = annotations.fields[fieldName];
                 if (field === null || field === void 0 ? void 0 : field.display) {
-                    var _a = field.display, components = _a.components, ctx = _a.ctx, admissions = _a.admissions;
+                    var _a = field.display, components = _a.components, ctx = _a.ctx, partOf = _a.partOf, access = _a.access;
                     var componentsWithContext = (0, addContext_1.addContext)(components, resource);
                     var tempField = existingFields[fieldName];
-                    if (existingFields && typeof tempField !== 'undefined') {
+                    if (existingFields && typeof tempField !== "undefined") {
                         if (!tempField.display)
                             tempField.display = {};
                         var oldDisplay = tempField.display;
-                        tempField.display = tslib_1.__assign(tslib_1.__assign({}, (oldDisplay)), { components: tslib_1.__assign({}, componentsWithContext), ctx: ctx || { resource: resource, props: {} }, admissions: admissions });
+                        tempField.display = tslib_1.__assign(tslib_1.__assign({}, oldDisplay), { components: tslib_1.__assign({}, componentsWithContext), ctx: ctx || { resource: resource, props: {} }, access: access, partOf: partOf });
                         existingFields[fieldName] = field;
                     }
                 }
@@ -33,9 +33,9 @@ var annotateResource = function (resourceKey, annotations) {
         }
     }
     if (annotations.display) {
-        var _b = annotations.display, components = _b.components, ctx = _b.ctx, admissions = _b.admissions;
+        var _b = annotations.display, components = _b.components, ctx = _b.ctx, access = _b.access, partOf = _b.partOf;
         var componentsWithContext = (0, addContext_1.addContext)(components, resource);
-        resource.display = tslib_1.__assign(tslib_1.__assign({}, resource.display), { components: tslib_1.__assign({}, componentsWithContext), ctx: ctx || { resource: resource, props: {} }, admissions: admissions });
+        resource.display = tslib_1.__assign(tslib_1.__assign({}, resource.display), { components: tslib_1.__assign({}, componentsWithContext), ctx: ctx || { resource: resource, props: {} }, access: access, partOf: partOf });
     }
     if (annotations.actions) {
         resource.actions = (0, addContext_1.addContextToActions)(annotations.actions, resource);

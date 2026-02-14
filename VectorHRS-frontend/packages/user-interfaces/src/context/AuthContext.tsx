@@ -1,12 +1,14 @@
 import React, { createContext, useContext, useState } from 'react';
 import { resources } from '@vhrs/resources';
 import { useRItem } from '../components/hooks/useRItem';
+import { definitions } from "@vhrs/resources";
 
 export interface UseAuthHook {
   isLoggedIn: boolean;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   error: any;
+  user:definitions['User']
   isLoading: boolean;
 }
 
@@ -17,7 +19,7 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const { createItem, isLoading, error } = useRItem(resources.Login);
+  const { createItem, isLoading, error, data } = useRItem(resources.Login);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const login = async (email: string, password: string): Promise<void> => {
@@ -45,6 +47,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     login,
     logout,
     error,
+    user:data,
     isLoading,
   };
 

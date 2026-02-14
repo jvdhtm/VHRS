@@ -28,7 +28,7 @@ export const initPassport = (app: any) => {
           // Access req object directly
           const data = { email, password };
           const request: RequestType = {
-            endpoint: makeUrlForItems(resources.LoginResource),
+            endpoint: makeUrlForItems(resources.Login),
             name: "Auth",
             method: "post",
             data,
@@ -71,7 +71,7 @@ export const initPassport = (app: any) => {
       const token = req.session.user.token; // Retrieve token from session
       const headers = { Authorization: `Token ${token}` };
       const request: RequestType = {
-        endpoint: `${resources.UserResource.baseUrl}${id}`,
+        endpoint: `${resources.User.baseUrl}${id}`,
         name: "Auth",
         method: "get",
         headers,

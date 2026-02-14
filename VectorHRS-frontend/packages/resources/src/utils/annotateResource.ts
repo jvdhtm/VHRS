@@ -26,22 +26,23 @@ export const annotateResource = (
       if (Object.prototype.hasOwnProperty.call(annotations.fields, fieldName)) {
         const field = annotations.fields[fieldName];
         if (field?.display) {
-          const { components, ctx, admissions } = field.display;
+          const { components, ctx, partOf, access } = field.display;
 
           const componentsWithContext = addContext(components, resource);
 
           let tempField = existingFields[fieldName];
-          if (existingFields && typeof tempField !== 'undefined') {
+          if (existingFields && typeof tempField !== "undefined") {
             if (!tempField.display) tempField.display = {};
             let oldDisplay = tempField.display;
 
             tempField.display = {
-              ...(oldDisplay),
+              ...oldDisplay,
               components: {
-                ...componentsWithContext
+                ...componentsWithContext,
               },
               ctx: ctx || { resource, props: {} },
-              admissions: admissions,
+              access,
+              partOf,
             };
 
             existingFields[fieldName] = field;
@@ -52,17 +53,18 @@ export const annotateResource = (
   }
 
   if (annotations.display) {
-    const { components, ctx, admissions } = annotations.display;
+    const { components, ctx, access, partOf } = annotations.display;
 
     const componentsWithContext = addContext(components, resource);
 
     resource.display = {
       ...resource.display,
       components: {
-        ...componentsWithContext
+        ...componentsWithContext,
       },
       ctx: ctx || { resource, props: {} },
-      admissions,
+      access,
+      partOf,
     };
   }
 
@@ -75,7 +77,7 @@ export const annotateResource = (
   }
 
   if (annotations.menu) {
-    resource.menu = [ ...annotations.menu];
+    resource.menu = [...annotations.menu];
   }
 
   return resource;

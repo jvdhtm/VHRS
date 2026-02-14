@@ -25,7 +25,7 @@ const Login = () => {
           boxShadow: 1,
         }}
       >
-        <DynamicForm resource={resources.LoginResource} includeFields={['email', 'password']}  />
+        <DynamicForm resource={resources.Login} includeFields={['email', 'password']}  />
       </Box>
     </Box>
   );

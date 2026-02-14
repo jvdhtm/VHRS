@@ -36,7 +36,8 @@ export const commonAnnotations: AnnotatedResourceFields<any> = {
           <TableCell>{data}</TableCell>
         )
       },
-      admissions: "DEFAULT_ADMIN",
+      access: ()=>true,
+          partOf:'DEFAULT_ADMIN'
     },
   },
   created_date_time: {
@@ -55,7 +56,8 @@ export const commonAnnotations: AnnotatedResourceFields<any> = {
           <TableCell>{data}</TableCell>
         ),
       },
-      admissions: "DEFAULT_ADMIN",
+      access: ()=>true,
+       partOf:'DEFAULT_ADMIN'
     },
   },
   description: {
@@ -78,14 +80,15 @@ export const commonAnnotations: AnnotatedResourceFields<any> = {
           <TableCell>{data}</TableCell>
         ),
       },
-      admissions: "DEFAULT_ADMIN",
+      access: ()=>true,
+       partOf:'DEFAULT_ADMIN'
     },
   },
 };
 export const defaultActions: Action[] = [
   (data?: any, ctx?: ResourceContext)=>({
     name: 'edit',
-    title: 'Edit User',
+    title: `Edit ${ctx?.resource.display?.components?.asTitle?.(data, ctx) ?? ''}`,
     useHandler: () => {
         const { saveItem } = useRItem(ctx?.resource); // Assuming useRItem is set up to handle saveItem
         saveItem(data.id, data); // Assuming saveItem handles the API request and cache update
@@ -94,11 +97,12 @@ export const defaultActions: Action[] = [
 
     },
     route: () => `${data.id}`,
-    admissions: 'DEFAULT_ADMIN',
+    access: ()=>true,
+     partOf:'DEFAULT_ADMIN'
   }),
   (data?: any, ctx?: ResourceContext) =>({
     name: 'delete',
-    title: 'Delete User',
+    title: `Delete ${ctx?.resource.display?.components?.asTitle?.(data, ctx) ?? ''}`,
     useHandler: () => {
         const { deleteItem } = useRItem(ctx?.resource); // Assuming useRItem is set up to handle saveItem
         deleteItem(data.id); // Assuming saveItem handles the API request and cache update
@@ -106,6 +110,7 @@ export const defaultActions: Action[] = [
 
     },
     route: () => `${data.id}`,
-    admissions: 'DEFAULT_ADMIN',
+    access: ()=>true,
+     partOf:'DEFAULT_ADMIN'
   }),
 ];

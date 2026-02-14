@@ -117,9 +117,9 @@ export interface ActionPropType {
     className?: string;
     disable?: boolean,
     hidden?: boolean;
-    admissions?: 'DEFAULT_ADMIN' | 'GENERAL' | UserIds[]
+    access?: Access;
+    partOf?: 'DEFAULT_ADMIN' | 'GENERAL'
 }
-
 export type Action = (data?: any, ctx?:ResourceContext) =>  ActionPropType;
 export interface Annotations<T> {
     actions?: Action[];
@@ -128,7 +128,7 @@ export interface Annotations<T> {
     menu?: Menu[]
 }
 export type DisplayResource = (data?: any, ctx?:ResourceContext) =>  ReactNode;
-type UserIds = number | string
+type UserId = number | string
 export interface Display {
     components? :{
         asTitle?: DisplayResource;
@@ -142,10 +142,12 @@ export interface Display {
         asIcon?: DisplayResource;
     }
     ctx?: ResourceContext;
-    admissions?: 'DEFAULT_ADMIN' | 'GENERAL' | UserIds[]
+    access?:  Access;
+    partOf?: 'DEFAULT_ADMIN' | 'GENERAL'
     disable?: boolean,
     hidden?: boolean;
 }
+export type Access = (userId?: UserId) => Boolean | 'disabled'; 
 export type AnnotatedResourceFields<T> = {
     [P in keyof T]?: AnnotatedResourceField;
 };
