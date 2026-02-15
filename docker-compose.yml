@@ -1,30 +1,13 @@
 version: '3.8'
 
 services:
-  django:
-    build:
-      context: ./VectorHRS
-      dockerfile: Dockerfile  # Assuming you have a Dockerfile for Django setup
-    ports:
-      - "8080:8000"
-    depends_on:
-      - vhrs_database
-    environment:
-      - DJANGO_SETTINGS_MODULE=VectorHRS.settings
-    command: >
-      sh -c "python manage.py migrate && 
-             python create_superuser.py &&
-             python manage.py runserver 0.0.0.0:8000"
-    volumes:
-      - ./VectorHRS:/VectorHRS
-
   vhrs_database:
     image: mysql:5.7
     restart: always
     environment:
       MYSQL_DATABASE: 'vhrs'
-      MYSQL_USER: 'user'  # Make sure this matches the user defined in Django settings
-      MYSQL_PASSWORD: 'admin'  # Make sure this matches the password defined in Django settings
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'admin'
       MYSQL_ROOT_PASSWORD: 'admin'
     ports:
       - "3306:3306"
@@ -35,6 +18,41 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
+
+  django:
+    build:
+      context: ./VectorHRS
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8000"
+    depends_on:
+      vhrs_database:
+        condition: service_healthy
+    environment:
+      - DJANGO_SETTINGS_MODULE=VectorHRS.settings
+    command: >
+      sh -c "python manage.py migrate && 
+             python create_superuser.py &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./VectorHRS:/VectorHRS
+
+  macaco:
+    build:
+      context: ./VectorHRS-frontend/apps/macaco
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    depends_on:
+      django:
+        condition: service_started
+    environment:
+      - API_URL=http://django:8000
+      - PORT=4000
+      - CLIENT_APP_PATH=/app/static
+      - CLIENT_INDEX_PATH=/app/static/index.html
+    volumes:
+      - ./VectorHRS-frontend/apps/macaco:/app
 
 volumes:
   mysql_data:

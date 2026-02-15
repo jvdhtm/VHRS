@@ -2,9 +2,8 @@ import { annotateResource } from "@vhrs/resources";
 import { definitions } from "@vhrs/resources";
 import { AnnotatedResourceFields } from "@vhrs/resources";
 import { TableCell } from '@mui/material';
-import { Person } from "@mui/icons-material"; // Import MUI icons as needed
-import { commonAnnotations } from "./common";
-
+import { Person } from "@mui/icons-material";
+import { commonAnnotations, defaultActions } from "./common";
 
 const newAnnotations: AnnotatedResourceFields<definitions['User']> = {
   is_active: {
@@ -26,7 +25,8 @@ annotateResource("User", {
       asTitle: () => <>User</>,
       asIcon: () => <Person/>
     }
-  }
+  },
+  actions: defaultActions
 });
 
 

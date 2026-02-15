@@ -1,7 +1,7 @@
 import { annotateResource } from "@vhrs/resources";
 import { definitions } from "@vhrs/resources";
 import { AnnotatedResourceFields } from "@vhrs/resources";
-import { commonAnnotations } from "./common";
+import { commonAnnotations, defaultActions } from "./common";
 
 const newAnnotations: AnnotatedResourceFields<definitions['NewsRelatedLink']> = {
   ...commonAnnotations
@@ -14,5 +14,6 @@ annotateResource("NewsRelatedLink", {
       asListItem: (data: any) => <span>{data.name}</span>,
       asTitle: () => <>News Related Link</>,
     }
-  }
+  },
+  actions: defaultActions
 });

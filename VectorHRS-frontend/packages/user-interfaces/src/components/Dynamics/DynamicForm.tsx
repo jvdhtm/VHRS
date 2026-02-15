@@ -26,19 +26,29 @@ import { useAuth } from "../../context/AuthContext";
 interface DynamicFormProps {
   resource?: ResourceObject;
   includeFields: string[];
-  mode?: "normal" | "two-col" | "three-col"; // New mode prop
+  mode?: "normal" | "two-col" | "three-col";
   props?: any;
+  initialData?: any;
 }
 
-export const DynamicForm = ({
+ const DynamicForm = ({
   resource,
   includeFields,
   mode,
   props,
+  initialData,
 }: DynamicFormProps) => {
   const navigate = useNavigate();
   const auth = useAuth();
   const [formData, setFormData] = useState<any>({});
+
+  React.useEffect(() => {
+    if (initialData) {
+      setFormData(initialData);
+    } else {
+      setFormData({});
+    }
+  }, [initialData]);
 
   if (!resource) return null;
 
@@ -333,3 +343,5 @@ export const DynamicForm = ({
     </form>
   );
 };
+
+export default DynamicForm;

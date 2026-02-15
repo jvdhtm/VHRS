@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently --kill-others \"npm start --prefix apps/macaco\"",
-    "sync": "npm run syncModels --prefix packages/generateModels && npm run syncContexts --prefix packages/generateReactContext && npm run buildResource",
     "buildResource": " npm run build --prefix packages/resources ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
