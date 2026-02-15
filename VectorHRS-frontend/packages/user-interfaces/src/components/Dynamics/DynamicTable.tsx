@@ -88,7 +88,7 @@ const DynamicTable: React.FC<DynamicTableProps> = ({
 
   const columns = useMemo(() => {
     const resourceFieldsObj: any = resource.fields;
-    const cols = includeHeader.map((field) => {
+    const cols: any[] = includeHeader.map((field) => {
       return columnHelper.accessor(field, {
         id: field,
         header: resourceFieldsObj[field]?.title || field,
@@ -101,7 +101,7 @@ const DynamicTable: React.FC<DynamicTableProps> = ({
         columnHelper.display({
           id: 'actions',
           header: 'Actions',
-          cell: ({ row }) => (
+          cell: ({ row }: any) => (
             <TableCell>
               {resourceActions.map((action) => {
                 const actionData = action(row.original, { resource, props: {}, auth });
@@ -116,7 +116,7 @@ const DynamicTable: React.FC<DynamicTableProps> = ({
                 );
               })}
             </TableCell>
-          );
+          )
         })
       );
     }

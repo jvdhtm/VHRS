@@ -117,8 +117,7 @@ export interface ActionPropType {
     className?: string;
     disable?: boolean,
     hidden?: boolean;
-    access?: Access;
-    partOf?: 'DEFAULT_ADMIN' | 'GENERAL'
+    showInForm? : boolean;
 }
 export type Action = (data?: any, ctx?:ResourceContext) =>  ActionPropType;
 export interface Annotations<T> {
@@ -169,6 +168,7 @@ export interface ResourceObject {
     errors?: ErrorFunctions;
     required?: string[];
     actions?: Action[];
+    linkActions?: Action[];
     baseFilter?: any;
     display?: Display;
     menu?: Menu[]

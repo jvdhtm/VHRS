@@ -199,6 +199,88 @@ Resources are automatically grouped by module using `groupResourcesByModule`:
 - Dynamically creates group names: `people.Person` → `People`, `staff_api.Staff` → `StaffApi`
 - Used by Sidebar for tree navigation
 
+## Component Pattern
+
+Each resource component folder follows a consistent structure:
+
+```
+components/
+├── Person/
+│   ├── PersonTable.tsx      # Table view using DynamicTable
+│   ├── PersonList.tsx       # List view using DynamicList
+│   ├── PersonForm.tsx       # Form view using DynamicForm
+│   └── index.tsx            # Barrel exports
+├── User/
+│   ├── UserTable.tsx
+│   ├── UserList.tsx
+│   ├── UserForm.tsx
+│   └── index.tsx
+└── ...
+```
+
+### Component File Structure
+
+Each `[Resource]Table.tsx`:
+```tsx
+import { Box } from "@mui/material";
+import DynamicTable from "../Dynamics/DynamicTable";
+import { resources } from "@vhrs/resources";
+
+const PersonTable = () => (
+  <Box sx={{ p: 3 }}>
+    <DynamicTable 
+      resource={resources.Person} 
+      includeHeader={['id', 'firstname', 'lastname', 'age']}  
+    />
+  </Box>
+);
+
+export default PersonTable;
+```
+
+Each `[Resource]List.tsx`:
+```tsx
+import { Box } from "@mui/material";
+import DynamicList from "../Dynamics/DynamicList";
+import { resources } from "@vhrs/resources";
+
+const PersonList = () => (
+  <Box sx={{ p: 3 }}>
+    <DynamicList 
+      resource={resources.Person} 
+      includeFields={['firstname', 'lastname', 'status']}  
+    />
+  </Box>
+);
+
+export default PersonList;
+```
+
+Each `[Resource]Form.tsx`:
+```tsx
+import { Box } from "@mui/material";
+import DynamicForm from "../Dynamics/DynamicForm";
+import { resources } from "@vhrs/resources";
+
+const PersonForm = () => (
+  <Box sx={{ p: 3 }}>
+    <DynamicForm 
+      resource={resources.Person} 
+      includeFields={['firstname', 'lastname', 'age']}  
+    />
+  </Box>
+);
+
+export default PersonForm;
+```
+
+Each `index.tsx`:
+```tsx
+export { default as PersonForm } from './PersonForm';
+export { default as PersonTable } from './PersonTable';
+export { default as PersonList } from './PersonList';
+```
+
 ## Running the Project
 
 ```bash

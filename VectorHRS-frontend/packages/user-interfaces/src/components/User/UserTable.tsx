@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { DynamicTable } from "../Dynamics/DynamicTable";
+import DynamicTable from "../Dynamics/DynamicTable";
 import { resources } from "@vhrs/resources";
 
 const UserTable = () => {

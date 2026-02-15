@@ -81,13 +81,19 @@ export const commonAnnotations: AnnotatedResourceFields<any> = {
 };
 export const defaultActions: Action[] = [
   (data?: any, ctx?: ResourceContext)=>({
-    name: 'edit',
-    title: `Edit ${ctx?.resource.display?.components?.asTitle?.(data, ctx) ?? ''}`,
+    name: 'save',
+    title: `Save ${ctx?.resource.display?.components?.asTitle?.(data, ctx) ?? ''}`,
     useHandler: () => {
         const { saveItem } = useRItem(ctx?.resource);
         saveItem(data.id, data);
     },
     route: () => `${data.id}`,
+  }),
+    (data?: any, ctx?: ResourceContext)=>({
+    name: 'edit',
+    title: `Edit ${ctx?.resource.display?.components?.asTitle?.(data, ctx) ?? ''}`,
+    route: () => `${data.id}`,
+    showInForm: false,
   }),
   (data?: any, ctx?: ResourceContext) =>({
     name: 'delete',

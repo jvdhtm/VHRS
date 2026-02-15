@@ -18,10 +18,9 @@ import type {
   Action,
 } from "@vhrs/resources";
 import { SelectChangeEvent } from "@mui/material";
-import SaveIcon from "@mui/icons-material/Save";
-import CancelIcon from "@mui/icons-material/Cancel";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 interface DynamicFormProps {
   resource?: ResourceObject;
@@ -208,28 +207,14 @@ interface DynamicFormProps {
     actions: Action[] = []
   ) => {
     if (actions.length === 0) {
-      // If no actions are provided, create default save and cancel buttons with icons
-      return (
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<SaveIcon />}
-            onClick={(e) => handleSubmit(e)}
-          >
-            Save
-          </Button>
-          <Button variant="outlined" color="primary" startIcon={<CancelIcon />}>
-            Cancel
-          </Button>
-        </Box>
-      );
+        console.warn('Actions are missing')
+        return
     }
 
     return (
       <Box sx={{ display: "flex", gap: 2 }}>
         {actions.map((action) => (
-          <Button
+          <><Button
             key={action().name}
             variant="contained"
             color={action().color || "primary"}
@@ -237,10 +222,13 @@ interface DynamicFormProps {
             onClick={(e) => handleSubmit(e, action)}
             startIcon={action().icon}
             disabled={action().disable}
-            hidden={action().hidden}
+            hidden={action().hidden || !action().showInForm}
           >
             {action().title}
           </Button>
+           <Button variant="outlined" color="primary" startIcon={<CancelIcon />}>
+              Cancel
+            </Button></>
         ))}
       </Box>
     );
