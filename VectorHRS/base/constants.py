@@ -48,3 +48,59 @@ STAFF_STEP_CHOICES = (
     ('gifts', 'gifts'),
     ('invitations', 'invitations'),
 )
+
+# Hiring/Pipeline Choices
+POSITION_STATUS_CHOICES = (
+    ('vacant', 'Vacant'),
+    ('hiring', 'Hiring'),
+    ('filled', 'Filled'),
+    ('archived', 'Archived'),
+)
+
+HIRING_STAGE_CHOICES = (
+    ('job_posted', 'Job Posted'),
+    ('applications', 'Applications'),
+    ('screening', 'Screening'),
+    ('interview_1', 'Interview 1'),
+    ('interview_2', 'Interview 2'),
+    ('offer', 'Offer'),
+    ('hired', 'Hired'),
+    ('rejected', 'Rejected'),
+)
+
+EMPLOYMENT_TYPE_CHOICES = (
+    ('full_time', 'Full Time'),
+    ('part_time', 'Part Time'),
+    ('contract', 'Contract'),
+    ('internship', 'Internship'),
+)
+
+# Leave/Calendar Choices
+LEAVE_TYPE_CHOICES = (
+    ('vacation', 'Vacation'),
+    ('sick', 'Sick Leave'),
+    ('parental', 'Parental Leave'),
+    ('remote', 'Remote Work'),
+    ('business_travel', 'Business Travel'),
+)
+
+LEAVE_STATUS_CHOICES = (
+    ('pending', 'Pending'),
+    ('approved', 'Approved'),
+    ('rejected', 'Rejected'),
+)
+
+# Survey Choices
+SURVEY_TYPE_CHOICES = (
+    ('engagement', 'Engagement'),
+    ('performance', 'Performance'),
+    ('exit', 'Exit'),
+    ('custom', 'Custom'),
+)
+
+QUESTION_TYPE_CHOICES = (
+    ('rating', 'Rating'),
+    ('text', 'Text'),
+    ('multiple_choice', 'Multiple Choice'),
+    ('boolean', 'Yes/No'),
+)

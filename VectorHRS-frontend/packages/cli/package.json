@@ -3,10 +3,11 @@
     "version": "1.0.0",
     "description": "Generate react context for VectorHRS apps",
     "main": "dist/index",
-    "scripts": {
+"scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "tsc --project .",
-        "syncContexts": "node dist/index.js"
+        "syncContexts": "node dist/index.js",
+        "buildResources": "npm run build && npm run syncContexts"
     },
     "keywords": [
         "vue",

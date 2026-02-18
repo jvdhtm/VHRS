@@ -23,6 +23,7 @@ services:
     build:
       context: ./VectorHRS
       dockerfile: Dockerfile
+    container_name: vhrs_django
     ports:
       - "8080:8000"
     depends_on:
@@ -37,22 +38,67 @@ services:
     volumes:
       - ./VectorHRS:/VectorHRS
 
-  macaco:
-    build:
-      context: ./VectorHRS-frontend/apps/macaco
-      dockerfile: Dockerfile
-    ports:
-      - "4000:4000"
+  cli:
+    image: node:18-alpine
+    container_name: vhrs_cli
+    working_dir: /app/packages/cli
     depends_on:
       django:
         condition: service_started
     environment:
+      - BASE_URL=http://django:8000
+      - SWAGGER_ENDPOINT=swagger.json
+    volumes:
+      - ./VectorHRS-frontend/packages/cli:/app/packages/cli
+      - ./VectorHRS-frontend/packages/resources:/app/packages/resources
+    command: >
+      sh -c "npm install && npm run buildResources"
+
+  proxy:
+    build:
+      context: ./VectorHRS-frontend/apps/macaco
+      dockerfile: Dockerfile
+    container_name: vhrs_proxy
+    ports:
+      - "4000:4000"
+    depends_on:
+      cli:
+        condition: service_completed_successfully
+      django:
+        condition: service_started
+    environment:
       - API_URL=http://django:8000
+      - BASE_URL=http://django:8000
       - PORT=4000
-      - CLIENT_APP_PATH=/app/static
-      - CLIENT_INDEX_PATH=/app/static/index.html
     volumes:
       - ./VectorHRS-frontend/apps/macaco:/app
+
+  frontend:
+    image: node:18-alpine
+    container_name: vhrs_frontend
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    depends_on:
+      cli:
+        condition: service_completed_successfully
+      proxy:
+        condition: service_started
+    environment:
+      - VITE_API_URL=http://localhost:4000/api
+      - NODE_ENV=development
+    volumes:
+      - ./VectorHRS-frontend:/app
+      - /app/node_modules
+      - /app/apps/trampoline/node_modules
+      - /app/packages/cli/node_modules
+      - /app/packages/resources/node_modules
+      - /app/packages/user-interfaces/node_modules
+    command: >
+      sh -c "npm install && 
+             cd packages/resources && npm run build && cd ../.. &&
+             cd packages/user-interfaces && npm run build && cd ../.. &&
+             cd apps/trampoline && npm install && npm run dev -- --host 0.0.0.0 --port 3000"
 
 volumes:
   mysql_data:
